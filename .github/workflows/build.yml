@@ -3,9 +3,6 @@ on:
   push:
     branches:
       - production
-      - release-candidate
-      - integration
-      - develop
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
