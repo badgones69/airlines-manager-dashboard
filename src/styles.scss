@@ -1,0 +1,14 @@
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+@font-face {
+  font-family: "Material Symbols";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local("Material Symbols"),
+    local("MaterialSymbolsOutlinedIcons-Regular"),
+    url(../src/images/material-icons/MaterialSymbolsOutlined-Regular.ttf)
+      format("truetype");
+}
