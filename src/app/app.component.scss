@@ -1,0 +1,11 @@
+/* Header Toolbar */
+mat-toolbar {
+  background: var(--app-black);
+  color: var(--app-beige);
+  justify-content: space-between;
+  font-weight: bold;
+}
+mat-toolbar > button {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}

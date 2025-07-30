@@ -1,0 +1,84 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+
+/* Buttons theme overriding */
+@mixin buttons() {
+  .mat-mdc-button,
+  .mat-mdc-icon-button {
+    font-family: var(--app-font), sans-serif;
+  }
+
+  .mat-mdc-button:focus,
+  .mat-mdc-icon-button:focus {
+    background-color: transparent;
+  }
+
+  .mat-mdc-icon-button .mat-mdc-button-persistent-ripple {
+    display: none;
+  }
+
+  .mat-mdc-button:not(.inputButton),
+  .mat-mdc-icon-button:not(.inputButton) {
+    color: var(--app-beige);
+  }
+
+  .mat-mdc-button.inputButton,
+  .mat-mdc-icon-button.inputButton {
+    color: var(--app-blue);
+  }
+
+  .mat-mdc-extended-fab {
+    padding-left: 15px;
+    padding-right: 10px;
+  }
+
+  .mat-mdc-extended-fab:disabled {
+    background-color: var(--app-grey);
+  }
+}
+
+/* Tables theme overriding */
+@mixin tables {
+  .mat-mdc-table {
+    border: 2px solid var(--app-red);
+  }
+
+  .mdc-data-table__cell {
+    padding: 0;
+  }
+
+  .mat-mdc-header-row > *:not(#actions) {
+    color: var(--app-beige);
+    background-color: var(--app-blue);
+  }
+
+  td .mat-mdc-icon-button.mat-mdc-button-base {
+    padding: 0;
+    --mat-icon-button-state-layer-size: 36px;
+  }
+
+  .mat-mdc-paginator {
+    margin-top: 20px;
+  }
+}
+
+/* Radio buttons theme overriding */
+@mixin radio {
+  .mat-mdc-radio-button.mat-accent {
+    --mat-radio-checked-ripple-color: #var(--app-blue);
+    --mat-radio-checked-ripple-color: var(--app-blue);
+    --mat-radio-ripple-color: var(--app-blue);
+    --mat-radio-selected-focus-icon-color: var(--app-blue);
+    --mat-radio-selected-hover-icon-color: var(--app-blue);
+    --mat-radio-selected-icon-color: var(--app-blue);
+    --mat-radio-selected-pressed-icon-color: var(--app-blue);
+    --mat-radio-unselected-focus-icon-color: var(--app-blue);
+    --mat-radio-unselected-hover-icon-color: var(--app-blue);
+  }
+}
+
+@mixin theme() {
+  @include buttons();
+  @include tables();
+  @include radio();
+}
