@@ -1,0 +1,23 @@
+<!-- DIALOG TITLE -->
+<h2 mat-dialog-title>{{ dialogTitle }}</h2>
+<!-- DIALOG BODY -->
+<mat-dialog-content>
+  {{ dialogMessage }}
+  <ng-content></ng-content>
+</mat-dialog-content>
+<!-- DIALOG BUTTONS -->
+<mat-dialog-actions>
+  <button
+    id="okButton"
+    mat-button
+    [mat-dialog-close]="!isConfirmationDialog"
+    (click)="confirm()"
+  >
+    {{ okLabel }}
+  </button>
+  @if (isConfirmationDialog) {
+    <button id="cancelButton" mat-button mat-dialog-close>
+      {{ cancelLabel }}
+    </button>
+  }
+</mat-dialog-actions>

@@ -9,3 +9,57 @@ mat-toolbar > button {
   padding-top: 12px;
   padding-bottom: 12px;
 }
+
+/* Menu */
+mat-sidenav {
+  text-align: center;
+  color: var(--app-beige);
+  padding: 0 16px;
+  background: var(--app-blue);
+  width: 265px;
+  border-right: 2px solid var(--app-red);
+  border-radius: 0;
+}
+.mat-sidenav-container {
+  height: 100%;
+}
+mat-sidenav-content {
+  background: var(--app-beige);
+  display: flex;
+  justify-content: center;
+  opacity: 1;
+  align-items: center;
+  color: black;
+}
+
+.menu-button {
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 45px;
+  margin-top: 15px;
+}
+.menu-button > span {
+  margin-right: 20px;
+}
+.menu-button > i,
+.submenu-button > i {
+  margin-right: 8px;
+}
+
+.submenu-button {
+  width: 100%;
+  display: flex;
+  padding-left: 65px;
+  justify-content: left;
+  font-size: 20px;
+  margin-top: 5px;
+}
+.menu-button:hover,
+.menu-button:focus,
+.submenu-button:hover,
+.submenu-button:focus {
+  background-color: var(--app-blue);
+}
