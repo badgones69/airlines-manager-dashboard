@@ -1,6 +1,22 @@
 <!-- HEADER TOOLBAR -->
 <mat-toolbar>
-  <button mat-button>
-    <i class="material-icons">menu</i>
+  <button mat-button (click)="menuToggle()">
+    @if (menuOpened) {
+      <i class="material-icons">keyboard_arrow_left</i>
+    } @else {
+      <i class="material-icons">menu</i>
+    }
   </button>
 </mat-toolbar>
+<!-- MENU -->
+<mat-sidenav-container>
+  <mat-sidenav mode="side" [opened]="menuOpened">
+    <!-- ABOUT SUBMENU -->
+    <button mat-button (click)="openAboutDialog()" class="menu-button">
+      <i class="material-icons">info</i>
+      <span>À propos</span>
+    </button>
+  </mat-sidenav>
+  <mat-sidenav-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
