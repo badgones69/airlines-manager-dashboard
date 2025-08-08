@@ -1,0 +1,39 @@
+/* Form */
+form > *:not(.formButtons) {
+  display: block;
+}
+
+/* Title */
+.formTitle {
+  font-family: var(--app-font), sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Fields */
+mat-form-field {
+  margin-bottom: 20px;
+}
+mat-form-field .errorHint {
+  color: var(--app-red);
+}
+
+/* Buttons */
+.formButtons {
+  display: flex;
+  column-gap: 50px;
+  margin-top: 10px;
+}
+
+.submitFormButton,
+.resetFormButton {
+  font-weight: bold;
+}
+.submitFormButton {
+  background-color: var(--app-blue);
+}
+.resetFormButton {
+  background-color: var(--app-black);
+}

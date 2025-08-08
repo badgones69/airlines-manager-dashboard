@@ -1,4 +1,8 @@
 import { Routes } from '@angular/router';
-import { AppComponent } from './app.component';
+import { AuthenticationComponent } from './authentication/authentication.component';
 
-export const routes: Routes = [{ path: '', component: AppComponent }];
+export const routes: Routes = [
+  /* Authentication form (default route) */
+  { path: '', redirectTo: '/authentication', pathMatch: 'full' },
+  { path: 'authentication', component: AuthenticationComponent },
+];
