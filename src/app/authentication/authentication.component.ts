@@ -162,6 +162,7 @@ export class AuthenticationComponent implements OnInit {
               // Session opening
               this.userService.connectUser(user);
               // Redirection to home page
+              this.router.navigate(['home']);
             } else {
               // Error notification showing
               this.getErrorNotification();

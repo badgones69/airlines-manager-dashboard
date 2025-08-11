@@ -1,0 +1,28 @@
+/* Error container */
+.error-container {
+  display: flex;
+  align-items: center;
+  font-size: 40px;
+  margin-bottom: 45px;
+}
+
+/* Error icon & message */
+.error-icon {
+  font-size: 200px;
+}
+.error-icon,
+.error-message {
+  color: var(--app-red);
+}
+.error-message {
+  font-weight: bold;
+}
+
+/* Redirection button */
+.redirection-button-container {
+  text-align: center;
+}
+#unauthorized-redirection-button {
+  font-weight: bold;
+  background-color: var(--app-red);
+}

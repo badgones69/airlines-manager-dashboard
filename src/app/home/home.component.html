@@ -1,0 +1,20 @@
+@if (authenticatedUser) {
+  <div id="home-page-container">
+    <!-- WELCOME MESSAGE -->
+    <p>{{ welcomeMessage }}</p>
+    @if (welcomeLogo) {
+      <!-- WELCOME LOGO -->
+      <img
+        id="welcome-logo"
+        [ngSrc]="welcomeLogo"
+        width="256"
+        height="256"
+        alt="Logo"
+        priority
+      />
+    }
+  </div>
+} @else {
+  <!-- UNAUTHORIZED ERROR PAGE -->
+  <unauthorized></unauthorized>
+}
