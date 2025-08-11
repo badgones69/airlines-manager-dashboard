@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,6 +9,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { AboutComponent } from './about/about.component';
 import { MatDialog } from '@angular/material/dialog';
+import { UserService } from './shared/services/user.service';
+import { User } from './shared/models/User';
 
 @Component({
   selector: 'app',
@@ -25,10 +27,26 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss', '../styles.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  public authenticatedUser!: User | null;
+
   public menuOpened: boolean = false;
 
-  constructor(readonly dialog: MatDialog) {}
+  constructor(
+    readonly userService: UserService,
+    readonly router: Router,
+    readonly dialog: MatDialog
+  ) {}
+
+  ngOnInit(): void {
+    this.userService.user.subscribe((user) => {
+      if (user) {
+        this.authenticatedUser = JSON.parse(user.toString());
+      } else {
+        this.authenticatedUser = null;
+      }
+    });
+  }
 
   /* Menu opening */
   menuToggle(): void {
@@ -42,5 +60,13 @@ export class AppComponent {
       autoFocus: true,
       scrollStrategy: new NoopScrollStrategy(),
     });
+  }
+
+  /* Authenticated user disconnecting */
+  logout(): void {
+    // Session closing
+    this.userService.disconnectUser();
+    // Redirection to authentication form
+    this.router.navigate(['authentication']);
   }
 }

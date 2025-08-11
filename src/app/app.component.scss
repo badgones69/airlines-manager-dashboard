@@ -63,3 +63,16 @@ mat-sidenav-content {
 .submenu-button:focus {
   background-color: var(--app-blue);
 }
+
+/* Authenticated user bar */
+#authenticated-user-container {
+  display: flex;
+  align-items: center;
+}
+#authenticated-user-icon {
+  font-size: 26px;
+  margin-right: 10px;
+}
+#authenticated-user-logout-button {
+  margin-left: 5px;
+}

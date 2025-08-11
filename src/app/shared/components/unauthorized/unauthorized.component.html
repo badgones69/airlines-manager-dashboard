@@ -1,0 +1,22 @@
+<div class="error-container">
+  <!-- UNAUTHORIZED ERROR ICON -->
+  <i class="material-icons error-icon">
+    shield_lock
+  </i>
+  <!-- UNAUTHORIZED ERROR MESSAGE -->
+  <span class="error-message">{{ message }}</span>
+</div>
+
+<!-- REDIRECTION BUTTON -->
+<div class="redirection-button-container">
+  <button
+    id="unauthorized-redirection-button"
+    (click)="goToAuthenticationForm()"
+    type="button"
+    mat-fab
+    extended
+  >
+    <i class="material-icons">open_in_new</i>
+    {{ redirectionButtonLabel }}
+  </button>
+</div>
