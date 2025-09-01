@@ -17,13 +17,13 @@
     display: none;
   }
 
-  .mat-mdc-button:not(.inputButton),
-  .mat-mdc-icon-button:not(.inputButton) {
+  .mat-mdc-button:not(.input-button),
+  .mat-mdc-icon-button:not(.input-button) {
     color: var(--app-beige);
   }
 
-  .mat-mdc-button.inputButton,
-  .mat-mdc-icon-button.inputButton {
+  .mat-mdc-button.input-button,
+  .mat-mdc-icon-button.input-button {
     color: var(--app-blue);
   }
 

@@ -1,0 +1,16 @@
+@if (authenticatedUser) {
+  @if (authenticatedUser.profile === 1) {
+    <!-- USER FORM (ADD MODE) -->
+    <user-form
+      (submitted)="addUser($event)"
+      [formMode]="formMode"
+      [user]="initUserToAdd">
+    </user-form>
+  } @else {
+    <!-- FORBIDDEN ERROR PAGE -->
+    <forbidden></forbidden>
+  }
+} @else {
+  <!-- UNAUTHORIZED ERROR PAGE -->
+  <unauthorized></unauthorized>
+}

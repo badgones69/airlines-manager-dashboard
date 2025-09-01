@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { HomeComponent } from './home/home.component';
-import { UnauthorizedComponent } from './shared/components/unauthorized/unauthorized.component';
+import { AddUserComponent } from './user/pages/add-user/add-user.component';
 
 export const routes: Routes = [
   /* Authentication form (default route) */
@@ -11,6 +11,11 @@ export const routes: Routes = [
   // Home page
   { path: 'home', component: HomeComponent },
 
-  // Unauthorized error page
-  { path: 'unauthorized', component: UnauthorizedComponent },
+  /* User pages */
+  {
+    path: 'users',
+    children: [
+      { path: 'add', component: AddUserComponent },
+    ],
+  },
 ];

@@ -8,7 +8,7 @@
 <!-- DIALOG BUTTONS -->
 <mat-dialog-actions>
   <button
-    id="okButton"
+    id="ok-button"
     mat-button
     [mat-dialog-close]="!isConfirmationDialog"
     (click)="confirm()"
@@ -16,7 +16,7 @@
     {{ okLabel }}
   </button>
   @if (isConfirmationDialog) {
-    <button id="cancelButton" mat-button mat-dialog-close>
+    <button id="cancel-button" mat-button mat-dialog-close>
       {{ cancelLabel }}
     </button>
   }

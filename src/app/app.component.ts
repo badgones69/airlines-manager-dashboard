@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,6 +17,7 @@ import { User } from './shared/models/User';
   standalone: true,
   imports: [
     CommonModule,
+    RouterLink,
     RouterOutlet,
     MatToolbarModule,
     MatButtonModule,
@@ -31,6 +32,7 @@ export class AppComponent implements OnInit {
   public authenticatedUser!: User | null;
 
   public menuOpened: boolean = false;
+  public userSubMenuExpanded: boolean = false;
 
   constructor(
     readonly userService: UserService,
@@ -48,9 +50,19 @@ export class AppComponent implements OnInit {
     });
   }
 
-  /* Menu opening */
+  /* Menu opening/closing */
   menuToggle(): void {
     this.menuOpened = !this.menuOpened;
+
+    /* All submenu closing */
+    if (!this.menuOpened) {
+      this.userSubMenuExpanded = false;
+    }
+  }
+
+  /* User submenu opening/closing */
+  userSubMenuToggle(): void {
+    this.userSubMenuExpanded = !this.userSubMenuExpanded;
   }
 
   /* About dialog opening */
