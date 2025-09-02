@@ -7,5 +7,5 @@ export function getSubmitButtonLabel(): string {
 }
 
 export function getErrorNotificationMessage(): string {
-  return 'Login et/ou mot de passe incorrects';
+  return 'Login et/ou mot de passe incorrects !';
 }

@@ -36,6 +36,7 @@ import {
   REQUIRED_ERROR,
 } from '../shared/constants/forms-constants';
 import { compare } from 'bcrypt-ts';
+import { getTechnicalErrorMessage, getTechnicalErrorTitle } from '../shared/labels/errors';
 
 @Component({
   selector: 'authentication',
@@ -164,22 +165,20 @@ export class AuthenticationComponent implements OnInit {
               // Redirection to home page
               this.router.navigate(['home']);
             } else {
-              // Error notification showing
-              this.getErrorNotification();
+              /* Error notification showing */
+              this.notificationService.showErrorNotification(
+                `${this.authenticationFormTitle.toUpperCase()}`,
+                `${getErrorNotificationMessage()}`
+              );
             }
           });
         } else {
-          // Error notification showing
-          this.getErrorNotification();
+          /* Technical error notification showing */
+          this.notificationService.showErrorNotification(
+            `${getTechnicalErrorTitle()}`,
+            `${getTechnicalErrorMessage()}`
+          );
         }
       });
-  }
-
-  /* Error notification throwing */
-  private getErrorNotification() {
-    this.notificationService.showErrorNotification(
-      `${this.authenticationFormTitle.toUpperCase()}`,
-      `${getErrorNotificationMessage()} !`
-    );
   }
 }

@@ -4,15 +4,19 @@ import { User } from '../models/User';
 import { getStoredItem, removeStoredItem } from '../utils/storage-utils';
 import { AUTHENTICATED_USER_STORAGE_NAME } from '../constants/storage-constants';
 import supabase from '../constants/services-constants';
+import { v7 as uuidv7 } from 'uuid';
+import { hash } from 'bcrypt-ts';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   readonly user$: BehaviorSubject<any> = new BehaviorSubject<any>({});
+  readonly users$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
   constructor() {
     this.refreshUser();
+    this.refreshUsersList();
   }
 
   /* Authenticated user loading */
@@ -20,9 +24,21 @@ export class UserService {
     this.user$.next(getStoredItem(AUTHENTICATED_USER_STORAGE_NAME));
   }
 
+  /* Users list loading */
+  public refreshUsersList(): void {
+    this.findAllUsers().then((users) => {
+      this.users$.next(users);
+    });
+  }
+
   /* Authenticated user reading */
   public get user(): Observable<any> {
     return this.user$;
+  }
+
+  /* Users list reading */
+  public get users(): Observable<any[]> {
+    return this.users$;
   }
 
   /* Authenticated user session opening */
@@ -49,5 +65,35 @@ export class UserService {
       .select()
       .eq('userLogin', login);
     return data?.[0];
+  }
+
+  /* All users retrieving */
+  public async findAllUsers(): Promise<any[]> {
+    const { data } = await supabase.from('USER').select();
+
+    return data || [];
+  }
+
+  /* User creation */
+  public async createUser(userToCreate: any): Promise<any> {
+    const { userGivenName, userSurname, userLogin, userPassword, userProfile } =
+      userToCreate;
+
+    const hashedPassword = await hash(userPassword, 13);
+
+    const data = await supabase
+      .from('USER')
+      .insert({
+        userUUID: uuidv7(),
+        userGivenName,
+        userSurname,
+        userLogin,
+        userPassword: hashedPassword,
+        userProfile,
+      })
+      .select();
+
+    this.refreshUsersList();
+    return data;
   }
 }

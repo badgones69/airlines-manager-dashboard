@@ -9,6 +9,7 @@
 /* Error icon & message */
 .error-icon {
   font-size: 200px;
+  margin-right: 20px;
 }
 .error-icon,
 .error-message {
@@ -22,7 +23,8 @@
 .redirection-button-container {
   text-align: center;
 }
-#unauthorized-redirection-button {
+#unauthorized-redirection-button,
+#forbidden-redirection-button {
   font-weight: bold;
   background-color: var(--app-red);
 }

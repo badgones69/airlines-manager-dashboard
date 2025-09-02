@@ -1,10 +1,10 @@
 /* Form */
-form > *:not(.formButtons) {
+form > *:not(.form-buttons) {
   display: block;
 }
 
 /* Title */
-.formTitle {
+.form-title {
   font-family: var(--app-font), sans-serif;
   font-weight: bold;
   font-size: 20px;
@@ -16,24 +16,24 @@ form > *:not(.formButtons) {
 mat-form-field {
   margin-bottom: 20px;
 }
-mat-form-field .errorHint {
+mat-form-field .error-hint {
   color: var(--app-red);
 }
 
 /* Buttons */
-.formButtons {
+.form-buttons {
   display: flex;
   column-gap: 50px;
   margin-top: 10px;
 }
 
-.submitFormButton,
-.resetFormButton {
+.submit-form-button,
+.reset-form-button {
   font-weight: bold;
 }
-.submitFormButton {
+.submit-form-button {
   background-color: var(--app-blue);
 }
-.resetFormButton {
+.reset-form-button {
   background-color: var(--app-black);
 }

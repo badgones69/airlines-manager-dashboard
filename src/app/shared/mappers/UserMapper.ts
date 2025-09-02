@@ -1,5 +1,10 @@
 import { User } from '../models/User';
-import { capitaliseFirstLetter } from '../utils/labels-utils';
+import {
+  capitalizeDashedWordsFirstLetter,
+  capitalizeFirstLetter,
+  capitalizeSpaceSeparatedWordsFirstLetter,
+  capitalize,
+} from '../utils/labels-utils';
 
 export class UserMapper {
 
@@ -27,11 +32,22 @@ export class UserMapper {
 
   /* DTO => DB mapping */
   public userToDB(userToDB: any): any {
+    if (
+      userToDB.givenName.indexOf('-') < 0 &&
+      userToDB.givenName.indexOf(' ') < 0
+    ) {
+      userToDB.givenName = capitalizeFirstLetter(userToDB.givenName);
+    } else {
+      userToDB.givenName = capitalizeDashedWordsFirstLetter(
+        capitalizeSpaceSeparatedWordsFirstLetter(userToDB.givenName)
+      );
+    }
+
     return {
       userID: userToDB.id,
       userUUID: userToDB.uuid,
-      userGivenName: capitaliseFirstLetter(userToDB.givenName),
-      userSurname: userToDB.surname.toUpperCase(),
+      userGivenName: userToDB.givenName,
+      userSurname: capitalize(userToDB.surname),
       userLogin: userToDB.login,
       userPassword: userToDB.password,
       userProfile: userToDB.profile,
