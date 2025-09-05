@@ -38,11 +38,16 @@
         <i class="material-icons">person</i>
         <span>Utilisateur</span>
       </button>
-      <!-- USER ADDING FORM BUTTON -->
       @if (userSubMenuExpanded) {
+        <!-- USER ADDING FORM BUTTON -->
         <button mat-icon-button class="submenu-button" routerLink="users/add">
           <i class="material-icons">add</i>
           <span>Ajouter</span>
+        </button>
+        <!-- USERS LIST BUTTON -->
+        <button mat-icon-button class="submenu-button" routerLink="users/list">
+          <i class="material-icons">list</i>
+          <span>Liste</span>
         </button>
       }
     }

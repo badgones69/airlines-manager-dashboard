@@ -1065,6 +1065,9 @@ html {
   --mat-paginator-form-field-container-height: 40px;
   --mat-paginator-form-field-container-vertical-padding: 8px;
   --mat-paginator-touch-target-display: block;
+  --mat-form-field-outlined-focus-outline-color: var(--app-blue);
+  --mat-form-field-outlined-hover-outline-color: var(--app-blue);
+  --mat-form-field-outlined-outline-color: var(--app-blue);
 
   /* Dialog */
   --mat-dialog-container-color: var(--app-beige);

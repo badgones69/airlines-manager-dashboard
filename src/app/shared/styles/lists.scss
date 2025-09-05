@@ -1,0 +1,15 @@
+/* Title */
+.list-title {
+  font-family: var(--app-font), sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+/* Paginator */
+.mat-mdc-paginator-range-actions
+.mat-mdc-icon-button
+.mat-mdc-button-touch-target {
+  display: none;
+}
