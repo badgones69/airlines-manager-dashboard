@@ -1,0 +1,13 @@
+/* Columns */
+.mat-column-profile,
+.mat-column-givenName,
+.mat-column-surname,
+.mat-column-login {
+  text-align: center;
+  padding: 3px;
+}
+.mat-column-profile,
+.mat-column-givenName,
+.mat-column-surname {
+  border-right: 2px solid var(--app-red);
+}
