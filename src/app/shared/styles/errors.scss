@@ -11,9 +11,13 @@
   font-size: 200px;
   margin-right: 20px;
 }
-.error-icon,
-.error-message {
+.error-icon:not(#illogical-error-icon),
+.error-message:not(#illogical-error-message) {
   color: var(--app-red);
+}
+#illogical-error-icon,
+#illogical-error-message {
+  color: var(--app-blue);
 }
 .error-message {
   font-weight: bold;
@@ -23,8 +27,12 @@
 .redirection-button-container {
   text-align: center;
 }
-#unauthorized-redirection-button,
-#forbidden-redirection-button {
+.redirection-button {
   font-weight: bold;
+}
+.redirection-button:not(#illogical-redirection-button) {
   background-color: var(--app-red);
+}
+#illogical-redirection-button {
+  background-color: var(--app-blue);
 }

@@ -32,6 +32,18 @@
         <td mat-cell *matCellDef="let user">{{ user.login }}</td>
       </ng-container>
 
+      <!-- ACTIONS BUTTONS -->
+      <ng-container [matColumnDef]="columnsIdentifiers[4]">
+        <th id="actions" mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let user">
+          @if (authenticatedUser && authenticatedUser.uuid !== user.uuid) {
+            <button mat-icon-button (click)="openUserForm(user)">
+              <i class="material-icons">edit</i>
+            </button>
+          }
+        </td>
+      </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="columnsIdentifiers"></tr>
       <tr mat-row *matRowDef="let row; columns: columnsIdentifiers"></tr>
     </table>

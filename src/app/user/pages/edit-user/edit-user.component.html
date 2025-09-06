@@ -1,0 +1,23 @@
+@if (authenticatedUser) {
+  @if (authenticatedUser.profile === 1) {
+    @if (initUserToEdit) {
+      @if (initUserToEdit.uuid !== authenticatedUser.uuid) {
+        <!-- USER FORM (EDIT MODE) -->
+        <user-form
+          (submitted)="editUser($event)"
+          [formMode]="formMode"
+          [user]="initUserToEdit"
+        ></user-form>
+      } @else {
+        <!-- AUTHENTICATED USER UNEDITABLE ERROR PAGE -->
+        <authenticated-user-uneditable></authenticated-user-uneditable>
+      }
+    }
+  } @else {
+    <!-- FORBIDDEN ERROR PAGE -->
+    <forbidden></forbidden>
+  }
+} @else {
+  <!-- UNAUTHORIZED ERROR PAGE -->
+  <unauthorized></unauthorized>
+}

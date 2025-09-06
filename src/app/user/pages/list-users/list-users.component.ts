@@ -22,6 +22,7 @@ import {
 } from '../../../shared/labels/commons/user-common';
 import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'list-users',
@@ -55,6 +56,7 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
     'givenName',
     'surname',
     'login',
+    'actions',
   ];
 
   /* List columns headers labels */
@@ -70,7 +72,10 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
 
   public userMapper: UserMapper = new UserMapper();
 
-  constructor(readonly userService: UserService) {}
+  constructor(
+    readonly userService: UserService,
+    readonly router: Router
+  ) {}
 
   ngOnInit(): void {
     this.usersListTitle = getUsersListTitle();
@@ -95,5 +100,10 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
     return (
       this.profiles.find((profile) => profile.id === userProfileId)?.name ?? ''
     );
+  }
+
+  /* User form (edit mode) opening */
+  openUserForm(user: User) {
+    this.router.navigate(['users', 'edit', user.uuid]);
   }
 }

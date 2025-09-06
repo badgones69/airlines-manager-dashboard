@@ -74,6 +74,16 @@ export class UserService {
     return data || [];
   }
 
+  /* User retrieving */
+  public async findUser(userUUID: string): Promise<any> {
+    const { data } = await supabase
+      .from('USER')
+      .select()
+      .eq('userUUID', userUUID);
+
+    return data?.[0];
+  }
+
   /* User creation */
   public async createUser(userToCreate: any): Promise<any> {
     const { userGivenName, userSurname, userLogin, userPassword, userProfile } =
@@ -91,6 +101,26 @@ export class UserService {
         userPassword: hashedPassword,
         userProfile,
       })
+      .select();
+
+    this.refreshUsersList();
+    return data;
+  }
+
+  /* User updating */
+  public async updateUser(userUpdated: any): Promise<any> {
+    const { userUUID, userGivenName, userSurname, userLogin, userProfile } =
+      userUpdated;
+
+    const data = await supabase
+      .from('USER')
+      .update({
+        userGivenName,
+        userSurname,
+        userLogin,
+        userProfile,
+      })
+      .eq('userUUID', userUUID)
       .select();
 
     this.refreshUsersList();

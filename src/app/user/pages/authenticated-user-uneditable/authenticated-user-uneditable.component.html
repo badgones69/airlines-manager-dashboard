@@ -1,0 +1,21 @@
+<div class="error-container">
+  <!-- AUTHENTICATED USER UNEDITABLE ERROR ICON -->
+  <i id="illogical-error-icon" class="material-icons error-icon">warning </i>
+  <!-- AUTHENTICATED USER UNEDITABLE ERROR MESSAGE -->
+  <span id="illogical-error-message" class="error-message">{{ message }}</span>
+</div>
+
+<!-- REDIRECTION BUTTON -->
+<div class="redirection-button-container">
+  <button
+    id="illogical-redirection-button"
+    class="redirection-button"
+    (click)="goToUsersList()"
+    type="button"
+    mat-fab
+    extended
+  >
+    <i class="material-icons">open_in_new</i>
+    {{ redirectionButtonLabel }}
+  </button>
+</div>

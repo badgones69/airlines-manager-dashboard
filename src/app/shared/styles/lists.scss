@@ -7,6 +7,12 @@
   padding-bottom: 20px;
 }
 
+/* Actions buttons */
+td .mat-mdc-icon-button.mat-mdc-button-base {
+  padding: 0;
+  color: var(--app-blue);
+}
+
 /* Paginator */
 .mat-mdc-paginator-range-actions
 .mat-mdc-icon-button
