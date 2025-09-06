@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NotificationService } from '../../../shared/services/notification.service';
-import { Router } from '@angular/router';
 import { UserService } from '../../../shared/services/user.service';
+import { NotificationService } from '../../../shared/services/notification.service';
+import { EDIT_FORM_MODE } from '../../../shared/constants/forms-constants';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../../shared/models/User';
 import { UserFormComponent } from '../../form-component/user-form.component';
-import { ADD_FORM_MODE } from '../../../shared/constants/forms-constants';
+import { UserMapper } from '../../../shared/mappers/UserMapper';
 import { getFormModeLabel } from '../../../shared/labels/commons/form-common';
 import {
   getUserFormSuccessNotificationMessage,
@@ -12,31 +13,44 @@ import {
 } from '../../../shared/labels/forms/user-form';
 import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
-import {
-  getTechnicalErrorTitle,
-  getTechnicalErrorMessage,
-} from '../../../shared/labels/errors';
+import { AuthenticatedUserUneditableComponent } from '../authenticated-user-uneditable/authenticated-user-uneditable.component';
+import { getTechnicalErrorMessage, getTechnicalErrorTitle } from '../../../shared/labels/errors';
 
 @Component({
-  selector: 'add-user',
+  selector: 'edit-user',
   standalone: true,
-  imports: [UserFormComponent, ForbiddenComponent, UnauthorizedComponent],
-  templateUrl: './add-user.component.html',
+  imports: [
+    UserFormComponent,
+    ForbiddenComponent,
+    UnauthorizedComponent,
+    AuthenticatedUserUneditableComponent,
+  ],
+  templateUrl: './edit-user.component.html',
   styleUrls: [],
 })
-export class AddUserComponent implements OnInit {
+export class EditUserComponent implements OnInit {
   public authenticatedUser!: User;
 
-  public initUserToAdd!: User;
-  public formMode: string = ADD_FORM_MODE;
+  public initUserToEdit!: User;
+  public formMode: string = EDIT_FORM_MODE;
+
+  public userUUID!: string;
+  public userMapper: UserMapper = new UserMapper();
 
   constructor(
     readonly userService: UserService,
     readonly notificationService: NotificationService,
+    readonly route: ActivatedRoute,
     readonly router: Router
-  ) {}
+  ) {
+    this.userUUID = this.route.snapshot.paramMap.get('uuid') ?? '';
+  }
 
   ngOnInit(): void {
+    this.userService.findUser(this.userUUID).then((user) => {
+      this.initUserToEdit = this.userMapper.userFromDB(user);
+    });
+
     this.userService.user.subscribe((user) => {
       if (user) {
         this.authenticatedUser = JSON.parse(user.toString());
@@ -44,17 +58,16 @@ export class AddUserComponent implements OnInit {
     });
   }
 
-  /* User adding */
-  addUser(user: any): void {
-    // User creation
-    this.userService.createUser(user).then((result: any) => {
-      // If user is created
+  /* User editing */
+  editUser(user: any): void {
+    user.userUUID = this.userUUID;
+    // User updating
+    this.userService.updateUser(user).then((result: any) => {
+      // If user is updated
       if (result.data) {
         /* Success notification showing */
         this.notificationService.showSuccessNotification(
-          `${getFormModeLabel(
-            this.formMode
-          )} ${getUserFormTitle()}`.toUpperCase(),
+          `${getFormModeLabel(this.formMode)} ${getUserFormTitle()}`,
           `${getUserFormSuccessNotificationMessage(this.formMode)}`
         );
         // Redirection to users list
