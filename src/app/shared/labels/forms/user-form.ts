@@ -1,3 +1,4 @@
+import { getDeleteDialogMessage } from '../commons/dialog-common';
 import { getFormActionLabel } from '../commons/form-common';
 
 export function getUserFormTitle(): string {
@@ -6,6 +7,10 @@ export function getUserFormTitle(): string {
 
 export function getRepeatedPasswordInputLabel(): string {
   return 'RÉPÉTER MOT DE PASSE';
+}
+
+export function getUserDeleteDialogMessage(): string {
+  return `${getDeleteDialogMessage().replace('{}', 'cet utilisateur')}`;
 }
 
 export function getIdentityFieldsErrorMessage(): string {
