@@ -23,6 +23,9 @@ import {
 import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
 import { Router } from '@angular/router';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DeleteUserComponent } from '../delete-user/delete-user.component';
 
 @Component({
   selector: 'list-users',
@@ -74,7 +77,8 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
 
   constructor(
     readonly userService: UserService,
-    readonly router: Router
+    readonly router: Router,
+    readonly dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -105,5 +109,19 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
   /* User form (edit mode) opening */
   openUserForm(user: User) {
     this.router.navigate(['users', 'edit', user.uuid]);
+  }
+
+  /* User deletion confirmation dialog opening */
+  deleteUser(user: User) {
+    let dialogRef: MatDialogRef<DeleteUserComponent> = this.dialog.open(
+      DeleteUserComponent,
+      {
+        disableClose: false,
+        autoFocus: true,
+        scrollStrategy: new NoopScrollStrategy(),
+      }
+    );
+    dialogRef.componentInstance.userUUID = user.uuid!;
+    dialogRef.afterClosed().subscribe(() => this.ngOnInit());
   }
 }

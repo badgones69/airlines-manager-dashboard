@@ -1,4 +1,5 @@
 <app-dialog [dialogTitle]="aboutDialogTitle" [dialogMode]="aboutDialogMode">
+  <!-- APP VERSION NUMBER AND RELEASE DATE -->
   <p>
     <span>{{ packageJson.productName }} v{{ packageJson.version }}</span> (#{{
       packageJson.releaseNumber
@@ -26,5 +27,6 @@
 
     <tr mat-row *matRowDef="let row; columns: columnsIdentifiers"></tr>
   </table>
+  <!-- AUTHOR COPYRIGHT -->
   <p>© 2025 {{ packageJson.author }}</p>
 </app-dialog>

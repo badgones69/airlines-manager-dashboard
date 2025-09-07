@@ -126,4 +126,15 @@ export class UserService {
     this.refreshUsersList();
     return data;
   }
+
+  /* User deletion */
+  public async deleteUser(userUUID: string): Promise<any> {
+    const response = await supabase
+      .from('USER')
+      .delete()
+      .eq('userUUID', userUUID);
+
+    this.refreshUsersList();
+    return response;
+  }
 }
