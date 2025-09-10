@@ -22,10 +22,12 @@ import {
 } from '../../../shared/labels/commons/user-common';
 import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteUserComponent } from '../delete-user/delete-user.component';
+import { getPasswordInputLabel } from '../../../shared/labels/commons/form-common';
+import { getSubmitButtonLabel } from '../../../shared/labels/forms/reset-user-password-form';
 
 @Component({
   selector: 'list-users',
@@ -35,6 +37,7 @@ import { DeleteUserComponent } from '../delete-user/delete-user.component';
     MatPaginatorModule,
     MatButtonModule,
     MatLabel,
+    RouterLink,
     ForbiddenComponent,
     UnauthorizedComponent,
   ],
@@ -59,6 +62,7 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
     'givenName',
     'surname',
     'login',
+    'passwordReset',
     'actions',
   ];
 
@@ -68,11 +72,13 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
     getGivenNameLabel(),
     getSurnameLabel(),
     getLoginLabel(),
+    getPasswordInputLabel(),
   ];
 
   // Profiles values
   public profiles: Profile[] = getProfilesValues();
 
+  public passwordResetColumnButtonName = getSubmitButtonLabel();
   public userMapper: UserMapper = new UserMapper();
 
   constructor(
