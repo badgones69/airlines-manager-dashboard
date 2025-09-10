@@ -7,6 +7,12 @@
   padding-bottom: 20px;
 }
 
+/* Links */
+a {
+  font-weight: bold;
+  color: var(--app-blue);
+}
+
 /* Actions buttons */
 td .mat-mdc-icon-button.mat-mdc-button-base {
   padding: 0;

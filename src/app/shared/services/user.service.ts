@@ -107,6 +107,24 @@ export class UserService {
     return data;
   }
 
+  /* User password reset */
+  public async resetUserPassword(userToResetPassword: any): Promise<any> {
+    const { userUUID, userPassword } = userToResetPassword;
+
+    const hashedPassword = await hash(userPassword, 13);
+
+    const data = await supabase
+      .from('USER')
+      .update({
+        userPassword: hashedPassword,
+      })
+      .eq('userUUID', userUUID)
+      .select();
+
+    this.refreshUsersList();
+    return data;
+  }
+
   /* User updating */
   public async updateUser(userUpdated: any): Promise<any> {
     const { userUUID, userGivenName, userSurname, userLogin, userProfile } =

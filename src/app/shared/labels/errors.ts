@@ -7,7 +7,7 @@ export function getForbiddenMessage(): string {
 }
 
 export function getAuthenticatedUserUneditableMessage(): string {
-  return 'Impossible de modifier l\'utilisateur connecté !';
+  return 'Aucune action possible sur l\'utilisateur connecté !';
 }
 
 export function getTechnicalErrorTitle(): string {

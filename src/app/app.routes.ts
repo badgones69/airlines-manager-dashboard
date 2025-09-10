@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { AddUserComponent } from './user/pages/add-user/add-user.component';
 import { ListUsersComponent } from './user/pages/list-users/list-users.component';
 import { EditUserComponent } from './user/pages/edit-user/edit-user.component';
+import { ResetUserPasswordComponent } from './user/pages/reset-user-password/reset-user-password.component';
 
 export const routes: Routes = [
   /* Authentication form (default route) */
@@ -20,6 +21,7 @@ export const routes: Routes = [
       { path: 'add', component: AddUserComponent },
       { path: 'list', component: ListUsersComponent },
       { path: 'edit/:uuid', component: EditUserComponent },
+      { path: 'reset-password/:uuid', component: ResetUserPasswordComponent },
     ],
   },
 ];
