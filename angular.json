@@ -35,6 +35,9 @@
               "src/styles.scss",
               "src/app/shared/styles/toastr.css"
             ],
+            "allowedCommonJsDependencies": [
+              "base64-ts"
+            ],
             "scripts": []
           },
           "configurations": {
