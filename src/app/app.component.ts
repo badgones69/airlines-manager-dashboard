@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
   public authenticatedUser!: User | null;
 
   public menuOpened: boolean = false;
+  public airlineSubMenuExpanded: boolean = false;
   public userSubMenuExpanded: boolean = false;
 
   constructor(
@@ -56,8 +57,14 @@ export class AppComponent implements OnInit {
 
     /* All submenu closing */
     if (!this.menuOpened) {
+      this.airlineSubMenuExpanded = false;
       this.userSubMenuExpanded = false;
     }
+  }
+
+  /* Airline submenu opening/closing */
+  airlineSubMenuToggle(): void {
+    this.airlineSubMenuExpanded = !this.airlineSubMenuExpanded;
   }
 
   /* User submenu opening/closing */

@@ -41,7 +41,10 @@ export class HomeComponent implements OnInit {
             getAirlineWelcomeMessage(airline.airlineName) ??
             getDefaultWelcomeMessage();
 
-          this.welcomeLogo = 'src/images/favicon.ico';
+          this.welcomeLogo = 'src/images/'.concat(airline.airlineLogo
+              ? `logos/256x256/${airline.airlineLogo}.png`
+              : 'favicon.ico'
+          );
         });
       }
     });

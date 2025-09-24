@@ -3,30 +3,49 @@
   <!-- MENU BUTTON -->
   <button mat-button (click)="menuToggle()">
     @if (menuOpened) {
-    <i class="material-icons">keyboard_arrow_left</i>
+      <i class="material-icons">keyboard_arrow_left</i>
     } @else {
-    <i class="material-icons">menu</i>
+      <i class="material-icons">menu</i>
     }
   </button>
 
   <!-- AUTHENTICATED USER BAR -->
   @if (authenticatedUser) {
-  <div id="authenticated-user-container">
-    <i id="authenticated-user-icon" class="material-icons">account_circle</i>
-    <span>
-      {{ authenticatedUser.givenName }} {{ authenticatedUser.surname }}
-    </span>
-    <button mat-button (click)="logout()">
-      <i id="authenticated-user-logout-button" class="material-icons">
-        logout
-      </i>
-    </button>
-  </div>
+    <div id="authenticated-user-container">
+      <i id="authenticated-user-icon" class="material-icons">account_circle</i>
+      <span>
+        {{ authenticatedUser.givenName }} {{ authenticatedUser.surname }}
+      </span>
+      <button mat-button (click)="logout()">
+        <i id="authenticated-user-logout-button" class="material-icons">
+          logout
+        </i>
+      </button>
+    </div>
   }
 </mat-toolbar>
 <!-- MENU CONTENT -->
 <mat-sidenav-container>
   <mat-sidenav mode="side" [opened]="menuOpened">
+    <!-- AIRLINE SUBMENU -->
+    @if (authenticatedUser && authenticatedUser.profile === 1) {
+      <button mat-button (click)="airlineSubMenuToggle()" class="menu-button">
+        @if (airlineSubMenuExpanded) {
+          <i class="material-icons">expand_more</i>
+        } @else {
+          <i class="material-icons">chevron_right</i>
+        }
+        <i class="material-icons">domain</i>
+        <span>Compagnie</span>
+      </button>
+      @if (airlineSubMenuExpanded) {
+        <!-- AIRLINE EDITING FORM BUTTON -->
+        <button mat-icon-button class="submenu-button" routerLink="airline/edit">
+          <i class="material-icons">edit</i>
+          <span>Modifier</span>
+        </button>
+      }
+    }
     <!-- USER SUBMENU -->
     @if (authenticatedUser && authenticatedUser.profile === 1) {
       <button mat-button (click)="userSubMenuToggle()" class="menu-button">

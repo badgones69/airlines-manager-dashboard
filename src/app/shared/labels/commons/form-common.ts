@@ -58,10 +58,14 @@ export function getRequiredFieldErrorMessage(): string {
   return 'champ obligatoire';
 }
 
-export function getICAO_IATAFieldsErrorMessage(): string {
+export function getICAO_IATA_FieldsErrorMessage(): string {
   return '3 lettres obligatoires';
 }
 
 export function getAllWhitespaceFieldErrorMessage(): string {
   return 'min. 1 caractère obligatoire';
+}
+
+export function getUnknownCountryErrorMessage(): string {
+  return 'pays inconnu';
 }

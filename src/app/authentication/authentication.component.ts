@@ -55,6 +55,8 @@ import { getTechnicalErrorMessage, getTechnicalErrorTitle } from '../shared/labe
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthenticationComponent implements OnInit {
+  public userMapper: UserMapper = new UserMapper();
+
   /* Form properties */
   public authenticationForm!: FormGroup;
   public authenticationFormTitle: string = '';
@@ -73,8 +75,6 @@ export class AuthenticationComponent implements OnInit {
   public resetButtonLabel: string = '';
   public resetButtonIcon: string = '';
   public resetButtonType: string = '';
-
-  public userMapper: UserMapper = new UserMapper();
 
   constructor(
     readonly formBuilder: FormBuilder,

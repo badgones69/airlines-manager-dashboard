@@ -20,6 +20,12 @@ mat-form-field .error-hint {
   color: var(--app-red);
 }
 
+/* Country field container */
+.country-field-container {
+  display: flex;
+  align-items: baseline;
+}
+
 /* Buttons */
 .form-buttons {
   display: flex;
