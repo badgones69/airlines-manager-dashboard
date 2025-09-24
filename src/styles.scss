@@ -943,6 +943,14 @@ html {
   --app-black: #000000;
   --app-grey: #808080;
   --app-red: #ff0000;
+  --orange: #ffa500;
+  --yellow: #ffff00;
+  --pink: #d87093;
+  --purple: #8a2be2;
+  --blue: #0000ff;
+  --green: #008000;
+  --brown: #784315;
+  --white: #ffffff;
 
   /* Application */
   @include app.theme();

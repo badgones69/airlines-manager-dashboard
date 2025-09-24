@@ -1,0 +1,59 @@
+/* Field title */
+.customization-field-title {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* Field container */
+.customization-field-container {
+  margin-bottom: 20px;
+}
+
+/* Preview container */
+#preview-container {
+  margin-bottom: 10px;
+}
+
+/* Color chooser */
+.color-chooser {
+  margin: 0 10px 0 10px;
+}
+
+/* Colors */
+.orange-color {
+  background-color: var(--orange);
+}
+.yellow-color {
+  background-color: var(--yellow);
+}
+.pink-color {
+  background-color: var(--pink);
+}
+.red-color {
+  background-color: var(--app-red);
+}
+.purple-color {
+  background-color: var(--purple);
+}
+.blue-color {
+  background-color: var(--blue);
+}
+.cyan-color {
+  background-color: var(--app-blue);
+}
+.green-color {
+  background-color: var(--green);
+}
+.brown-color {
+  background-color: var(--brown);
+}
+.grey-color {
+  background-color: var(--app-grey);
+}
+.black-color {
+  background-color: var(--app-black);
+}
+#white-color {
+  background-color: var(--white);
+  border: 0.5px solid var(--app-black);
+}

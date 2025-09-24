@@ -72,6 +72,8 @@ export class UserFormComponent implements OnInit {
   @Input() public user!: User;
   @Output() public submitted = new EventEmitter();
   public isEditMode!: boolean;
+  
+  public userMapper: UserMapper = new UserMapper();
 
   /* Form properties */
   public userForm!: FormGroup;
@@ -105,10 +107,8 @@ export class UserFormComponent implements OnInit {
   public resetButtonIcon: string = '';
   public resetButtonType: string = '';
 
-  public userMapper: UserMapper = new UserMapper();
-
   constructor(readonly formBuilder: FormBuilder) {
-    // Form fields creation and constraints definition
+    /* Form fields creation & constraints definition */
     this.userForm = this.formBuilder.group(
       {
         givenName: [

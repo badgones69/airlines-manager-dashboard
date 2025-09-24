@@ -74,9 +74,9 @@ import { getTechnicalErrorTitle, getTechnicalErrorMessage } from '../../../share
 export class ResetUserPasswordComponent {
   public authenticatedUser!: User;
 
+  public userUUID!: string;
   public initUserToResetPassword!: User;
 
-  public userUUID!: string;
   public userMapper: UserMapper = new UserMapper();
 
   /* Form properties */
@@ -114,7 +114,7 @@ export class ResetUserPasswordComponent {
   ) {
     this.userUUID = this.route.snapshot.paramMap.get('uuid') ?? '';
 
-    // Form fields creation and constraints definition
+    /* Form fields creation & constraints definition */
     this.resetUserPasswordForm = this.formBuilder.group(
       {
         givenName: { value: '', disabled: true },
@@ -169,17 +169,17 @@ export class ResetUserPasswordComponent {
     this.resetButtonType = getResetButtonType(ADD_FORM_MODE);
   }
 
-  // Password showing toggle listener
+  /* Password showing toggle listener */
   showPasswordToggle() {
     this.showPassword = !this.showPassword;
   }
 
-  // Repeated password showing toggle listener
+  /* Repeated password showing toggle listener */
   showRepeatedPasswordToggle() {
     this.showRepeatedPassword = !this.showRepeatedPassword;
   }
 
-  // Password field validation
+  /* Password field validation */
   isPasswordFieldInvalid(): boolean {
     let passwordFormField: any = this.resetUserPasswordForm.get(
       this.passwordFieldIdentifier
@@ -191,7 +191,7 @@ export class ResetUserPasswordComponent {
     );
   }
 
-  // Repeated password field validation
+  /* Repeated password field validation */
   isRepeatedPasswordFieldInvalid(): boolean {
     let repeatedPasswordFormField: any = this.resetUserPasswordForm.get(
       this.repeatedPasswordFieldIdentifier
@@ -206,7 +206,7 @@ export class ResetUserPasswordComponent {
     );
   }
 
-  // Password field error message(s) display
+  /* Password field error message(s) display */
   displayPasswordErrorMessage(): string {
     if (
       this.resetUserPasswordForm
@@ -224,7 +224,7 @@ export class ResetUserPasswordComponent {
     return '';
   }
 
-  // Repeated password field error message(s) display
+  /* Repeated password field error message(s) display */
   displayRepeatedPasswordErrorMessage(error: string): string {
     if (
       error === REQUIRED_ERROR &&
@@ -257,23 +257,25 @@ export class ResetUserPasswordComponent {
     let userToResetPassword = this.userMapper.userToDB(userToDB);
 
     // User password resetting
-    this.userService.resetUserPassword(userToResetPassword).then((result: any) => {
-      // If user password is reseted
-      if (result.data) {
-        /* Success notification showing */
-        this.notificationService.showSuccessNotification(
-          `${getResetUserPasswordFormTitle(true)}`,
-          `${getResetUserPasswordFormSuccessNotificationMessage()}`
-        );
-        // Redirection to users list
-        this.router.navigate(['users', 'list']);
-      } else {
-        /* Technical error notification showing */
-        this.notificationService.showErrorNotification(
-          `${getTechnicalErrorTitle()}`,
-          `${getTechnicalErrorMessage()}`
-        );
-      }
-    });
+    this.userService
+      .resetUserPassword(userToResetPassword)
+      .then((result: any) => {
+        // If user password is reseted
+        if (result.data) {
+          /* Success notification showing */
+          this.notificationService.showSuccessNotification(
+            `${getResetUserPasswordFormTitle(true)}`,
+            `${getResetUserPasswordFormSuccessNotificationMessage()}`
+          );
+          // Redirection to users list
+          this.router.navigate(['users', 'list']);
+        } else {
+          /* Technical error notification showing */
+          this.notificationService.showErrorNotification(
+            `${getTechnicalErrorTitle()}`,
+            `${getTechnicalErrorMessage()}`
+          );
+        }
+      });
   }
 }

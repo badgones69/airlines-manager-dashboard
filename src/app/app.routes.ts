@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { HomeComponent } from './home/home.component';
+import { AirlineComponent } from './airline/airline.component';
 import { AddUserComponent } from './user/pages/add-user/add-user.component';
 import { ListUsersComponent } from './user/pages/list-users/list-users.component';
 import { EditUserComponent } from './user/pages/edit-user/edit-user.component';
@@ -13,6 +14,14 @@ export const routes: Routes = [
 
   // Home page
   { path: 'home', component: HomeComponent },
+
+  /* Airline pages */
+  {
+    path: 'airline',
+    children: [
+      { path: 'edit', component: AirlineComponent }
+    ],
+  },
 
   /* User pages */
   {
