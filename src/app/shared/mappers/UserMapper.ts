@@ -12,9 +12,9 @@ export class UserMapper {
   public usersListFromDB(usersListFromDB: any[]): User[] {
     let usersList: User[] = [];
 
-    usersListFromDB.forEach((userFromDB) => {
+    for (const userFromDB of usersListFromDB) {
       usersList.push(this.userFromDB(userFromDB));
-    });
+    }
     return usersList;
   }
 
@@ -33,8 +33,8 @@ export class UserMapper {
   /* DTO => DB mapping */
   public userToDB(userToDB: any): any {
     if (
-      userToDB.givenName.indexOf('-') < 0 &&
-      userToDB.givenName.indexOf(' ') < 0
+      userToDB.givenName.includes('-') &&
+      userToDB.givenName.includes(' ')
     ) {
       userToDB.givenName = capitalizeFirstLetter(userToDB.givenName);
     } else {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DialogComponent } from '../shared/components/dialog/dialog.component';
 import packageJson from '../../../package.json';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -11,7 +11,7 @@ import { getAppReleaseDate } from '../shared/labels/commons/commons';
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss',
 })
-export class AboutComponent {
+export class AboutComponent implements OnInit {
   public aboutDialogTitle!: string;
   public aboutDialogMode!: string;
   public releaseDate!: string;
@@ -33,64 +33,62 @@ export class AboutComponent {
     this.aboutDialogMode = INFO_DIALOG_MODE;
     this.releaseDate = getAppReleaseDate();
 
-    /* Server & Database libraries */
-    this.externalToolsList.data.push({
-      toolLeft: { name: 'Vercel', version: packageJson.vercel },
-      toolRight: {
-        name: 'Supabase-JS',
-        version: packageJson.dependencies['@supabase/supabase-js'].replace(
-          '^',
-          ''
-        ),
+    this.externalToolsList.data.push(
+      /* Server & Database libraries */
+      {
+        toolLeft: { name: 'Vercel', version: packageJson.vercel },
+        toolRight: {
+          name: 'Supabase-JS',
+          version: packageJson.dependencies['@supabase/supabase-js'].replace(
+            '^',
+            ''
+          ),
+        },
       },
-    });
-
-    /* Angular libraries */
-    this.externalToolsList.data.push({
-      toolLeft: {
-        name: 'Angular',
-        version: packageJson.dependencies['@angular/core'].replace('^', ''),
+      /* Angular libraries */
+      {
+        toolLeft: {
+          name: 'Angular',
+          version: packageJson.dependencies['@angular/core'].replace('^', ''),
+        },
+        toolRight: {
+          name: 'NGx Toastr',
+          version: packageJson.dependencies['ngx-toastr'].replace('^', ''),
+        },
       },
-      toolRight: {
-        name: 'NGx Toastr',
-        version: packageJson.dependencies['ngx-toastr'].replace('^', ''),
+      /* Tests libraries */
+      {
+        toolLeft: {
+          name: 'Jasmine',
+          version: packageJson.devDependencies['jasmine-core'].replace('^', ''),
+        },
+        toolRight: {
+          name: 'Karma',
+          version: packageJson.devDependencies['karma'].replace('^', ''),
+        },
       },
-    });
-
-    /* Tests libraries */
-    this.externalToolsList.data.push({
-      toolLeft: {
-        name: 'Jasmine',
-        version: packageJson.devDependencies['jasmine-core'].replace('^', ''),
+      /* Security libraries */
+      {
+        toolLeft: {
+          name: 'UUID',
+          version: packageJson.dependencies['uuid'].replace('^', ''),
+        },
+        toolRight: {
+          name: 'Bcrypt-TS',
+          version: packageJson.dependencies['bcrypt-ts'].replace('^', ''),
+        },
       },
-      toolRight: {
-        name: 'Karma',
-        version: packageJson.devDependencies['karma'].replace('^', ''),
+      /* Charts & Flags libraries */
+      {
+        toolLeft: {
+          name: 'Chart.js',
+          version: packageJson.dependencies['chart.js'].replace('^', ''),
+        },
+        toolRight: {
+          name: 'Flag Icons',
+          version: packageJson.dependencies['flag-icons'].replace('^', ''),
+        },
       },
-    });
-
-    /* Security libraries */
-    this.externalToolsList.data.push({
-      toolLeft: {
-        name: 'UUID',
-        version: packageJson.dependencies['uuid'].replace('^', ''),
-      },
-      toolRight: {
-        name: 'Bcrypt-TS',
-        version: packageJson.dependencies['bcrypt-ts'].replace('^', ''),
-      },
-    });
-
-    /* Charts & Flags libraries */
-    this.externalToolsList.data.push({
-      toolLeft: {
-        name: 'Chart.js',
-        version: packageJson.dependencies['chart.js'].replace('^', ''),
-      },
-      toolRight: {
-        name: 'Flag Icons',
-        version: packageJson.dependencies['flag-icons'].replace('^', ''),
-      },
-    });
+    );
   }
 }

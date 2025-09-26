@@ -261,7 +261,7 @@ export class AirlineComponent implements OnInit {
 
       const countryFound = getCountryByName(filterValue);
 
-      if (countryFound != undefined) {
+      if (countryFound) {
         this.nationalityFlag = countryFound.flagCode;
       } else {
         this.nationalityFlag = 'xx';

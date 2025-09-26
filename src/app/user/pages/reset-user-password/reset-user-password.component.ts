@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -71,7 +71,7 @@ import { getTechnicalErrorTitle, getTechnicalErrorMessage } from '../../../share
   templateUrl: './reset-user-password.component.html',
   styleUrl: '../../../shared/styles/forms.scss',
 })
-export class ResetUserPasswordComponent {
+export class ResetUserPasswordComponent implements OnInit {
   public authenticatedUser!: User;
 
   public userUUID!: string;
