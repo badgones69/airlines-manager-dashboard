@@ -2,7 +2,7 @@ export function getResetUserPasswordFormTitle(isNotification: boolean): string {
   const title: string = `Réinitialisation du mot de passe<br /> d'un utilisateur`;
 
   if (isNotification) {
-    return title.replaceAll(/(<([^>]+)>)/gi, '');
+    return title.replaceAll('<br />', '');
   }
   return title;
 }

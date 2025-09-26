@@ -19,8 +19,8 @@ export class AirlineMapper {
   /* DTO => DB mapping */
   public airlineToDB(airlineToDB: any): any {
     if (
-      airlineToDB.name.indexOf('-') < 0 &&
-      airlineToDB.name.indexOf(' ') < 0
+      airlineToDB.name.includes('-') &&
+      airlineToDB.name.includes(' ')
     ) {
       airlineToDB.name = capitalizeFirstLetter(airlineToDB.name);
     } else {
