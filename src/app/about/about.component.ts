@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { DialogComponent } from '../shared/components/dialog/dialog.component';
 import packageJson from '../../../package.json';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { INFO_DIALOG_MODE } from '../shared/constants/dialogs-constants';
 import { getAppReleaseDate } from '../shared/labels/commons/commons';
+import { getAboutDialogTitle, getServerAndDatabaseLabel, getFrameworkAndLanguageLabel, getChartsAndMapsLabel, getFlagsAndNotificationsLabel, getSecurityLabel, getTestsLabel } from '../shared/labels/dialogs/about-dialog';
 
 @Component({
   selector: 'about',
-  imports: [DialogComponent, MatTableModule],
+  imports: [DialogComponent],
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss',
 })
@@ -15,80 +15,26 @@ export class AboutComponent implements OnInit {
   public aboutDialogTitle!: string;
   public aboutDialogMode!: string;
   public releaseDate!: string;
+  public serverAndDatabaseLabel!: string;
+  public frameworkAndLanguageLabel!: string;
+  public chartsAndMapsLabel!: string;
+  public flagsAndNotificationsLabel!: string;
+  public securityLabel!: string;
+  public testsLabel!: string;
 
   public packageJson = packageJson;
-
-  public columnsIdentifiers: string[] = [
-    'toolLeftName',
-    'toolLeftVersion',
-    'toolRightName',
-    'toolRightVersion',
-  ];
-  public externalToolsList: MatTableDataSource<any> = new MatTableDataSource();
 
   constructor() {}
 
   ngOnInit(): void {
-    this.aboutDialogTitle = `${packageJson.productName} - À propos`;
+    this.aboutDialogTitle = `${packageJson.productName} - ${getAboutDialogTitle()}`;
     this.aboutDialogMode = INFO_DIALOG_MODE;
     this.releaseDate = getAppReleaseDate();
-
-    this.externalToolsList.data.push(
-      /* Server & Database libraries */
-      {
-        toolLeft: { name: 'Vercel', version: packageJson.vercel },
-        toolRight: {
-          name: 'Supabase-JS',
-          version: packageJson.dependencies['@supabase/supabase-js'].replace(
-            '^',
-            ''
-          ),
-        },
-      },
-      /* Angular libraries */
-      {
-        toolLeft: {
-          name: 'Angular',
-          version: packageJson.dependencies['@angular/core'].replace('^', ''),
-        },
-        toolRight: {
-          name: 'NGx Toastr',
-          version: packageJson.dependencies['ngx-toastr'].replace('^', ''),
-        },
-      },
-      /* Tests libraries */
-      {
-        toolLeft: {
-          name: 'Jasmine',
-          version: packageJson.devDependencies['jasmine-core'].replace('^', ''),
-        },
-        toolRight: {
-          name: 'Karma',
-          version: packageJson.devDependencies['karma'].replace('^', ''),
-        },
-      },
-      /* Security libraries */
-      {
-        toolLeft: {
-          name: 'UUID',
-          version: packageJson.dependencies['uuid'].replace('^', ''),
-        },
-        toolRight: {
-          name: 'Bcrypt-TS',
-          version: packageJson.dependencies['bcrypt-ts'].replace('^', ''),
-        },
-      },
-      /* Charts & Flags libraries */
-      {
-        toolLeft: {
-          name: 'Chart.js',
-          version: packageJson.dependencies['chart.js'].replace('^', ''),
-        },
-        toolRight: {
-          name: 'Flag Icons',
-          version: packageJson.dependencies['flag-icons'].replace('^', ''),
-        },
-      },
-    );
+    this.serverAndDatabaseLabel = getServerAndDatabaseLabel();
+    this.frameworkAndLanguageLabel = getFrameworkAndLanguageLabel();
+    this.chartsAndMapsLabel = getChartsAndMapsLabel();
+    this.flagsAndNotificationsLabel = getFlagsAndNotificationsLabel();
+    this.securityLabel = getSecurityLabel();
+    this.testsLabel = getTestsLabel();
   }
 }
