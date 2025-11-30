@@ -1,33 +1,82 @@
 <app-dialog [dialogTitle]="aboutDialogTitle" [dialogMode]="aboutDialogMode">
   <!-- APP VERSION NUMBER AND RELEASE DATE -->
   <p>
-    <span>{{ packageJson.productName }} v{{ packageJson.version }}</span> (#{{
+    <span id="app-version">{{ packageJson.productName }} v{{ packageJson.version }}</span> (#{{
       packageJson.releaseNumber
     }}), {{ releaseDate }}
   </p>
-
-  <table mat-table [dataSource]="externalToolsList">
-    <th></th>
-    <ng-container [matColumnDef]="columnsIdentifiers[0]">
-      <td mat-cell *matCellDef="let tools">
-        <span>{{ tools.toolLeft.name }}</span>
-      </td>
-    </ng-container>
-    <ng-container [matColumnDef]="columnsIdentifiers[1]">
-      <td mat-cell *matCellDef="let tools">v{{ tools.toolLeft.version }}</td>
-    </ng-container>
-
-    <ng-container [matColumnDef]="columnsIdentifiers[2]">
-      <td mat-cell *matCellDef="let tools">
-        <span>{{ tools.toolRight.name }}</span>
-      </td>
-    </ng-container>
-    <ng-container [matColumnDef]="columnsIdentifiers[3]">
-      <td mat-cell *matCellDef="let tools">v{{ tools.toolRight.version }}</td>
-    </ng-container>
-
-    <tr mat-row *matRowDef="let row; columns: columnsIdentifiers"></tr>
-  </table>
+  <!-- DEPENDENCIES -->
+  <span class="dependencies-group-title">{{ serverAndDatabaseLabel }} :</span>
+  <p class="dependencies-group">
+    <img
+      src="https://img.shields.io/badge/Vercel v48.12.0-000000.svg"
+      alt="Vercel"
+    />
+    <img
+      class="last-img"
+      src="https://img.shields.io/badge/Supabase--JS v2.86.0-008000.svg"
+      alt="Supabase-JS"
+    />
+  </p>
+  <span class="dependencies-group-title">{{ frameworkAndLanguageLabel }} :</span>
+  <p class="dependencies-group">
+    <img
+      src="https://img.shields.io/badge/Angular v20.3.13-purple.svg"
+      alt="Angular"
+    />
+    <img
+      class="last-img"
+      src="https://img.shields.io/badge/TypeScript v5.9.3-3C91B0.svg"
+      alt="NGx Toastr"
+    />
+  </p>
+  <span class="dependencies-group-title">{{ chartsAndMapsLabel }} :</span>
+  <p class="dependencies-group">
+    <img
+      src="https://img.shields.io/badge/Chart.js v4.5.1-orange.svg"
+      alt="Chart.js"
+    />
+    <img
+      class="last-img"
+      src="https://img.shields.io/badge/OpenLayers v10.7.0-cyan.svg"
+      alt="Flag Icons"
+    />
+  </p>
+  <span class="dependencies-group-title">{{ flagsAndNotificationsLabel }} :</span>
+  <p class="dependencies-group">
+    <img
+      src="https://img.shields.io/badge/Flag Icons v7.5.0-yellow.svg"
+      alt="Flag Icons"
+    />
+    <img
+      class="last-img"
+      src="https://img.shields.io/badge/NGx Toastr v19.1.0-FF69B4.svg"
+      alt="NGx Toastr"
+    />
+  </p>
+  <span class="dependencies-group-title">{{ securityLabel }} :</span>
+  <p class="dependencies-group">
+    <img
+      src="https://img.shields.io/badge/UUID v13.0.0-grey.svg"
+      alt="UUID"
+    />
+    <img
+      src="https://img.shields.io/badge/Bcrypt--TS v7.1.0-9F5540.svg"
+      alt="Bcrypt-TS"
+    />
+    <img
+      class="last-img"
+      src="https://img.shields.io/badge/Base64--TS v2.0.1-greenlight.svg"
+      alt="Base64-TS"
+    />
+  </p>
+  <span class="dependencies-group-title">{{ testsLabel }} :</span>
+  <p class="dependencies-group">
+    <img
+      src="https://img.shields.io/badge/Vitest v4.0.14-729B1B.svg"
+      alt="Vitest"
+    />
+  </p>
   <!-- AUTHOR COPYRIGHT -->
-  <p>© 2025 {{ packageJson.author }}</p>
+  <p id="author">© 2025 {{ packageJson.author }}</p>
 </app-dialog>

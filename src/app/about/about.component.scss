@@ -1,31 +1,22 @@
-span {
+/* App version number */
+#app-version {
   font-weight: bold;
 }
 
-/* Table */
-.mat-mdc-table {
-  margin-bottom: 10px;
+/* Dependencies */
+.dependencies-group-title {
+  text-decoration: underline;
+}
+.dependencies-group {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+img:not(.last-img) {
+  margin-right: 10px;
 }
 
-/* Columns */
-.mat-column-toolLeftName,
-.mat-column-toolRightName {
-  text-align: right;
-  padding-left: 10px;
-}
-.mat-column-toolLeftVersion,
-.mat-column-toolRightVersion {
-  text-align: left;
-  padding-right: 10px;
-}
-.mat-column-toolLeftVersion {
-  border-right: 2px solid var(--app-red);
-}
-
-/* Cells */
-.mat-mdc-cell {
-  border-color: var(--app-red);
-}
-td {
-  padding: 3px;
+/* Author */
+#author {
+  margin-top: 25px;
 }
