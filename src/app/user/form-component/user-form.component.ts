@@ -85,8 +85,8 @@ export class UserFormComponent implements OnInit {
   public givenNameFieldIdentifier: string = 'givenName';
   public surnameFieldIdentifier: string = 'surname';
   public loginFieldIdentifier: string = 'login';
-  public passwordFieldIdentifier: string = 'pswrd';
-  public repeatedPasswordFieldIdentifier: string = 'repeatedPswrd';
+  public passwordFieldIdentifier: string = 'pFI';
+  public repeatedPasswordFieldIdentifier: string = 'repeatedPFI';
   public profileFieldIdentifier: string = 'profile';
 
   /* Form fields labels */
