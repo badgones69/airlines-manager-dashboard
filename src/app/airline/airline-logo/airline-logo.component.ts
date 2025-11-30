@@ -68,10 +68,7 @@ export class AirlineLogoComponent implements OnInit {
 
   public airlineMapper: AirlineMapper = new AirlineMapper();
 
-  constructor(
-    readonly airlineService: AirlineService,
-    readonly notificationService: NotificationService
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {
     /* Form title, fields and button initialization */

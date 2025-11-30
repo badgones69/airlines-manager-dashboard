@@ -54,7 +54,7 @@ export class DialogComponent implements OnInit {
     );
   }
 
-  confirm() {
+  confirm(): void {
     this.submitted.emit(true);
   }
 }

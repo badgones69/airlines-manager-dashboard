@@ -3,7 +3,7 @@ import {
   OK_DIALOG_BUTTON_TYPE,
 } from '../../constants/dialogs-constants';
 
-export function getConfirmationDialogTitleLabel(): string {
+export function getConfirmationDialogTitle(): string {
   return ': confirmation';
 }
 

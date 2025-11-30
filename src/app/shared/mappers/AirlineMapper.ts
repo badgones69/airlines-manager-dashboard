@@ -22,11 +22,11 @@ export class AirlineMapper {
       airlineToDB.name.includes('-') &&
       airlineToDB.name.includes(' ')
     ) {
-      airlineToDB.name = capitalizeFirstLetter(airlineToDB.name);
-    } else {
       airlineToDB.name = capitalizeDashedWordsFirstLetter(
         capitalizeSpaceSeparatedWordsFirstLetter(airlineToDB.name)
       );
+    } else {
+      airlineToDB.name = capitalizeFirstLetter(airlineToDB.name);
     }
 
     return {

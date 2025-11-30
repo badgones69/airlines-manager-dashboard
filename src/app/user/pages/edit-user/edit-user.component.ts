@@ -40,13 +40,13 @@ export class EditUserComponent implements OnInit {
   constructor(
     readonly userService: UserService,
     readonly notificationService: NotificationService,
-    readonly route: ActivatedRoute,
+    public route: ActivatedRoute,
     readonly router: Router
-  ) {
-    this.userUUID = this.route.snapshot.paramMap.get('uuid') ?? '';
-  }
+  ) {}
 
   ngOnInit(): void {
+    this.userUUID = this.route.snapshot.paramMap.get('uuid') ?? '';
+
     this.userService.findUser(this.userUUID).then((user) => {
       this.initUserToEdit = this.userMapper.userFromDB(user);
     });

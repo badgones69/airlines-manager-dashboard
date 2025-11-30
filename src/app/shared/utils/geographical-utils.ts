@@ -1,7 +1,7 @@
 import { COUNTRIES_FR } from '../constants/geographical-constants';
 import { Country } from '../models/Country';
 import { Region } from '../models/Region';
-import { orderElementsByAlphabetical } from './commons-utils';
+import { sortElementsAlphabetically } from './commons-utils';
 import { capitalize } from './labels-utils';
 
 export function getCountriesList(): Country[] {
@@ -10,7 +10,7 @@ export function getCountriesList(): Country[] {
 
 export function getCountries(): Country[] {
   let countriesList = getCountriesList();
-  return orderElementsByAlphabetical(countriesList, 'fr');
+  return sortElementsAlphabetically(countriesList, 'fr');
 }
 
 export function getCountryById(countryId: number): Country | undefined {
@@ -23,7 +23,7 @@ export function getCountryByName(countryName: string): Country | undefined {
   );
 }
 
-export function getRegion(countryId: number, regionId: number): Region | undefined {
+export function getRegion(regionId: number, countryId: number): Region | undefined {
   return getCountryById(countryId)?.regions?.find(
     (region) => region.id === regionId,
   );

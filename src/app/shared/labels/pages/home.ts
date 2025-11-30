@@ -1,6 +1,6 @@
 import packageJson from '../../../../../package.json';
 
-function getWelcomeMessagePrefix(): string {
+export function getWelcomeMessagePrefix(): string {
   return 'Bienvenue sur';
 }
 

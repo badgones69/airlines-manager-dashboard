@@ -14,7 +14,7 @@ export const ICAO_IATA_CODE_PATTERN = '[A-Za-z]{3}';
 
 /* Forms fields error types */
 export const REQUIRED_ERROR = 'required';
-export const ONLY_WHITESPACE_ERROR = 'onlyWhitespaceValue';
+export const BLANK_VALUE_ERROR = 'blankValue';
 export const MIN_LENGTH_ERROR = 'minlength';
 export const MAX_LENGTH_ERROR = 'maxlength';
 export const PATTERN_ERROR = 'pattern';

@@ -9,7 +9,7 @@ import {
   getUserFormTitle,
 } from '../../../shared/labels/forms/user-form';
 import { DialogComponent } from '../../../shared/components/dialog/dialog.component';
-import { getConfirmationDialogTitleLabel } from '../../../shared/labels/commons/dialog-common';
+import { getConfirmationDialogTitle } from '../../../shared/labels/commons/dialog-common';
 import { getFormModeLabel } from '../../../shared/labels/commons/form-common';
 import { getTechnicalErrorTitle, getTechnicalErrorMessage } from '../../../shared/labels/errors';
 
@@ -38,7 +38,7 @@ export class DeleteUserComponent implements OnInit {
   ngOnInit(): void {
     this.deleteUserDialogTitle = `${
       this.deleteUserFormTitle
-    } ${getConfirmationDialogTitleLabel()}`;
+    } ${getConfirmationDialogTitle()}`;
     this.deleteUserDialogMode = CONFIRMATION_DIALOG_MODE;
     this.deleteUserDialogMessage = getUserDeleteDialogMessage();
   }
@@ -53,7 +53,7 @@ export class DeleteUserComponent implements OnInit {
         if (response.status === 204) {
           /* Success notification showing */
           this.notificationService.showSuccessNotification(
-            this.deleteUserFormTitle,
+            this.deleteUserFormTitle.toUpperCase(),
             getUserFormSuccessNotificationMessage(DELETE_FORM_MODE)
           );
         } else {

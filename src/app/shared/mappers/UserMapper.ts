@@ -36,11 +36,11 @@ export class UserMapper {
       userToDB.givenName.includes('-') &&
       userToDB.givenName.includes(' ')
     ) {
-      userToDB.givenName = capitalizeFirstLetter(userToDB.givenName);
-    } else {
       userToDB.givenName = capitalizeDashedWordsFirstLetter(
         capitalizeSpaceSeparatedWordsFirstLetter(userToDB.givenName)
       );
+    } else {
+      userToDB.givenName = capitalizeFirstLetter(userToDB.givenName);
     }
 
     return {
