@@ -1,4 +1,4 @@
-export function orderElementsByAlphabetical(
+export function sortElementsAlphabetically(
   elements: any[],
   language: string,
 ): any[] {

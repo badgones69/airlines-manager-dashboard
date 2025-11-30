@@ -15,7 +15,7 @@ import {
   getResetButtonLabel,
   getRequiredFieldErrorMessage,
   getICAO_IATA_FieldsErrorMessage,
-  getAllWhitespaceFieldErrorMessage,
+  getBlankStringFieldErrorMessage,
   getResetButtonIcon,
   getUnknownCountryErrorMessage,
 } from '../shared/labels/commons/form-common';
@@ -29,7 +29,7 @@ import {
   ICAO_IATA_CODE_PATTERN,
   MAX_LENGTH_ERROR,
   MIN_LENGTH_ERROR,
-  ONLY_WHITESPACE_ERROR,
+  BLANK_VALUE_ERROR,
   PATTERN_ERROR,
   REQUIRED_ERROR,
   UNKNOWN_COUNTRY_ERROR,
@@ -318,9 +318,9 @@ export class AirlineComponent implements OnInit {
     } else if (
       this.airlineForm
         .get(this.nameFieldIdentifier)
-        ?.hasError(ONLY_WHITESPACE_ERROR)
+        ?.hasError(BLANK_VALUE_ERROR)
     ) {
-      return getAllWhitespaceFieldErrorMessage();
+      return getBlankStringFieldErrorMessage();
     }
     return '';
   }

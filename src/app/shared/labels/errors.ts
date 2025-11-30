@@ -3,7 +3,7 @@ export function getUnauthorizedMessage(): string {
 }
 
 export function getForbiddenMessage(): string {
-  return "Vous n'êtes pas habilité(e) pour accéder à cette page !";
+  return 'Vous n\'êtes pas habilité(e) pour accéder à cette page !';
 }
 
 export function getAuthenticatedUserUneditableMessage(): string {

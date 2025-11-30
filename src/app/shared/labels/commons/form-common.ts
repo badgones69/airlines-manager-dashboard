@@ -62,7 +62,7 @@ export function getICAO_IATA_FieldsErrorMessage(): string {
   return '3 lettres obligatoires';
 }
 
-export function getAllWhitespaceFieldErrorMessage(): string {
+export function getBlankStringFieldErrorMessage(): string {
   return 'min. 1 caractère obligatoire';
 }
 
