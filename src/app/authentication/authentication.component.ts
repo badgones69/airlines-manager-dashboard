@@ -64,7 +64,7 @@ export class AuthenticationComponent implements OnInit {
 
   /* Form fields identifiers */
   public loginFieldIdentifier: string = 'login';
-  public passwordFieldIdentifier: string = 'passWord';
+  public passwordFieldIdentifier: string = 'pass-word';
 
   /* Form fields labels */
   public loginInputLabel: string = '';
