@@ -88,8 +88,8 @@ export class ResetUserPasswordComponent implements OnInit {
   /* Form fields identifiers */
   public givenNameFieldIdentifier: string = 'givenName';
   public surnameFieldIdentifier: string = 'surname';
-  public passwordFieldIdentifier: string = 'password';
-  public repeatedPasswordFieldIdentifier: string = 'repeatedPassword';
+  public passwordFieldIdentifier: string = 'passWord';
+  public repeatedPasswordFieldIdentifier: string = 'repeatedPassWord';
 
   /* Form fields labels */
   public givenNameInputLabel: string = '';
