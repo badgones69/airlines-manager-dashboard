@@ -88,8 +88,8 @@ export class ResetUserPasswordComponent implements OnInit {
   /* Form fields identifiers */
   public givenNameFieldIdentifier: string = 'givenName';
   public surnameFieldIdentifier: string = 'surname';
-  public passwordFieldIdentifier: string = 'pFI';
-  public repeatedPasswordFieldIdentifier: string = 'repeatedPFI';
+  public pass_wordFieldIdentifier: string = 'password';
+  public repeatedPass_wordFieldIdentifier: string = 'repeatedPassword';
 
   /* Form fields labels */
   public givenNameInputLabel: string = '';
@@ -131,8 +131,8 @@ export class ResetUserPasswordComponent implements OnInit {
       {
         validators: [
           notIdenticalPasswordsValidator(
-            this.passwordFieldIdentifier,
-            this.repeatedPasswordFieldIdentifier
+            this.pass_wordFieldIdentifier,
+            this.repeatedPass_wordFieldIdentifier
           ),
         ],
         updateOn: 'change',
@@ -182,7 +182,7 @@ export class ResetUserPasswordComponent implements OnInit {
   /* Password field validation */
   isPasswordFieldInvalid(): boolean {
     let passwordFormField: any = this.resetUserPasswordForm.get(
-      this.passwordFieldIdentifier
+      this.pass_wordFieldIdentifier
     );
     return (
       (passwordFormField?.invalid &&
@@ -194,7 +194,7 @@ export class ResetUserPasswordComponent implements OnInit {
   /* Repeated password field validation */
   isRepeatedPasswordFieldInvalid(): boolean {
     let repeatedPasswordFormField: any = this.resetUserPasswordForm.get(
-      this.repeatedPasswordFieldIdentifier
+      this.repeatedPass_wordFieldIdentifier
     );
 
     return (
@@ -210,13 +210,13 @@ export class ResetUserPasswordComponent implements OnInit {
   displayPasswordErrorMessage(): string {
     if (
       this.resetUserPasswordForm
-        .get(this.passwordFieldIdentifier)
+        .get(this.pass_wordFieldIdentifier)
         ?.hasError(REQUIRED_ERROR)
     ) {
       return getRequiredFieldErrorMessage();
     } else if (
       this.resetUserPasswordForm
-        .get(this.passwordFieldIdentifier)
+        .get(this.pass_wordFieldIdentifier)
         ?.hasError(PATTERN_ERROR)
     ) {
       return getPasswordFieldFormatErrorMessage();
@@ -229,7 +229,7 @@ export class ResetUserPasswordComponent implements OnInit {
     if (
       error === REQUIRED_ERROR &&
       this.resetUserPasswordForm
-        .get(this.repeatedPasswordFieldIdentifier)
+        .get(this.repeatedPass_wordFieldIdentifier)
         ?.hasError(REQUIRED_ERROR)
     ) {
       return getRequiredFieldErrorMessage();

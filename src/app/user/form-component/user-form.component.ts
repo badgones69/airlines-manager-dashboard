@@ -85,8 +85,8 @@ export class UserFormComponent implements OnInit {
   public givenNameFieldIdentifier: string = 'givenName';
   public surnameFieldIdentifier: string = 'surname';
   public loginFieldIdentifier: string = 'login';
-  public passwordFieldIdentifier: string = 'pFI';
-  public repeatedPasswordFieldIdentifier: string = 'repeatedPFI';
+  public pass_wordFieldIdentifier: string = 'password';
+  public repeatedPass_wordFieldIdentifier: string = 'repeatedPassword';
   public profileFieldIdentifier: string = 'profile';
 
   /* Form fields labels */
@@ -142,8 +142,8 @@ export class UserFormComponent implements OnInit {
       {
         validators: [
           notIdenticalPasswordsValidator(
-            this.passwordFieldIdentifier,
-            this.repeatedPasswordFieldIdentifier
+            this.pass_wordFieldIdentifier,
+            this.repeatedPass_wordFieldIdentifier
           ),
         ],
         updateOn: 'change',
@@ -156,9 +156,9 @@ export class UserFormComponent implements OnInit {
 
     if (this.isEditMode) {
       this.userForm.setValidators([]);
-      this.userForm.get(this.passwordFieldIdentifier)?.setValidators([]);
+      this.userForm.get(this.pass_wordFieldIdentifier)?.setValidators([]);
       this.userForm
-        .get(this.repeatedPasswordFieldIdentifier)
+        .get(this.repeatedPass_wordFieldIdentifier)
         ?.setValidators([]);
     }
 
@@ -199,7 +199,7 @@ export class UserFormComponent implements OnInit {
   /* Password field validation */
   isPasswordFieldInvalid(): boolean {
     let passwordFormField: any = this.userForm.get(
-      this.passwordFieldIdentifier
+      this.pass_wordFieldIdentifier
     );
     return (
       (passwordFormField?.invalid &&
@@ -211,7 +211,7 @@ export class UserFormComponent implements OnInit {
   /* Repeated password field validation */
   isRepeatedPasswordFieldInvalid(): boolean {
     let repeatedPasswordFormField: any = this.userForm.get(
-      this.repeatedPasswordFieldIdentifier
+      this.repeatedPass_wordFieldIdentifier
     );
 
     return (
@@ -268,11 +268,11 @@ export class UserFormComponent implements OnInit {
   /* Password field error message(s) display */
   displayPasswordErrorMessage(): string {
     if (
-      this.userForm.get(this.passwordFieldIdentifier)?.hasError(REQUIRED_ERROR)
+      this.userForm.get(this.pass_wordFieldIdentifier)?.hasError(REQUIRED_ERROR)
     ) {
       return getRequiredFieldErrorMessage();
     } else if (
-      this.userForm.get(this.passwordFieldIdentifier)?.hasError(PATTERN_ERROR)
+      this.userForm.get(this.pass_wordFieldIdentifier)?.hasError(PATTERN_ERROR)
     ) {
       return getPasswordFieldFormatErrorMessage();
     }
@@ -284,7 +284,7 @@ export class UserFormComponent implements OnInit {
     if (
       error === REQUIRED_ERROR &&
       this.userForm
-        .get(this.repeatedPasswordFieldIdentifier)
+        .get(this.repeatedPass_wordFieldIdentifier)
         ?.hasError(REQUIRED_ERROR)
     ) {
       return getRequiredFieldErrorMessage();
