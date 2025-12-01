@@ -64,7 +64,7 @@ export class AuthenticationComponent implements OnInit {
 
   /* Form fields identifiers */
   public loginFieldIdentifier: string = 'login';
-  public passwordFieldIdentifier: string = 'pFI';
+  public pass_wordFieldIdentifier: string = 'password';
 
   /* Form fields labels */
   public loginInputLabel: string = '';
@@ -111,9 +111,9 @@ export class AuthenticationComponent implements OnInit {
   /* Password field validation */
   isPasswordFieldValid(): boolean {
     return (
-      (this.authenticationForm.get(this.passwordFieldIdentifier)?.invalid &&
-        (this.authenticationForm.get(this.passwordFieldIdentifier)?.dirty ||
-          this.authenticationForm.get(this.passwordFieldIdentifier)
+      (this.authenticationForm.get(this.pass_wordFieldIdentifier)?.invalid &&
+        (this.authenticationForm.get(this.pass_wordFieldIdentifier)?.dirty ||
+          this.authenticationForm.get(this.pass_wordFieldIdentifier)
             ?.touched)) ??
       true
     );
@@ -135,7 +135,7 @@ export class AuthenticationComponent implements OnInit {
   displayPasswordErrorMessage(): string {
     if (
       this.authenticationForm
-        .get(this.passwordFieldIdentifier)
+        .get(this.pass_wordFieldIdentifier)
         ?.hasError(REQUIRED_ERROR)
     ) {
       return getRequiredFieldErrorMessage();
