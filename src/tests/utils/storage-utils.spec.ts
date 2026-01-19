@@ -1,27 +1,10 @@
 import { AUTHENTICATED_USER_STORAGE_NAME } from '../../app/shared/constants/storage-constants';
 import { getStoredItem, removeStoredItem } from '../../app/shared/utils/storage-utils';
 import { describe, beforeEach, it, expect } from 'vitest';
-
-const sessionStorageMock = (() => {
-  let store: any = {};
-  return {
-    getItem(key: any) {
-        return store[key] ?? null;
-    },
-    setItem(key: any, value: any) {
-        store[key] = value.toString();
-    },
-    removeItem(key: any) {
-        delete store[key];
-    },
-    clear() {
-        store = {};
-    }
-  };
-})();
+import { mockSessionStorage } from "../mocks/mock-session-storage";
   
 Object.defineProperty(globalThis, 'sessionStorage', {
-  value: sessionStorageMock
+  value: mockSessionStorage
 });
 
 describe('StorageUtils', () => {

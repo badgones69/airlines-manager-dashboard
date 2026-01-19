@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import {
   FormGroup,
   Validators,
   FormsModule,
-  FormBuilder,
+  FormControl,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -70,22 +70,23 @@ export class AuthenticationComponent implements OnInit {
   public loginInputLabel: string = '';
   public passwordInputLabel: string = '';
 
-  /* Buttons properties */
+  /* Buttons labels and icons */
   public submitButtonLabel: string = '';
   public resetButtonLabel: string = '';
   public resetButtonIcon: string = '';
   public resetButtonType: string = '';
 
+  /* Injections */
+  public userService: UserService = inject(UserService);
+  public router: Router = inject(Router);
+
   constructor(
-    readonly formBuilder: FormBuilder,
-    readonly router: Router,
-    readonly userService: UserService,
     readonly notificationService: NotificationService
   ) {
     /* Form fields creation & constraints definition */
-    this.authenticationForm = this.formBuilder.group({
-      login: ['', Validators.required],
-      password: ['', Validators.required],
+    this.authenticationForm = new FormGroup({
+      login: new FormControl(['', Validators.required]),
+      password: new FormControl(['', Validators.required]),
     });
   }
 
@@ -109,7 +110,7 @@ export class AuthenticationComponent implements OnInit {
   }
 
   /* Password field validation */
-  isPasswordFieldValid(): boolean {
+  isPasswordFieldInvalid(): boolean {
     return (
       (this.authenticationForm.get(this.pass_wordFieldIdentifier)?.invalid &&
         (this.authenticationForm.get(this.pass_wordFieldIdentifier)?.dirty ||

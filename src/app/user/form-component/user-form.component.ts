@@ -3,7 +3,7 @@ import {
   FormGroup,
   Validators,
   FormsModule,
-  FormBuilder,
+  FormControl,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -107,37 +107,37 @@ export class UserFormComponent implements OnInit {
   public resetButtonIcon: string = '';
   public resetButtonType: string = '';
 
-  constructor(readonly formBuilder: FormBuilder) {
+  constructor() {
     /* Form fields creation & constraints definition */
-    this.userForm = this.formBuilder.group(
+    this.userForm = new FormGroup(
       {
-        givenName: [
+        givenName: new FormControl([
           '',
           [
             Validators.required,
             Validators.pattern(new RegExp(IDENTITY_PATTERN)),
           ],
-        ],
-        surname: [
+        ]),
+        surname: new FormControl([
           '',
           [
             Validators.required,
             Validators.pattern(new RegExp(IDENTITY_PATTERN)),
           ],
-        ],
-        login: [
+        ]),
+        login: new FormControl([
           '',
           [Validators.required, Validators.pattern(new RegExp(LOGIN_PATTERN))],
-        ],
-        password: [
+        ]),
+        password: new FormControl([
           '',
           [
             Validators.required,
             Validators.pattern(new RegExp(PASS_WORD_PATTERN)),
           ],
-        ],
-        repeatedPassword: ['', Validators.required],
-        profile: ['', Validators.required],
+        ]),
+        repeatedPassword: new FormControl(['', Validators.required]),
+        profile: new FormControl(['', Validators.required]),
       },
       {
         validators: [

@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { User } from '@supabase/supabase-js';
+import { User } from '../../app/shared/models/User';
 import { describe, it, vi, expect } from 'vitest';
 import { MockUserService } from '../mocks/mock-user-service';
 import { AppComponent } from '../../app/app.component';
@@ -85,7 +85,7 @@ describe('AppComponent', () => {
     expect(appComponent.userSubMenuExpanded).toBeFalsy();
   });
 
-  it('#openAboutDialog should open "about" dialog', () => {
+  it('#openAboutDialog should open "About" dialog', () => {
     const mockAppComponent: MockAppComponent = new MockAppComponent();
     const appComponent: AppComponent = new AppComponent(Inject(UserService), Inject(Router), Inject(MatDialog));
     vi.spyOn(appComponent, 'openAboutDialog').mockImplementation(() => {
