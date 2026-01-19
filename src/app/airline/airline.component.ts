@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import {
-  FormBuilder,
+  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -138,29 +138,30 @@ export class AirlineComponent implements OnInit {
   // List of countries matching to nationality field value
   public filteredCountries: Observable<Country[]> = new Observable<Country[]>();
 
+  /* Injections */
+  public userService: UserService = inject(UserService);
+  public airlineService: AirlineService = inject(AirlineService);
+  public dialog: MatDialog = inject(MatDialog);
+  public router: Router = inject(Router);
+
   constructor(
-    readonly formBuilder: FormBuilder,
-    readonly router: Router,
     readonly route: ActivatedRoute,
-    readonly dialog: MatDialog,
-    readonly userService: UserService,
-    readonly airlineService: AirlineService,
     readonly notificationService: NotificationService
   ) {
     /* Form fields creation & constraints definition */
-    this.airlineForm = this.formBuilder.group({
-      icao: [
+    this.airlineForm = new FormGroup({
+      icao: new FormControl([
         '',
         [
           Validators.required,
           Validators.pattern(new RegExp(ICAO_IATA_CODE_PATTERN)),
         ],
-      ],
-      name: [
+      ]),
+      name: new FormControl([
         '',
         [Validators.required, onlyWhitespaceValueValidator().bind(this)],
-      ],
-      nationality: ['', Validators.required],
+      ]),
+      nationality: new FormControl(['', Validators.required]),
     });
   }
 
@@ -192,6 +193,10 @@ export class AirlineComponent implements OnInit {
             ? airlineEdited.nationality
             : airlineEdited.nationality.name
         );
+      } else {
+        this.airlineService.airlineLogo.subscribe((airlineLogo) => {
+          this.airlineLogoImage = `src/images/logos/64x64/${airlineLogo}.png`;
+        });
       }
 
       // @ts-ignore
@@ -216,12 +221,6 @@ export class AirlineComponent implements OnInit {
         icao: airlineEdited?.icao ?? this.initAirlineToEdit?.icao,
         name: airlineEdited?.name ?? this.initAirlineToEdit?.name,
       });
-
-      if (!airlineEdited) {
-        this.airlineService.airlineLogo.subscribe((airlineLogo) => {
-          this.airlineLogoImage = `src/images/logos/64x64/${airlineLogo}.png`;
-        });
-      }
 
       this.airlineForm
         .get(this.nationalityFieldIdentifier)
@@ -371,7 +370,7 @@ export class AirlineComponent implements OnInit {
             if (result.data) {
               /* Success notification showing */
               this.notificationService.showSuccessNotification(
-                `${getFormModeLabel(EDIT_FORM_MODE)} ${getAirlineFormTitle()}`,
+                `${getFormModeLabel(EDIT_FORM_MODE)} ${getAirlineFormTitle()}`.toUpperCase(),
                 `${getAirlineFormSuccessNotificationMessage(EDIT_FORM_MODE)}`
               );
               // Redirection to home page

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
-  FormBuilder,
+  FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
@@ -30,8 +30,6 @@ import {
 } from '../../../shared/labels/forms/user-form';
 import {
   getGivenNameLabel,
-  getLoginLabel,
-  getProfileLabel,
   getSurnameLabel,
 } from '../../../shared/labels/commons/user-common';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -94,10 +92,8 @@ export class ResetUserPasswordComponent implements OnInit {
   /* Form fields labels */
   public givenNameInputLabel: string = '';
   public surnameInputLabel: string = '';
-  public loginInputLabel: string = '';
   public passwordInputLabel: string = '';
   public repeatedPasswordInputLabel: string = '';
-  public profileInputLabel: string = '';
 
   /* Buttons labels and icons */
   public submitButtonLabel: string = '';
@@ -105,28 +101,27 @@ export class ResetUserPasswordComponent implements OnInit {
   public resetButtonIcon: string = '';
   public resetButtonType: string = '';
 
-  constructor(
-    readonly formBuilder: FormBuilder,
-    readonly userService: UserService,
-    readonly notificationService: NotificationService,
-    readonly route: ActivatedRoute,
-    readonly router: Router
-  ) {
-    this.userUUID = this.route.snapshot.paramMap.get('uuid') ?? '';
+  /* Injections */
+  public userService: UserService = inject(UserService);
+  public router: Router = inject(Router);
 
+  constructor(
+    readonly notificationService: NotificationService,
+    readonly route: ActivatedRoute
+  ) {
     /* Form fields creation & constraints definition */
-    this.resetUserPasswordForm = this.formBuilder.group(
+    this.resetUserPasswordForm = new FormGroup(
       {
-        givenName: { value: '', disabled: true },
-        surname: { value: '', disabled: true },
-        password: [
+        givenName: new FormControl({ value: '', disabled: true }),
+        surname: new FormControl({ value: '', disabled: true }),
+        password: new FormControl([
           '',
           [
             Validators.required,
             Validators.pattern(new RegExp(PASS_WORD_PATTERN)),
           ],
-        ],
-        repeatedPassword: ['', Validators.required],
+        ]),
+        repeatedPassword: new FormControl(['', Validators.required]),
       },
       {
         validators: [
@@ -141,6 +136,8 @@ export class ResetUserPasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userUUID = this.route.snapshot.paramMap.get('uuid') ?? '';
+    
     this.userService.findUser(this.userUUID).then((userFromDB) => {
       this.initUserToResetPassword = this.userMapper.userFromDB(userFromDB);
       this.resetUserPasswordForm.patchValue({
@@ -159,10 +156,8 @@ export class ResetUserPasswordComponent implements OnInit {
     this.resetUserPasswordFormTitle = getResetUserPasswordFormTitle(false);
     this.givenNameInputLabel = getGivenNameLabel();
     this.surnameInputLabel = getSurnameLabel();
-    this.loginInputLabel = getLoginLabel();
     this.passwordInputLabel = getPasswordInputLabel();
     this.repeatedPasswordInputLabel = getRepeatedPasswordInputLabel();
-    this.profileInputLabel = getProfileLabel();
     this.submitButtonLabel = getSubmitButtonLabel();
     this.resetButtonLabel = getResetButtonLabel(ADD_FORM_MODE);
     this.resetButtonIcon = getResetButtonIcon(ADD_FORM_MODE);
@@ -243,7 +238,7 @@ export class ResetUserPasswordComponent implements OnInit {
   }
 
   /* Form submit */
-  submitResetUserPasswordFormForm() {
+  submitResetUserPasswordForm() {
     /* User data mapping */
     const userToDB = {
       ...this.resetUserPasswordForm.value,
@@ -264,7 +259,7 @@ export class ResetUserPasswordComponent implements OnInit {
         if (result.data) {
           /* Success notification showing */
           this.notificationService.showSuccessNotification(
-            `${getResetUserPasswordFormTitle(true)}`,
+            `${getResetUserPasswordFormTitle(true)}`.toUpperCase(),
             `${getResetUserPasswordFormSuccessNotificationMessage()}`
           );
           // Redirection to users list

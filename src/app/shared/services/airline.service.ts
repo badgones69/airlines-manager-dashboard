@@ -29,7 +29,7 @@ export class AirlineService {
       this.airlineLogo$.next(newAirlineLogo);
     } else {
       this.findAirline().then((airline) => {
-        this.airlineLogo$.next(airline.airlineLogo);
+        this.airlineLogo$.next(airline?.airlineLogo ?? '');
       });
     }
   }

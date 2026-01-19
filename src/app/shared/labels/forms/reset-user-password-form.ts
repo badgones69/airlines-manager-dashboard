@@ -12,5 +12,5 @@ export function getSubmitButtonLabel(): string {
 }
 
 export function getResetUserPasswordFormSuccessNotificationMessage(): string {
-  return `Le mot de passe de votre utilisateur a bien été réinitialisé !`;
+  return 'Le mot de passe de votre utilisateur a bien été réinitialisé !';
 }

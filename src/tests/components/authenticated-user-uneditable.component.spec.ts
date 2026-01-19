@@ -17,7 +17,7 @@ describe('AuthenticatedUserUneditableComponent', () => {
     });
   });
 
-  it('#goToHome should redirect to "ListUsers" component', async () => {
+  it('#goToUsersList should redirect to "ListUsers" component', async () => {
     TestBed.configureTestingModule({
       imports: [AuthenticatedUserUneditableComponent],
       providers: [
