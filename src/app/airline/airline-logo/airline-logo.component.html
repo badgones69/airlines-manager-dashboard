@@ -1,0 +1,127 @@
+<!-- TITLE -->
+<h2 mat-dialog-title>{{ airlineLogoDialogTitle }}</h2>
+<mat-dialog-content>
+  <!-- LOGO BACKGROUND COLOR FIELD -->
+  <div class="customization-field-container">
+    <p class="customization-field-title">
+      {{ airlineLogoBackgroundInputLabel }} :
+    </p>
+    <mat-radio-group
+      [(ngModel)]="logoBackground"
+      (change)="refreshLogoPreviewImage()"
+    >
+      <mat-radio-button value="BG-O" class="color-chooser">
+        <span class="orange-color">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+      </mat-radio-button>
+      <mat-radio-button value="BG-Y" class="color-chooser">
+        <span class="yellow-color">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+      </mat-radio-button>
+      <mat-radio-button value="BG-PI" class="color-chooser">
+        <span class="pink-color">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+      </mat-radio-button>
+      <mat-radio-button value="BG-R" class="color-chooser">
+        <span class="red-color">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+      </mat-radio-button>
+      <mat-radio-button value="BG-PU" class="color-chooser">
+        <span class="purple-color">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+      </mat-radio-button>
+      <mat-radio-button value="BG-LB" class="color-chooser">
+        <span class="blue-color">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+      </mat-radio-button>
+      <mat-radio-button value="BG-CB" class="color-chooser">
+        <span class="cyan-color">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+      </mat-radio-button>
+      <mat-radio-button value="BG-G" class="color-chooser">
+        <span class="green-color">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+      </mat-radio-button>
+      <mat-radio-button value="BG-BR" class="color-chooser">
+        <span class="brown-color">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+      </mat-radio-button>
+      <mat-radio-button value="BG-DG" class="color-chooser">
+        <span class="grey-color">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+      </mat-radio-button>
+      <mat-radio-button value="BG-BL" class="color-chooser">
+        <span class="black-color">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <!-- LOGO LETTER FIELD -->
+  <div class="customization-field-container">
+    <p class="customization-field-title">{{ airlineLogoLetterInputLabel }} :</p>
+    <mat-form-field floatLabel="always">
+      <mat-select
+        [(ngModel)]="logoLetter"
+        (selectionChange)="refreshLogoPreviewImage()"
+      >
+        @for (letter of letters; track letter) {
+          <mat-option [value]="letter">{{ letter }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <!-- LOGO LETTER COLOR FIELD -->
+  <div class="customization-field-container">
+    <p class="customization-field-title">
+      {{ airlineLogoLetterColorInputLabel }} :
+    </p>
+    <mat-radio-group
+      [(ngModel)]="logoLetterColor"
+      (change)="refreshLogoPreviewImage()"
+    >
+      <mat-radio-button disabled value="LT-W" class="color-chooser">
+        <span id="white-color">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  @if (this.logoPreviewImage) {
+    <!-- LOGO PREVIEW -->
+    <div id="preview-container">
+      <p class="customization-field-title">
+        {{ airlineLogoPreviewInputLabel }} :
+      </p>
+      <img
+        [ngSrc]="logoPreviewImage"
+        width="128"
+        height="128"
+        alt="Logo preview"
+      />
+    </div>
+  }
+</mat-dialog-content>
+@if (this.logoPreviewImage) {
+  <!-- BUTTON -->
+  <mat-dialog-actions>
+    <button
+      id="ok-button"
+      mat-button
+      mat-dialog-close
+      (click)="editAirlineLogo()"
+    >
+      {{ selectButtonLabel }}
+    </button>
+  </mat-dialog-actions>
+}

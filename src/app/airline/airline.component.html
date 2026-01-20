@@ -1,0 +1,111 @@
+@if (authenticatedUser) {
+  @if (authenticatedUser.profile === 1) {
+    <!-- FORM -->
+    <form id="form" [formGroup]="airlineForm" (ngSubmit)="submitAirlineForm()">
+      <!-- TITLE -->
+      <mat-label class="form-title">{{ airlineFormTitle }}</mat-label>
+
+      <!-- ICAO FIELD -->
+      <mat-form-field>
+        <mat-label>{{ icaoInputLabel }}</mat-label>
+        <input
+          matInput
+          [formControlName]="this.icaoFieldIdentifier"
+          minlength="3"
+          maxlength="3"
+        />
+        <mat-error>{{ displayICAOErrorMessage() }}</mat-error>
+      </mat-form-field>
+
+      <!-- NAME FIELD -->
+      <mat-form-field>
+        <mat-label>{{ nameInputLabel }}</mat-label>
+        <input matInput [formControlName]="this.nameFieldIdentifier" />
+        <mat-error>{{ displayNameErrorMessage() }}</mat-error>
+      </mat-form-field>
+
+      <!-- LOGO FIELD -->
+      <div id="logo-chooser-container">
+        <button
+          type="button"
+          class="submit-form-button"
+          mat-fab
+          extended
+          (click)="changeLogo()"
+        >
+          <i class="material-icons">image</i>
+          {{ logoInputLabel }}
+        </button>
+        @if (this.initAirlineToEdit) {
+          @if (this.initAirlineToEdit.logo) {
+            <img
+              class="logo-image"
+              [ngSrc]="airlineLogoImage"
+              width="64"
+              height="64"
+              alt="Logo preview"
+            />
+          } @else {
+            <span id="no-logo-message">{{ noLogoLabel }}</span>
+          }
+        }
+      </div>
+
+      <!-- NATIONALITY FIELD -->
+      <div class="country-field-container">
+        <span class="flag fi fi-{{ this.nationalityFlag }}"></span>
+        <mat-form-field>
+          <mat-label>{{ nationalityInputLabel }}</mat-label>
+          <input
+            matInput
+            [formControlName]="this.nationalityFieldIdentifier"
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete
+            #auto="matAutocomplete"
+            [displayWith]="displayCountry"
+            (optionSelected)="changeNationalityFlag($event.option.value)"
+          >
+            @for (country of filteredCountries | async; track country) {
+              <mat-option [value]="country">
+                <span class="flag fi fi-{{ country.flagCode }}"></span>
+                {{ country.name }}
+              </mat-option>
+            }
+          </mat-autocomplete>
+          <mat-error>{{ displayNationalityErrorMessage() }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- BUTTONS -->
+      <div class="form-buttons">
+        <button
+          type="submit"
+          class="submit-form-button"
+          mat-fab
+          extended
+          [disabled]="this.airlineForm.invalid"
+        >
+          <i class="material-icons">edit</i>
+          {{ submitButtonLabel }}
+        </button>
+        <button
+          type="button"
+          class="reset-form-button"
+          mat-fab
+          extended
+          (click)="resetAirlineForm()"
+        >
+          <i class="material-icons">{{ resetButtonIcon }}</i>
+          {{ resetButtonLabel }}
+        </button>
+      </div>
+    </form>
+  } @else {
+    <!-- FORBIDDEN ERROR PAGE -->
+    <forbidden></forbidden>
+  }
+} @else {
+  <!-- UNAUTHORIZED ERROR PAGE -->
+  <unauthorized></unauthorized>
+}
