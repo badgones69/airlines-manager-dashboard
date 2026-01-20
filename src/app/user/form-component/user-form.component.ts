@@ -72,7 +72,7 @@ export class UserFormComponent implements OnInit {
   @Input() public user!: User;
   @Output() public submitted = new EventEmitter();
   public isEditMode!: boolean;
-  
+
   public userMapper: UserMapper = new UserMapper();
 
   /* Form properties */
@@ -143,11 +143,11 @@ export class UserFormComponent implements OnInit {
         validators: [
           notIdenticalPasswordsValidator(
             this.pass_wordFieldIdentifier,
-            this.repeatedPass_wordFieldIdentifier
+            this.repeatedPass_wordFieldIdentifier,
           ),
         ],
         updateOn: 'change',
-      }
+      },
     );
   }
 
@@ -164,7 +164,7 @@ export class UserFormComponent implements OnInit {
 
     /* Form title, fields and buttons initialization */
     this.userFormTitle = `${getFormModeLabel(
-      this.formMode
+      this.formMode,
     )} ${getUserFormTitle()}`;
     this.givenNameInputLabel = getGivenNameLabel();
     this.surnameInputLabel = getSurnameLabel();
@@ -199,7 +199,7 @@ export class UserFormComponent implements OnInit {
   /* Password field validation */
   isPasswordFieldInvalid(): boolean {
     let passwordFormField: any = this.userForm.get(
-      this.pass_wordFieldIdentifier
+      this.pass_wordFieldIdentifier,
     );
     return (
       (passwordFormField?.invalid &&
@@ -211,7 +211,7 @@ export class UserFormComponent implements OnInit {
   /* Repeated password field validation */
   isRepeatedPasswordFieldInvalid(): boolean {
     let repeatedPasswordFormField: any = this.userForm.get(
-      this.repeatedPass_wordFieldIdentifier
+      this.repeatedPass_wordFieldIdentifier,
     );
 
     return (

@@ -84,7 +84,7 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
   constructor(
     readonly userService: UserService,
     readonly router: Router,
-    readonly dialog: MatDialog
+    readonly dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
@@ -125,7 +125,7 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
         disableClose: false,
         autoFocus: true,
         scrollStrategy: new NoopScrollStrategy(),
-      }
+      },
     );
     dialogRef.componentInstance.userUUID = user.uuid!;
     dialogRef.afterClosed().subscribe(() => this.ngOnInit());

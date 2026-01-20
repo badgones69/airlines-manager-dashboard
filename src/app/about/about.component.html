@@ -1,9 +1,10 @@
 <app-dialog [dialogTitle]="aboutDialogTitle" [dialogMode]="aboutDialogMode">
   <!-- APP VERSION NUMBER AND RELEASE DATE -->
   <p>
-    <span id="app-version">{{ packageJson.productName }} v{{ packageJson.version }}</span> (#{{
-      packageJson.releaseNumber
-    }}), {{ releaseDate }}
+    <span id="app-version"
+      >{{ packageJson.productName }} v{{ packageJson.version }}</span
+    >
+    (#{{ packageJson.releaseNumber }}), {{ releaseDate }}
   </p>
   <!-- DEPENDENCIES -->
   <span class="dependencies-group-title">{{ serverAndDatabaseLabel }} :</span>
@@ -18,7 +19,9 @@
       alt="Supabase-JS"
     />
   </p>
-  <span class="dependencies-group-title">{{ frameworkAndLanguageLabel }} :</span>
+  <span class="dependencies-group-title"
+    >{{ frameworkAndLanguageLabel }} :</span
+  >
   <p class="dependencies-group">
     <img
       src="https://img.shields.io/badge/Angular v20.3.13-purple?logo=angular&logoColor=FFFFFF"
@@ -42,7 +45,9 @@
       alt="OpenLayers"
     />
   </p>
-  <span class="dependencies-group-title">{{ flagsAndNotificationsLabel }} :</span>
+  <span class="dependencies-group-title"
+    >{{ flagsAndNotificationsLabel }} :</span
+  >
   <p class="dependencies-group">
     <img
       src="https://img.shields.io/badge/Flag Icons v7.5.0-yellow.svg"
@@ -56,10 +61,7 @@
   </p>
   <span class="dependencies-group-title">{{ securityLabel }} :</span>
   <p class="dependencies-group">
-    <img
-      src="https://img.shields.io/badge/UUID v13.0.0-grey.svg"
-      alt="UUID"
-    />
+    <img src="https://img.shields.io/badge/UUID v13.0.0-grey.svg" alt="UUID" />
     <img
       src="https://img.shields.io/badge/Bcrypt--TS v7.1.0-9F5540.svg"
       alt="Bcrypt-TS"

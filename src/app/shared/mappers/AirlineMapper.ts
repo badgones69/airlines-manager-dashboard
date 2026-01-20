@@ -1,9 +1,13 @@
 import { Airline } from '../models/Airline';
 import { getCountryById } from '../utils/geographical-utils';
-import { capitalize, capitalizeDashedWordsFirstLetter, capitalizeFirstLetter, capitalizeSpaceSeparatedWordsFirstLetter } from '../utils/labels-utils';
+import {
+  capitalize,
+  capitalizeDashedWordsFirstLetter,
+  capitalizeFirstLetter,
+  capitalizeSpaceSeparatedWordsFirstLetter,
+} from '../utils/labels-utils';
 
 export class AirlineMapper {
-  
   /* DB => DTO mapping */
   public airlineFromDB(airlineFromDB: any): Airline {
     return {
@@ -18,12 +22,9 @@ export class AirlineMapper {
 
   /* DTO => DB mapping */
   public airlineToDB(airlineToDB: any): any {
-    if (
-      airlineToDB.name.includes('-') &&
-      airlineToDB.name.includes(' ')
-    ) {
+    if (airlineToDB.name.includes('-') && airlineToDB.name.includes(' ')) {
       airlineToDB.name = capitalizeDashedWordsFirstLetter(
-        capitalizeSpaceSeparatedWordsFirstLetter(airlineToDB.name)
+        capitalizeSpaceSeparatedWordsFirstLetter(airlineToDB.name),
       );
     } else {
       airlineToDB.name = capitalizeFirstLetter(airlineToDB.name);

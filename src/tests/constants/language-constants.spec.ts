@@ -1,8 +1,15 @@
 import { describe, it, expect } from 'vitest';
-import { FRENCH, GERMAN, SPANISH, ENGLISH, ITALIAN, DUTCH, PORTUGHESE } from '../../app/shared/constants/language-constants';
+import {
+  FRENCH,
+  GERMAN,
+  SPANISH,
+  ENGLISH,
+  ITALIAN,
+  DUTCH,
+  PORTUGHESE,
+} from '../../app/shared/constants/language-constants';
 
 describe('LanguageConstants', () => {
-    
   it('FRENCH should return French language code', () => {
     expect(FRENCH).toStrictEqual('fr');
   });

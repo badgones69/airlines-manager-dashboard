@@ -21,7 +21,7 @@ export function getFlagsAndNotificationsLabel(): string {
 export function getSecurityLabel(): string {
   return 'Sécurité';
 }
-    
+
 export function getTestsLabel(): string {
   return 'Tests';
 }

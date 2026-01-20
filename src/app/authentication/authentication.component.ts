@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import {
   FormGroup,
   Validators,
@@ -36,7 +41,10 @@ import {
   REQUIRED_ERROR,
 } from '../shared/constants/forms-constants';
 import { compare } from 'bcrypt-ts';
-import { getTechnicalErrorMessage, getTechnicalErrorTitle } from '../shared/labels/errors';
+import {
+  getTechnicalErrorMessage,
+  getTechnicalErrorTitle,
+} from '../shared/labels/errors';
 
 @Component({
   selector: 'authentication',
@@ -80,9 +88,7 @@ export class AuthenticationComponent implements OnInit {
   public userService: UserService = inject(UserService);
   public router: Router = inject(Router);
 
-  constructor(
-    readonly notificationService: NotificationService
-  ) {
+  constructor(readonly notificationService: NotificationService) {
     /* Form fields creation & constraints definition */
     this.authenticationForm = new FormGroup({
       login: new FormControl(['', Validators.required]),
@@ -155,7 +161,7 @@ export class AuthenticationComponent implements OnInit {
           // Password comparison
           compare(
             this.authenticationForm.value.password,
-            userFound.userPassword
+            userFound.userPassword,
           ).then((isValid: any) => {
             // If password is valid
             if (isValid) {
@@ -169,7 +175,7 @@ export class AuthenticationComponent implements OnInit {
               /* Error notification showing */
               this.notificationService.showErrorNotification(
                 `${this.authenticationFormTitle.toUpperCase()}`,
-                `${getErrorNotificationMessage()}`
+                `${getErrorNotificationMessage()}`,
               );
             }
           });
@@ -177,7 +183,7 @@ export class AuthenticationComponent implements OnInit {
           /* Technical error notification showing */
           this.notificationService.showErrorNotification(
             `${getTechnicalErrorTitle()}`,
-            `${getTechnicalErrorMessage()}`
+            `${getTechnicalErrorMessage()}`,
           );
         }
       });

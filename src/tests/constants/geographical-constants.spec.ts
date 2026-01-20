@@ -1,8 +1,13 @@
-import { AUSTRALIA_REGIONS_FR, BRAZIL_REGIONS_FR, CANADA_REGIONS_FR, USA_REGIONS_FR, COUNTRIES_FR } from '../../app/shared/constants/geographical-constants';
+import {
+  AUSTRALIA_REGIONS_FR,
+  BRAZIL_REGIONS_FR,
+  CANADA_REGIONS_FR,
+  USA_REGIONS_FR,
+  COUNTRIES_FR,
+} from '../../app/shared/constants/geographical-constants';
 import { describe, it, expect } from 'vitest';
 
 describe('GeographicalConstants', () => {
-  
   it('AUSTRALIA_REGIONS_FR should return all Australia regions in French', () => {
     expect(AUSTRALIA_REGIONS_FR.length).toStrictEqual(8);
     expect(AUSTRALIA_REGIONS_FR[0].name).toStrictEqual('Australie-Méridionale');
@@ -48,9 +53,13 @@ describe('GeographicalConstants', () => {
     expect(COUNTRIES_FR[162].name).toStrictEqual('Tchéquie');
     expect(COUNTRIES_FR[164].name).toStrictEqual('Angleterre (Royaume-Uni)');
     expect(COUNTRIES_FR[211].name).toStrictEqual('Île Christmas (Australie)');
-    expect(COUNTRIES_FR[212].name).toStrictEqual('Irlande du Nord (Royaume-Uni)');
+    expect(COUNTRIES_FR[212].name).toStrictEqual(
+      'Irlande du Nord (Royaume-Uni)',
+    );
     expect(COUNTRIES_FR[213].name).toStrictEqual('Écosse (Royaume-Uni)');
-    expect(COUNTRIES_FR[214].name).toStrictEqual('Pays de Galles (Royaume-Uni)');
+    expect(COUNTRIES_FR[214].name).toStrictEqual(
+      'Pays de Galles (Royaume-Uni)',
+    );
     expect(COUNTRIES_FR[215].name).toStrictEqual('Europe');
   });
 });

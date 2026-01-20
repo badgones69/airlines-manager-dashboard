@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
   constructor(
     readonly userService: UserService,
     readonly router: Router,
-    readonly dialog: MatDialog
+    readonly dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {

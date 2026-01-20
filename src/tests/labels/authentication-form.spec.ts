@@ -1,8 +1,11 @@
-import { getAuthenticationFormTitle, getSubmitButtonLabel, getErrorNotificationMessage } from '../../app/shared/labels/forms/authentication-form';
+import {
+  getAuthenticationFormTitle,
+  getSubmitButtonLabel,
+  getErrorNotificationMessage,
+} from '../../app/shared/labels/forms/authentication-form';
 import { describe, it, expect } from 'vitest';
 
 describe('AuthenticationFormLabels', () => {
-  
   it('#getAuthenticationFormTitle should return authentication form title', () => {
     const authenticationFormTitle: string = getAuthenticationFormTitle();
     expect(authenticationFormTitle).toStrictEqual('Authentification');
@@ -15,6 +18,8 @@ describe('AuthenticationFormLabels', () => {
 
   it('#getErrorNotificationMessage should return error notification message', () => {
     const errorNotificationMessage: string = getErrorNotificationMessage();
-    expect(errorNotificationMessage).toStrictEqual('Login et/ou mot de passe incorrects !');
+    expect(errorNotificationMessage).toStrictEqual(
+      'Login et/ou mot de passe incorrects !',
+    );
   });
 });

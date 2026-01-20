@@ -27,6 +27,8 @@ export function getNationalityInputLabel(): string {
   return 'NATIONALITÉ';
 }
 
-export function getAirlineFormSuccessNotificationMessage(formMode: string): string {
+export function getAirlineFormSuccessNotificationMessage(
+  formMode: string,
+): string {
   return `Votre compagnie et/ou son logo ont bien été ${getFormActionLabel(formMode)}s !`;
 }

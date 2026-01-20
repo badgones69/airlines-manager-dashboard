@@ -15,7 +15,7 @@ export class InternationalPaginator implements MatPaginatorIntl {
   /* Page size properties */
   changes = new Subject<void>();
   itemsPerPageLabel = `${getItemsPerPageLabel()} :`;
-  
+
   /* Pages navigation buttons */
   firstPageLabel = getFirstPageLabel();
   previousPageLabel = getPreviousPageLabel();

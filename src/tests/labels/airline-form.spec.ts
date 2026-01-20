@@ -1,9 +1,16 @@
 import { EDIT_FORM_MODE } from '../../app/shared/constants/forms-constants';
-import { getAirlineFormTitle, getICAOCodeInputLabel, getNameInputLabel, getLogoInputLabel, getNoLogoLabel, getNationalityInputLabel, getAirlineFormSuccessNotificationMessage } from '../../app/shared/labels/forms/airline-form';
+import {
+  getAirlineFormTitle,
+  getICAOCodeInputLabel,
+  getNameInputLabel,
+  getLogoInputLabel,
+  getNoLogoLabel,
+  getNationalityInputLabel,
+  getAirlineFormSuccessNotificationMessage,
+} from '../../app/shared/labels/forms/airline-form';
 import { describe, it, expect } from 'vitest';
 
 describe('AirlineFormLabels', () => {
-  
   it('#getAirlineFormTitle should return airline form title', () => {
     const airlineFormTitle: string = getAirlineFormTitle();
     expect(airlineFormTitle).toStrictEqual('de la compagnie');
@@ -35,7 +42,10 @@ describe('AirlineFormLabels', () => {
   });
 
   it('#getAirlineFormSuccessNotificationMessage should return success notification message', () => {
-    const successNotificationMessage: string = getAirlineFormSuccessNotificationMessage(EDIT_FORM_MODE);
-    expect(successNotificationMessage).toStrictEqual('Votre compagnie et/ou son logo ont bien été modifié(e)s !');
+    const successNotificationMessage: string =
+      getAirlineFormSuccessNotificationMessage(EDIT_FORM_MODE);
+    expect(successNotificationMessage).toStrictEqual(
+      'Votre compagnie et/ou son logo ont bien été modifié(e)s !',
+    );
   });
 });

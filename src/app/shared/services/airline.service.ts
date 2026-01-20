@@ -8,7 +8,7 @@ import supabase from '../constants/services-constants';
 export class AirlineService {
   readonly airlines$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   readonly airlineLogo$: BehaviorSubject<string> = new BehaviorSubject<string>(
-    ''
+    '',
   );
 
   constructor() {

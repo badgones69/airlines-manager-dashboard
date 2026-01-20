@@ -2,7 +2,7 @@ import { getDeleteDialogMessage } from '../commons/dialog-common';
 import { getFormActionLabel } from '../commons/form-common';
 
 export function getUserFormTitle(): string {
-  return 'd\'un utilisateur';
+  return "d'un utilisateur";
 }
 
 export function getRepeatedPasswordInputLabel(): string {
@@ -30,7 +30,7 @@ export function getRepeatedPasswordFieldFormatErrorMessage(): string {
 }
 
 export function getUserFormSuccessNotificationMessage(
-  formMode: string
+  formMode: string,
 ): string {
   return `Votre utilisateur a bien été ${getFormActionLabel(formMode)} !`;
 }

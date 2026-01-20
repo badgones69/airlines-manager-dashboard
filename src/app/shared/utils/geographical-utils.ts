@@ -23,7 +23,10 @@ export function getCountryByName(countryName: string): Country | undefined {
   );
 }
 
-export function getRegion(regionId: number, countryId: number): Region | undefined {
+export function getRegion(
+  regionId: number,
+  countryId: number,
+): Region | undefined {
   return getCountryById(countryId)?.regions?.find(
     (region) => region.id === regionId,
   );

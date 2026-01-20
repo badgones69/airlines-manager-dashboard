@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import {
   FormControl,
@@ -73,7 +78,10 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { AirlineLogoComponent } from './airline-logo/airline-logo.component';
 import { Airline } from '../shared/models/Airline';
-import { getTechnicalErrorMessage, getTechnicalErrorTitle } from '../shared/labels/errors';
+import {
+  getTechnicalErrorMessage,
+  getTechnicalErrorTitle,
+} from '../shared/labels/errors';
 
 @Component({
   selector: 'airline',
@@ -146,7 +154,7 @@ export class AirlineComponent implements OnInit {
 
   constructor(
     readonly route: ActivatedRoute,
-    readonly notificationService: NotificationService
+    readonly notificationService: NotificationService,
   ) {
     /* Form fields creation & constraints definition */
     this.airlineForm = new FormGroup({
@@ -174,7 +182,7 @@ export class AirlineComponent implements OnInit {
 
     /* Form title, fields and buttons initialization */
     this.airlineFormTitle = `${getFormModeLabel(
-      EDIT_FORM_MODE
+      EDIT_FORM_MODE,
     )} ${getAirlineFormTitle()}`;
     this.icaoInputLabel = getICAOCodeInputLabel();
     this.nameInputLabel = getNameInputLabel();
@@ -191,7 +199,7 @@ export class AirlineComponent implements OnInit {
         airlineEdited.nationality = getCountryByName(
           typeof airlineEdited.nationality === 'string'
             ? airlineEdited.nationality
-            : airlineEdited.nationality.name
+            : airlineEdited.nationality.name,
         );
       } else {
         this.airlineService.airlineLogo.subscribe((airlineLogo) => {
@@ -206,15 +214,15 @@ export class AirlineComponent implements OnInit {
           distinctUntilChanged(),
           startWith(''),
           map((country) =>
-            country ? this.filterCountries(country) : this.countries.slice()
-          )
+            country ? this.filterCountries(country) : this.countries.slice(),
+          ),
         );
 
       this.airlineForm
         .get(this.nationalityFieldIdentifier)
         ?.valueChanges.pipe(takeUntil(new Subject<void>()))
         .subscribe((countryValueChanged) =>
-          this.changeNationalityFlag(countryValueChanged)
+          this.changeNationalityFlag(countryValueChanged),
         );
 
       this.airlineForm.patchValue({
@@ -225,7 +233,7 @@ export class AirlineComponent implements OnInit {
       this.airlineForm
         .get(this.nationalityFieldIdentifier)
         ?.setValue(
-          airlineEdited?.nationality ?? this.initAirlineToEdit?.nationality
+          airlineEdited?.nationality ?? this.initAirlineToEdit?.nationality,
         );
       this.nationalityFlag =
         airlineEdited?.nationality.flagCode ??
@@ -241,7 +249,7 @@ export class AirlineComponent implements OnInit {
         disableClose: false,
         autoFocus: false,
         scrollStrategy: new NoopScrollStrategy(),
-      }
+      },
     );
 
     dialogRef.componentInstance.submitted.subscribe((airlineNewLogo: any) => {
@@ -279,7 +287,7 @@ export class AirlineComponent implements OnInit {
         ? capitalize(countryValue)
         : capitalize(countryValue.name);
     return this.countries.filter((country) =>
-      capitalize(country.name).startsWith(filterValue)
+      capitalize(country.name).startsWith(filterValue),
     );
   }
 
@@ -359,19 +367,20 @@ export class AirlineComponent implements OnInit {
               ?.value === 'string'
               ? this.airlineForm.get(this.nationalityFieldIdentifier)?.value
               : this.airlineForm.get(this.nationalityFieldIdentifier)?.value
-                  .name
+                  .name,
           ),
         };
 
         // Airline updating
-        this.airlineService.updateAirline(this.airlineMapper.airlineToDB(airlineToDB))
+        this.airlineService
+          .updateAirline(this.airlineMapper.airlineToDB(airlineToDB))
           .then((result: any) => {
             // If airline is updated
             if (result.data) {
               /* Success notification showing */
               this.notificationService.showSuccessNotification(
                 `${getFormModeLabel(EDIT_FORM_MODE)} ${getAirlineFormTitle()}`.toUpperCase(),
-                `${getAirlineFormSuccessNotificationMessage(EDIT_FORM_MODE)}`
+                `${getAirlineFormSuccessNotificationMessage(EDIT_FORM_MODE)}`,
               );
               // Redirection to home page
               this.router.navigate(['home']);
@@ -379,7 +388,7 @@ export class AirlineComponent implements OnInit {
               /* Technical error notification showing */
               this.notificationService.showErrorNotification(
                 `${getTechnicalErrorTitle()}`,
-                `${getTechnicalErrorMessage()}`
+                `${getTechnicalErrorMessage()}`,
               );
             }
           });

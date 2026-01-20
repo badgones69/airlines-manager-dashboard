@@ -3,7 +3,15 @@ import { DialogComponent } from '../shared/components/dialog/dialog.component';
 import packageJson from '../../../package.json';
 import { INFO_DIALOG_MODE } from '../shared/constants/dialogs-constants';
 import { getAppReleaseDate } from '../shared/labels/commons/commons';
-import { getAboutDialogTitle, getServerAndDatabaseLabel, getFrameworkAndLanguageLabel, getChartsAndMapsLabel, getFlagsAndNotificationsLabel, getSecurityLabel, getTestsLabel } from '../shared/labels/dialogs/about-dialog';
+import {
+  getAboutDialogTitle,
+  getServerAndDatabaseLabel,
+  getFrameworkAndLanguageLabel,
+  getChartsAndMapsLabel,
+  getFlagsAndNotificationsLabel,
+  getSecurityLabel,
+  getTestsLabel,
+} from '../shared/labels/dialogs/about-dialog';
 
 @Component({
   selector: 'about',

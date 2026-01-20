@@ -8,7 +8,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideToastr({
-      toastComponent: ToastNoAnimation
+      toastComponent: ToastNoAnimation,
     }),
     provideHttpClient(),
   ],

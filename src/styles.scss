@@ -956,7 +956,8 @@ html {
   @include app.theme();
   --mat-app-background-color: var(--app-beige);
   --mat-app-text-color: var(--app-black);
-  html, body {
+  html,
+  body {
     height: 100%;
   }
   body {

@@ -15,7 +15,8 @@ describe('AirlineMapper', () => {
       airlineLogo: null,
       airlineNationality: 103,
     };
-    const airlineMappedFromDB: Airline = airlineMapper.airlineFromDB(airlineInDB);
+    const airlineMappedFromDB: Airline =
+      airlineMapper.airlineFromDB(airlineInDB);
     expect(airlineMappedFromDB.id).toStrictEqual(4);
     expect(airlineMappedFromDB.uuid).toStrictEqual('airline-uuid');
     expect(airlineMappedFromDB.icao).toStrictEqual('XAL');
@@ -26,7 +27,7 @@ describe('AirlineMapper', () => {
 
   it('#airlineToDB should return mapped airline to DB', () => {
     const airline: Airline = {
-      id: 5,  
+      id: 5,
       uuid: 'uuid-airline',
       icao: 'XAW',
       name: 'X Airways',
@@ -35,8 +36,8 @@ describe('AirlineMapper', () => {
         id: 188,
         name: 'Suisse',
         icao: 'HB',
-        flagCode: 'ch'
-      } as Country
+        flagCode: 'ch',
+      } as Country,
     };
     const airlineMappedToDB: any = airlineMapper.airlineToDB(airline);
     expect(airlineMappedToDB.airlineID).toStrictEqual(5);
@@ -45,5 +46,5 @@ describe('AirlineMapper', () => {
     expect(airlineMappedToDB.airlineName).toStrictEqual('X Airways');
     expect(airlineMappedToDB.airlineLogo).toStrictEqual('X_BG-R_LT-W');
     expect(airlineMappedToDB.airlineNationality).toStrictEqual(188);
-  })
+  });
 });

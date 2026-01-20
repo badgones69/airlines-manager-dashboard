@@ -14,7 +14,10 @@ import {
 import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
 import { AuthenticatedUserUneditableComponent } from '../authenticated-user-uneditable/authenticated-user-uneditable.component';
-import { getTechnicalErrorMessage, getTechnicalErrorTitle } from '../../../shared/labels/errors';
+import {
+  getTechnicalErrorMessage,
+  getTechnicalErrorTitle,
+} from '../../../shared/labels/errors';
 
 @Component({
   selector: 'edit-user',
@@ -41,7 +44,7 @@ export class EditUserComponent implements OnInit {
     readonly userService: UserService,
     readonly notificationService: NotificationService,
     public route: ActivatedRoute,
-    readonly router: Router
+    readonly router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -68,7 +71,7 @@ export class EditUserComponent implements OnInit {
         /* Success notification showing */
         this.notificationService.showSuccessNotification(
           `${getFormModeLabel(this.formMode)} ${getUserFormTitle()}`,
-          `${getUserFormSuccessNotificationMessage(this.formMode)}`
+          `${getUserFormSuccessNotificationMessage(this.formMode)}`,
         );
         // Redirection to users list
         this.router.navigate(['users', 'list']);
@@ -76,7 +79,7 @@ export class EditUserComponent implements OnInit {
         /* Technical error notification showing */
         this.notificationService.showErrorNotification(
           `${getTechnicalErrorTitle()}`,
-          `${getTechnicalErrorMessage()}`
+          `${getTechnicalErrorMessage()}`,
         );
       }
     });

@@ -1,13 +1,20 @@
 import { Country } from '../../app/shared/models/Country';
 import { Region } from '../../app/shared/models/Region';
-import { getCountriesList, getCountries, getCountryById, getCountryByName, getRegion } from '../../app/shared/utils/geographical-utils';
+import {
+  getCountriesList,
+  getCountries,
+  getCountryById,
+  getCountryByName,
+  getRegion,
+} from '../../app/shared/utils/geographical-utils';
 import { describe, it, expect } from 'vitest';
 
 describe('GeographicalUtils', () => {
-  
   it('#getCountriesList should return all countries without Europe', () => {
     const countriesList: Country[] = getCountriesList();
-    const europeFound: boolean = countriesList.some(country => country.flagCode === 'eu');
+    const europeFound: boolean = countriesList.some(
+      (country) => country.flagCode === 'eu',
+    );
     expect(countriesList.length).toStrictEqual(215);
     expect(europeFound).toBeFalsy();
   });
@@ -41,12 +48,12 @@ describe('GeographicalUtils', () => {
     expect(countryFound?.icao).toStrictEqual('F');
     expect(countryFound?.flagCode).toStrictEqual('fr');
     expect(countryFound?.regions).toBeUndefined();
-  })
+  });
 
   it('#getRegion should return region found by its id and id of its country', () => {
     const regionFound: Region | undefined = getRegion(8, 37);
     expect(regionFound?.id).toStrictEqual(8);
     expect(regionFound?.code).toStrictEqual('QC');
     expect(regionFound?.name).toStrictEqual('Québec');
-  })
+  });
 });

@@ -49,7 +49,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
 import { AuthenticatedUserUneditableComponent } from '../authenticated-user-uneditable/authenticated-user-uneditable.component';
-import { getTechnicalErrorTitle, getTechnicalErrorMessage } from '../../../shared/labels/errors';
+import {
+  getTechnicalErrorTitle,
+  getTechnicalErrorMessage,
+} from '../../../shared/labels/errors';
 
 @Component({
   selector: 'reset-user-password',
@@ -107,7 +110,7 @@ export class ResetUserPasswordComponent implements OnInit {
 
   constructor(
     readonly notificationService: NotificationService,
-    readonly route: ActivatedRoute
+    readonly route: ActivatedRoute,
   ) {
     /* Form fields creation & constraints definition */
     this.resetUserPasswordForm = new FormGroup(
@@ -127,17 +130,17 @@ export class ResetUserPasswordComponent implements OnInit {
         validators: [
           notIdenticalPasswordsValidator(
             this.pass_wordFieldIdentifier,
-            this.repeatedPass_wordFieldIdentifier
+            this.repeatedPass_wordFieldIdentifier,
           ),
         ],
         updateOn: 'change',
-      }
+      },
     );
   }
 
   ngOnInit(): void {
     this.userUUID = this.route.snapshot.paramMap.get('uuid') ?? '';
-    
+
     this.userService.findUser(this.userUUID).then((userFromDB) => {
       this.initUserToResetPassword = this.userMapper.userFromDB(userFromDB);
       this.resetUserPasswordForm.patchValue({
@@ -177,7 +180,7 @@ export class ResetUserPasswordComponent implements OnInit {
   /* Password field validation */
   isPasswordFieldInvalid(): boolean {
     let passwordFormField: any = this.resetUserPasswordForm.get(
-      this.pass_wordFieldIdentifier
+      this.pass_wordFieldIdentifier,
     );
     return (
       (passwordFormField?.invalid &&
@@ -189,7 +192,7 @@ export class ResetUserPasswordComponent implements OnInit {
   /* Repeated password field validation */
   isRepeatedPasswordFieldInvalid(): boolean {
     let repeatedPasswordFormField: any = this.resetUserPasswordForm.get(
-      this.repeatedPass_wordFieldIdentifier
+      this.repeatedPass_wordFieldIdentifier,
     );
 
     return (
@@ -260,7 +263,7 @@ export class ResetUserPasswordComponent implements OnInit {
           /* Success notification showing */
           this.notificationService.showSuccessNotification(
             `${getResetUserPasswordFormTitle(true)}`.toUpperCase(),
-            `${getResetUserPasswordFormSuccessNotificationMessage()}`
+            `${getResetUserPasswordFormSuccessNotificationMessage()}`,
           );
           // Redirection to users list
           this.router.navigate(['users', 'list']);
@@ -268,7 +271,7 @@ export class ResetUserPasswordComponent implements OnInit {
           /* Technical error notification showing */
           this.notificationService.showErrorNotification(
             `${getTechnicalErrorTitle()}`,
-            `${getTechnicalErrorMessage()}`
+            `${getTechnicalErrorMessage()}`,
           );
         }
       });
