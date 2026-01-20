@@ -1,9 +1,9 @@
 <app-dialog [dialogTitle]="aboutDialogTitle" [dialogMode]="aboutDialogMode">
   <!-- APP VERSION NUMBER AND RELEASE DATE -->
   <p>
-    <span id="app-version"
-      >{{ packageJson.productName }} v{{ packageJson.version }}</span
-    >
+    <span id="app-version">
+      {{ packageJson.productName }} v{{ packageJson.version }}
+    </span>
     (#{{ packageJson.releaseNumber }}), {{ releaseDate }}
   </p>
   <!-- DEPENDENCIES -->
@@ -19,9 +19,9 @@
       alt="Supabase-JS"
     />
   </p>
-  <span class="dependencies-group-title"
-    >{{ frameworkAndLanguageLabel }} :</span
-  >
+  <span class="dependencies-group-title">
+    {{ frameworkAndLanguageLabel }} :
+  </span>
   <p class="dependencies-group">
     <img
       src="https://img.shields.io/badge/Angular v20.3.13-purple?logo=angular&logoColor=FFFFFF"
@@ -45,9 +45,9 @@
       alt="OpenLayers"
     />
   </p>
-  <span class="dependencies-group-title"
-    >{{ flagsAndNotificationsLabel }} :</span
-  >
+  <span class="dependencies-group-title">
+    {{ flagsAndNotificationsLabel }} :
+  </span>
   <p class="dependencies-group">
     <img
       src="https://img.shields.io/badge/Flag Icons v7.5.0-yellow.svg"
@@ -80,5 +80,5 @@
     />
   </p>
   <!-- AUTHOR COPYRIGHT -->
-  <p id="author">© 2025 {{ packageJson.author }}</p>
+  <p id="author">© 2026 {{ packageJson.author }}</p>
 </app-dialog>
