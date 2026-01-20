@@ -1,8 +1,15 @@
-import { getAboutDialogTitle, getServerAndDatabaseLabel, getFrameworkAndLanguageLabel, getChartsAndMapsLabel, getFlagsAndNotificationsLabel, getSecurityLabel, getTestsLabel } from '../../app/shared/labels/dialogs/about-dialog';
+import {
+  getAboutDialogTitle,
+  getServerAndDatabaseLabel,
+  getFrameworkAndLanguageLabel,
+  getChartsAndMapsLabel,
+  getFlagsAndNotificationsLabel,
+  getSecurityLabel,
+  getTestsLabel,
+} from '../../app/shared/labels/dialogs/about-dialog';
 import { describe, it, expect } from 'vitest';
 
 describe('AboutDialogLabels', () => {
-  
   it('#getAboutDialogTitle should return about dialog title', () => {
     const aboutDialogTitle: string = getAboutDialogTitle();
     expect(aboutDialogTitle).toStrictEqual('À propos');
@@ -25,7 +32,9 @@ describe('AboutDialogLabels', () => {
 
   it('#getFlagsAndNotificationsLabel should return "flags & notifications" label', () => {
     const flagsAndNotificationsLabel: string = getFlagsAndNotificationsLabel();
-    expect(flagsAndNotificationsLabel).toStrictEqual('Drapeaux & Notifications');
+    expect(flagsAndNotificationsLabel).toStrictEqual(
+      'Drapeaux & Notifications',
+    );
   });
 
   it('#getSecurityLabel should return "security" button label', () => {

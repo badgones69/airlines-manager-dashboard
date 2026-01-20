@@ -9,7 +9,6 @@ import { EditUserComponent } from '../app/user/pages/edit-user/edit-user.compone
 import { ResetUserPasswordComponent } from '../app/user/pages/reset-user-password/reset-user-password.component';
 
 describe('App routes', () => {
-    
   it('First route should return default route ("authentication")', () => {
     expect(routes[0].path).toStrictEqual('');
     expect(routes[0].redirectTo).toStrictEqual('/authentication');
@@ -43,6 +42,8 @@ describe('App routes', () => {
     expect(routes[4].children?.[2].path).toStrictEqual('edit/:uuid');
     expect(routes[4].children?.[2].component).toStrictEqual(EditUserComponent);
     expect(routes[4].children?.[3].path).toStrictEqual('reset-password/:uuid');
-    expect(routes[4].children?.[3].component).toStrictEqual(ResetUserPasswordComponent);
+    expect(routes[4].children?.[3].component).toStrictEqual(
+      ResetUserPasswordComponent,
+    );
   });
 });

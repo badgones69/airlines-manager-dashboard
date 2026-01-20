@@ -18,9 +18,7 @@ export const routes: Routes = [
   /* Airline pages */
   {
     path: 'airline',
-    children: [
-      { path: 'edit', component: AirlineComponent }
-    ],
+    children: [{ path: 'edit', component: AirlineComponent }],
   },
 
   /* User pages */

@@ -1,6 +1,5 @@
 <!-- FORM -->
 <form [formGroup]="userForm" (ngSubmit)="submitUserForm()">
-
   <!-- TITLE -->
   <mat-label class="form-title">{{ userFormTitle }}</mat-label>
 
@@ -93,8 +92,13 @@
         </i>
       </button>
 
-      <mat-error>{{ displayRepeatedPasswordErrorMessage("required") }}</mat-error>
-      @if (isRepeatedPasswordFieldInvalid() && userForm.hasError("notIdenticalPassword")) {
+      <mat-error>{{
+        displayRepeatedPasswordErrorMessage("required")
+      }}</mat-error>
+      @if (
+        isRepeatedPasswordFieldInvalid() &&
+        userForm.hasError("notIdenticalPassword")
+      ) {
         <mat-hint class="error-hint">{{
           displayRepeatedPasswordErrorMessage("notIdenticalPassword")
         }}</mat-hint>
@@ -107,7 +111,7 @@
     <mat-label>{{ profileInputLabel }}</mat-label>
     <mat-select [formControlName]="profileFieldIdentifier">
       @for (profile of profiles; track profile) {
-      <mat-option [value]="profile.id">{{ profile.name }}</mat-option>
+        <mat-option [value]="profile.id">{{ profile.name }}</mat-option>
       }
     </mat-select>
     <mat-error>{{ displayProfileErrorMessage() }}</mat-error>

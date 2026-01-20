@@ -1,8 +1,14 @@
-import { getAirlineLogoDialogTitle, getAirlineLogoBackgroundInputLabel, getAirlineLogoLetterInputLabel, getAirlineLogoLetterColorInputLabel, getAirlineLogoPreviewLabel, getSelectButtonLabel } from '../../app/shared/labels/dialogs/airline-logo-dialog';
+import {
+  getAirlineLogoDialogTitle,
+  getAirlineLogoBackgroundInputLabel,
+  getAirlineLogoLetterInputLabel,
+  getAirlineLogoLetterColorInputLabel,
+  getAirlineLogoPreviewLabel,
+  getSelectButtonLabel,
+} from '../../app/shared/labels/dialogs/airline-logo-dialog';
 import { describe, it, expect } from 'vitest';
 
 describe('AirlineLogoDialogLabels', () => {
-  
   it('#getAirlineLogoDialogTitle should return airline logo dialog title', () => {
     const airlineLogoDialogTitle: string = getAirlineLogoDialogTitle();
     expect(airlineLogoDialogTitle).toStrictEqual('Logo de la compagnie');

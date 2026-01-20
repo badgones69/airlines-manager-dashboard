@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     readonly userService: UserService,
-    readonly airlineService: AirlineService
+    readonly airlineService: AirlineService,
   ) {}
 
   ngOnInit(): void {
@@ -41,9 +41,10 @@ export class HomeComponent implements OnInit {
             getAirlineWelcomeMessage(airline.airlineName) ??
             getDefaultWelcomeMessage();
 
-          this.welcomeLogo = 'src/images/'.concat(airline.airlineLogo
+          this.welcomeLogo = 'src/images/'.concat(
+            airline.airlineLogo
               ? `logos/256x256/${airline.airlineLogo}.png`
-              : 'favicon.ico'
+              : 'favicon.ico',
           );
         });
       }

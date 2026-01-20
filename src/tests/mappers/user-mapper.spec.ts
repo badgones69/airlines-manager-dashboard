@@ -25,23 +25,22 @@ describe('UserMapper', () => {
 
   it('#usersListFromDB should return mapped users list from DB', () => {
     const usersInDB: any[] = [
-        {
-          userID: 2,
-          userUUID: 'user-uuid',
-          userGivenName: 'User-One',
-          userSurname: 'FROM-DB',
-          userLogin: 'user-one.from-db',
-          userProfile: 2,
-        },
-        {
-          userID: 22,
-          userUUID: 'uuid-user',
-          userGivenName: 'User-Two',
-          userSurname: 'FROM-DB',
-          userLogin: 'user-two.from-db',
-          userProfile: 2,
-        },
-
+      {
+        userID: 2,
+        userUUID: 'user-uuid',
+        userGivenName: 'User-One',
+        userSurname: 'FROM-DB',
+        userLogin: 'user-one.from-db',
+        userProfile: 2,
+      },
+      {
+        userID: 22,
+        userUUID: 'uuid-user',
+        userGivenName: 'User-Two',
+        userSurname: 'FROM-DB',
+        userLogin: 'user-two.from-db',
+        userProfile: 2,
+      },
     ];
     const usersMappedFromDB: User[] = userMapper.usersListFromDB(usersInDB);
     expect(usersMappedFromDB.length).toStrictEqual(2);
@@ -61,7 +60,7 @@ describe('UserMapper', () => {
 
   it('#userToDB should return mapped user to DB', () => {
     const user: User = {
-      id: 1,  
+      id: 1,
       uuid: 'uuid-user',
       givenName: 'john-jules w.',
       surname: 'smith',
@@ -75,5 +74,5 @@ describe('UserMapper', () => {
     expect(userMappedToDB.userSurname).toStrictEqual('SMITH');
     expect(userMappedToDB.userLogin).toStrictEqual('jj-w.s');
     expect(userMappedToDB.userProfile).toStrictEqual(1);
-  })
+  });
 });

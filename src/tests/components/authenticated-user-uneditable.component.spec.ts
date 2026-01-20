@@ -7,13 +7,17 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingHarness } from '@angular/router/testing';
 
 describe('AuthenticatedUserUneditableComponent', () => {
-
   it('#ngOnInit should initialize "AuthenticatedUserUneditable" component', () => {
     TestBed.runInInjectionContext(() => {
-      const authenticatedUserUneditableComponent: AuthenticatedUserUneditableComponent = new AuthenticatedUserUneditableComponent(Inject(Router));
+      const authenticatedUserUneditableComponent: AuthenticatedUserUneditableComponent =
+        new AuthenticatedUserUneditableComponent(Inject(Router));
       authenticatedUserUneditableComponent.ngOnInit();
-      expect(authenticatedUserUneditableComponent.message).toStrictEqual('Aucune action possible sur l\'utilisateur connecté !');
-      expect(authenticatedUserUneditableComponent.redirectionButtonLabel).toStrictEqual('Liste des utilisateurs');
+      expect(authenticatedUserUneditableComponent.message).toStrictEqual(
+        "Aucune action possible sur l'utilisateur connecté !",
+      );
+      expect(
+        authenticatedUserUneditableComponent.redirectionButtonLabel,
+      ).toStrictEqual('Liste des utilisateurs');
     });
   });
 
@@ -22,17 +26,22 @@ describe('AuthenticatedUserUneditableComponent', () => {
       imports: [AuthenticatedUserUneditableComponent],
       providers: [
         provideRouter([
-          { path: 'users/list', component: MockListUsersComponent }
-        ])
-      ]
+          { path: 'users/list', component: MockListUsersComponent },
+        ]),
+      ],
     });
 
     const harness: RouterTestingHarness = await RouterTestingHarness.create();
-    const authenticatedUserUneditableComponent: AuthenticatedUserUneditableComponent = new AuthenticatedUserUneditableComponent(Inject(Router));
+    const authenticatedUserUneditableComponent: AuthenticatedUserUneditableComponent =
+      new AuthenticatedUserUneditableComponent(Inject(Router));
     await harness.navigateByUrl('/users/list');
-    const spy = vi.spyOn(authenticatedUserUneditableComponent, 'goToUsersList').mockImplementation(() => harness.routeNativeElement?.textContent);
+    const spy = vi
+      .spyOn(authenticatedUserUneditableComponent, 'goToUsersList')
+      .mockImplementation(() => harness.routeNativeElement?.textContent);
     authenticatedUserUneditableComponent.goToUsersList();
     expect(spy).toHaveBeenCalled();
-    expect(authenticatedUserUneditableComponent.goToUsersList()).toBe('List users');
+    expect(authenticatedUserUneditableComponent.goToUsersList()).toBe(
+      'List users',
+    );
   });
 });

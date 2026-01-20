@@ -7,7 +7,6 @@ import {
 } from '../utils/labels-utils';
 
 export class UserMapper {
-
   /* DB => DTO mapping (users list) */
   public usersListFromDB(usersListFromDB: any[]): User[] {
     let usersList: User[] = [];
@@ -32,12 +31,9 @@ export class UserMapper {
 
   /* DTO => DB mapping */
   public userToDB(userToDB: any): any {
-    if (
-      userToDB.givenName.includes('-') &&
-      userToDB.givenName.includes(' ')
-    ) {
+    if (userToDB.givenName.includes('-') && userToDB.givenName.includes(' ')) {
       userToDB.givenName = capitalizeDashedWordsFirstLetter(
-        capitalizeSpaceSeparatedWordsFirstLetter(userToDB.givenName)
+        capitalizeSpaceSeparatedWordsFirstLetter(userToDB.givenName),
       );
     } else {
       userToDB.givenName = capitalizeFirstLetter(userToDB.givenName);

@@ -89,7 +89,7 @@ export class AirlineLogoComponent implements OnInit {
   /* Airline logo editing */
   editAirlineLogo(): void {
     this.submitted.emit(
-      `${this.logoLetter}_${this.logoBackground}_${this.logoLetterColor}`
+      `${this.logoLetter}_${this.logoBackground}_${this.logoLetterColor}`,
     );
   }
 }

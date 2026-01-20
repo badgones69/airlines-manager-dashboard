@@ -11,7 +11,10 @@ import {
 import { DialogComponent } from '../../../shared/components/dialog/dialog.component';
 import { getConfirmationDialogTitle } from '../../../shared/labels/commons/dialog-common';
 import { getFormModeLabel } from '../../../shared/labels/commons/form-common';
-import { getTechnicalErrorTitle, getTechnicalErrorMessage } from '../../../shared/labels/errors';
+import {
+  getTechnicalErrorTitle,
+  getTechnicalErrorMessage,
+} from '../../../shared/labels/errors';
 
 @Component({
   templateUrl: '../../pages/delete-user/delete-user.component.html',
@@ -28,10 +31,10 @@ export class DeleteUserComponent implements OnInit {
 
   constructor(
     readonly userService: UserService,
-    readonly notificationService: NotificationService
+    readonly notificationService: NotificationService,
   ) {
     this.deleteUserFormTitle = `${getFormModeLabel(
-      DELETE_FORM_MODE
+      DELETE_FORM_MODE,
     )} ${getUserFormTitle()}`;
   }
 
@@ -54,13 +57,13 @@ export class DeleteUserComponent implements OnInit {
           /* Success notification showing */
           this.notificationService.showSuccessNotification(
             this.deleteUserFormTitle.toUpperCase(),
-            getUserFormSuccessNotificationMessage(DELETE_FORM_MODE)
+            getUserFormSuccessNotificationMessage(DELETE_FORM_MODE),
           );
         } else {
           /* Technical error notification showing */
           this.notificationService.showErrorNotification(
             `${getTechnicalErrorTitle()}`,
-            `${getTechnicalErrorMessage()}`
+            `${getTechnicalErrorMessage()}`,
           );
         }
       });

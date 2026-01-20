@@ -1,9 +1,11 @@
 import { describe, it, expect, vi } from 'vitest';
 import { DialogComponent } from '../../app/shared/components/dialog/dialog.component';
-import { CONFIRMATION_DIALOG_MODE, INFO_DIALOG_MODE } from '../../app/shared/constants/dialogs-constants';
+import {
+  CONFIRMATION_DIALOG_MODE,
+  INFO_DIALOG_MODE,
+} from '../../app/shared/constants/dialogs-constants';
 
 describe('DialogComponent', () => {
-
   it('#ngOnInit should initialize "Dialog" component', () => {
     const dialogComponent: DialogComponent = new DialogComponent();
     dialogComponent.dialogMode = CONFIRMATION_DIALOG_MODE;

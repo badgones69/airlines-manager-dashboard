@@ -4,7 +4,7 @@ export function capitalize(word: string): string {
 }
 
 export function capitalizeSpaceSeparatedWordsFirstLetter(
-  wordsBlock: string
+  wordsBlock: string,
 ): string {
   wordsBlock = wordsBlock.trim();
   const words = wordsBlock.split(' ');

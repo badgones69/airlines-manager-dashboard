@@ -10,23 +10,28 @@ import { MatDialogConfig } from '@angular/material/dialog';
 
 @Component({})
 export class MockAirlineComponent {
-    public airlineMapper: AirlineMapper = new AirlineMapper();
+  public airlineMapper: AirlineMapper = new AirlineMapper();
 
-    constructor(
-        readonly userService: MockUserService = new MockUserService(),
-        readonly airlineService: MockAirlineService = new MockAirlineService(),
-        readonly notificationService: MockNotificationService = new MockNotificationService(Inject(ToastrService)),
-    ) {}
+  constructor(
+    readonly userService: MockUserService = new MockUserService(),
+    readonly airlineService: MockAirlineService = new MockAirlineService(),
+    readonly notificationService: MockNotificationService = new MockNotificationService(
+      Inject(ToastrService),
+    ),
+  ) {}
 
-    changeLogo(): void {
-      this.open(AirlineLogoComponent, {
-        disableClose: false,
-        autoFocus: false,
-        scrollStrategy: new NoopScrollStrategy(),
-      });
-    }
+  changeLogo(): void {
+    this.open(AirlineLogoComponent, {
+      disableClose: false,
+      autoFocus: false,
+      scrollStrategy: new NoopScrollStrategy(),
+    });
+  }
 
-    open(component: ComponentType<AirlineLogoComponent>, config: MatDialogConfig<any>): void {
-      // MatDialog open() method overrinding
-    }
+  open(
+    component: ComponentType<AirlineLogoComponent>,
+    config: MatDialogConfig<any>,
+  ): void {
+    // MatDialog open() method overrinding
+  }
 }

@@ -21,13 +21,8 @@
     "lib": ["ES2022", "dom"],
     "types": ["vitest", "vite/client"]
   },
-  "include": [
-    "src/**/*.spec.ts",
-    "src/**/*.d.ts"
-  ],
-  "files": [
-    "test.setup.ts"
-  ],
+  "include": ["src/**/*.spec.ts", "src/**/*.d.ts"],
+  "files": ["test.setup.ts"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

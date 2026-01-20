@@ -2,7 +2,6 @@
   @if (authenticatedUser.profile === 1) {
     <!-- FORM -->
     <form id="form" [formGroup]="airlineForm" (ngSubmit)="submitAirlineForm()">
-
       <!-- TITLE -->
       <mat-label class="form-title">{{ airlineFormTitle }}</mat-label>
 
@@ -38,7 +37,7 @@
           {{ logoInputLabel }}
         </button>
         @if (this.initAirlineToEdit) {
-          @if(this.initAirlineToEdit.logo) {
+          @if (this.initAirlineToEdit.logo) {
             <img
               class="logo-image"
               [ngSrc]="airlineLogoImage"

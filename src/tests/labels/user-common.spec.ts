@@ -1,9 +1,14 @@
-import { getGivenNameLabel, getSurnameLabel, getLoginLabel, getProfileLabel, getProfilesValues } from '../../app/shared/labels/commons/user-common';
+import {
+  getGivenNameLabel,
+  getSurnameLabel,
+  getLoginLabel,
+  getProfileLabel,
+  getProfilesValues,
+} from '../../app/shared/labels/commons/user-common';
 import { describe, it, expect } from 'vitest';
 import { Profile } from '../../app/shared/models/Profile';
 
 describe('UserCommonLabels', () => {
-  
   it('#getGivenNameLabel should return "given name" label', () => {
     const givenNameLabel: string = getGivenNameLabel();
     expect(givenNameLabel).toStrictEqual('PRÉNOM');

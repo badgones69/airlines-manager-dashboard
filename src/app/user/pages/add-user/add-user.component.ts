@@ -33,7 +33,7 @@ export class AddUserComponent implements OnInit {
   constructor(
     readonly userService: UserService,
     readonly notificationService: NotificationService,
-    readonly router: Router
+    readonly router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -53,9 +53,9 @@ export class AddUserComponent implements OnInit {
         /* Success notification showing */
         this.notificationService.showSuccessNotification(
           `${getFormModeLabel(
-            this.formMode
+            this.formMode,
           )} ${getUserFormTitle()}`.toUpperCase(),
-          `${getUserFormSuccessNotificationMessage(this.formMode)}`
+          `${getUserFormSuccessNotificationMessage(this.formMode)}`,
         );
         // Redirection to users list
         this.router.navigate(['users', 'list']);
@@ -63,7 +63,7 @@ export class AddUserComponent implements OnInit {
         /* Technical error notification showing */
         this.notificationService.showErrorNotification(
           `${getTechnicalErrorTitle()}`,
-          `${getTechnicalErrorMessage()}`
+          `${getTechnicalErrorMessage()}`,
         );
       }
     });

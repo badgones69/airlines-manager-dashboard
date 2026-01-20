@@ -1,8 +1,12 @@
 import { describe, it, expect } from 'vitest';
-import { CONFIRMATION_DIALOG_MODE, INFO_DIALOG_MODE, OK_DIALOG_BUTTON_TYPE, CANCEL_DIALOG_BUTTON_TYPE } from '../../app/shared/constants/dialogs-constants';
+import {
+  CONFIRMATION_DIALOG_MODE,
+  INFO_DIALOG_MODE,
+  OK_DIALOG_BUTTON_TYPE,
+  CANCEL_DIALOG_BUTTON_TYPE,
+} from '../../app/shared/constants/dialogs-constants';
 
 describe('DialogsConstants', () => {
-    
   it('CONFIRMATION_DIALOG_MODE should return "confirmation" dialog mode', () => {
     expect(CONFIRMATION_DIALOG_MODE).toStrictEqual('CONFIRMATION');
   });

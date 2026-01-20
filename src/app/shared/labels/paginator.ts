@@ -4,7 +4,7 @@ export function getItemsPerPageLabel(): string {
 
 export function getCurrentPageLabel(
   currentPage: number,
-  totalPages: number
+  totalPages: number,
 ): string {
   return `Page ${currentPage} sur ${totalPages}`;
 }

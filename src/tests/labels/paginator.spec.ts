@@ -1,8 +1,14 @@
-import { getItemsPerPageLabel, getCurrentPageLabel, getFirstPageLabel, getPreviousPageLabel, getNextPageLabel, getLastPageLabel } from '../../app/shared/labels/paginator';
+import {
+  getItemsPerPageLabel,
+  getCurrentPageLabel,
+  getFirstPageLabel,
+  getPreviousPageLabel,
+  getNextPageLabel,
+  getLastPageLabel,
+} from '../../app/shared/labels/paginator';
 import { describe, it, expect } from 'vitest';
 
 describe('PaginatorLabels', () => {
-  
   it('#getItemsPerPageLabel should return "items per page" label', () => {
     const itemsPerPageLabel: string = getItemsPerPageLabel();
     expect(itemsPerPageLabel).toStrictEqual('Éléments par page');

@@ -13,7 +13,6 @@ import { ComponentType, NoopScrollStrategy } from '@angular/cdk/overlay';
 import { MockAuthenticationComponent } from '../mocks/mock-authentication-component';
 
 describe('AppComponent', () => {
-
   @Component({})
   class MockAppComponent {
     public authenticatedUser!: User;
@@ -30,14 +29,21 @@ describe('AppComponent', () => {
       });
     }
 
-    open(component: ComponentType<AboutComponent>, config: MatDialogConfig<any>): void {
+    open(
+      component: ComponentType<AboutComponent>,
+      config: MatDialogConfig<any>,
+    ): void {
       // MatDialog open() method overrinding
     }
   }
 
   it('#ngOnInit should initialize "App" component', () => {
     let mockAppComponent: MockAppComponent = new MockAppComponent();
-    const appComponent: AppComponent = new AppComponent(Inject(UserService), Inject(Router), Inject(MatDialog));
+    const appComponent: AppComponent = new AppComponent(
+      Inject(UserService),
+      Inject(Router),
+      Inject(MatDialog),
+    );
     vi.spyOn(appComponent, 'ngOnInit').mockImplementation(() => {
       mockAppComponent.userService.user.subscribe((user) => {
         if (user) {
@@ -47,20 +53,22 @@ describe('AppComponent', () => {
     });
     appComponent.ngOnInit();
 
-    expect(appComponent.authenticatedUser).toStrictEqual(
-      {
-        id: 7,  
-        uuid: 'uuid-authenticated-user',
-        givenName: 'Authneticated',
-        surname: 'USER',
-        login: 'a.u',
-        profile: 1,
-      }
-    );
+    expect(appComponent.authenticatedUser).toStrictEqual({
+      id: 7,
+      uuid: 'uuid-authenticated-user',
+      givenName: 'Authneticated',
+      surname: 'USER',
+      login: 'a.u',
+      profile: 1,
+    });
   });
 
   it('#menuToggle should open menu and close it with all submenus', () => {
-    const appComponent: AppComponent = new AppComponent(Inject(UserService), Inject(Router), Inject(MatDialog));
+    const appComponent: AppComponent = new AppComponent(
+      Inject(UserService),
+      Inject(Router),
+      Inject(MatDialog),
+    );
     appComponent.menuToggle();
     expect(appComponent.menuOpened).toBeTruthy();
     appComponent.menuToggle();
@@ -70,7 +78,11 @@ describe('AppComponent', () => {
   });
 
   it('#airlineSubMenuToggle should open/close "airline" submenu items', () => {
-    const appComponent: AppComponent = new AppComponent(Inject(UserService), Inject(Router), Inject(MatDialog));
+    const appComponent: AppComponent = new AppComponent(
+      Inject(UserService),
+      Inject(Router),
+      Inject(MatDialog),
+    );
     appComponent.airlineSubMenuToggle();
     expect(appComponent.airlineSubMenuExpanded).toBeTruthy();
     appComponent.airlineSubMenuToggle();
@@ -78,7 +90,11 @@ describe('AppComponent', () => {
   });
 
   it('#userSubMenuToggle should open/close "user" submenu items', () => {
-    const appComponent: AppComponent = new AppComponent(Inject(UserService), Inject(Router), Inject(MatDialog));
+    const appComponent: AppComponent = new AppComponent(
+      Inject(UserService),
+      Inject(Router),
+      Inject(MatDialog),
+    );
     appComponent.userSubMenuToggle();
     expect(appComponent.userSubMenuExpanded).toBeTruthy();
     appComponent.userSubMenuToggle();
@@ -87,7 +103,11 @@ describe('AppComponent', () => {
 
   it('#openAboutDialog should open "About" dialog', () => {
     const mockAppComponent: MockAppComponent = new MockAppComponent();
-    const appComponent: AppComponent = new AppComponent(Inject(UserService), Inject(Router), Inject(MatDialog));
+    const appComponent: AppComponent = new AppComponent(
+      Inject(UserService),
+      Inject(Router),
+      Inject(MatDialog),
+    );
     vi.spyOn(appComponent, 'openAboutDialog').mockImplementation(() => {
       vi.spyOn(mockAppComponent, 'openAboutDialog').mockImplementation(() => {
         expect(mockAppComponent.open).toHaveBeenCalledWith(AboutComponent, {
@@ -105,18 +125,22 @@ describe('AppComponent', () => {
       imports: [AppComponent],
       providers: [
         provideRouter([
-          { path: 'authentication', component: MockAuthenticationComponent }
-        ])
-      ]
+          { path: 'authentication', component: MockAuthenticationComponent },
+        ]),
+      ],
     });
 
     const harness: RouterTestingHarness = await RouterTestingHarness.create();
     const mockAppComponent: MockAppComponent = new MockAppComponent();
-    const appComponent: AppComponent = new AppComponent(Inject(UserService), Inject(Router), Inject(MatDialog));
+    const appComponent: AppComponent = new AppComponent(
+      Inject(UserService),
+      Inject(Router),
+      Inject(MatDialog),
+    );
     vi.spyOn(appComponent, 'logout').mockImplementation(() => {
       mockAppComponent.userService.disconnectUser().subscribe(async (user) => {
         expect(user).toStrictEqual({});
-        
+
         await harness.navigateByUrl('authentication');
         expect(harness.routeNativeElement?.textContent).toBe('Authentication');
       });

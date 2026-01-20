@@ -46,11 +46,11 @@ export class DialogComponent implements OnInit {
     /* Dialog buttons labels initialization */
     this.okLabel = getDialogButtonLabel(
       OK_DIALOG_BUTTON_TYPE,
-      this.isConfirmationDialog
+      this.isConfirmationDialog,
     );
     this.cancelLabel = getDialogButtonLabel(
       CANCEL_DIALOG_BUTTON_TYPE,
-      this.isConfirmationDialog
+      this.isConfirmationDialog,
     );
   }
 

@@ -1,7 +1,6 @@
 <!-- TITLE -->
 <h2 mat-dialog-title>{{ airlineLogoDialogTitle }}</h2>
 <mat-dialog-content>
-  
   <!-- LOGO BACKGROUND COLOR FIELD -->
   <div class="customization-field-container">
     <p class="customization-field-title">
@@ -70,9 +69,7 @@
   </div>
   <!-- LOGO LETTER FIELD -->
   <div class="customization-field-container">
-    <p class="customization-field-title">
-      {{ airlineLogoLetterInputLabel }} :
-    </p>
+    <p class="customization-field-title">{{ airlineLogoLetterInputLabel }} :</p>
     <mat-form-field floatLabel="always">
       <mat-select
         [(ngModel)]="logoLetter"
@@ -118,7 +115,12 @@
 @if (this.logoPreviewImage) {
   <!-- BUTTON -->
   <mat-dialog-actions>
-    <button id="ok-button" mat-button mat-dialog-close (click)="editAirlineLogo()">
+    <button
+      id="ok-button"
+      mat-button
+      mat-dialog-close
+      (click)="editAirlineLogo()"
+    >
       {{ selectButtonLabel }}
     </button>
   </mat-dialog-actions>
