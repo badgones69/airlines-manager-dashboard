@@ -91,8 +91,8 @@ export class AuthenticationComponent implements OnInit {
   constructor(readonly notificationService: NotificationService) {
     /* Form fields creation & constraints definition */
     this.authenticationForm = new FormGroup({
-      login: new FormControl(['', Validators.required]),
-      password: new FormControl(['', Validators.required]),
+      login: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
     });
   }
 
