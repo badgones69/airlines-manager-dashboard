@@ -111,33 +111,33 @@ export class UserFormComponent implements OnInit {
     /* Form fields creation & constraints definition */
     this.userForm = new FormGroup(
       {
-        givenName: new FormControl([
+        givenName: new FormControl(
           '',
           [
             Validators.required,
             Validators.pattern(new RegExp(IDENTITY_PATTERN)),
           ],
-        ]),
-        surname: new FormControl([
+        ),
+        surname: new FormControl(
           '',
           [
             Validators.required,
             Validators.pattern(new RegExp(IDENTITY_PATTERN)),
           ],
-        ]),
-        login: new FormControl([
+        ),
+        login: new FormControl(
           '',
           [Validators.required, Validators.pattern(new RegExp(LOGIN_PATTERN))],
-        ]),
-        password: new FormControl([
+        ),
+        password: new FormControl(
           '',
           [
             Validators.required,
             Validators.pattern(new RegExp(PASS_WORD_PATTERN)),
           ],
-        ]),
-        repeatedPassword: new FormControl(['', Validators.required]),
-        profile: new FormControl(['', Validators.required]),
+        ),
+        repeatedPassword: new FormControl('', Validators.required),
+        profile: new FormControl('', Validators.required),
       },
       {
         validators: [
