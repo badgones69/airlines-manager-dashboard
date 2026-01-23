@@ -117,14 +117,14 @@ export class ResetUserPasswordComponent implements OnInit {
       {
         givenName: new FormControl({ value: '', disabled: true }),
         surname: new FormControl({ value: '', disabled: true }),
-        password: new FormControl([
+        password: new FormControl(
           '',
           [
             Validators.required,
             Validators.pattern(new RegExp(PASS_WORD_PATTERN)),
           ],
-        ]),
-        repeatedPassword: new FormControl(['', Validators.required]),
+        ),
+        repeatedPassword: new FormControl('', Validators.required),
       },
       {
         validators: [
