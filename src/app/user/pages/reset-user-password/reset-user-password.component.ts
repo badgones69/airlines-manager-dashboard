@@ -233,7 +233,9 @@ export class ResetUserPasswordComponent implements OnInit {
       return getRequiredFieldErrorMessage();
     } else if (
       error === NOT_IDENTICAL_PASS_WORD_ERROR &&
-      this.resetUserPasswordForm.hasError(NOT_IDENTICAL_PASS_WORD_ERROR)
+      this.resetUserPasswordForm
+        .get(this.repeatedPass_wordFieldIdentifier)
+        ?.hasError(NOT_IDENTICAL_PASS_WORD_ERROR)
     ) {
       return getRepeatedPasswordFieldFormatErrorMessage();
     }
