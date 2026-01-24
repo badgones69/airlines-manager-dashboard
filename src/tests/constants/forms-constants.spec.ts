@@ -31,7 +31,7 @@ describe('FormsConstants', () => {
 
   it('IDENTITY_PATTERN should return identity fields pattern', () => {
     expect(IDENTITY_PATTERN).toStrictEqual(
-      String.raw`^[a-zA-Zßñçãáàâäéèêëíìîïõо́òôöúùûüẞÑÇÃÁÀÂÄÉÈÊËÍÌÎÏÕÒÓÔÖÚÙÛÜ\.]+(?:[ -][a-zA-Zßñçãáàâäéèêëíìîïõо́òôöúùûüẞÑÇÃÁÀÂÄÉÈÊËÍÌÎÏÕÒÓÔÖÚÙÛÜ\.]+)*$')`,
+      String.raw`^[a-zA-Zßñçãáàâäéèêëíìîïõо́òôöúùûüẞÑÇÃÁÀÂÄÉÈÊËÍÌÎÏÕÒÓÔÖÚÙÛÜ\.]+(?:[ -][a-zA-Zßñçãáàâäéèêëíìîïõо́òôöúùûüẞÑÇÃÁÀÂÄÉÈÊËÍÌÎÏÕÒÓÔÖÚÙÛÜ\.]+)*$`,
     );
   });
 
