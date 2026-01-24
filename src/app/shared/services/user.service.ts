@@ -64,7 +64,7 @@ export class UserService {
       .from('USER')
       .select()
       .eq('userLogin', login);
-    return data?.[0];
+    return data;
   }
 
   /* All users retrieving */

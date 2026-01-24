@@ -155,30 +155,39 @@ export class AuthenticationComponent implements OnInit {
     // User verification
     this.userService
       .authenticateUser(this.authenticationForm.value.login)
-      .then((userFound: any) => {
-        // If user exists
-        if (userFound) {
-          // Password comparison
-          compare(
-            this.authenticationForm.value.password,
-            userFound.userPassword,
-          ).then((isValid: any) => {
-            // If password is valid
-            if (isValid) {
-              // User mapping
-              const user: User = this.userMapper.userFromDB(userFound);
-              // Session opening
-              this.userService.connectUser(user);
-              // Redirection to home page
-              this.router.navigate(['home']);
-            } else {
-              /* Error notification showing */
-              this.notificationService.showErrorNotification(
-                `${this.authenticationFormTitle.toUpperCase()}`,
-                `${getErrorNotificationMessage()}`,
-              );
-            }
-          });
+      .then((result: any) => {
+        if (result) {
+          // If user exists
+          if (result.length > 0) {
+            const userFound = result[0];
+            // Password comparison
+            compare(
+              this.authenticationForm.value.password,
+              userFound.userPassword,
+            ).then((isValid: any) => {
+              // If password is valid
+              if (isValid) {
+                // User mapping
+                const user: User = this.userMapper.userFromDB(userFound);
+                // Session opening
+                this.userService.connectUser(user);
+                // Redirection to home page
+                this.router.navigate(['home']);
+              } else {
+                /* Error notification showing */
+                this.notificationService.showErrorNotification(
+                  `${this.authenticationFormTitle.toUpperCase()}`,
+                  `${getErrorNotificationMessage()}`,
+                );
+              }
+            });
+          } else {
+            /* Error notification showing */
+            this.notificationService.showErrorNotification(
+              `${this.authenticationFormTitle.toUpperCase()}`,
+              `${getErrorNotificationMessage()}`,
+            );
+          }
         } else {
           /* Technical error notification showing */
           this.notificationService.showErrorNotification(
