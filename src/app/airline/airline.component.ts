@@ -201,11 +201,13 @@ export class AirlineComponent implements OnInit {
             ? airlineEdited.nationality
             : airlineEdited.nationality.name,
         );
-      } else {
-        this.airlineService.airlineLogo.subscribe((airlineLogo) => {
-          this.airlineLogoImage = `src/images/logos/64x64/${airlineLogo}.png`;
-        });
       }
+
+      this.airlineService.airlineLogo.subscribe((airlineLogo) => {
+        if (airlineLogo) {
+          this.airlineLogoImage = `src/images/logos/64x64/${airlineLogo}.png`;
+        }
+      });
 
       // @ts-ignore
       this.filteredCountries = this.airlineForm
