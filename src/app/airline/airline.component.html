@@ -37,7 +37,7 @@
           {{ logoInputLabel }}
         </button>
         @if (this.initAirlineToEdit) {
-          @if (this.initAirlineToEdit.logo) {
+          @if (this.airlineLogoImage) {
             <img
               class="logo-image"
               [ngSrc]="airlineLogoImage"
