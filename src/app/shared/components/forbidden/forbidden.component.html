@@ -1,0 +1,20 @@
+<div class="error-container">
+  <!-- FORBIDDEN ERROR ICON -->
+  <i class="material-icons error-icon"> do_not_disturb_on </i>
+  <!-- FORBIDDEN ERROR MESSAGE -->
+  <span class="error-message">{{ message }}</span>
+</div>
+
+<!-- REDIRECTION BUTTON -->
+<div class="redirection-button-container">
+  <button
+    class="redirection-button"
+    (click)="goToHome()"
+    type="button"
+    mat-fab
+    extended
+  >
+    <i class="material-icons">open_in_new</i>
+    {{ redirectionButtonLabel }}
+  </button>
+</div>

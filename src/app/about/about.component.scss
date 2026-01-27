@@ -1,0 +1,22 @@
+/* App version number */
+#app-version {
+  font-weight: bold;
+}
+
+/* Dependencies */
+.dependencies-group-title {
+  text-decoration: underline;
+}
+.dependencies-group {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+img:not(.last-img) {
+  margin-right: 10px;
+}
+
+/* Author */
+#author {
+  margin-top: 25px;
+}

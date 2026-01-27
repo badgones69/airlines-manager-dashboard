@@ -1,0 +1,61 @@
+<!-- FORM -->
+<form [formGroup]="authenticationForm" (ngSubmit)="submitAuthenticationForm()">
+  <!-- TITLE -->
+  <mat-label class="form-title">{{ authenticationFormTitle }}</mat-label>
+
+  <!-- LOGIN FIELD -->
+  <mat-form-field>
+    <mat-label>{{ loginInputLabel }}</mat-label>
+    <input matInput [formControlName]="this.loginFieldIdentifier" />
+    <mat-error>{{ displayLoginErrorMessage() }}</mat-error>
+  </mat-form-field>
+
+  <!-- PASSWORD FIELD -->
+  <mat-form-field>
+    <mat-label>{{ passwordInputLabel }}</mat-label>
+    <input
+      matInput
+      [formControlName]="this.pass_wordFieldIdentifier"
+      [type]="showPassword ? 'text' : 'password'"
+    />
+
+    <!-- PASSWORD SHOWING TOGGLE -->
+    <button
+      type="button"
+      class="input-button"
+      (click)="showPasswordToggle()"
+      mat-icon-button
+      matSuffix
+    >
+      <i
+        class="material-icons"
+        [style]="
+          isPasswordFieldInvalid()
+            ? 'color: var(--app-red)'
+            : 'color: var(--app-blue)'
+        "
+      >
+        {{ showPassword ? "visibility_off" : "visibility" }}
+      </i>
+    </button>
+    <mat-error>{{ displayPasswordErrorMessage() }}</mat-error>
+  </mat-form-field>
+
+  <!-- BUTTONS -->
+  <div class="form-buttons">
+    <button
+      type="submit"
+      class="submit-form-button"
+      mat-fab
+      extended
+      [disabled]="this.authenticationForm.invalid"
+    >
+      <i class="material-icons">login</i>
+      {{ submitButtonLabel }}
+    </button>
+    <button [type]="resetButtonType" class="reset-form-button" mat-fab extended>
+      <i class="material-icons">{{ resetButtonIcon }}</i>
+      {{ resetButtonLabel }}
+    </button>
+  </div>
+</form>

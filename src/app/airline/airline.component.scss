@@ -1,0 +1,17 @@
+/* Airline logo chooser container */
+#logo-chooser-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Airline logo image */
+.logo-image {
+  margin-left: 50px;
+}
+
+/* "No logo" message */
+#no-logo-message {
+  font-weight: bold;
+  margin-left: 20px;
+}
