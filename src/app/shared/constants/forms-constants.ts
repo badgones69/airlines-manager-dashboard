@@ -1,0 +1,20 @@
+/* Form modes */
+export const ADD_FORM_MODE = 'ADD';
+export const EDIT_FORM_MODE = 'EDIT';
+export const DELETE_FORM_MODE = 'DELETE';
+
+/* Forms fields patterns */
+export const IDENTITY_PATTERN = String.raw`^[a-zA-Zßñçãáàâäéèêëíìîïõо́òôöúùûüẞÑÇÃÁÀÂÄÉÈÊËÍÌÎÏÕÒÓÔÖÚÙÛÜ\.]+(?:[ -][a-zA-Zßñçãáàâäéèêëíìîïõо́òôöúùûüẞÑÇÃÁÀÂÄÉÈÊËÍÌÎÏÕÒÓÔÖÚÙÛÜ\.]+)*$`;
+export const LOGIN_PATTERN = String.raw`^([a-zßñçãáàâäéèêëíìîïõо́òôöúùûü]|[a-zßñçãáàâäéèêëíìîïõо́òôöúùûü]-[a-zßñçãáàâäéèêëíìîïõо́òôöúùûü])+\.([a-zßñçãáàâäéèêëíìîïõо́òôöúùûü]|[a-zßñçãáàâäéèêëíìîïõо́òôöúùûü]-[a-zßñçãáàâäéèêëíìîïõо́òôöúùûü])+$`;
+export const PASS_WORD_PATTERN =
+  '^(?=(?:.*[0-9]){2,})(?=(?:.*[A-ZẞÑÇÃÁÀÂÄÉÈÊËÍÌÎÏÕÒÓÔÖÚÙÛÜ]){2,})(?=(?:.*[a-zßñçãáàâäéèêëíìîïõо́òôöúùûü]){2,})(?=(?:.*[\\[\\]§:*_`|"+(=)&¤<.>?€;!$£%@^#~/{}\\-]){2,}).{16,}$';
+export const ICAO_IATA_CODE_PATTERN = '[A-Za-z]{3}';
+
+/* Forms fields error types */
+export const REQUIRED_ERROR = 'required';
+export const BLANK_VALUE_ERROR = 'blankValue';
+export const MIN_LENGTH_ERROR = 'minlength';
+export const MAX_LENGTH_ERROR = 'maxlength';
+export const PATTERN_ERROR = 'pattern';
+export const NOT_IDENTICAL_PASS_WORD_ERROR = 'notIdenticalPassword';
+export const UNKNOWN_COUNTRY_ERROR = 'unknownCountry';

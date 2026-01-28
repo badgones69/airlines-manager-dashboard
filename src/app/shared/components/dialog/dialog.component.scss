@@ -1,0 +1,19 @@
+/* Dialog body */
+h2,
+.mat-mdc-dialog-content {
+  text-align: center;
+}
+.mat-mdc-dialog-content {
+  max-height: 700px;
+}
+
+/* Dialog buttons */
+#ok-button {
+  background-color: var(--app-blue);
+  font-weight: bold;
+}
+
+#cancel-button {
+  background-color: var(--app-black);
+  font-weight: bold;
+}

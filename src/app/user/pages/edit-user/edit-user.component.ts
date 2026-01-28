@@ -1,0 +1,87 @@
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../../shared/services/user.service';
+import { NotificationService } from '../../../shared/services/notification.service';
+import { EDIT_FORM_MODE } from '../../../shared/constants/forms-constants';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '../../../shared/models/User';
+import { UserFormComponent } from '../../form-component/user-form.component';
+import { UserMapper } from '../../../shared/mappers/UserMapper';
+import { getFormModeLabel } from '../../../shared/labels/commons/form-common';
+import {
+  getUserFormSuccessNotificationMessage,
+  getUserFormTitle,
+} from '../../../shared/labels/forms/user-form';
+import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
+import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
+import { AuthenticatedUserUneditableComponent } from '../authenticated-user-uneditable/authenticated-user-uneditable.component';
+import {
+  getTechnicalErrorMessage,
+  getTechnicalErrorTitle,
+} from '../../../shared/labels/errors';
+
+@Component({
+  selector: 'edit-user',
+  standalone: true,
+  imports: [
+    UserFormComponent,
+    ForbiddenComponent,
+    UnauthorizedComponent,
+    AuthenticatedUserUneditableComponent,
+  ],
+  templateUrl: './edit-user.component.html',
+  styleUrls: [],
+})
+export class EditUserComponent implements OnInit {
+  public authenticatedUser!: User;
+
+  public initUserToEdit!: User;
+  public formMode: string = EDIT_FORM_MODE;
+
+  public userUUID!: string;
+  public userMapper: UserMapper = new UserMapper();
+
+  constructor(
+    readonly userService: UserService,
+    readonly notificationService: NotificationService,
+    public route: ActivatedRoute,
+    readonly router: Router,
+  ) {}
+
+  ngOnInit(): void {
+    this.userUUID = this.route.snapshot.paramMap.get('uuid') ?? '';
+
+    this.userService.findUser(this.userUUID).then((user) => {
+      this.initUserToEdit = this.userMapper.userFromDB(user);
+    });
+
+    this.userService.user.subscribe((user) => {
+      if (user) {
+        this.authenticatedUser = JSON.parse(user.toString());
+      }
+    });
+  }
+
+  /* User editing */
+  editUser(user: any): void {
+    user.userUUID = this.userUUID;
+    // User updating
+    this.userService.updateUser(user).then((result: any) => {
+      // If user is updated
+      if (result.data) {
+        /* Success notification showing */
+        this.notificationService.showSuccessNotification(
+          `${getFormModeLabel(this.formMode)} ${getUserFormTitle()}`,
+          `${getUserFormSuccessNotificationMessage(this.formMode)}`,
+        );
+        // Redirection to users list
+        this.router.navigate(['users', 'list']);
+      } else {
+        /* Technical error notification showing */
+        this.notificationService.showErrorNotification(
+          `${getTechnicalErrorTitle()}`,
+          `${getTechnicalErrorMessage()}`,
+        );
+      }
+    });
+  }
+}

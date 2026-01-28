@@ -1,0 +1,143 @@
+<!-- FORM -->
+<form [formGroup]="userForm" (ngSubmit)="submitUserForm()">
+  <!-- TITLE -->
+  <mat-label class="form-title">{{ userFormTitle }}</mat-label>
+
+  <!-- GIVEN NAME FIELD -->
+  <mat-form-field floatLabel="always">
+    <mat-label>{{ givenNameInputLabel }}</mat-label>
+    <input matInput [formControlName]="givenNameFieldIdentifier" />
+    <mat-error>{{ displayGivenNameErrorMessage() }}</mat-error>
+  </mat-form-field>
+
+  <!-- SURNAME FIELD -->
+  <mat-form-field floatLabel="always">
+    <mat-label>{{ surnameInputLabel }}</mat-label>
+    <input matInput [formControlName]="surnameFieldIdentifier" />
+    <mat-error>{{ displaySurnameErrorMessage() }}</mat-error>
+  </mat-form-field>
+
+  <!-- LOGIN FIELD -->
+  <mat-form-field floatLabel="always">
+    <mat-label>{{ loginInputLabel }}</mat-label>
+    <input matInput [formControlName]="loginFieldIdentifier" />
+    <mat-error>{{ displayLoginErrorMessage() }}</mat-error>
+  </mat-form-field>
+
+  @if (!isEditMode) {
+    <!-- PASSWORD FIELD -->
+    <mat-form-field floatLabel="always">
+      <mat-label>{{ passwordInputLabel }}</mat-label>
+      <input
+        matInput
+        [formControlName]="pass_wordFieldIdentifier"
+        [type]="showPassword ? 'text' : 'password'"
+      />
+
+      <!-- PASSWORD SHOWING TOGGLE -->
+      <button
+        type="button"
+        class="input-button"
+        (click)="showPasswordToggle()"
+        mat-icon-button
+        matSuffix
+      >
+        <i
+          class="material-icons"
+          [style]="
+            isPasswordFieldInvalid()
+              ? 'color: var(--app-red)'
+              : 'color: var(--app-blue)'
+          "
+        >
+          {{ showPassword ? "visibility_off" : "visibility" }}
+        </i>
+      </button>
+      <mat-error>{{ displayPasswordErrorMessage() }}</mat-error>
+    </mat-form-field>
+  }
+
+  @if (!isEditMode && userForm.get(pass_wordFieldIdentifier)?.valid) {
+    <!-- REPEATED PASSWORD FIELD -->
+    <mat-form-field floatLabel="always">
+      <mat-label>{{ repeatedPasswordInputLabel }}</mat-label>
+      <input
+        matInput
+        [formControlName]="repeatedPass_wordFieldIdentifier"
+        [type]="showRepeatedPassword ? 'text' : 'password'"
+        [style]="
+          isRepeatedPasswordFieldInvalid()
+            ? 'color: var(--app-red)'
+            : 'color: var(--app-blue)'
+        "
+      />
+
+      <!-- REPEATED PASSWORD SHOWING TOGGLE -->
+      <button
+        type="button"
+        class="input-button"
+        (click)="showRepeatedPasswordToggle()"
+        mat-icon-button
+        matSuffix
+      >
+        <i
+          class="material-icons"
+          [style]="
+            isRepeatedPasswordFieldInvalid()
+              ? 'color: var(--app-red)'
+              : 'color: var(--app-blue)'
+          "
+        >
+          {{ showRepeatedPassword ? "visibility_off" : "visibility" }}
+        </i>
+      </button>
+
+      <mat-error>{{
+        displayRepeatedPasswordErrorMessage("required")
+      }}</mat-error>
+      @if (
+        isRepeatedPasswordFieldInvalid() &&
+        userForm.hasError("notIdenticalPassword")
+      ) {
+        <mat-hint class="error-hint">{{
+          displayRepeatedPasswordErrorMessage("notIdenticalPassword")
+        }}</mat-hint>
+      }
+    </mat-form-field>
+  }
+
+  <!-- PROFILE FIELD -->
+  <mat-form-field floatLabel="always">
+    <mat-label>{{ profileInputLabel }}</mat-label>
+    <mat-select [formControlName]="profileFieldIdentifier">
+      @for (profile of profiles; track profile) {
+        <mat-option [value]="profile.id">{{ profile.name }}</mat-option>
+      }
+    </mat-select>
+    <mat-error>{{ displayProfileErrorMessage() }}</mat-error>
+  </mat-form-field>
+
+  <!-- BUTTONS -->
+  <div class="form-buttons">
+    <button
+      type="submit"
+      class="submit-form-button"
+      mat-fab
+      extended
+      [disabled]="userForm.invalid"
+    >
+      <i class="material-icons">{{ submitButtonIcon }}</i>
+      {{ submitButtonLabel }}
+    </button>
+    <button
+      [type]="resetButtonType"
+      class="reset-form-button"
+      mat-fab
+      extended
+      (click)="ngOnInit()"
+    >
+      <i class="material-icons">{{ resetButtonIcon }}</i>
+      {{ resetButtonLabel }}
+    </button>
+  </div>
+</form>
