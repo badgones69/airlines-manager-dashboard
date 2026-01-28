@@ -1,18 +1,18 @@
-<h1 style="text-align: center">
+<h1 align="center">
     AM Dashboard
 </h1>
 
-<p style="text-align: center">
+<p align="center">
     <a href="https://github.com/badgones69/airlines-manager-dashboard">
     <img src="src/images/favicon.ico">
    </a>
 </p>
 
-<p style="text-align: center">
+<p align="center">
     The airline dashboard !
 </p>
 
-<p style="text-align: center">
+<p align="center">
     <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/v1.0.0-B60205.svg"></a>
     <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/January 28th, 2026-7E7E7E.svg"></a>
     <br />
@@ -26,9 +26,9 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
 
 ## External tools used
 
-<span style="text-decoration: underline; font-weight: bold">SERVER & DATABASE :</span>
-<p style="margin-top: 15px; display: flex">
-<img style="margin-right: 10px"
+**<ins>SERVER & DATABASE :<ins>**
+<p>
+<img
     src="https://img.shields.io/badge/Vercel v48.12.0-000000?logo=vercel&logoColor=FFFFFF"
     alt="Vercel"
 />
@@ -37,9 +37,10 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
     alt="Supabase-JS"
 />
 </p>
-<span style="text-decoration: underline; font-weight: bold">FRAMEWORK & LANGUAGE :</span>
-<p style="margin-top: 15px; display: flex">
-<img style="margin-right: 10px"
+
+**<ins>FRAMEWORK & LANGUAGE :<ins>**
+<p>
+<img
     src="https://img.shields.io/badge/Angular v20.3.13-purple?logo=angular&logoColor=FFFFFF"
     alt="Angular"
 />
@@ -48,9 +49,10 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
     alt="NGx Toastr"
 />
 </p>
-<span style="text-decoration: underline; font-weight: bold">CHARTS & MAPS :</span>
-<p style="margin-top: 15px; display: flex">
-<img style="margin-right: 10px"
+
+**<ins>CHARTS & MAPS :<ins>**
+<p>
+<img
     src="https://img.shields.io/badge/Chart.js v4.5.1-orange?logo=chart.js&logoColor=FFFFFF"
     alt="Chart.js"
 />
@@ -59,9 +61,10 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
     alt="Flag Icons"
 />
 </p>
-<span style="text-decoration: underline; font-weight: bold">FLAGS & NOTIFICATIONS :</span>
-<p style="margin-top: 15px; display: flex">
-<img style="margin-right: 10px"
+
+**<ins>FLAGS & NOTIFICATIONS :<ins>**
+<p>
+<img
     src="https://img.shields.io/badge/Flag Icons v7.5.0-yellow.svg"
     alt="Flag Icons"
 />
@@ -70,13 +73,14 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
     alt="NGx Toastr"
 />
 </p>
-<span style="text-decoration: underline; font-weight: bold">SECURITY :</span>
-<p style="margin-top: 15px; display: flex">
-<img style="margin-right: 10px"
+
+**<ins>SECURITY :<ins>**
+<p>
+<img
     src="https://img.shields.io/badge/UUID v13.0.0-grey.svg"
     alt="UUID"
 />
-<img style="margin-right: 10px"
+<img
     src="https://img.shields.io/badge/Bcrypt--TS v7.1.0-9F5540.svg"
     alt="Bcrypt-TS"
 />
@@ -85,8 +89,9 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
     alt="Base64-TS"
 />
 </p>
-<span style="text-decoration: underline; font-weight: bold">TESTS :</span>
-<p style="margin-top: 15px; display: flex">
+
+**<ins>TESTS :<ins>**
+<p>
 <img
     src="https://img.shields.io/badge/Vitest v4.0.14-729B1B?logo=vitest&logoColor=FFFFFF"
     alt="Vitest"
