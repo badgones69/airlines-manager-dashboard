@@ -41,7 +41,7 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
 **<ins>FRAMEWORK & LANGUAGE :<ins>**
 <p>
 <img
-    src="https://img.shields.io/badge/Angular v20.3.13-purple?logo=angular&logoColor=FFFFFF"
+    src="https://img.shields.io/badge/Angular v20.3.16-purple?logo=angular&logoColor=FFFFFF"
     alt="Angular"
 />
 <img
