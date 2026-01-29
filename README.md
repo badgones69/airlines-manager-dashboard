@@ -13,8 +13,8 @@
 </p>
 
 <p align="center">
-    <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/v1.0.0-B60205.svg"></a>
-    <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/January 28th, 2026-7E7E7E.svg"></a>
+    <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/v1.0.1-F317F9.svg"></a>
+    <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/January 29th, 2026-7E7E7E.svg"></a>
     <br />
     <img src="https://img.shields.io/badge/SonarQube%20%3A%2098%20%25-0000AA?logo=sonar&logoColor=FFFFFF">
 </p>
@@ -41,7 +41,7 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
 **<ins>FRAMEWORK & LANGUAGE :<ins>**
 <p>
 <img
-    src="https://img.shields.io/badge/Angular v20.3.13-purple?logo=angular&logoColor=FFFFFF"
+    src="https://img.shields.io/badge/Angular v20.3.16-purple?logo=angular&logoColor=FFFFFF"
     alt="Angular"
 />
 <img

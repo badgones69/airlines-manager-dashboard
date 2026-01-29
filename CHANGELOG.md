@@ -13,3 +13,22 @@
     <li><b>USER :</b> adding, editing, deleting, password resetting</li>
   </ul>
 </ul>
+<br />
+<h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.0.1">1.0.1</a>
+    (2026-01-29)
+</h1>
+
+<h3>Security</h3>
+
+<ul>
+  <li><h4>CVE corrections :</h4></li>
+  <ul>
+    <li>@angular/compiler</li>
+    <li>@angular/common</li>
+    <li>@angular/core</li>
+    <li>tar</li>
+    <li>@modelcontextprotocol/sdk</li>
+    <li>qs</li>
+  </ul>
+</ul>
