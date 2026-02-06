@@ -28,36 +28,42 @@
 
       <!-- LOGIN COLUMN -->
       <ng-container [matColumnDef]="columnsIdentifiers[3]">
-        <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[3] }}</th>
-        <td mat-cell *matCellDef="let user">{{ user.login }}</td>
+        <th mat-header-cell class="column-login"
+          [class.mat-column-login]="usersList.data.length > 1"
+          *matHeaderCellDef>{{ columnsHeaders[3] }}</th>
+        <td mat-cell class="column-login"
+          [class.mat-column-login]="usersList.data.length > 1"
+          *matCellDef="let user">{{ user.login }}</td>
       </ng-container>
 
-      <!-- PASSWORD RESET COLUMN -->
-      <ng-container [matColumnDef]="columnsIdentifiers[4]">
-        <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[4] }}</th>
-        <td mat-cell *matCellDef="let user">
-          @if (authenticatedUser && authenticatedUser.uuid !== user.uuid) {
-            <a routerLink="../reset-password/{{ user.uuid }}">{{
-              passwordResetColumnButtonName
-            }}</a>
-          }
-        </td>
-      </ng-container>
+      @if (usersList.data.length > 1) {
+        <!-- PASSWORD RESET COLUMN -->
+        <ng-container [matColumnDef]="columnsIdentifiers[4]">
+          <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[4] }}</th>
+          <td mat-cell *matCellDef="let user">
+            @if (authenticatedUser && authenticatedUser.uuid !== user.uuid) {
+              <a routerLink="../reset-password/{{ user.uuid }}">{{
+                passwordResetColumnButtonName
+              }}</a>
+            }
+          </td>
+        </ng-container>
 
-      <!-- ACTIONS BUTTONS -->
-      <ng-container [matColumnDef]="columnsIdentifiers[5]">
-        <th id="actions" mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let user">
-          @if (authenticatedUser && authenticatedUser.uuid !== user.uuid) {
-            <button mat-icon-button (click)="openUserForm(user)">
-              <i class="material-icons">edit</i>
-            </button>
-            <button mat-icon-button (click)="deleteUser(user)">
-              <i class="material-icons">delete</i>
-            </button>
-          }
-        </td>
-      </ng-container>
+        <!-- ACTIONS BUTTONS -->
+        <ng-container [matColumnDef]="columnsIdentifiers[5]">
+          <th id="actions" mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let user">
+            @if (authenticatedUser && authenticatedUser.uuid !== user.uuid) {
+              <button mat-icon-button (click)="openUserForm(user)">
+                <i class="material-icons">edit</i>
+              </button>
+              <button mat-icon-button (click)="deleteUser(user)">
+                <i class="material-icons">delete</i>
+              </button>
+            }
+          </td>
+        </ng-container>
+      }  
 
       <tr mat-header-row *matHeaderRowDef="columnsIdentifiers"></tr>
       <tr mat-row *matRowDef="let row; columns: columnsIdentifiers"></tr>

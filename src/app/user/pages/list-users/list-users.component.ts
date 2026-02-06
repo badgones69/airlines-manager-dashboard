@@ -62,8 +62,6 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
     'givenName',
     'surname',
     'login',
-    'passwordReset',
-    'actions',
   ];
 
   /* List columns headers labels */
@@ -98,6 +96,10 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
 
     this.userService.users.subscribe((users) => {
       this.usersList.data = this.userMapper.usersListFromDB(users);
+
+      if (this.usersList.data.length > 1) {
+        this.columnsIdentifiers.push('passwordReset', 'actions');
+      }
     });
   }
 
