@@ -31,7 +31,7 @@ export class UserMapper {
 
   /* DTO => DB mapping */
   public userToDB(userToDB: any): any {
-    if (userToDB.givenName.includes('-') && userToDB.givenName.includes(' ')) {
+    if (userToDB.givenName.includes('-') || userToDB.givenName.includes(' ')) {
       userToDB.givenName = capitalizeDashedWordsFirstLetter(
         capitalizeSpaceSeparatedWordsFirstLetter(userToDB.givenName),
       );
