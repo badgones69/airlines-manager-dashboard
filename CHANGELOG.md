@@ -32,3 +32,18 @@
     <li>qs</li>
   </ul>
 </ul>
+<br />
+<h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.0.2">1.0.2</a>
+    (2026-02-07)
+</h1>
+
+<h3>Bug fixes</h3>
+
+<ul>
+  <li><b>USER :</b></li>
+  <ul>
+    <li>add/edit form (given name formatting)</li>
+    <li>list (columns display correction)</li>
+  </ul>
+</ul>
