@@ -1,9 +1,9 @@
 {
   "private": true,
   "productName": "AM Dashboard",
-  "version": "1.0.2",
+  "version": "1.0.3-rc.01",
   "releaseNumber": "3",
-  "releaseDate": "2026-02-07",
+  "releaseDate": "2026-02-08",
   "author": "Florian RENARD",
   "scripts": {
     "ng": "ng",
@@ -52,6 +52,8 @@
   },
   "overrides": {
     "rimraf": "^6.1.2",
-    "glob": "^13.0.0"
+    "glob": "^13.0.0",
+    "@isaacs/brace-expansion": "^5.0.1",
+    "@modelcontextprotocol/sdk": "^1.26.0"
   }
 }
