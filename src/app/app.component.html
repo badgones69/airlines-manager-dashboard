@@ -74,6 +74,25 @@
         </button>
       }
     }
+    <!-- HUB SUBMENU -->
+    @if (authenticatedUser && authenticatedUser.profile !== 3) {
+      <button mat-button (click)="hubSubMenuToggle()" class="menu-button">
+        @if (hubSubMenuExpanded) {
+          <i class="material-icons">expand_more</i>
+        } @else {
+          <i class="material-icons">chevron_right</i>
+        }
+        <i class="material-icons">share</i>
+        <span>Hub</span>
+      </button>
+      @if (hubSubMenuExpanded) {
+        <!-- HUB ADDING FORM BUTTON -->
+        <button mat-icon-button class="submenu-button" routerLink="hubs/add">
+          <i class="material-icons">add</i>
+          <span>Ajouter</span>
+        </button>
+      }
+    }
     <!-- ABOUT SUBMENU -->
     <button mat-button (click)="openAboutDialog()" class="menu-button">
       <i class="material-icons">info</i>

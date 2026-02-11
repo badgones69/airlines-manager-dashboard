@@ -23,11 +23,24 @@ export function getCountryByName(countryName: string): Country | undefined {
   );
 }
 
-export function getRegion(
+export function getRegions(countryId: number): Region[] {
+  let regionsList = getCountryById(countryId)!.regions!;
+  return sortElementsAlphabetically(regionsList, 'fr');
+}
+
+export function getRegionById(
   regionId: number,
   countryId: number,
 ): Region | undefined {
   return getCountryById(countryId)?.regions?.find(
     (region) => region.id === regionId,
   );
+}
+
+export function getRegionByName(
+  regionName: string,
+  countryFlagCode: string,
+): Region | undefined {
+  return getCountries().find((country) => country.flagCode === countryFlagCode)
+  ?.regions?.find((region) => capitalize(region.name) === capitalize(regionName),);
 }

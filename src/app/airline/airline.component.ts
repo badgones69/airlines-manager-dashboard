@@ -23,6 +23,7 @@ import {
   getBlankStringFieldErrorMessage,
   getResetButtonIcon,
   getUnknownCountryErrorMessage,
+  getNameLabel,
 } from '../shared/labels/commons/form-common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ToastrModule } from 'ngx-toastr';
@@ -45,7 +46,6 @@ import {
   getNationalityInputLabel,
   getICAOCodeInputLabel,
   getLogoInputLabel,
-  getNameInputLabel,
   getNoLogoLabel,
 } from '../shared/labels/forms/airline-form';
 import { AirlineMapper } from '../shared/mappers/AirlineMapper';
@@ -185,7 +185,7 @@ export class AirlineComponent implements OnInit {
       EDIT_FORM_MODE,
     )} ${getAirlineFormTitle()}`;
     this.icaoInputLabel = getICAOCodeInputLabel();
-    this.nameInputLabel = getNameInputLabel();
+    this.nameInputLabel = getNameLabel();
     this.logoInputLabel = getLogoInputLabel(EDIT_FORM_MODE);
     this.nationalityInputLabel = getNationalityInputLabel();
     this.submitButtonLabel = getSubmitButtonLabel(EDIT_FORM_MODE);
