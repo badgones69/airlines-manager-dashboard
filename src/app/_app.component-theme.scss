@@ -65,7 +65,9 @@
 /* Radio buttons theme overriding */
 @mixin radio {
   .mat-mdc-radio-button.mat-accent {
-    --mat-radio-checked-ripple-color: #var(--app-blue);
+    --mat-radio-label-text-color: var(--app-blue);
+    --mat-radio-label-text-weight: bold;
+    --mat-radio-checked-ripple-color: var(--app-blue);
     --mat-radio-checked-ripple-color: var(--app-blue);
     --mat-radio-ripple-color: var(--app-blue);
     --mat-radio-selected-focus-icon-color: var(--app-blue);

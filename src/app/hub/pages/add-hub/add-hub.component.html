@@ -1,0 +1,17 @@
+@if (authenticatedUser) {
+  @if (authenticatedUser.profile !== 3) {
+    <!-- HUB FORM (ADD MODE) -->
+    <hub-form
+      (submitted)="addHub($event)"
+      [formMode]="formMode"
+      [hub]="initHubToAdd"
+    >
+    </hub-form>
+  } @else {
+    <!-- FORBIDDEN ERROR PAGE -->
+    <forbidden></forbidden>
+  }
+} @else {
+  <!-- UNAUTHORIZED ERROR PAGE -->
+  <unauthorized></unauthorized>
+}
