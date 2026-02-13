@@ -62,3 +62,17 @@
     <li>@modelcontextprotocol/sdk</li>
   </ul>
 </ul>
+<br />
+<h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.0.4">1.0.4</a>
+    (2026-02-13)
+</h1>
+
+<h3>Bug fixes</h3>
+
+<ul>
+  <li><b>USER :</b></li>
+  <ul>
+    <li>list (columns display correction)</li>
+  </ul>
+</ul>
