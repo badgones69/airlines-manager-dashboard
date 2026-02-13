@@ -97,7 +97,10 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
     this.userService.users.subscribe((users) => {
       this.usersList.data = this.userMapper.usersListFromDB(users);
 
-      if (this.usersList.data.length > 1) {
+      if (this.usersList.data.length > 1  &&
+        !this.columnsIdentifiers.includes('passwordRest') &&
+        !this.columnsIdentifiers.includes('actions')) {
+  
         this.columnsIdentifiers.push('passwordReset', 'actions');
       }
     });
