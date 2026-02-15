@@ -76,3 +76,17 @@
     <li>list (columns display correction)</li>
   </ul>
 </ul>
+<br />
+<h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.0.5">1.0.5</a>
+    (2026-02-15)
+</h1>
+
+<h3>Security</h3>
+
+<ul>
+  <li><h4>CVE corrections :</h4></li>
+  <ul>
+    <li>qs</li>
+  </ul>
+</ul>
