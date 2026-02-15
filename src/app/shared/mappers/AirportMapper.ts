@@ -8,6 +8,16 @@ import {
 } from '../utils/labels-utils';
 
 export class AirportMapper {
+  /* DB => DTO mapping (airports list) */
+    public airportsListFromDB(airportsListFromDB: any[]): Airport[] {
+      let airportsList: Airport[] = [];
+  
+      for (const airportFromDB of airportsListFromDB) {
+        airportsList.push(this.airportFromDB(airportFromDB));
+      }
+      return airportsList;
+    }
+  
   /* DB => DTO mapping */
   public airportFromDB(airportFromDB: any): Airport {
     return {

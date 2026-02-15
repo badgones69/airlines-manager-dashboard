@@ -434,14 +434,17 @@ export class HubFormComponent implements OnInit {
               : this.hubForm.get(this.countryFieldIdentifier)?.value
                   .name,
     );
-    this.hubForm.value.region = getRegionByName(
+
+    if (this.hubForm.value.country.regions) {
+      this.hubForm.value.region = getRegionByName(
             typeof this.hubForm.get(this.regionFieldIdentifier)
               ?.value === 'string'
               ? this.hubForm.get(this.regionFieldIdentifier)?.value
               : this.hubForm.get(this.regionFieldIdentifier)?.value
                   .name,
             this.countryFlag
-    );
+      );
+    }
 
     this.submitted.emit(this.airportMapper.airportToDB(this.hubForm.value));
   }

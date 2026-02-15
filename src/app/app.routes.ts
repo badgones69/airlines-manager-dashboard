@@ -7,6 +7,7 @@ import { ListUsersComponent } from './user/pages/list-users/list-users.component
 import { EditUserComponent } from './user/pages/edit-user/edit-user.component';
 import { ResetUserPasswordComponent } from './user/pages/reset-user-password/reset-user-password.component';
 import { AddHubComponent } from './hub/pages/add-hub/add-hub.component';
+import { ListHubsComponent } from './hub/pages/list-hubs/list-hubs.component';
 
 export const routes: Routes = [
   /* Authentication form (default route) */
@@ -38,6 +39,7 @@ export const routes: Routes = [
     path: 'hubs',
     children: [
       { path: 'add', component: AddHubComponent },
+      { path: 'list', component: ListHubsComponent },
     ],
   },
 ];

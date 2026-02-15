@@ -59,6 +59,8 @@ export class AddHubComponent implements OnInit {
           )} ${getHubFormTitle()}`.toUpperCase(),
           `${getHubFormSuccessNotificationMessage(this.formMode)}`,
         );
+        // Redirection to hubs list
+        this.router.navigate(['hubs', 'list']);
       } else {
         /* Technical error notification showing */
         this.notificationService.showErrorNotification(
