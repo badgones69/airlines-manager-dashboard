@@ -20,42 +20,42 @@
 
       <!-- COUNTRY COLUMN -->
       <ng-container [matColumnDef]="columnsIdentifiers[2]">
-        <th mat-header-cell class="column-country"
-          [class.mat-column-country]="showCityColumn"
-          *matHeaderCellDef>{{ columnsHeaders[2] }}</th>
-        <td mat-cell class="column-country"
-          [class.mat-column-country]="showCityColumn"
-          *matCellDef="let hub">
+        <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[2] }}</th>
+        <td mat-cell *matCellDef="let hub">
           <span class="flag fi fi-{{ hub.country.flagCode }}"></span>
           {{ hub.country.name }}
         </td>
       </ng-container>
 
-      @if (showCityColumn) {
-        <!-- CITY COLUMN -->
-        <ng-container [matColumnDef]="columnsIdentifiers[3]">
-          <th mat-header-cell class="column-city"
-            [class.mat-column-city]="showRegionColumn"
-            *matHeaderCellDef>{{ columnsHeaders[3] }}</th>
-          <td mat-cell class="column-city"
-            [class.mat-column-city]="showRegionColumn"
-            *matCellDef="let hub">
-            {{ hub.city }}
-          </td>
-        </ng-container>
-      }
+      <!-- CITY COLUMN -->
+      <ng-container [matColumnDef]="columnsIdentifiers[3]">
+        <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[3] }}</th>
+        <td mat-cell *matCellDef="let hub">
+          {{ hub.city }}
+        </td>
+      </ng-container>
       
-      @if (showRegionColumn) {
-        <!-- REGION COLUMN -->
-        <ng-container [matColumnDef]="columnsIdentifiers[4]">
-          <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[4] }}</th>
-          <td mat-cell *matCellDef="let hub">
-            @if (hub.region) {
-              {{ hub.region.name }} ({{ hub.region.code }})
-            }
-          </td>
-        </ng-container>
-      }
+      <!-- REGION COLUMN -->
+      <ng-container [matColumnDef]="columnsIdentifiers[4]">
+        <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[4] }}</th>
+        <td mat-cell *matCellDef="let hub">
+          @if (hub.region) {
+            {{ hub.region.name }} ({{ hub.region.code }})
+          } @else {
+            -
+          }
+        </td>
+      </ng-container>
+
+      <!-- ACTIONS BUTTONS -->
+      <ng-container [matColumnDef]="columnsIdentifiers[5]">
+        <th id="actions" mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let hub">
+          <button mat-icon-button (click)="openHubForm(hub)">
+            <i class="material-icons">edit</i>
+          </button>
+        </td>
+      </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="columnsIdentifiers"></tr>
       <tr mat-row *matRowDef="let row; columns: columnsIdentifiers"></tr>

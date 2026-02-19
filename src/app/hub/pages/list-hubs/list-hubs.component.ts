@@ -58,6 +58,9 @@ export class ListHubsComponent implements OnInit, AfterViewInit {
     'iata',
     'name',
     'country',
+    'city',
+    'region',
+    'actions',
   ];
 
   /* List columns headers labels */
@@ -69,8 +72,6 @@ export class ListHubsComponent implements OnInit, AfterViewInit {
     getRegionLabel(),
   ];
 
-  public showCityColumn: boolean = false;
-  public showRegionColumn: boolean = false;
   public airportMapper: AirportMapper = new AirportMapper();
 
   /* Injections */
@@ -93,21 +94,15 @@ export class ListHubsComponent implements OnInit, AfterViewInit {
 
     this.airportService.hubs.subscribe((hubs) => {
       this.hubsList.data = this.airportMapper.airportsListFromDB(hubs);
-
-      this.showCityColumn = this.hubsList.data.some(hub => hub.city);
-      this.showRegionColumn = this.hubsList.data.some(hub => hub.region);
-
-      if (this.showCityColumn && !this.columnsIdentifiers.includes('city')) {
-        this.columnsIdentifiers.push('city');
-      }
-
-      if (this.showRegionColumn && !this.columnsIdentifiers.includes('region')) {
-        this.columnsIdentifiers.push('region');
-      }
     });
   }
 
   ngAfterViewInit() {
     this.hubsList.paginator = this.paginator;
+  }
+
+  /* Hub form (edit mode) opening */
+  openHubForm(hub: Airport) {
+    this.router.navigate(['hubs', 'edit', hub.uuid]);
   }
 }

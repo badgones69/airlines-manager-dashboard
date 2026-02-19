@@ -249,10 +249,13 @@ export class HubFormComponent implements OnInit {
         
         if (countryFound.regions) {
           this.regions = getRegions(countryFound.id);
+          this.hubForm.get(this.regionFieldIdentifier)?.setValidators(Validators.required);
+          this.hubForm
+            .get(this.regionFieldIdentifier)
+            ?.setValue(
+              this.hub?.region,
+          );
         }
-
-        this.hubForm.get(this.regionFieldIdentifier)?.setValidators(Validators.required);
-
       } else {
         this.countryFlag = 'xx';
         this.regions = [];
