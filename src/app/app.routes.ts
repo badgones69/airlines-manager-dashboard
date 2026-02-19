@@ -8,6 +8,7 @@ import { EditUserComponent } from './user/pages/edit-user/edit-user.component';
 import { ResetUserPasswordComponent } from './user/pages/reset-user-password/reset-user-password.component';
 import { AddHubComponent } from './hub/pages/add-hub/add-hub.component';
 import { ListHubsComponent } from './hub/pages/list-hubs/list-hubs.component';
+import { EditHubComponent } from './hub/pages/edit-hub/edit-hub.component';
 
 export const routes: Routes = [
   /* Authentication form (default route) */
@@ -40,6 +41,7 @@ export const routes: Routes = [
     children: [
       { path: 'add', component: AddHubComponent },
       { path: 'list', component: ListHubsComponent },
+      { path: 'edit/:uuid', component: EditHubComponent },
     ],
   },
 ];

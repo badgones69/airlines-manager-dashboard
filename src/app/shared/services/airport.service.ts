@@ -33,6 +33,16 @@ export class AirportService {
     return data || [];
   }
 
+  /* Airport retrieving */
+  public async findAirport(airportUUID: string): Promise<any> {
+    const { data } = await supabase
+      .from('AIRPORT')
+      .select()
+      .eq('airportUUID', airportUUID);
+
+    return data?.[0];
+  }
+
   /* Airport creation */
   public async createAirport(airportToCreate: any): Promise<any> {
     const { airportIATA, airportName, airportCity, airportLatitude, airportLongitude, airportCountry, airportRegion, airportHub } =
@@ -54,6 +64,29 @@ export class AirportService {
       .select();
 
     this.refreshHubsList();  
+    return data;
+  }
+
+  /* Airport updating */
+  public async updateAirport(airportUpdated: any): Promise<any> {
+    const { airportUUID, airportIATA, airportName, airportCity, airportLatitude, airportLongitude, airportCountry, airportRegion } =
+      airportUpdated;
+
+    const data = await supabase
+      .from('AIRPORT')
+      .update({
+        airportIATA,
+        airportName,
+        airportCity,
+        airportLatitude,
+        airportLongitude,
+        airportCountry,
+        airportRegion,
+      })
+      .eq('airportUUID', airportUUID)
+      .select();
+
+    this.refreshHubsList();
     return data;
   }
 }
