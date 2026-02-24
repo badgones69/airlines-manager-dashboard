@@ -22,9 +22,11 @@ import {
 import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DeleteHubComponent } from '../delete-hub/delete-hub.component';
 import { getNameLabel } from '../../../shared/labels/commons/form-common';
 import { Airport } from '../../../shared/models/Airport';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'list-users',
@@ -104,5 +106,19 @@ export class ListHubsComponent implements OnInit, AfterViewInit {
   /* Hub form (edit mode) opening */
   openHubForm(hub: Airport) {
     this.router.navigate(['hubs', 'edit', hub.uuid]);
+  }
+
+  /* Hub deletion confirmation dialog opening */
+  deleteHub(hub: Airport) {
+    let dialogRef: MatDialogRef<DeleteHubComponent> = this.dialog.open(
+      DeleteHubComponent,
+      {
+        disableClose: false,
+        autoFocus: true,
+        scrollStrategy: new NoopScrollStrategy(),
+      },
+    );
+    dialogRef.componentInstance.hubUUID = hub.uuid!;
+    dialogRef.afterClosed().subscribe(() => this.ngOnInit());
   }
 }
