@@ -1,13 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { NotificationService } from '../../../shared/services/notification.service';
-import { UserService } from '../../../shared/services/user.service';
+import { AirportService } from '../../../shared/services/airport.service';
 import { DELETE_FORM_MODE } from '../../../shared/constants/forms-constants';
 import { CONFIRMATION_DIALOG_MODE } from '../../../shared/constants/dialogs-constants';
 import {
-  getUserDeleteDialogMessage,
-  getUserFormSuccessNotificationMessage,
-  getUserFormTitle,
-} from '../../../shared/labels/forms/user-form';
+  getHubDeleteDialogMessage,
+  getHubFormSuccessNotificationMessage,
+  getHubFormTitle,
+} from '../../../shared/labels/forms/hub-form';
 import { DialogComponent } from '../../../shared/components/dialog/dialog.component';
 import { getFormModeLabel } from '../../../shared/labels/commons/form-common';
 import {
@@ -16,42 +16,44 @@ import {
 } from '../../../shared/labels/errors';
 
 @Component({
-  templateUrl: '../../pages/delete-user/delete-user.component.html',
+  templateUrl: '../../pages/delete-hub/delete-hub.component.html',
   standalone: true,
   imports: [DialogComponent],
 })
-export class DeleteUserComponent implements OnInit {
-  @Input() public userUUID!: string;
+export class DeleteHubComponent implements OnInit {
+  @Input() public hubUUID!: string;
 
-  public deleteUserDialogTitle!: string;
-  public deleteUserDialogMode!: string;
-  public deleteUserDialogMessage!: string;
+  public deleteHubDialogTitle!: string;
+  public deleteHubDialogMode!: string;
+  public deleteHubDialogMessage!: string;
+
+  /* Injections */
+  public airportService: AirportService = inject(AirportService);
 
   constructor(
-    readonly userService: UserService,
     readonly notificationService: NotificationService,
   ) {}
 
   ngOnInit(): void {
-    this.deleteUserDialogTitle = `${getFormModeLabel(
+    this.deleteHubDialogTitle = `${getFormModeLabel(
       DELETE_FORM_MODE,
-    )} ${getUserFormTitle()}`;
-    this.deleteUserDialogMode = CONFIRMATION_DIALOG_MODE;
-    this.deleteUserDialogMessage = getUserDeleteDialogMessage();
+    )} ${getHubFormTitle()}`;
+    this.deleteHubDialogMode = CONFIRMATION_DIALOG_MODE;
+    this.deleteHubDialogMessage = getHubDeleteDialogMessage();
   }
 
-  /* User deleting */
-  deleteUser(isDeletionDialogConfirmed: boolean) {
+  /* Hub deleting */
+  deleteHub(isDeletionDialogConfirmed: boolean) {
     // If deletion is confirmed by user
     if (isDeletionDialogConfirmed) {
-      // User deletion
-      this.userService.deleteUser(this.userUUID).then((response) => {
-        // If user is deleted
+      // Hub deletion
+      this.airportService.deleteAirport(this.hubUUID).then((response) => {
+        // If hub is deleted
         if (response.status === 204) {
           /* Success notification showing */
           this.notificationService.showSuccessNotification(
-            this.deleteUserDialogTitle.toUpperCase(),
-            getUserFormSuccessNotificationMessage(DELETE_FORM_MODE),
+            this.deleteHubDialogTitle.toUpperCase(),
+            getHubFormSuccessNotificationMessage(DELETE_FORM_MODE),
           );
         } else {
           /* Technical error notification showing */

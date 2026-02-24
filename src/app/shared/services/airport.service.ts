@@ -89,4 +89,15 @@ export class AirportService {
     this.refreshHubsList();
     return data;
   }
+
+  /* Airport deletion */
+  public async deleteAirport(airportUUID: string): Promise<any> {
+    const response = await supabase
+      .from('AIRPORT')
+      .delete()
+      .eq('airportUUID', airportUUID);
+
+    this.refreshHubsList();
+    return response;
+  }
 }
