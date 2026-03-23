@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
-import { DeleteUserComponent } from '../../app/user/pages/delete-user/delete-user.component';
+import { DeleteHubComponent } from '../../app/hub/pages/delete-hub/delete-hub.component';
 import { Component, Inject } from '@angular/core';
-import { MockUserService } from '../mocks/mock-user-service';
+import { MockAirportService } from '../mocks/mock-airport-service';
 import { MockNotificationService } from '../mocks/mock-notification-service';
 import { NotificationService } from '../../app/shared/services/notification.service';
 import { ToastrService } from 'ngx-toastr';
@@ -9,69 +9,69 @@ import {
   getTechnicalErrorMessage,
   getTechnicalErrorTitle,
 } from '../../app/shared/labels/errors';
-import { getUserFormSuccessNotificationMessage, getUserFormTitle } from '../../app/shared/labels/forms/user-form';
 import { CONFIRMATION_DIALOG_MODE } from '../../app/shared/constants/dialogs-constants';
 import { DELETE_FORM_MODE } from '../../app/shared/constants/forms-constants';
-import { getFormModeLabel } from '../../app/shared/labels/commons/form-common';
 import { TestBed } from '@angular/core/testing';
+import { getFormModeLabel } from '../../app/shared/labels/commons/form-common';
+import { getHubFormSuccessNotificationMessage, getHubFormTitle } from '../../app/shared/labels/forms/hub-form';
 
-describe('DeleteUserComponent', () => {
+describe('DeleteHubComponent', () => {
   @Component({})
-  class MockDeleteUserComponent {
+  class MockDeleteHubComponent {
     constructor(
-      readonly userService: MockUserService = new MockUserService(),
+      readonly airportService: MockAirportService = new MockAirportService(),
       readonly notificationService: MockNotificationService = new MockNotificationService(
         Inject(ToastrService),
       ),
     ) {}
   }
 
-  it('#ngOnInit should initialize "Delete user" component', () => {
+  it('#ngOnInit should initialize "Delete hub" component', () => {
     TestBed.runInInjectionContext(() => {
-      const deleteUserComponent: DeleteUserComponent = new DeleteUserComponent(
+      const deleteHubComponent: DeleteHubComponent = new DeleteHubComponent(
         Inject(NotificationService),
       );
-      deleteUserComponent.ngOnInit();
+      deleteHubComponent.ngOnInit();
 
-      expect(deleteUserComponent.deleteUserDialogTitle).toStrictEqual(
-        'Suppression d\'un utilisateur',
+      expect(deleteHubComponent.deleteHubDialogTitle).toStrictEqual(
+        'Suppression d\'un hub',
       );
-      expect(deleteUserComponent.deleteUserDialogMode).toStrictEqual(
+      expect(deleteHubComponent.deleteHubDialogMode).toStrictEqual(
         CONFIRMATION_DIALOG_MODE,
       );
-      expect(deleteUserComponent.deleteUserDialogMessage).toStrictEqual(
-        'Confirmez-vous la suppression définitive de cet utilisateur ?',
+      expect(deleteHubComponent.deleteHubDialogMessage).toStrictEqual(
+        'Confirmez-vous la suppression définitive de ce hub ?',
       );
     });
-});
+  });
 
-  it('#deleteUser should delete user in DB', async () => {
+  it('#deleteHub should delete hub in DB', async () => {
     TestBed.runInInjectionContext(() => {
-      let mockDeleteUserComponent: MockDeleteUserComponent =
-        new MockDeleteUserComponent();
-      const deleteUserComponent: DeleteUserComponent = new DeleteUserComponent(
+      let mockDeleteHubComponent: MockDeleteHubComponent =
+        new MockDeleteHubComponent();
+      const deleteHubComponent: DeleteHubComponent = new DeleteHubComponent(
         Inject(NotificationService),
       );
-      vi.spyOn(deleteUserComponent, 'deleteUser').mockImplementation(() => {
-        mockDeleteUserComponent.userService
-          .deleteUser('uuid-user-to-delete')
+      vi.spyOn(deleteHubComponent, 'deleteHub').mockImplementation(() => {
+        mockDeleteHubComponent.airportService
+          .deleteAirport('uuid-hub-to-delete')
           .then(async (result) => {
             if (result.status === 204) {
               const toastrSuccess: any =
-                mockDeleteUserComponent.notificationService.showSuccessNotification(
-                  `${getFormModeLabel(DELETE_FORM_MODE)} ${getUserFormTitle()}`.toUpperCase(),
-                  `${getUserFormSuccessNotificationMessage(DELETE_FORM_MODE)}`,
+                mockDeleteHubComponent.notificationService.showSuccessNotification(
+                  `${getFormModeLabel(DELETE_FORM_MODE)} ${getHubFormTitle()}`.toUpperCase(),
+                  `${getHubFormSuccessNotificationMessage(DELETE_FORM_MODE)}`,
                 );
               expect(toastrSuccess.toastId).toStrictEqual(2);
               expect(toastrSuccess.title).toStrictEqual(
-                "SUPPRESSION D'UN UTILISATEUR",
+                "SUPPRESSION D'UN HUB",
               );
               expect(toastrSuccess.message).toStrictEqual(
-                'Votre utilisateur a bien été supprimé(e) !',
+                'Votre hub a bien été supprimé(e) !',
               );
             } else {
               const toastrError: any =
-                mockDeleteUserComponent.notificationService.showErrorNotification(
+                mockDeleteHubComponent.notificationService.showErrorNotification(
                   `${getTechnicalErrorTitle()}`,
                   `${getTechnicalErrorMessage()}`,
                 );
@@ -83,7 +83,7 @@ describe('DeleteUserComponent', () => {
             }
           });
       });
-      deleteUserComponent.deleteUser(true);
+      deleteHubComponent.deleteHub(true);
     });
   });
 });

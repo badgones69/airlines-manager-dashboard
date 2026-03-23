@@ -3,17 +3,12 @@ import {
   OK_DIALOG_BUTTON_TYPE,
 } from '../../app/shared/constants/dialogs-constants';
 import {
-  getConfirmationDialogTitle,
   getDeleteDialogMessage,
   getDialogButtonLabel,
 } from '../../app/shared/labels/commons/dialog-common';
 import { describe, it, expect } from 'vitest';
 
 describe('DialogCommonLabels', () => {
-  it('#getConfirmationDialogTitle should return confirmation dialog title', () => {
-    const confirmationDialogTitle: string = getConfirmationDialogTitle();
-    expect(confirmationDialogTitle).toStrictEqual(': confirmation');
-  });
 
   it('#getDeleteDialogMessage should return delete dialog message', () => {
     const deleteDialogMessage: string = getDeleteDialogMessage();

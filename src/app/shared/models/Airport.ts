@@ -2,7 +2,7 @@ import { Country } from "./Country";
 import { Region } from "./Region";
 
 export class Airport {
-  id!: number;
+  id?: number;
   uuid!: string;
   iata!: string;
   name!: string;
@@ -10,6 +10,6 @@ export class Airport {
   latitude!: number;
   longitude!: number;
   country!: Country;
-  region!: Region;
+  region?: Region;
   hub!: boolean;
 }

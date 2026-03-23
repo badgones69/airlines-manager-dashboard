@@ -1,11 +1,10 @@
 import { describe, it, expect, vi } from 'vitest';
 import { AddUserComponent } from '../../app/user/pages/add-user/add-user.component';
-import { UserService } from '../../app/shared/services/user.service';
 import { Component, Inject } from '@angular/core';
 import { User } from '../../app/shared/models/User';
 import { MockUserService } from '../mocks/mock-user-service';
 import { MockNotificationService } from '../mocks/mock-notification-service';
-import { provideRouter, Router } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { NotificationService } from '../../app/shared/services/notification.service';
 import { ToastrService } from 'ngx-toastr';
 import {
@@ -35,28 +34,28 @@ describe('AddUserComponent', () => {
   }
 
   it('#ngOnInit should initialize "Add user" component', () => {
-    let mockAddUserComponent: MockAddUserComponent = new MockAddUserComponent();
-    const addUserComponent: AddUserComponent = new AddUserComponent(
-      Inject(UserService),
-      Inject(NotificationService),
-      Inject(Router),
-    );
-    vi.spyOn(addUserComponent, 'ngOnInit').mockImplementation(() => {
-      mockAddUserComponent.userService.user.subscribe((user) => {
-        if (user) {
-          addUserComponent.authenticatedUser = JSON.parse(user.toString());
-        }
+    TestBed.runInInjectionContext(() => {
+      let mockAddUserComponent: MockAddUserComponent = new MockAddUserComponent();
+      const addUserComponent: AddUserComponent = new AddUserComponent(
+        Inject(NotificationService),
+      );
+      vi.spyOn(addUserComponent, 'ngOnInit').mockImplementation(() => {
+        mockAddUserComponent.userService.user.subscribe((user) => {
+          if (user) {
+            addUserComponent.authenticatedUser = JSON.parse(user.toString());
+          }
+        });
       });
-    });
-    addUserComponent.ngOnInit();
+      addUserComponent.ngOnInit();
 
-    expect(addUserComponent.authenticatedUser).toStrictEqual({
-      id: 7,
-      uuid: 'uuid-authenticated-user',
-      givenName: 'Authneticated',
-      surname: 'USER',
-      login: 'a.u',
-      profile: 1,
+      expect(addUserComponent.authenticatedUser).toStrictEqual({
+        id: 7,
+        uuid: 'uuid-authenticated-user',
+        givenName: 'Authneticated',
+        surname: 'USER',
+        login: 'a.u',
+        profile: 1,
+      });
     });
   });
 
@@ -79,53 +78,53 @@ describe('AddUserComponent', () => {
     };
 
     const harness: RouterTestingHarness = await RouterTestingHarness.create();
-    let mockAddUserComponent: MockAddUserComponent = new MockAddUserComponent();
-    const addUserComponent: AddUserComponent = new AddUserComponent(
-      Inject(UserService),
-      Inject(NotificationService),
-      Inject(Router),
-    );
-    vi.spyOn(addUserComponent, 'addUser').mockImplementation(() => {
-      mockAddUserComponent.userService
-        .createUser(userToCreate)
-        .then(async (result) => {
-          if (result.data) {
-            expect(result.data).toStrictEqual({
-              userID: 21,
-              userUUID: 'user-created-uuid',
-              userGivenName: 'User',
-              userSurname: 'CREATED',
-              userLogin: 'u.c',
-              userProfile: 2,
-            });
+    TestBed.runInInjectionContext(() => {
+      let mockAddUserComponent: MockAddUserComponent = new MockAddUserComponent();
+      const addUserComponent: AddUserComponent = new AddUserComponent(
+        Inject(NotificationService),
+      );
+      vi.spyOn(addUserComponent, 'addUser').mockImplementation(() => {
+        mockAddUserComponent.userService
+          .createUser(userToCreate)
+          .then(async (result) => {
+            if (result.data) {
+              expect(result.data).toStrictEqual({
+                userID: 21,
+                userUUID: 'user-created-uuid',
+                userGivenName: 'User',
+                userSurname: 'CREATED',
+                userLogin: 'u.c',
+                userProfile: 2,
+              });
 
-            const toastrSuccess: any =
-              mockAddUserComponent.notificationService.showSuccessNotification(
-                `${getFormModeLabel(addUserComponent.formMode)} ${getUserFormTitle()}`.toUpperCase(),
-                `${getUserFormSuccessNotificationMessage(addUserComponent.formMode)}`,
+              const toastrSuccess: any =
+                mockAddUserComponent.notificationService.showSuccessNotification(
+                  `${getFormModeLabel(addUserComponent.formMode)} ${getUserFormTitle()}`.toUpperCase(),
+                  `${getUserFormSuccessNotificationMessage(addUserComponent.formMode)}`,
+                );
+              expect(toastrSuccess.toastId).toStrictEqual(2);
+              expect(toastrSuccess.title).toStrictEqual("AJOUT D'UN UTILISATEUR");
+              expect(toastrSuccess.message).toStrictEqual(
+                'Votre utilisateur a bien été créé(e) !',
               );
-            expect(toastrSuccess.toastId).toStrictEqual(2);
-            expect(toastrSuccess.title).toStrictEqual("AJOUT D'UN UTILISATEUR");
-            expect(toastrSuccess.message).toStrictEqual(
-              'Votre utilisateur a bien été créé(e) !',
-            );
 
-            await harness.navigateByUrl('/users/list');
-            expect(harness.routeNativeElement?.textContent).toBe('List users');
-          } else {
-            const toastrError: any =
-              mockAddUserComponent.notificationService.showErrorNotification(
-                `${getTechnicalErrorTitle()}`,
-                `${getTechnicalErrorMessage()}`,
+              await harness.navigateByUrl('/users/list');
+              expect(harness.routeNativeElement?.textContent).toBe('List users');
+            } else {
+              const toastrError: any =
+                mockAddUserComponent.notificationService.showErrorNotification(
+                  `${getTechnicalErrorTitle()}`,
+                  `${getTechnicalErrorMessage()}`,
+                );
+              expect(toastrError.toastId).toStrictEqual(1);
+              expect(toastrError.title).toStrictEqual('ERREUR TECHNIQUE');
+              expect(toastrError.message).toStrictEqual(
+                'Une erreur est survenue : veuillez réessayer...',
               );
-            expect(toastrError.toastId).toStrictEqual(1);
-            expect(toastrError.title).toStrictEqual('ERREUR TECHNIQUE');
-            expect(toastrError.message).toStrictEqual(
-              'Une erreur est survenue : veuillez réessayer...',
-            );
-          }
-        });
+            }
+          });
+      });
+      addUserComponent.addUser(userToCreate);
     });
-    addUserComponent.addUser(userToCreate);
   });
 });

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../shared/services/user.service';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
@@ -27,10 +27,11 @@ export class HomeComponent implements OnInit {
   public welcomeMessage!: string;
   public welcomeLogo!: string;
 
-  constructor(
-    readonly userService: UserService,
-    readonly airlineService: AirlineService,
-  ) {}
+  /* Injections */
+  public userService: UserService = inject(UserService);
+  public airlineService: AirlineService = inject(AirlineService);  
+
+  constructor() {}
 
   ngOnInit(): void {
     this.userService.user.subscribe((user) => {

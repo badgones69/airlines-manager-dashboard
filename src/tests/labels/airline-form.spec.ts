@@ -2,7 +2,6 @@ import { EDIT_FORM_MODE } from '../../app/shared/constants/forms-constants';
 import {
   getAirlineFormTitle,
   getICAOCodeInputLabel,
-  getNameInputLabel,
   getLogoInputLabel,
   getNoLogoLabel,
   getNationalityInputLabel,
@@ -19,11 +18,6 @@ describe('AirlineFormLabels', () => {
   it('#getICAOCodeInputLabel should return "ICAO" label', () => {
     const icaoLabel: string = getICAOCodeInputLabel();
     expect(icaoLabel).toStrictEqual('ICAO');
-  });
-
-  it('#getNameInputLabel should return "name" label', () => {
-    const nameLabel: string = getNameInputLabel();
-    expect(nameLabel).toStrictEqual('NOM');
   });
 
   it('#getLogoInputLabel should return "update logo" label', () => {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -36,9 +36,11 @@ export class AppComponent implements OnInit {
   public userSubMenuExpanded: boolean = false;
   public hubSubMenuExpanded: boolean = false;
 
+  /* Injections */
+  public userService: UserService = inject(UserService);
+  public router: Router = inject(Router);
+
   constructor(
-    readonly userService: UserService,
-    readonly router: Router,
     readonly dialog: MatDialog,
   ) {}
 
