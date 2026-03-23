@@ -2,8 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { describe, it, expect, vi } from 'vitest';
 import { User } from '../../app/shared/models/User';
 import { ListUsersComponent } from '../../app/user/pages/list-users/list-users.component';
-import { UserService } from '../../app/shared/services/user.service';
-import { provideRouter, Router } from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MockUserService } from '../mocks/mock-user-service';
 import { UserMapper } from '../../app/shared/mappers/UserMapper';
@@ -45,81 +44,81 @@ describe('ListUsersComponent', () => {
   }
 
   it('#ngOnInit should initialize "List users" component', () => {
-    const mockListUsersComponent: MockListUsersComponent =
-      new MockListUsersComponent();
-    const listUsersComponent: ListUsersComponent = new ListUsersComponent(
-      Inject(UserService),
-      Inject(Router),
-      Inject(MatDialog),
-    );
-    vi.spyOn(listUsersComponent, 'ngOnInit').mockImplementation(() => {
-      listUsersComponent.usersListTitle = getUsersListTitle();
+    TestBed.runInInjectionContext(() => {
+      const mockListUsersComponent: MockListUsersComponent =
+        new MockListUsersComponent();
+      const listUsersComponent: ListUsersComponent = new ListUsersComponent(
+        Inject(MatDialog),
+      );
+      vi.spyOn(listUsersComponent, 'ngOnInit').mockImplementation(() => {
+        listUsersComponent.usersListTitle = getUsersListTitle();
 
-      mockListUsersComponent.userService.user.subscribe((user) => {
-        if (user) {
-          listUsersComponent.authenticatedUser = JSON.parse(user.toString());
-        }
+        mockListUsersComponent.userService.user.subscribe((user) => {
+          if (user) {
+            listUsersComponent.authenticatedUser = JSON.parse(user.toString());
+          }
+        });
+        mockListUsersComponent.userService.users.subscribe((users) => {
+          if (users) {
+            listUsersComponent.usersList.data =
+              mockListUsersComponent.userMapper.usersListFromDB(users);
+          }
+        });
       });
-      mockListUsersComponent.userService.users.subscribe((users) => {
-        if (users) {
-          listUsersComponent.usersList.data =
-            mockListUsersComponent.userMapper.usersListFromDB(users);
-        }
-      });
-    });
-    listUsersComponent.ngOnInit();
+      listUsersComponent.ngOnInit();
 
-    expect(listUsersComponent.usersListTitle).toStrictEqual(
-      'Liste des utilisateurs',
-    );
+      expect(listUsersComponent.usersListTitle).toStrictEqual(
+        'Liste des utilisateurs',
+      );
 
-    expect(listUsersComponent.authenticatedUser).toStrictEqual({
-      id: 7,
-      uuid: 'uuid-authenticated-user',
-      givenName: 'Authneticated',
-      surname: 'USER',
-      login: 'a.u',
-      profile: 1,
-    });
-
-    expect(listUsersComponent.usersList.data).toStrictEqual([
-      {
-        id: 1,
-        uuid: 'user-admin-uuid',
-        givenName: 'User',
-        surname: 'ADMIN',
-        login: 'u.a',
+      expect(listUsersComponent.authenticatedUser).toStrictEqual({
+        id: 7,
+        uuid: 'uuid-authenticated-user',
+        givenName: 'Authneticated',
+        surname: 'USER',
+        login: 'a.u',
         profile: 1,
-      },
-      {
-        id: 2,
-        uuid: 'user-manager-uuid',
-        givenName: 'User',
-        surname: 'MANAGER',
-        login: 'u.m',
-        profile: 2,
-      },
-      {
-        id: 3,
-        uuid: 'user-consultant-uuid',
-        givenName: 'User',
-        surname: 'CONSULTANT',
-        login: 'u.c',
-        profile: 3,
-      },
-    ]);
+      });
+
+      expect(listUsersComponent.usersList.data).toStrictEqual([
+        {
+          id: 1,
+          uuid: 'user-admin-uuid',
+          givenName: 'User',
+          surname: 'ADMIN',
+          login: 'u.a',
+          profile: 1,
+        },
+        {
+          id: 2,
+          uuid: 'user-manager-uuid',
+          givenName: 'User',
+          surname: 'MANAGER',
+          login: 'u.m',
+          profile: 2,
+        },
+        {
+          id: 3,
+          uuid: 'user-consultant-uuid',
+          givenName: 'User',
+          surname: 'CONSULTANT',
+          login: 'u.c',
+          profile: 3,
+        },
+      ]);
+    });
   });
 
   it('#displayProfileName should display profile name found by its id', () => {
-    const listUsersComponent: ListUsersComponent = new ListUsersComponent(
-      Inject(UserService),
-      Inject(Router),
-      Inject(MatDialog),
-    );
-    expect(listUsersComponent.displayProfileName(2)).toStrictEqual(
-      'Gestionnaire',
-    );
-    expect(listUsersComponent.displayProfileName(4)).toStrictEqual('');
+    TestBed.runInInjectionContext(() => {
+      const listUsersComponent: ListUsersComponent = new ListUsersComponent(
+        Inject(MatDialog),
+      );
+      expect(listUsersComponent.displayProfileName(2)).toStrictEqual(
+        'Gestionnaire',
+      );
+      expect(listUsersComponent.displayProfileName(4)).toStrictEqual('');
+    });
   });
 
   it('#openUserForm should redirect to "Edit user" component', async () => {
@@ -133,25 +132,15 @@ describe('ListUsersComponent', () => {
     });
 
     const harness: RouterTestingHarness = await RouterTestingHarness.create();
-    const listUsersComponent: ListUsersComponent = new ListUsersComponent(
-      Inject(UserService),
-      Inject(Router),
-      Inject(MatDialog),
-    );
     await harness.navigateByUrl('/users/edit/:uuid');
-    const spy = vi
-      .spyOn(listUsersComponent, 'openUserForm')
-      .mockImplementation(() => harness.routeNativeElement?.textContent);
-    listUsersComponent.openUserForm({
-      id: 3,
-      uuid: 'user-consultant-uuid',
-      givenName: 'User',
-      surname: 'CONSULTANT',
-      login: 'u.c',
-      profile: 3,
-    });
-    expect(spy).toHaveBeenCalled();
-    expect(
+
+    TestBed.runInInjectionContext(() => {
+      const listUsersComponent: ListUsersComponent = new ListUsersComponent(
+        Inject(MatDialog),
+      );
+      const spy = vi
+        .spyOn(listUsersComponent, 'openUserForm')
+        .mockImplementation(() => harness.routeNativeElement?.textContent);
       listUsersComponent.openUserForm({
         id: 3,
         uuid: 'user-consultant-uuid',
@@ -159,37 +148,48 @@ describe('ListUsersComponent', () => {
         surname: 'CONSULTANT',
         login: 'u.c',
         profile: 3,
-      }),
-    ).toBe('Edit user');
+      });
+      expect(spy).toHaveBeenCalled();
+      expect(
+        listUsersComponent.openUserForm({
+          id: 3,
+          uuid: 'user-consultant-uuid',
+          givenName: 'User',
+          surname: 'CONSULTANT',
+          login: 'u.c',
+          profile: 3,
+        }),
+      ).toBe('Edit user');
+    });
   });
 
   it('#deleteUser should open "Delete user" dialog', () => {
-    const mockListUsersComponent: MockListUsersComponent =
-      new MockListUsersComponent();
-    const listUsersComponent: ListUsersComponent = new ListUsersComponent(
-      Inject(UserService),
-      Inject(Router),
-      Inject(MatDialog),
-    );
-    vi.spyOn(listUsersComponent, 'deleteUser').mockImplementation(() => {
-      vi.spyOn(mockListUsersComponent, 'deleteUser').mockImplementation(() => {
-        expect(mockListUsersComponent.open).toHaveBeenCalledWith(
-          DeleteUserComponent,
-          {
-            disableClose: false,
-            autoFocus: true,
-            scrollStrategy: new NoopScrollStrategy(),
-          },
-        );
+    TestBed.runInInjectionContext(() => {
+      const mockListUsersComponent: MockListUsersComponent =
+        new MockListUsersComponent();
+      const listUsersComponent: ListUsersComponent = new ListUsersComponent(
+        Inject(MatDialog),
+      );
+      vi.spyOn(listUsersComponent, 'deleteUser').mockImplementation(() => {
+        vi.spyOn(mockListUsersComponent, 'deleteUser').mockImplementation(() => {
+          expect(mockListUsersComponent.open).toHaveBeenCalledWith(
+            DeleteUserComponent,
+            {
+              disableClose: false,
+              autoFocus: true,
+              scrollStrategy: new NoopScrollStrategy(),
+            },
+          );
+        });
       });
-    });
-    listUsersComponent.deleteUser({
-      id: 2,
-      uuid: 'user-manager-uuid',
-      givenName: 'User',
-      surname: 'MANAGER',
-      login: 'u.m',
-      profile: 2,
+      listUsersComponent.deleteUser({
+        id: 2,
+        uuid: 'user-manager-uuid',
+        givenName: 'User',
+        surname: 'MANAGER',
+        login: 'u.m',
+        profile: 2,
+      });
     });
   });
 });

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { UserService } from '../../../shared/services/user.service';
 import { DELETE_FORM_MODE } from '../../../shared/constants/forms-constants';
@@ -27,8 +27,10 @@ export class DeleteUserComponent implements OnInit {
   public deleteUserDialogMode!: string;
   public deleteUserDialogMessage!: string;
 
+  /* Injections */
+  public userService: UserService = inject(UserService);
+
   constructor(
-    readonly userService: UserService,
     readonly notificationService: NotificationService,
   ) {}
 

@@ -14,6 +14,8 @@ import {
   PATTERN_ERROR,
   NOT_IDENTICAL_PASS_WORD_ERROR,
   UNKNOWN_COUNTRY_ERROR,
+  UNKNOWN_REGION_ERROR,
+  LATITUDE_LONGITUDE_PATTERN,
 } from '../../app/shared/constants/forms-constants';
 
 describe('FormsConstants', () => {
@@ -51,6 +53,10 @@ describe('FormsConstants', () => {
     expect(ICAO_IATA_CODE_PATTERN).toStrictEqual('[A-Za-z]{3}');
   });
 
+  it('LATITUDE_LONGITUDE_PATTERN should return latitude/longitude fields pattern', () => {
+    expect(LATITUDE_LONGITUDE_PATTERN).toStrictEqual(String.raw`^-?\d+\.\d+$`);
+  });
+
   it('REQUIRED_ERROR should return "required" error code', () => {
     expect(REQUIRED_ERROR).toStrictEqual('required');
   });
@@ -77,5 +83,9 @@ describe('FormsConstants', () => {
 
   it('UNKNOWN_COUNTRY_ERROR should return "unknown country" error code', () => {
     expect(UNKNOWN_COUNTRY_ERROR).toStrictEqual('unknownCountry');
+  });
+
+  it('UNKNOWN_REGION_ERROR should return "unknown region" error code', () => {
+    expect(UNKNOWN_REGION_ERROR).toStrictEqual('unknownRegion');
   });
 });

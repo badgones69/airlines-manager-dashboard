@@ -37,10 +37,10 @@ export class EditHubComponent implements OnInit {
   public userService: UserService = inject(UserService);
   public airportService: AirportService = inject(AirportService);
   public router: Router = inject(Router);
-  public route: ActivatedRoute = inject(ActivatedRoute);
 
   constructor(
     readonly notificationService: NotificationService,
+    readonly route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {

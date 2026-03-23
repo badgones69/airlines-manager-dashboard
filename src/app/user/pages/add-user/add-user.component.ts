@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { Router } from '@angular/router';
 import { UserService } from '../../../shared/services/user.service';
@@ -30,10 +30,12 @@ export class AddUserComponent implements OnInit {
   public initUserToAdd!: User;
   public formMode: string = ADD_FORM_MODE;
 
+  /* Injections */
+  public userService: UserService = inject(UserService);
+  public router: Router = inject(Router);
+
   constructor(
-    readonly userService: UserService,
     readonly notificationService: NotificationService,
-    readonly router: Router,
   ) {}
 
   ngOnInit(): void {

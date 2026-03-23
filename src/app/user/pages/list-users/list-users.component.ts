@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
 import {
   MatPaginator,
   MatPaginatorIntl,
@@ -79,9 +79,11 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
   public passwordResetColumnButtonName = getSubmitButtonLabel();
   public userMapper: UserMapper = new UserMapper();
 
+  /* Injections */
+  public userService: UserService = inject(UserService);
+  public router: Router = inject(Router);
+
   constructor(
-    readonly userService: UserService,
-    readonly router: Router,
     readonly dialog: MatDialog,
   ) {}
 

@@ -16,6 +16,7 @@ import { ActivatedRoute, provideRouter } from '@angular/router';
 import { Country } from '../../app/shared/models/Country';
 import {
   getFormModeLabel,
+  getNameLabel,
   getResetButtonIcon,
   getResetButtonLabel,
   getSubmitButtonLabel,
@@ -25,7 +26,6 @@ import {
   getAirlineFormTitle,
   getICAOCodeInputLabel,
   getLogoInputLabel,
-  getNameInputLabel,
   getNationalityInputLabel,
 } from '../../app/shared/labels/forms/airline-form';
 import { MockAirlineComponent } from '../mocks/mock-airline-component';
@@ -134,7 +134,7 @@ function testAirlineService(
 
   airlineComponent.airlineFormTitle = `${getFormModeLabel(EDIT_FORM_MODE)} ${getAirlineFormTitle()}`;
   airlineComponent.icaoInputLabel = getICAOCodeInputLabel();
-  airlineComponent.nameInputLabel = getNameInputLabel();
+  airlineComponent.nameInputLabel = getNameLabel();
   airlineComponent.logoInputLabel = getLogoInputLabel(EDIT_FORM_MODE);
   airlineComponent.nationalityInputLabel = getNationalityInputLabel();
   airlineComponent.submitButtonLabel = getSubmitButtonLabel(EDIT_FORM_MODE);
@@ -189,7 +189,7 @@ function testAirlineServiceWithAirlineEdited(
 
   airlineComponent.airlineFormTitle = `${getFormModeLabel(EDIT_FORM_MODE)} ${getAirlineFormTitle()}`;
   airlineComponent.icaoInputLabel = getICAOCodeInputLabel();
-  airlineComponent.nameInputLabel = getNameInputLabel();
+  airlineComponent.nameInputLabel = getNameLabel();
   airlineComponent.logoInputLabel = getLogoInputLabel(EDIT_FORM_MODE);
   airlineComponent.nationalityInputLabel = getNationalityInputLabel();
   airlineComponent.submitButtonLabel = getSubmitButtonLabel(EDIT_FORM_MODE);

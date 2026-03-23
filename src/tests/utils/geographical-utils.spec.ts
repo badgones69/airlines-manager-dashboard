@@ -5,7 +5,9 @@ import {
   getCountries,
   getCountryById,
   getCountryByName,
-  getRegion,
+  getRegions,
+  getRegionById,
+  getRegionByName,
 } from '../../app/shared/utils/geographical-utils';
 import { describe, it, expect } from 'vitest';
 
@@ -50,10 +52,27 @@ describe('GeographicalUtils', () => {
     expect(countryFound?.regions).toBeUndefined();
   });
 
-  it('#getRegion should return region found by its id and id of its country', () => {
-    const regionFound: Region | undefined = getRegion(8, 37);
+  it(`#getRegions should return all regions of a country
+      (only if it's Australia, Brazil, Canada or United States)`, () => {
+    const regionsAustralia: Region[] = getRegions(13);
+    expect(regionsAustralia.length).toStrictEqual(8);
+    expect(regionsAustralia[0].name).toStrictEqual('Australie-Méridionale');
+    expect(regionsAustralia[3].name).toStrictEqual('Queensland');
+    expect(regionsAustralia[5].name).toStrictEqual('Territoire de la capitale Australienne');
+    expect(regionsAustralia[7].name).toStrictEqual('Victoria');
+  });
+
+  it('#getRegionById should return region found by its id and id of its country', () => {
+    const regionFound: Region | undefined = getRegionById(8, 37);
     expect(regionFound?.id).toStrictEqual(8);
     expect(regionFound?.code).toStrictEqual('QC');
     expect(regionFound?.name).toStrictEqual('Québec');
+  });
+
+  it('#getRegionByName should return region found by its name and flag code of its country', () => {
+    const regionFound: Region | undefined = getRegionByName('washington', 'us');
+    expect(regionFound?.id).toStrictEqual(11);
+    expect(regionFound?.code).toStrictEqual('WA');
+    expect(regionFound?.name).toStrictEqual('Washington');
   });
 });
