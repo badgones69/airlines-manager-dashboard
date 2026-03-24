@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
 
   /* Injections */
   public userService: UserService = inject(UserService);
-  public airlineService: AirlineService = inject(AirlineService);  
+  public airlineService: AirlineService = inject(AirlineService);
 
   constructor() {}
 

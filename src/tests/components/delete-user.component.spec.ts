@@ -9,7 +9,10 @@ import {
   getTechnicalErrorMessage,
   getTechnicalErrorTitle,
 } from '../../app/shared/labels/errors';
-import { getUserFormSuccessNotificationMessage, getUserFormTitle } from '../../app/shared/labels/forms/user-form';
+import {
+  getUserFormSuccessNotificationMessage,
+  getUserFormTitle,
+} from '../../app/shared/labels/forms/user-form';
 import { CONFIRMATION_DIALOG_MODE } from '../../app/shared/constants/dialogs-constants';
 import { DELETE_FORM_MODE } from '../../app/shared/constants/forms-constants';
 import { getFormModeLabel } from '../../app/shared/labels/commons/form-common';
@@ -34,7 +37,7 @@ describe('DeleteUserComponent', () => {
       deleteUserComponent.ngOnInit();
 
       expect(deleteUserComponent.deleteUserDialogTitle).toStrictEqual(
-        'Suppression d\'un utilisateur',
+        "Suppression d'un utilisateur",
       );
       expect(deleteUserComponent.deleteUserDialogMode).toStrictEqual(
         CONFIRMATION_DIALOG_MODE,
@@ -43,7 +46,7 @@ describe('DeleteUserComponent', () => {
         'Confirmez-vous la suppression définitive de cet utilisateur ?',
       );
     });
-});
+  });
 
   it('#deleteUser should delete user in DB', async () => {
     TestBed.runInInjectionContext(() => {

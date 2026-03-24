@@ -13,7 +13,10 @@ import { CONFIRMATION_DIALOG_MODE } from '../../app/shared/constants/dialogs-con
 import { DELETE_FORM_MODE } from '../../app/shared/constants/forms-constants';
 import { TestBed } from '@angular/core/testing';
 import { getFormModeLabel } from '../../app/shared/labels/commons/form-common';
-import { getHubFormSuccessNotificationMessage, getHubFormTitle } from '../../app/shared/labels/forms/hub-form';
+import {
+  getHubFormSuccessNotificationMessage,
+  getHubFormTitle,
+} from '../../app/shared/labels/forms/hub-form';
 
 describe('DeleteHubComponent', () => {
   @Component({})
@@ -34,7 +37,7 @@ describe('DeleteHubComponent', () => {
       deleteHubComponent.ngOnInit();
 
       expect(deleteHubComponent.deleteHubDialogTitle).toStrictEqual(
-        'Suppression d\'un hub',
+        "Suppression d'un hub",
       );
       expect(deleteHubComponent.deleteHubDialogMode).toStrictEqual(
         CONFIRMATION_DIALOG_MODE,
@@ -63,9 +66,7 @@ describe('DeleteHubComponent', () => {
                   `${getHubFormSuccessNotificationMessage(DELETE_FORM_MODE)}`,
                 );
               expect(toastrSuccess.toastId).toStrictEqual(2);
-              expect(toastrSuccess.title).toStrictEqual(
-                "SUPPRESSION D'UN HUB",
-              );
+              expect(toastrSuccess.title).toStrictEqual("SUPPRESSION D'UN HUB");
               expect(toastrSuccess.message).toStrictEqual(
                 'Votre hub a bien été supprimé(e) !',
               );

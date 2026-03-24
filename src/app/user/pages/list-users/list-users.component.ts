@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   MatPaginator,
   MatPaginatorIntl,
@@ -83,9 +89,7 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
   public userService: UserService = inject(UserService);
   public router: Router = inject(Router);
 
-  constructor(
-    readonly dialog: MatDialog,
-  ) {}
+  constructor(readonly dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.usersListTitle = getUsersListTitle();
@@ -99,10 +103,11 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
     this.userService.users.subscribe((users) => {
       this.usersList.data = this.userMapper.usersListFromDB(users);
 
-      if (this.usersList.data.length > 1  &&
+      if (
+        this.usersList.data.length > 1 &&
         !this.columnsIdentifiers.includes('passwordRest') &&
-        !this.columnsIdentifiers.includes('actions')) {
-  
+        !this.columnsIdentifiers.includes('actions')
+      ) {
         this.columnsIdentifiers.push('passwordReset', 'actions');
       }
     });

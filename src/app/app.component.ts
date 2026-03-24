@@ -40,9 +40,7 @@ export class AppComponent implements OnInit {
   public userService: UserService = inject(UserService);
   public router: Router = inject(Router);
 
-  constructor(
-    readonly dialog: MatDialog,
-  ) {}
+  constructor(readonly dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.userService.user.subscribe((user) => {

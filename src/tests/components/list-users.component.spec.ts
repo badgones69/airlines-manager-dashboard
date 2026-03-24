@@ -171,16 +171,18 @@ describe('ListUsersComponent', () => {
         Inject(MatDialog),
       );
       vi.spyOn(listUsersComponent, 'deleteUser').mockImplementation(() => {
-        vi.spyOn(mockListUsersComponent, 'deleteUser').mockImplementation(() => {
-          expect(mockListUsersComponent.open).toHaveBeenCalledWith(
-            DeleteUserComponent,
-            {
-              disableClose: false,
-              autoFocus: true,
-              scrollStrategy: new NoopScrollStrategy(),
-            },
-          );
-        });
+        vi.spyOn(mockListUsersComponent, 'deleteUser').mockImplementation(
+          () => {
+            expect(mockListUsersComponent.open).toHaveBeenCalledWith(
+              DeleteUserComponent,
+              {
+                disableClose: false,
+                autoFocus: true,
+                scrollStrategy: new NoopScrollStrategy(),
+              },
+            );
+          },
+        );
       });
       listUsersComponent.deleteUser({
         id: 2,

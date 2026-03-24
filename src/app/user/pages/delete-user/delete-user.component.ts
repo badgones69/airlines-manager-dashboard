@@ -30,9 +30,7 @@ export class DeleteUserComponent implements OnInit {
   /* Injections */
   public userService: UserService = inject(UserService);
 
-  constructor(
-    readonly notificationService: NotificationService,
-  ) {}
+  constructor(readonly notificationService: NotificationService) {}
 
   ngOnInit(): void {
     this.deleteUserDialogTitle = `${getFormModeLabel(

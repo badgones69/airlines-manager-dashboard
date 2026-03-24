@@ -140,7 +140,9 @@ describe('EditUserComponent', () => {
               );
 
               await harness.navigateByUrl('/users/list');
-              expect(harness.routeNativeElement?.textContent).toBe('List users');
+              expect(harness.routeNativeElement?.textContent).toBe(
+                'List users',
+              );
             } else {
               const toastrError: any =
                 mockEditUserComponent.notificationService.showErrorNotification(

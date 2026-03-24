@@ -158,17 +158,14 @@ export class AirlineComponent implements OnInit {
   ) {
     /* Form fields creation & constraints definition */
     this.airlineForm = new FormGroup({
-      icao: new FormControl(
-        '',
-        [
-          Validators.required,
-          Validators.pattern(new RegExp(ICAO_IATA_CODE_PATTERN)),
-        ],
-      ),
-      name: new FormControl(
-        '',
-        [Validators.required, onlyWhitespaceValueValidator().bind(this)],
-      ),
+      icao: new FormControl('', [
+        Validators.required,
+        Validators.pattern(new RegExp(ICAO_IATA_CODE_PATTERN)),
+      ]),
+      name: new FormControl('', [
+        Validators.required,
+        onlyWhitespaceValueValidator().bind(this),
+      ]),
       nationality: new FormControl('', Validators.required),
     });
   }

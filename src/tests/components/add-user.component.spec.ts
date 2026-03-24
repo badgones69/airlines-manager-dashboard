@@ -35,7 +35,8 @@ describe('AddUserComponent', () => {
 
   it('#ngOnInit should initialize "Add user" component', () => {
     TestBed.runInInjectionContext(() => {
-      let mockAddUserComponent: MockAddUserComponent = new MockAddUserComponent();
+      let mockAddUserComponent: MockAddUserComponent =
+        new MockAddUserComponent();
       const addUserComponent: AddUserComponent = new AddUserComponent(
         Inject(NotificationService),
       );
@@ -79,7 +80,8 @@ describe('AddUserComponent', () => {
 
     const harness: RouterTestingHarness = await RouterTestingHarness.create();
     TestBed.runInInjectionContext(() => {
-      let mockAddUserComponent: MockAddUserComponent = new MockAddUserComponent();
+      let mockAddUserComponent: MockAddUserComponent =
+        new MockAddUserComponent();
       const addUserComponent: AddUserComponent = new AddUserComponent(
         Inject(NotificationService),
       );
@@ -103,13 +105,17 @@ describe('AddUserComponent', () => {
                   `${getUserFormSuccessNotificationMessage(addUserComponent.formMode)}`,
                 );
               expect(toastrSuccess.toastId).toStrictEqual(2);
-              expect(toastrSuccess.title).toStrictEqual("AJOUT D'UN UTILISATEUR");
+              expect(toastrSuccess.title).toStrictEqual(
+                "AJOUT D'UN UTILISATEUR",
+              );
               expect(toastrSuccess.message).toStrictEqual(
                 'Votre utilisateur a bien été créé(e) !',
               );
 
               await harness.navigateByUrl('/users/list');
-              expect(harness.routeNativeElement?.textContent).toBe('List users');
+              expect(harness.routeNativeElement?.textContent).toBe(
+                'List users',
+              );
             } else {
               const toastrError: any =
                 mockAddUserComponent.notificationService.showErrorNotification(

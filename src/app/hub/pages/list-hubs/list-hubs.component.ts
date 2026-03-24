@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   MatPaginator,
   MatPaginatorIntl,
@@ -81,9 +87,7 @@ export class ListHubsComponent implements OnInit, AfterViewInit {
   public airportService: AirportService = inject(AirportService);
   public router: Router = inject(Router);
 
-  constructor(
-    readonly dialog: MatDialog,
-  ) {}
+  constructor(readonly dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.hubsListTitle = getHubsListTitle();

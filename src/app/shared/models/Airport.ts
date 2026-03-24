@@ -1,5 +1,5 @@
-import { Country } from "./Country";
-import { Region } from "./Region";
+import { Country } from './Country';
+import { Region } from './Region';
 
 export class Airport {
   id?: number;

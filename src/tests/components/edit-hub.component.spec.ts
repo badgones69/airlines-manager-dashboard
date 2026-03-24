@@ -16,7 +16,10 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { MockAirportService } from '../mocks/mock-airport-service';
 import { EditHubComponent } from '../../app/hub/pages/edit-hub/edit-hub.component';
 import { MockListHubsComponent } from '../mocks/mock-list-hubs-component';
-import { getHubFormSuccessNotificationMessage, getHubFormTitle } from '../../app/shared/labels/forms/hub-form';
+import {
+  getHubFormSuccessNotificationMessage,
+  getHubFormTitle,
+} from '../../app/shared/labels/forms/hub-form';
 
 describe('EditHubComponent', () => {
   @Component({})
@@ -54,17 +57,17 @@ describe('EditHubComponent', () => {
             editHubComponent.initHubToEdit =
               editHubComponent.airportMapper.airportFromDB(hubToEdit.data);
 
-            expect(editHubComponent.initHubToEdit).toStrictEqual({                                                                                                                                                                                                                  
-              id: 21,                                                                                                                                                                                                                  
-              uuid: 'airport-created-uuid',                                                                                                                                                                                            
-              iata: 'CRE',                                                                                                                                                                                                             
-              name: 'Airport-Created',                                                                                                                                                                                                 
+            expect(editHubComponent.initHubToEdit).toStrictEqual({
+              id: 21,
+              uuid: 'airport-created-uuid',
+              iata: 'CRE',
+              name: 'Airport-Created',
               city: 'Cracovie',
               latitude: 1.5,
               longitude: 5.5,
               country: { id: 155, name: 'Pologne', icao: 'SP', flagCode: 'pl' },
               region: undefined,
-              hub: true
+              hub: true,
             });
           });
 

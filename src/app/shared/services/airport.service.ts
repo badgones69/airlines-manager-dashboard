@@ -7,7 +7,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AirportService {
-
   readonly hubs$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
   constructor() {
@@ -28,7 +27,10 @@ export class AirportService {
 
   /* All hubs retrieving */
   public async findAllHubs(): Promise<any[]> {
-    const { data } = await supabase.from('AIRPORT').select().eq('airportHub', true);
+    const { data } = await supabase
+      .from('AIRPORT')
+      .select()
+      .eq('airportHub', true);
 
     return data || [];
   }
@@ -45,8 +47,16 @@ export class AirportService {
 
   /* Airport creation */
   public async createAirport(airportToCreate: any): Promise<any> {
-    const { airportIATA, airportName, airportCity, airportLatitude, airportLongitude, airportCountry, airportRegion, airportHub } =
-      airportToCreate;
+    const {
+      airportIATA,
+      airportName,
+      airportCity,
+      airportLatitude,
+      airportLongitude,
+      airportCountry,
+      airportRegion,
+      airportHub,
+    } = airportToCreate;
 
     const data = await supabase
       .from('AIRPORT')
@@ -59,18 +69,26 @@ export class AirportService {
         airportLongitude,
         airportCountry,
         airportRegion,
-        airportHub
+        airportHub,
       })
       .select();
 
-    this.refreshHubsList();  
+    this.refreshHubsList();
     return data;
   }
 
   /* Airport updating */
   public async updateAirport(airportUpdated: any): Promise<any> {
-    const { airportUUID, airportIATA, airportName, airportCity, airportLatitude, airportLongitude, airportCountry, airportRegion } =
-      airportUpdated;
+    const {
+      airportUUID,
+      airportIATA,
+      airportName,
+      airportCity,
+      airportLatitude,
+      airportLongitude,
+      airportCountry,
+      airportRegion,
+    } = airportUpdated;
 
     const data = await supabase
       .from('AIRPORT')

@@ -28,12 +28,22 @@
 
       <!-- LOGIN COLUMN -->
       <ng-container [matColumnDef]="columnsIdentifiers[3]">
-        <th mat-header-cell class="column-login"
+        <th
+          mat-header-cell
+          class="column-login"
           [class.mat-column-login]="usersList.data.length > 1"
-          *matHeaderCellDef>{{ columnsHeaders[3] }}</th>
-        <td mat-cell class="column-login"
+          *matHeaderCellDef
+        >
+          {{ columnsHeaders[3] }}
+        </th>
+        <td
+          mat-cell
+          class="column-login"
           [class.mat-column-login]="usersList.data.length > 1"
-          *matCellDef="let user">{{ user.login }}</td>
+          *matCellDef="let user"
+        >
+          {{ user.login }}
+        </td>
       </ng-container>
 
       @if (usersList.data.length > 1) {
@@ -63,7 +73,7 @@
             }
           </td>
         </ng-container>
-      }  
+      }
 
       <tr mat-header-row *matHeaderRowDef="columnsIdentifiers"></tr>
       <tr mat-row *matRowDef="let row; columns: columnsIdentifiers"></tr>

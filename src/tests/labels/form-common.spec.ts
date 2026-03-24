@@ -40,9 +40,9 @@ describe('FormCommonLabels', () => {
   });
 
   it('#getNameLabel should return "name" label', () => {
-      const nameLabel: string = getNameLabel();
-      expect(nameLabel).toStrictEqual('NOM');
-    });
+    const nameLabel: string = getNameLabel();
+    expect(nameLabel).toStrictEqual('NOM');
+  });
 
   it('#getPasswordInputLabel should return "password" label', () => {
     const passwordLabel: string = getPasswordInputLabel();

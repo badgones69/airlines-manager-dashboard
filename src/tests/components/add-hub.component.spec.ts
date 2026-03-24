@@ -15,7 +15,10 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { MockListHubsComponent } from '../mocks/mock-list-hubs-component';
 import { MockUserService } from '../mocks/mock-user-service';
-import { getHubFormSuccessNotificationMessage, getHubFormTitle } from '../../app/shared/labels/forms/hub-form';
+import {
+  getHubFormSuccessNotificationMessage,
+  getHubFormTitle,
+} from '../../app/shared/labels/forms/hub-form';
 
 describe('AddHubComponent', () => {
   @Component({})

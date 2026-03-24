@@ -34,9 +34,7 @@ export class AddUserComponent implements OnInit {
   public userService: UserService = inject(UserService);
   public router: Router = inject(Router);
 
-  constructor(
-    readonly notificationService: NotificationService,
-  ) {}
+  constructor(readonly notificationService: NotificationService) {}
 
   ngOnInit(): void {
     this.userService.user.subscribe((user) => {

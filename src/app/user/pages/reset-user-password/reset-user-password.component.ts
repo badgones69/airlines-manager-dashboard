@@ -117,13 +117,10 @@ export class ResetUserPasswordComponent implements OnInit {
       {
         givenName: new FormControl({ value: '', disabled: true }),
         surname: new FormControl({ value: '', disabled: true }),
-        password: new FormControl(
-          '',
-          [
-            Validators.required,
-            Validators.pattern(new RegExp(PASS_WORD_PATTERN)),
-          ],
-        ),
+        password: new FormControl('', [
+          Validators.required,
+          Validators.pattern(new RegExp(PASS_WORD_PATTERN)),
+        ]),
         repeatedPassword: new FormControl('', Validators.required),
       },
       {
@@ -233,8 +230,7 @@ export class ResetUserPasswordComponent implements OnInit {
       return getRequiredFieldErrorMessage();
     } else if (
       error === NOT_IDENTICAL_PASS_WORD_ERROR &&
-      this.resetUserPasswordForm
-        .hasError(NOT_IDENTICAL_PASS_WORD_ERROR)
+      this.resetUserPasswordForm.hasError(NOT_IDENTICAL_PASS_WORD_ERROR)
     ) {
       return getRepeatedPasswordFieldFormatErrorMessage();
     }

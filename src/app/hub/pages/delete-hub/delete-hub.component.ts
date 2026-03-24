@@ -30,9 +30,7 @@ export class DeleteHubComponent implements OnInit {
   /* Injections */
   public airportService: AirportService = inject(AirportService);
 
-  constructor(
-    readonly notificationService: NotificationService,
-  ) {}
+  constructor(readonly notificationService: NotificationService) {}
 
   ngOnInit(): void {
     this.deleteHubDialogTitle = `${getFormModeLabel(

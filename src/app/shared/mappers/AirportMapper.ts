@@ -9,15 +9,15 @@ import {
 
 export class AirportMapper {
   /* DB => DTO mapping (airports list) */
-    public airportsListFromDB(airportsListFromDB: any[]): Airport[] {
-      let airportsList: Airport[] = [];
-  
-      for (const airportFromDB of airportsListFromDB) {
-        airportsList.push(this.airportFromDB(airportFromDB));
-      }
-      return airportsList;
+  public airportsListFromDB(airportsListFromDB: any[]): Airport[] {
+    let airportsList: Airport[] = [];
+
+    for (const airportFromDB of airportsListFromDB) {
+      airportsList.push(this.airportFromDB(airportFromDB));
     }
-  
+    return airportsList;
+  }
+
   /* DB => DTO mapping */
   public airportFromDB(airportFromDB: any): Airport {
     return {
@@ -29,7 +29,10 @@ export class AirportMapper {
       latitude: airportFromDB.airportLatitude,
       longitude: airportFromDB.airportLongitude,
       country: getCountryById(airportFromDB.airportCountry),
-      region: getRegionById(airportFromDB.airportRegion, airportFromDB.airportCountry),
+      region: getRegionById(
+        airportFromDB.airportRegion,
+        airportFromDB.airportCountry,
+      ),
       hub: airportFromDB.airportHub,
     } as Airport;
   }
@@ -46,7 +49,6 @@ export class AirportMapper {
 
     if (airportToDB.city) {
       if (airportToDB.city.includes('-') || airportToDB.city.includes(' ')) {
-
         airportToDB.city = capitalizeDashedWordsFirstLetter(
           capitalizeSpaceSeparatedWordsFirstLetter(airportToDB.city),
         );
@@ -65,7 +67,7 @@ export class AirportMapper {
       airportLongitude: airportToDB.longitude,
       airportCountry: airportToDB.country.id,
       airportRegion: airportToDB.region?.id,
-      airportHub: airportToDB.hub
+      airportHub: airportToDB.hub,
     };
   }
 }
