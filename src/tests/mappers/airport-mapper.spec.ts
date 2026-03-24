@@ -18,7 +18,8 @@ describe('AirportMapper', () => {
       airportCountry: 67,
       airportHub: false,
     };
-    const airportMappedFromDB: Airport = airportMapper.airportFromDB(airportInDB);
+    const airportMappedFromDB: Airport =
+      airportMapper.airportFromDB(airportInDB);
     expect(airportMappedFromDB.id).toStrictEqual(2);
     expect(airportMappedFromDB.uuid).toStrictEqual('airport-uuid');
     expect(airportMappedFromDB.iata).toStrictEqual('CDG');
@@ -26,14 +27,12 @@ describe('AirportMapper', () => {
     expect(airportMappedFromDB.city).toStrictEqual('Paris');
     expect(airportMappedFromDB.latitude).toStrictEqual(6.6);
     expect(airportMappedFromDB.longitude).toStrictEqual(7.7);
-    expect(airportMappedFromDB.country).toStrictEqual(
-      {
-        id: 67,
-        name: 'France',
-        icao: 'F',
-        flagCode: 'fr'
-      }
-    );
+    expect(airportMappedFromDB.country).toStrictEqual({
+      id: 67,
+      name: 'France',
+      icao: 'F',
+      flagCode: 'fr',
+    });
     expect(airportMappedFromDB.region).toBeUndefined();
     expect(airportMappedFromDB.hub).toBeFalsy();
   });
@@ -64,7 +63,8 @@ describe('AirportMapper', () => {
         airportHub: false,
       },
     ];
-    const airportsMappedFromDB: Airport[] = airportMapper.airportsListFromDB(airportsInDB);
+    const airportsMappedFromDB: Airport[] =
+      airportMapper.airportsListFromDB(airportsInDB);
     expect(airportsMappedFromDB.length).toStrictEqual(2);
     expect(airportsMappedFromDB[0].id).toStrictEqual(1);
     expect(airportsMappedFromDB[0].uuid).toStrictEqual('uuid-airport');
@@ -73,37 +73,33 @@ describe('AirportMapper', () => {
     expect(airportsMappedFromDB[0].city).toStrictEqual('New York');
     expect(airportsMappedFromDB[0].latitude).toStrictEqual(63.63);
     expect(airportsMappedFromDB[0].longitude).toStrictEqual(1.1);
-    expect(airportsMappedFromDB[0].country).toStrictEqual(
-      {
-        id: 63,
-        name: 'États-Unis',
-        icao: 'N',
-        flagCode: 'us',
-        regions: USA_REGIONS_FR,
-      }
-    );
-    expect(airportsMappedFromDB[0].region).toStrictEqual(
-      {
-        id: 1,
-        code: 'NY',
-        name: 'New York'
-      }
-    );
+    expect(airportsMappedFromDB[0].country).toStrictEqual({
+      id: 63,
+      name: 'États-Unis',
+      icao: 'N',
+      flagCode: 'us',
+      regions: USA_REGIONS_FR,
+    });
+    expect(airportsMappedFromDB[0].region).toStrictEqual({
+      id: 1,
+      code: 'NY',
+      name: 'New York',
+    });
     expect(airportsMappedFromDB[1].id).toStrictEqual(2);
     expect(airportsMappedFromDB[1].uuid).toStrictEqual('airport-uuid');
     expect(airportsMappedFromDB[1].iata).toStrictEqual('CDG');
-    expect(airportsMappedFromDB[1].name).toStrictEqual('Roissy-Charles de Gaulle');
+    expect(airportsMappedFromDB[1].name).toStrictEqual(
+      'Roissy-Charles de Gaulle',
+    );
     expect(airportsMappedFromDB[1].city).toStrictEqual('Paris');
     expect(airportsMappedFromDB[1].latitude).toStrictEqual(6.6);
     expect(airportsMappedFromDB[1].longitude).toStrictEqual(7.7);
-    expect(airportsMappedFromDB[1].country).toStrictEqual(
-      {
-        id: 67,
-        name: 'France',
-        icao: 'F',
-        flagCode: 'fr'
-      }
-    );
+    expect(airportsMappedFromDB[1].country).toStrictEqual({
+      id: 67,
+      name: 'France',
+      icao: 'F',
+      flagCode: 'fr',
+    });
     expect(airportsMappedFromDB[1].region).toBeUndefined();
   });
 
@@ -126,7 +122,7 @@ describe('AirportMapper', () => {
       region: {
         id: 1,
         code: 'NY',
-        name: 'New York'
+        name: 'New York',
       },
       hub: true,
     };

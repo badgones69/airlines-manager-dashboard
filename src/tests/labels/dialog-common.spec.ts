@@ -9,7 +9,6 @@ import {
 import { describe, it, expect } from 'vitest';
 
 describe('DialogCommonLabels', () => {
-
   it('#getDeleteDialogMessage should return delete dialog message', () => {
     const deleteDialogMessage: string = getDeleteDialogMessage();
     expect(deleteDialogMessage).toStrictEqual(

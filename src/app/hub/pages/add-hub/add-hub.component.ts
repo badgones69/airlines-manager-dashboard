@@ -14,7 +14,10 @@ import {
   getTechnicalErrorMessage,
 } from '../../../shared/labels/errors';
 import { AirportService } from '../../../shared/services/airport.service';
-import { getHubFormSuccessNotificationMessage, getHubFormTitle } from '../../../shared/labels/forms/hub-form';
+import {
+  getHubFormSuccessNotificationMessage,
+  getHubFormTitle,
+} from '../../../shared/labels/forms/hub-form';
 
 @Component({
   selector: 'add-hub',
@@ -34,9 +37,7 @@ export class AddHubComponent implements OnInit {
   public airportService: AirportService = inject(AirportService);
   public router: Router = inject(Router);
 
-  constructor(
-    readonly notificationService: NotificationService,
-  ) {}
+  constructor(readonly notificationService: NotificationService) {}
 
   ngOnInit(): void {
     this.userService.user.subscribe((user) => {

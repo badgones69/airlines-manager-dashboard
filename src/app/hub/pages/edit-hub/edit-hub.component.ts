@@ -14,7 +14,10 @@ import {
   getTechnicalErrorMessage,
 } from '../../../shared/labels/errors';
 import { AirportService } from '../../../shared/services/airport.service';
-import { getHubFormSuccessNotificationMessage, getHubFormTitle } from '../../../shared/labels/forms/hub-form';
+import {
+  getHubFormSuccessNotificationMessage,
+  getHubFormTitle,
+} from '../../../shared/labels/forms/hub-form';
 import { AirportMapper } from '../../../shared/mappers/AirportMapper';
 
 @Component({

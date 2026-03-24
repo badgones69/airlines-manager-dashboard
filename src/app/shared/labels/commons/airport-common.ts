@@ -7,11 +7,11 @@ export function getCityLabel(): string {
 }
 
 export function getLatitudeInputLabel(): string {
-  return 'LATITUDE'
+  return 'LATITUDE';
 }
 
 export function getLongitudeInputLabel(): string {
-  return 'LONGITUDE'
+  return 'LONGITUDE';
 }
 
 export function getCountryLabel(): string {

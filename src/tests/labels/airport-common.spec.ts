@@ -41,9 +41,7 @@ describe('AirportCommonLabels', () => {
   });
 
   it('#getUnknownRegionErrorMessage should return region field error message', () => {
-      const unknownRegionErrorMessage: string = getUnknownRegionErrorMessage();
-      expect(unknownRegionErrorMessage).toStrictEqual(
-        'région inconnue',
-      );
-    });
+    const unknownRegionErrorMessage: string = getUnknownRegionErrorMessage();
+    expect(unknownRegionErrorMessage).toStrictEqual('région inconnue');
+  });
 });

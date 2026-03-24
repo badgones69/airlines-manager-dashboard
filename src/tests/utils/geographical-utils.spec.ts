@@ -58,7 +58,9 @@ describe('GeographicalUtils', () => {
     expect(regionsAustralia.length).toStrictEqual(8);
     expect(regionsAustralia[0].name).toStrictEqual('Australie-Méridionale');
     expect(regionsAustralia[3].name).toStrictEqual('Queensland');
-    expect(regionsAustralia[5].name).toStrictEqual('Territoire de la capitale Australienne');
+    expect(regionsAustralia[5].name).toStrictEqual(
+      'Territoire de la capitale Australienne',
+    );
     expect(regionsAustralia[7].name).toStrictEqual('Victoria');
   });
 

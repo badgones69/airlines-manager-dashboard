@@ -41,6 +41,9 @@ export function getRegionByName(
   regionName: string,
   countryFlagCode: string,
 ): Region | undefined {
-  return getCountries().find((country) => country.flagCode === countryFlagCode)
-  ?.regions?.find((region) => capitalize(region.name) === capitalize(regionName),);
+  return getCountries()
+    .find((country) => country.flagCode === countryFlagCode)
+    ?.regions?.find(
+      (region) => capitalize(region.name) === capitalize(regionName),
+    );
 }

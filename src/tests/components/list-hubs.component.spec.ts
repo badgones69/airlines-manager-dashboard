@@ -70,9 +70,7 @@ describe('ListHubsComponent', () => {
       });
       listHubsComponent.ngOnInit();
 
-      expect(listHubsComponent.hubsListTitle).toStrictEqual(
-        'Liste des hubs',
-      );
+      expect(listHubsComponent.hubsListTitle).toStrictEqual('Liste des hubs');
 
       expect(listHubsComponent.authenticatedUser).toStrictEqual({
         id: 7,
@@ -92,7 +90,13 @@ describe('ListHubsComponent', () => {
           city: 'New York',
           latitude: 63.63,
           longitude: 1.1,
-          country: { id: 63, name: 'États-Unis', icao: 'N', flagCode: 'us', regions: USA_REGIONS_FR },
+          country: {
+            id: 63,
+            name: 'États-Unis',
+            icao: 'N',
+            flagCode: 'us',
+            regions: USA_REGIONS_FR,
+          },
           region: { id: 1, code: 'NY', name: 'New York' },
           hub: true,
         },
@@ -134,16 +138,16 @@ describe('ListHubsComponent', () => {
         .spyOn(listHubsComponent, 'openHubForm')
         .mockImplementation(() => harness.routeNativeElement?.textContent);
       listHubsComponent.openHubForm({
-          id: 2,
-          uuid: 'airport-uuid',
-          iata: 'CDG',
-          name: 'Roissy-Charles de Gaulle',
-          city: 'Paris',
-          latitude: 6.6,
-          longitude: 7.7,
-          country: { id: 67, name: 'France', icao: 'F', flagCode: 'fr' },
-          hub: true,
-        });
+        id: 2,
+        uuid: 'airport-uuid',
+        iata: 'CDG',
+        name: 'Roissy-Charles de Gaulle',
+        city: 'Paris',
+        latitude: 6.6,
+        longitude: 7.7,
+        country: { id: 67, name: 'France', icao: 'F', flagCode: 'fr' },
+        hub: true,
+      });
       expect(spy).toHaveBeenCalled();
       expect(
         listHubsComponent.openHubForm({
@@ -181,17 +185,17 @@ describe('ListHubsComponent', () => {
         });
       });
       listHubsComponent.deleteHub({
-          id: 2,
-          uuid: 'airport-uuid',
-          iata: 'CDG',
-          name: 'Roissy-Charles de Gaulle',
-          city: 'Paris',
-          latitude: 6.6,
-          longitude: 7.7,
-          country: { id: 67, name: 'France', icao: 'F', flagCode: 'fr' },
-          region: undefined,
-          hub: true,
-        });
+        id: 2,
+        uuid: 'airport-uuid',
+        iata: 'CDG',
+        name: 'Roissy-Charles de Gaulle',
+        city: 'Paris',
+        latitude: 6.6,
+        longitude: 7.7,
+        country: { id: 67, name: 'France', icao: 'F', flagCode: 'fr' },
+        region: undefined,
+        hub: true,
+      });
     });
   });
 });

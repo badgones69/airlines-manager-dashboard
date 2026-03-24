@@ -39,9 +39,7 @@ describe('AppComponent', () => {
   it('#ngOnInit should initialize "App" component', () => {
     TestBed.runInInjectionContext(() => {
       let mockAppComponent: MockAppComponent = new MockAppComponent();
-      const appComponent: AppComponent = new AppComponent(
-        Inject(MatDialog),
-      );
+      const appComponent: AppComponent = new AppComponent(Inject(MatDialog));
       vi.spyOn(appComponent, 'ngOnInit').mockImplementation(() => {
         mockAppComponent.userService.user.subscribe((user) => {
           if (user) {
@@ -64,9 +62,7 @@ describe('AppComponent', () => {
 
   it('#menuToggle should open menu and close it with all submenus', () => {
     TestBed.runInInjectionContext(() => {
-      const appComponent: AppComponent = new AppComponent(
-        Inject(MatDialog),
-      );
+      const appComponent: AppComponent = new AppComponent(Inject(MatDialog));
       appComponent.menuToggle();
       expect(appComponent.menuOpened).toBeTruthy();
       appComponent.menuToggle();
@@ -79,9 +75,7 @@ describe('AppComponent', () => {
 
   it('#airlineSubMenuToggle should open/close "airline" submenu items', () => {
     TestBed.runInInjectionContext(() => {
-      const appComponent: AppComponent = new AppComponent(
-        Inject(MatDialog),
-      );
+      const appComponent: AppComponent = new AppComponent(Inject(MatDialog));
       appComponent.airlineSubMenuToggle();
       expect(appComponent.airlineSubMenuExpanded).toBeTruthy();
       appComponent.airlineSubMenuToggle();
@@ -91,9 +85,7 @@ describe('AppComponent', () => {
 
   it('#userSubMenuToggle should open/close "user" submenu items', () => {
     TestBed.runInInjectionContext(() => {
-      const appComponent: AppComponent = new AppComponent(
-        Inject(MatDialog),
-      );
+      const appComponent: AppComponent = new AppComponent(Inject(MatDialog));
       appComponent.userSubMenuToggle();
       expect(appComponent.userSubMenuExpanded).toBeTruthy();
       appComponent.userSubMenuToggle();
@@ -103,9 +95,7 @@ describe('AppComponent', () => {
 
   it('#hubSubMenuToggle should open/close "hub" submenu items', () => {
     TestBed.runInInjectionContext(() => {
-      const appComponent: AppComponent = new AppComponent(
-        Inject(MatDialog),
-      );
+      const appComponent: AppComponent = new AppComponent(Inject(MatDialog));
       appComponent.hubSubMenuToggle();
       expect(appComponent.hubSubMenuExpanded).toBeTruthy();
       appComponent.hubSubMenuToggle();
@@ -116,9 +106,7 @@ describe('AppComponent', () => {
   it('#openAboutDialog should open "About" dialog', () => {
     TestBed.runInInjectionContext(() => {
       const mockAppComponent: MockAppComponent = new MockAppComponent();
-      const appComponent: AppComponent = new AppComponent(
-        Inject(MatDialog),
-      );
+      const appComponent: AppComponent = new AppComponent(Inject(MatDialog));
       vi.spyOn(appComponent, 'openAboutDialog').mockImplementation(() => {
         vi.spyOn(mockAppComponent, 'openAboutDialog').mockImplementation(() => {
           expect(mockAppComponent.open).toHaveBeenCalledWith(AboutComponent, {
@@ -145,16 +133,18 @@ describe('AppComponent', () => {
     const harness: RouterTestingHarness = await RouterTestingHarness.create();
     TestBed.runInInjectionContext(() => {
       const mockAppComponent: MockAppComponent = new MockAppComponent();
-      const appComponent: AppComponent = new AppComponent(
-        Inject(MatDialog),
-      );
+      const appComponent: AppComponent = new AppComponent(Inject(MatDialog));
       vi.spyOn(appComponent, 'logout').mockImplementation(() => {
-        mockAppComponent.userService.disconnectUser().subscribe(async (user) => {
-          expect(user).toStrictEqual({});
+        mockAppComponent.userService
+          .disconnectUser()
+          .subscribe(async (user) => {
+            expect(user).toStrictEqual({});
 
-          await harness.navigateByUrl('authentication');
-          expect(harness.routeNativeElement?.textContent).toBe('Authentication');
-        });
+            await harness.navigateByUrl('authentication');
+            expect(harness.routeNativeElement?.textContent).toBe(
+              'Authentication',
+            );
+          });
       });
       appComponent.logout();
     });
