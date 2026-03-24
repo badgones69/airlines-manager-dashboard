@@ -1,0 +1,118 @@
+<!-- FORM -->
+<form id="form" [formGroup]="hubForm" (ngSubmit)="submitHubForm()">
+  <!-- TITLE -->
+  <mat-label class="form-title">{{ hubFormTitle }}</mat-label>
+
+  <!-- IATA FIELD -->
+  <mat-form-field>
+    <mat-label>{{ iataInputLabel }}</mat-label>
+    <input
+      matInput
+      [formControlName]="this.iataFieldIdentifier"
+      minlength="3"
+      maxlength="3"
+    />
+    <mat-error>{{ displayIATAErrorMessage() }}</mat-error>
+  </mat-form-field>
+
+  <!-- NAME FIELD -->
+  <mat-form-field>
+    <mat-label>{{ nameInputLabel }}</mat-label>
+    <input matInput [formControlName]="this.nameFieldIdentifier" />
+    <mat-error>{{ displayNameErrorMessage() }}</mat-error>
+  </mat-form-field>
+
+  <!-- CITY FIELD -->
+  <mat-form-field>
+    <mat-label>{{ cityInputLabel }}</mat-label>
+    <input matInput [formControlName]="this.cityFieldIdentifier" />
+  </mat-form-field>
+
+  <!-- LATITUDE FIELD -->
+  <mat-form-field>
+    <mat-label>{{ latitudeInputLabel }}</mat-label>
+    <input matInput [formControlName]="this.latitudeFieldIdentifier" />
+    <mat-error>{{ displayLatitudeErrorMessage() }}</mat-error>
+  </mat-form-field>
+
+  <!-- LONGITUDE FIELD -->
+  <mat-form-field>
+    <mat-label>{{ longitudeInputLabel }}</mat-label>
+    <input matInput [formControlName]="this.longitudeFieldIdentifier" />
+    <mat-error>{{ displayLongitudeErrorMessage() }}</mat-error>
+  </mat-form-field>
+
+  <!-- COUNTRY FIELD -->
+  <div class="country-field-container">
+    <span class="flag fi fi-{{ this.countryFlag }}"></span>
+    <mat-form-field>
+      <mat-label>{{ countryInputLabel }}</mat-label>
+      <input
+        matInput
+        [formControlName]="this.countryFieldIdentifier"
+        [matAutocomplete]="autoCountry"
+      />
+      <mat-autocomplete
+        #autoCountry="matAutocomplete"
+        [displayWith]="displayCountry"
+        (optionSelected)="changeCountry($event.option.value)"
+      >
+        @for (country of filteredCountries | async; track country) {
+          <mat-option [value]="country">
+            <span class="flag fi fi-{{ country.flagCode }}"></span>
+            {{ country.name }}
+          </mat-option>
+        }
+      </mat-autocomplete>
+      <mat-error>{{ displayCountryErrorMessage() }}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- REGION FIELD -->
+  @if (regions.length > 0) {
+    <mat-form-field>
+      <mat-label>{{ regionInputLabel }}</mat-label>
+      <input
+        matInput
+        [formControlName]="this.regionFieldIdentifier"
+        [matAutocomplete]="autoRegion"
+      />
+      <mat-autocomplete
+        #autoRegion="matAutocomplete"
+        [displayWith]="displayRegion"
+        (optionSelected)="changeRegion($event.option.value)"
+      >
+        @for (region of filteredRegions | async; track region) {
+          <mat-option [value]="region">
+            {{ region.name }} ({{ region.code }})
+          </mat-option>
+        }
+      </mat-autocomplete>
+      <mat-error>{{ displayRegionErrorMessage() }}</mat-error>
+    </mat-form-field>
+  }
+
+  <!-- BUTTONS -->
+  <div class="form-buttons">
+    <button
+      type="submit"
+      class="submit-form-button"
+      mat-fab
+      extended
+      [disabled]="hubForm.invalid"
+    >
+      <i class="material-icons">edit</i>
+      {{ submitButtonLabel }}
+    </button>
+    <button
+      type="button"
+      class="reset-form-button"
+      mat-fab
+      extended
+      (click)="ngOnInit()"
+    >
+      <i class="material-icons">{{ resetButtonIcon }}</i>
+      {{ resetButtonLabel }}
+    </button>
+  </div>
+</form>

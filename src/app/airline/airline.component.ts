@@ -23,6 +23,7 @@ import {
   getBlankStringFieldErrorMessage,
   getResetButtonIcon,
   getUnknownCountryErrorMessage,
+  getNameLabel,
 } from '../shared/labels/commons/form-common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ToastrModule } from 'ngx-toastr';
@@ -45,7 +46,6 @@ import {
   getNationalityInputLabel,
   getICAOCodeInputLabel,
   getLogoInputLabel,
-  getNameInputLabel,
   getNoLogoLabel,
 } from '../shared/labels/forms/airline-form';
 import { AirlineMapper } from '../shared/mappers/AirlineMapper';
@@ -158,17 +158,14 @@ export class AirlineComponent implements OnInit {
   ) {
     /* Form fields creation & constraints definition */
     this.airlineForm = new FormGroup({
-      icao: new FormControl(
-        '',
-        [
-          Validators.required,
-          Validators.pattern(new RegExp(ICAO_IATA_CODE_PATTERN)),
-        ],
-      ),
-      name: new FormControl(
-        '',
-        [Validators.required, onlyWhitespaceValueValidator().bind(this)],
-      ),
+      icao: new FormControl('', [
+        Validators.required,
+        Validators.pattern(new RegExp(ICAO_IATA_CODE_PATTERN)),
+      ]),
+      name: new FormControl('', [
+        Validators.required,
+        onlyWhitespaceValueValidator().bind(this),
+      ]),
       nationality: new FormControl('', Validators.required),
     });
   }
@@ -185,7 +182,7 @@ export class AirlineComponent implements OnInit {
       EDIT_FORM_MODE,
     )} ${getAirlineFormTitle()}`;
     this.icaoInputLabel = getICAOCodeInputLabel();
-    this.nameInputLabel = getNameInputLabel();
+    this.nameInputLabel = getNameLabel();
     this.logoInputLabel = getLogoInputLabel(EDIT_FORM_MODE);
     this.nationalityInputLabel = getNationalityInputLabel();
     this.submitButtonLabel = getSubmitButtonLabel(EDIT_FORM_MODE);

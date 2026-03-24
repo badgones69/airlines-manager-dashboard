@@ -34,6 +34,10 @@ export function getPasswordInputLabel(): string {
   return 'MOT DE PASSE';
 }
 
+export function getNameLabel(): string {
+  return 'NOM';
+}
+
 export function getSubmitButtonLabel(formMode: string): string {
   return formMode === ADD_FORM_MODE ? 'Créer' : 'Modifier';
 }
@@ -60,6 +64,10 @@ export function getRequiredFieldErrorMessage(): string {
 
 export function getICAO_IATA_FieldsErrorMessage(): string {
   return '3 lettres obligatoires';
+}
+
+export function getLatitudeLongitudeFieldsErrorMessage(): string {
+  return 'coordonnée invalide (format décimal)';
 }
 
 export function getBlankStringFieldErrorMessage(): string {
