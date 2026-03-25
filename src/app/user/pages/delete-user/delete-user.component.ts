@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { UserService } from '../../../shared/services/user.service';
 import { DELETE_FORM_MODE } from '../../../shared/constants/forms-constants';
@@ -9,7 +9,6 @@ import {
   getUserFormTitle,
 } from '../../../shared/labels/forms/user-form';
 import { DialogComponent } from '../../../shared/components/dialog/dialog.component';
-import { getConfirmationDialogTitle } from '../../../shared/labels/commons/dialog-common';
 import { getFormModeLabel } from '../../../shared/labels/commons/form-common';
 import {
   getTechnicalErrorTitle,
@@ -24,24 +23,19 @@ import {
 export class DeleteUserComponent implements OnInit {
   @Input() public userUUID!: string;
 
-  public deleteUserFormTitle!: string;
   public deleteUserDialogTitle!: string;
   public deleteUserDialogMode!: string;
   public deleteUserDialogMessage!: string;
 
-  constructor(
-    readonly userService: UserService,
-    readonly notificationService: NotificationService,
-  ) {
-    this.deleteUserFormTitle = `${getFormModeLabel(
-      DELETE_FORM_MODE,
-    )} ${getUserFormTitle()}`;
-  }
+  /* Injections */
+  public userService: UserService = inject(UserService);
+
+  constructor(readonly notificationService: NotificationService) {}
 
   ngOnInit(): void {
-    this.deleteUserDialogTitle = `${
-      this.deleteUserFormTitle
-    } ${getConfirmationDialogTitle()}`;
+    this.deleteUserDialogTitle = `${getFormModeLabel(
+      DELETE_FORM_MODE,
+    )} ${getUserFormTitle()}`;
     this.deleteUserDialogMode = CONFIRMATION_DIALOG_MODE;
     this.deleteUserDialogMessage = getUserDeleteDialogMessage();
   }
@@ -56,7 +50,7 @@ export class DeleteUserComponent implements OnInit {
         if (response.status === 204) {
           /* Success notification showing */
           this.notificationService.showSuccessNotification(
-            this.deleteUserFormTitle.toUpperCase(),
+            this.deleteUserDialogTitle.toUpperCase(),
             getUserFormSuccessNotificationMessage(DELETE_FORM_MODE),
           );
         } else {

@@ -322,8 +322,9 @@ describe('ResetUserPasswordComponent', () => {
         ),
       ).toStrictEqual('champ obligatoire');
 
-      resetUserPasswordComponent.resetUserPasswordForm
-        .setErrors({ [NOT_IDENTICAL_PASS_WORD_ERROR]: true });
+      resetUserPasswordComponent.resetUserPasswordForm.setErrors({
+        [NOT_IDENTICAL_PASS_WORD_ERROR]: true,
+      });
 
       expect(
         resetUserPasswordComponent.displayRepeatedPasswordErrorMessage(

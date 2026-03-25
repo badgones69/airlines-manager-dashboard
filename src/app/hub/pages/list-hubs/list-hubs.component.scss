@@ -1,0 +1,17 @@
+/* Columns */
+.mat-column-iata,
+.mat-column-name,
+.mat-column-country,
+.mat-column-city,
+.mat-column-region,
+.mat-column-actions {
+  text-align: center;
+  padding: 3px;
+}
+.mat-column-iata,
+.mat-column-name,
+.mat-column-country,
+.mat-column-city,
+.mat-column-region {
+  border-right: 2px solid var(--app-red);
+}

@@ -1,0 +1,19 @@
+@if (authenticatedUser) {
+  @if (authenticatedUser.profile !== 3) {
+    @if (initHubToEdit) {
+      <!-- HUB FORM (EDIT MODE) -->
+      <hub-form
+        (submitted)="editHub($event)"
+        [formMode]="formMode"
+        [hub]="initHubToEdit"
+      >
+      </hub-form>
+    }
+  } @else {
+    <!-- FORBIDDEN ERROR PAGE -->
+    <forbidden></forbidden>
+  }
+} @else {
+  <!-- UNAUTHORIZED ERROR PAGE -->
+  <unauthorized></unauthorized>
+}
