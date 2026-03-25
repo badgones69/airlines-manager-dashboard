@@ -6,6 +6,7 @@ import {
 import {
   getFormModeLabel,
   getFormActionLabel,
+  getNameLabel,
   getPasswordInputLabel,
   getSubmitButtonLabel,
   getSubmitButtonIcon,
@@ -36,6 +37,11 @@ describe('FormCommonLabels', () => {
     expect(addFormActionLabel).toStrictEqual('créé(e)');
     expect(editFormActionLabel).toStrictEqual('modifié(e)');
     expect(deleteFormActionLabel).toStrictEqual('supprimé(e)');
+  });
+
+  it('#getNameLabel should return "name" label', () => {
+    const nameLabel: string = getNameLabel();
+    expect(nameLabel).toStrictEqual('NOM');
   });
 
   it('#getPasswordInputLabel should return "password" label', () => {

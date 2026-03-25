@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { UserService } from '../../../shared/services/user.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { EDIT_FORM_MODE } from '../../../shared/constants/forms-constants';
@@ -40,11 +40,13 @@ export class EditUserComponent implements OnInit {
   public userUUID!: string;
   public userMapper: UserMapper = new UserMapper();
 
+  /* Injections */
+  public userService: UserService = inject(UserService);
+  public router: Router = inject(Router);
+
   constructor(
-    readonly userService: UserService,
     readonly notificationService: NotificationService,
     public route: ActivatedRoute,
-    readonly router: Router,
   ) {}
 
   ngOnInit(): void {

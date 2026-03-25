@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -34,12 +34,13 @@ export class AppComponent implements OnInit {
   public menuOpened: boolean = false;
   public airlineSubMenuExpanded: boolean = false;
   public userSubMenuExpanded: boolean = false;
+  public hubSubMenuExpanded: boolean = false;
 
-  constructor(
-    readonly userService: UserService,
-    readonly router: Router,
-    readonly dialog: MatDialog,
-  ) {}
+  /* Injections */
+  public userService: UserService = inject(UserService);
+  public router: Router = inject(Router);
+
+  constructor(readonly dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.userService.user.subscribe((user) => {
@@ -59,6 +60,7 @@ export class AppComponent implements OnInit {
     if (!this.menuOpened) {
       this.airlineSubMenuExpanded = false;
       this.userSubMenuExpanded = false;
+      this.hubSubMenuExpanded = false;
     }
   }
 
@@ -70,6 +72,11 @@ export class AppComponent implements OnInit {
   /* User submenu opening/closing */
   userSubMenuToggle(): void {
     this.userSubMenuExpanded = !this.userSubMenuExpanded;
+  }
+
+  /* Hub submenu opening/closing */
+  hubSubMenuToggle(): void {
+    this.hubSubMenuExpanded = !this.hubSubMenuExpanded;
   }
 
   /* About dialog opening */

@@ -11,10 +11,6 @@ export function getICAOCodeInputLabel(): string {
   return 'ICAO';
 }
 
-export function getNameInputLabel(): string {
-  return 'NOM';
-}
-
 export function getLogoInputLabel(formMode: string): string {
   return `${getSubmitButtonLabel(formMode)} le logo`;
 }

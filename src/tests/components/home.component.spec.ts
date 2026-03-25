@@ -1,13 +1,11 @@
 import { describe, it, expect, vi } from 'vitest';
 import { HomeComponent } from '../../app/home/home.component';
-import { UserService } from '../../app/shared/services/user.service';
-import { Inject } from '@angular/core';
-import { AirlineService } from '../../app/shared/services/airline.service';
 import {
   getAirlineWelcomeMessage,
   getDefaultWelcomeMessage,
 } from '../../app/shared/labels/pages/home';
 import { MockHomeComponent } from '../mocks/mock-home-component';
+import { TestBed } from '@angular/core/testing';
 
 function testAirlineService(
   mockHomeComponent: MockHomeComponent,
@@ -35,28 +33,27 @@ function testAirlineService(
 
 describe('HomeComponent', () => {
   it('#ngOnInit should initialize "Home" component', () => {
-    let mockHomeComponent: MockHomeComponent = new MockHomeComponent();
-    const homeComponent: HomeComponent = new HomeComponent(
-      Inject(UserService),
-      Inject(AirlineService),
-    );
-    vi.spyOn(homeComponent, 'ngOnInit').mockImplementation(() => {
-      mockHomeComponent.userService.user.subscribe((user) => {
-        if (user) {
-          homeComponent.authenticatedUser = JSON.parse(user.toString());
-          testAirlineService(mockHomeComponent, homeComponent);
-        }
+    TestBed.runInInjectionContext(() => {
+      let mockHomeComponent: MockHomeComponent = new MockHomeComponent();
+      const homeComponent: HomeComponent = new HomeComponent();
+      vi.spyOn(homeComponent, 'ngOnInit').mockImplementation(() => {
+        mockHomeComponent.userService.user.subscribe((user) => {
+          if (user) {
+            homeComponent.authenticatedUser = JSON.parse(user.toString());
+            testAirlineService(mockHomeComponent, homeComponent);
+          }
+        });
       });
-    });
-    homeComponent.ngOnInit();
+      homeComponent.ngOnInit();
 
-    expect(homeComponent.authenticatedUser).toStrictEqual({
-      id: 7,
-      uuid: 'uuid-authenticated-user',
-      givenName: 'Authneticated',
-      surname: 'USER',
-      login: 'a.u',
-      profile: 1,
+      expect(homeComponent.authenticatedUser).toStrictEqual({
+        id: 7,
+        uuid: 'uuid-authenticated-user',
+        givenName: 'Authneticated',
+        surname: 'USER',
+        login: 'a.u',
+        profile: 1,
+      });
     });
   });
 });
