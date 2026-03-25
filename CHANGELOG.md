@@ -106,3 +106,17 @@
     <li>tar</li>
   </ul>
 </ul>
+
+<h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.1.0">1.1.0</a>
+    (2026-03-25)
+</h1>
+
+<h3>Features</h3>
+
+<ul>
+  <li><h4><ins>ADMINISTRATOR OR MANAGER PROFILE</ins></h4></li>
+  <ul>
+    <li><b>HUB :</b> adding, editing, deleting</li>
+  </ul>
+</ul>
