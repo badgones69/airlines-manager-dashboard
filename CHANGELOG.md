@@ -120,3 +120,23 @@
     <li><b>HUB :</b> adding, editing, deleting</li>
   </ul>
 </ul>
+<br />
+<h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.1.1">1.1.1</a>
+    (2026-03-27)
+</h1>
+
+<h3>Security</h3>
+
+<ul>
+  <li><h4>Dependencies upgrade :</h4></li>
+  <ul>
+    <li>Angular (20 => 21)</li>
+    <li>TypeScript</li>
+    <li>Supabase-JS</li>
+    <li>OpenLayers</li>
+    <li>NGx Toastr</li>
+    <li>Bcrypt-TS</li>
+    <li>Vitest</li>
+  </ul>
+</ul>
