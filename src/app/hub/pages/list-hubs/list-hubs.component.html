@@ -1,52 +1,63 @@
 @if (authenticatedUser) {
-  @if (authenticatedUser.profile !== 3) {
-    <!-- TITLE -->
-    <div class="list-title">
-      <mat-label>{{ hubsListTitle }}</mat-label>
-    </div>
+  <!-- TITLE -->
+  <div class="list-title">
+    <mat-label>{{ hubsListTitle }}</mat-label>
+  </div>
 
-    <table mat-table [dataSource]="hubsList">
-      <!-- IATA COLUMN -->
-      <ng-container [matColumnDef]="columnsIdentifiers[0]">
-        <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[0] }}</th>
-        <td mat-cell *matCellDef="let hub">{{ hub.iata }}</td>
-      </ng-container>
+  <table mat-table [dataSource]="hubsList">
+    <!-- IATA COLUMN -->
+    <ng-container [matColumnDef]="columnsIdentifiers[0]">
+      <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[0] }}</th>
+      <td mat-cell *matCellDef="let hub">{{ hub.iata }}</td>
+    </ng-container>
 
-      <!-- NAME COLUMN -->
-      <ng-container [matColumnDef]="columnsIdentifiers[1]">
-        <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[1] }}</th>
-        <td mat-cell *matCellDef="let hub">{{ hub.name }}</td>
-      </ng-container>
+    <!-- NAME COLUMN -->
+    <ng-container [matColumnDef]="columnsIdentifiers[1]">
+      <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[1] }}</th>
+      <td mat-cell *matCellDef="let hub">{{ hub.name }}</td>
+    </ng-container>
 
-      <!-- COUNTRY COLUMN -->
-      <ng-container [matColumnDef]="columnsIdentifiers[2]">
-        <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[2] }}</th>
-        <td mat-cell *matCellDef="let hub">
-          <span class="flag fi fi-{{ hub.country.flagCode }}"></span>
-          {{ hub.country.name }}
-        </td>
-      </ng-container>
+    <!-- COUNTRY COLUMN -->
+    <ng-container [matColumnDef]="columnsIdentifiers[2]">
+      <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[2] }}</th>
+      <td mat-cell *matCellDef="let hub">
+        <span class="flag fi fi-{{ hub.country.flagCode }}"></span>
+        {{ hub.country.name }}
+      </td>
+    </ng-container>
 
-      <!-- CITY COLUMN -->
-      <ng-container [matColumnDef]="columnsIdentifiers[3]">
-        <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[3] }}</th>
-        <td mat-cell *matCellDef="let hub">
-          {{ hub.city }}
-        </td>
-      </ng-container>
+    <!-- CITY COLUMN -->
+    <ng-container [matColumnDef]="columnsIdentifiers[3]">
+      <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[3] }}</th>
+      <td mat-cell *matCellDef="let hub">
+        {{ hub.city }}
+      </td>
+    </ng-container>
 
-      <!-- REGION COLUMN -->
-      <ng-container [matColumnDef]="columnsIdentifiers[4]">
-        <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[4] }}</th>
-        <td mat-cell *matCellDef="let hub">
-          @if (hub.region) {
-            {{ hub.region.name }} ({{ hub.region.code }})
-          } @else {
-            -
-          }
-        </td>
-      </ng-container>
-
+    <!-- REGION COLUMN -->
+    <ng-container [matColumnDef]="columnsIdentifiers[4]">
+      <th
+        mat-header-cell
+        class="column-region"
+        [class.mat-column-region]="authenticatedUser.profile < 3"
+        *matHeaderCellDef
+      >
+        {{ columnsHeaders[4] }}
+      </th>
+      <td
+        mat-cell
+        class="column-region"
+        [class.mat-column-region]="authenticatedUser.profile < 3"
+        *matCellDef="let hub"
+      >
+        @if (hub.region) {
+          {{ hub.region.name }} ({{ hub.region.code }})
+        } @else {
+          -
+        }
+      </td>
+    </ng-container>
+    @if (authenticatedUser.profile < 3) {
       <!-- ACTIONS BUTTONS -->
       <ng-container [matColumnDef]="columnsIdentifiers[5]">
         <th id="actions" mat-header-cell *matHeaderCellDef></th>
@@ -59,17 +70,14 @@
           </button>
         </td>
       </ng-container>
+    }
 
-      <tr mat-header-row *matHeaderRowDef="columnsIdentifiers"></tr>
-      <tr mat-row *matRowDef="let row; columns: columnsIdentifiers"></tr>
-    </table>
+    <tr mat-header-row *matHeaderRowDef="columnsIdentifiers"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsIdentifiers"></tr>
+  </table>
 
-    <!-- PAGINATOR -->
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons />
-  } @else {
-    <!-- FORBIDDEN ERROR PAGE -->
-    <forbidden></forbidden>
-  }
+  <!-- PAGINATOR -->
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons />
 } @else {
   <!-- UNAUTHORIZED ERROR PAGE -->
   <unauthorized></unauthorized>
