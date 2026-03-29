@@ -75,7 +75,7 @@
       }
     }
     <!-- HUB SUBMENU -->
-    @if (authenticatedUser && authenticatedUser.profile !== 3) {
+    @if (authenticatedUser) {
       <button mat-button (click)="hubSubMenuToggle()" class="menu-button">
         @if (hubSubMenuExpanded) {
           <i class="material-icons">expand_more</i>
@@ -86,11 +86,13 @@
         <span>Hub</span>
       </button>
       @if (hubSubMenuExpanded) {
-        <!-- HUB ADDING FORM BUTTON -->
-        <button mat-icon-button class="submenu-button" routerLink="hubs/add">
-          <i class="material-icons">add</i>
-          <span>Ajouter</span>
-        </button>
+        @if (authenticatedUser.profile < 3) {
+          <!-- HUB ADDING FORM BUTTON -->
+          <button mat-icon-button class="submenu-button" routerLink="hubs/add">
+            <i class="material-icons">add</i>
+            <span>Ajouter</span>
+          </button>
+        }
         <!-- HUBS LIST BUTTON -->
         <button mat-icon-button class="submenu-button" routerLink="hubs/list">
           <i class="material-icons">list</i>
