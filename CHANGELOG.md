@@ -140,3 +140,17 @@
     <li>Vitest</li>
   </ul>
 </ul>
+<br />
+<h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.1.2">1.1.2</a>
+    (2026-03-29)
+</h1>
+
+<h3>Bug fixes</h3>
+
+<ul>
+  <li><b>HUB :</b></li>
+  <ul>
+    <li>list (access in read-only mode to user with consultant profile)</li>
+  </ul>
+</ul>

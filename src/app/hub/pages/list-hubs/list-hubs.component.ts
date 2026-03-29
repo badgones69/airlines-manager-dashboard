@@ -25,7 +25,6 @@ import {
   getCityLabel,
   getRegionLabel,
 } from '../../../shared/labels/commons/airport-common';
-import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -42,7 +41,6 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
     MatPaginatorModule,
     MatButtonModule,
     MatLabel,
-    ForbiddenComponent,
     UnauthorizedComponent,
   ],
   templateUrl: './list-hubs.component.html',
@@ -68,7 +66,6 @@ export class ListHubsComponent implements OnInit, AfterViewInit {
     'country',
     'city',
     'region',
-    'actions',
   ];
 
   /* List columns headers labels */
@@ -95,6 +92,13 @@ export class ListHubsComponent implements OnInit, AfterViewInit {
     this.userService.user.subscribe((user) => {
       if (user) {
         this.authenticatedUser = JSON.parse(user.toString());
+
+        if (
+          this.authenticatedUser.profile < 3 &&
+          !this.columnsIdentifiers.includes('actions')
+        ) {
+          this.columnsIdentifiers.push('actions');
+        }
       }
     });
 
