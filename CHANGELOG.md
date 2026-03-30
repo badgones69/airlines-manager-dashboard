@@ -1,123 +1,15 @@
 <h1 align="center">AM Dashboard</h1>
 <h1 align="center">
-    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.0.0">1.0.0</a>
-    (2026-01-28)
-</h1>
-
-<h3>Features</h3>
-
-<ul>
-  <li><h4><ins>ADMINISTRATOR PROFILE ONLY</ins></h4></li>
-  <ul>
-    <li><b>AIRLINE :</b> editing & logo customizing</li>
-    <li><b>USER :</b> adding, editing, deleting, password resetting</li>
-  </ul>
-</ul>
-<br />
-<h1 align="center">
-    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.0.1">1.0.1</a>
-    (2026-01-29)
-</h1>
-
-<h3>Security</h3>
-
-<ul>
-  <li><h4>CVE corrections :</h4></li>
-  <ul>
-    <li>@angular/compiler</li>
-    <li>@angular/common</li>
-    <li>@angular/core</li>
-    <li>tar</li>
-    <li>@modelcontextprotocol/sdk</li>
-    <li>qs</li>
-  </ul>
-</ul>
-<br />
-<h1 align="center">
-    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.0.2">1.0.2</a>
-    (2026-02-07)
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.1.2">1.1.2</a>
+    (2026-03-29)
 </h1>
 
 <h3>Bug fixes</h3>
 
 <ul>
-  <li><b>USER :</b></li>
+  <li><b>HUB :</b></li>
   <ul>
-    <li>add/edit form (given name formatting)</li>
-    <li>list (columns display correction)</li>
-  </ul>
-</ul>
-<br />
-<h1 align="center">
-    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.0.3">1.0.3</a>
-    (2026-02-08)
-</h1>
-
-<h3>Security</h3>
-
-<ul>
-  <li><h4>CVE corrections :</h4></li>
-  <ul>
-    <li>@isaacs/brace-expansion</li>
-    <li>@modelcontextprotocol/sdk</li>
-  </ul>
-</ul>
-<br />
-<h1 align="center">
-    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.0.4">1.0.4</a>
-    (2026-02-13)
-</h1>
-
-<h3>Bug fixes</h3>
-
-<ul>
-  <li><b>USER :</b></li>
-  <ul>
-    <li>list (columns display correction)</li>
-  </ul>
-</ul>
-<br />
-<h1 align="center">
-    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.0.5">1.0.5</a>
-    (2026-02-15)
-</h1>
-
-<h3>Security</h3>
-
-<ul>
-  <li><h4>CVE corrections :</h4></li>
-  <ul>
-    <li>qs</li>
-  </ul>
-</ul>
-<br />
-<h1 align="center">
-    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.0.6">1.0.6</a>
-    (2026-02-20)
-</h1>
-
-<h3>Security</h3>
-
-<ul>
-  <li><h4>CVE corrections :</h4></li>
-  <ul>
-    <li>ajv</li>
-    <li>minimatch</li>
-    <li>tar</li>
-  </ul>
-</ul>
-
-<h1 align="center">
-    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.1.0">1.1.0</a>
-    (2026-03-25)
-</h1>
-
-<h3>Features</h3>
-
-<ul>
-  <li><h4><ins>ADMINISTRATOR OR MANAGER PROFILE</ins></h4></li>
-  <ul>
-    <li><b>HUB :</b> adding, editing, deleting</li>
+    <li>list (access in read-only mode to user with consultant profile)</li>
   </ul>
 </ul>
 <br />
@@ -142,15 +34,123 @@
 </ul>
 <br />
 <h1 align="center">
-    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.1.2">1.1.2</a>
-    (2026-03-29)
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.1.0">1.1.0</a>
+    (2026-03-25)
+</h1>
+
+<h3>Features</h3>
+
+<ul>
+  <li><h4><ins>ADMINISTRATOR OR MANAGER PROFILE</ins></h4></li>
+  <ul>
+    <li><b>HUB :</b> adding, editing, deleting</li>
+  </ul>
+</ul>
+<br />
+<h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.0.6">1.0.6</a>
+    (2026-02-20)
+</h1>
+
+<h3>Security</h3>
+
+<ul>
+  <li><h4>CVE corrections :</h4></li>
+  <ul>
+    <li>ajv</li>
+    <li>minimatch</li>
+    <li>tar</li>
+  </ul>
+</ul>
+<br />
+<h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.0.5">1.0.5</a>
+    (2026-02-15)
+</h1>
+
+<h3>Security</h3>
+
+<ul>
+  <li><h4>CVE corrections :</h4></li>
+  <ul>
+    <li>qs</li>
+  </ul>
+</ul>
+<br />
+<h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.0.4">1.0.4</a>
+    (2026-02-13)
 </h1>
 
 <h3>Bug fixes</h3>
 
 <ul>
-  <li><b>HUB :</b></li>
+  <li><b>USER :</b></li>
   <ul>
-    <li>list (access in read-only mode to user with consultant profile)</li>
+    <li>list (columns display correction)</li>
+  </ul>
+</ul>
+<br />
+<h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.0.3">1.0.3</a>
+    (2026-02-08)
+</h1>
+
+<h3>Security</h3>
+
+<ul>
+  <li><h4>CVE corrections :</h4></li>
+  <ul>
+    <li>@isaacs/brace-expansion</li>
+    <li>@modelcontextprotocol/sdk</li>
+  </ul>
+</ul>
+<br />
+<h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.0.2">1.0.2</a>
+    (2026-02-07)
+</h1>
+
+<h3>Bug fixes</h3>
+
+<ul>
+  <li><b>USER :</b></li>
+  <ul>
+    <li>add/edit form (given name formatting)</li>
+    <li>list (columns display correction)</li>
+  </ul>
+</ul>
+<br />
+<h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.0.1">1.0.1</a>
+    (2026-01-29)
+</h1>
+
+<h3>Security</h3>
+
+<ul>
+  <li><h4>CVE corrections :</h4></li>
+  <ul>
+    <li>@angular/compiler</li>
+    <li>@angular/common</li>
+    <li>@angular/core</li>
+    <li>tar</li>
+    <li>@modelcontextprotocol/sdk</li>
+    <li>qs</li>
+  </ul>
+</ul>
+<br />
+<h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.0.0">1.0.0</a>
+    (2026-01-28)
+</h1>
+
+<h3>Features</h3>
+
+<ul>
+  <li><h4><ins>ADMINISTRATOR PROFILE ONLY</ins></h4></li>
+  <ul>
+    <li><b>AIRLINE :</b> editing & logo customizing</li>
+    <li><b>USER :</b> adding, editing, deleting, password resetting</li>
   </ul>
 </ul>
