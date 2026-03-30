@@ -1,5 +1,20 @@
 <h1 align="center">AM Dashboard</h1>
 <h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.1.3">1.1.3</a>
+    (2026-03-30)
+</h1>
+
+<h3>Security</h3>
+
+<ul>
+  <li><h4>CVE corrections :</h4></li>
+  <ul>
+    <li>brace-expansion</li>
+    <li>picomatch</li>
+  </ul>
+</ul>
+<br />
+<h1 align="center">
     <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.1.2">1.1.2</a>
     (2026-03-29)
 </h1>
