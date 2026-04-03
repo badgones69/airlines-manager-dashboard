@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../../../shared/services/user.service';
 import { User } from '../../../shared/models/User';
 import { Airport } from '../../../shared/models/Airport';
-import { HubFormComponent } from '../../form-component/hub-form.component';
+import { AirportFormComponent } from '../../../shared/components/airport-form/airport-form.component';
 import { ADD_FORM_MODE } from '../../../shared/constants/forms-constants';
 import { getFormModeLabel } from '../../../shared/labels/commons/form-common';
 import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
@@ -22,7 +22,7 @@ import {
 @Component({
   selector: 'add-hub',
   standalone: true,
-  imports: [HubFormComponent, ForbiddenComponent, UnauthorizedComponent],
+  imports: [AirportFormComponent, ForbiddenComponent, UnauthorizedComponent],
   templateUrl: './add-hub.component.html',
   styleUrls: [],
 })
@@ -31,6 +31,7 @@ export class AddHubComponent implements OnInit {
 
   public initHubToAdd!: Airport;
   public formMode: string = ADD_FORM_MODE;
+  public formTitle: string = getHubFormTitle();
 
   /* Injections */
   public userService: UserService = inject(UserService);

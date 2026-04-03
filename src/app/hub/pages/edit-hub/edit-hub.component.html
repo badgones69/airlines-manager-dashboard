@@ -1,13 +1,15 @@
 @if (authenticatedUser) {
-  @if (authenticatedUser.profile !== 3) {
+  @if (authenticatedUser.profile < 3) {
     @if (initHubToEdit) {
       <!-- HUB FORM (EDIT MODE) -->
-      <hub-form
+      <airport-form
         (submitted)="editHub($event)"
         [formMode]="formMode"
-        [hub]="initHubToEdit"
+        [formTitle]="formTitle"
+        [airport]="initHubToEdit"
+        [isHub]=true
       >
-      </hub-form>
+      </airport-form>
     }
   } @else {
     <!-- FORBIDDEN ERROR PAGE -->

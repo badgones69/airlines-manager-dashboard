@@ -9,7 +9,7 @@ export const LOGIN_PATTERN = String.raw`^([a-zßñçãáàâäéèêëíìîïõ
 export const PASS_WORD_PATTERN =
   '^(?=(?:.*[0-9]){2,})(?=(?:.*[A-ZẞÑÇÃÁÀÂÄÉÈÊËÍÌÎÏÕÒÓÔÖÚÙÛÜ]){2,})(?=(?:.*[a-zßñçãáàâäéèêëíìîïõо́òôöúùûü]){2,})(?=(?:.*[\\[\\]§:*_`|"+(=)&¤<.>?€;!$£%@^#~/{}\\-]){2,}).{16,}$';
 export const ICAO_IATA_CODE_PATTERN = '[A-Za-z]{3}';
-export const LATITUDE_LONGITUDE_PATTERN = String.raw`^-?\d+\.\d+$`;
+export const LATITUDE_LONGITUDE_PATTERN = String.raw`^-?\d+([.]\d+)?$`;
 
 /* Forms fields error types */
 export const REQUIRED_ERROR = 'required';
