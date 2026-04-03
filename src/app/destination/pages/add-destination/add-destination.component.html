@@ -1,12 +1,12 @@
 @if (authenticatedUser) {
   @if (authenticatedUser.profile < 3) {
-    <!-- HUB FORM (ADD MODE) -->
+    <!-- DESTINATION FORM (ADD MODE) -->
     <airport-form
-      (submitted)="addHub($event)"
+      (submitted)="addDestination($event)"
       [formMode]="formMode"
       [formTitle]="formTitle"
-      [airport]="initHubToAdd"
-      [isHub]=true
+      [airport]="initDestinationToAdd"
+      [isHub]=false
     >
     </airport-form>
   } @else {
