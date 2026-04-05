@@ -5,3 +5,7 @@ export function getUsersListTitle(): string {
 export function getHubsListTitle(): string {
   return 'Liste des hubs';
 }
+
+export function getDestinationsListTitle(): string {
+  return 'Liste des destinations';
+}

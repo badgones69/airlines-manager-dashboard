@@ -10,6 +10,7 @@ import { AddHubComponent } from './hub/pages/add-hub/add-hub.component';
 import { ListHubsComponent } from './hub/pages/list-hubs/list-hubs.component';
 import { EditHubComponent } from './hub/pages/edit-hub/edit-hub.component';
 import { AddDestinationComponent } from './destination/pages/add-destination/add-destination.component';
+import { ListDestinationsComponent } from './destination/pages/list-destinations/list-destinations.component';
 
 export const routes: Routes = [
   /* Authentication form (default route) */
@@ -51,6 +52,7 @@ export const routes: Routes = [
     path: 'destinations',
     children: [
       { path: 'add', component: AddDestinationComponent },
+      { path: 'list', component: ListDestinationsComponent },
     ],
   },
 ];
