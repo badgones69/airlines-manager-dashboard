@@ -1,11 +1,9 @@
 @if (authenticatedUser) {
   @if (authenticatedUser.profile < 3) {
-    <!-- HUBS LIST -->
+    <!-- DESTINATIONS LIST -->
     <list-airports
-      [airportsListTitle]="hubsListTitle"
-      [isHub]=true
-      [openAirportForm]="openHubForm"
-      [deleteAirport]="deleteHub"
+      [airportsListTitle]="destinationsListTitle"
+      [isHub]=false
     >
     </list-airports>
   } @else {

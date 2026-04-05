@@ -17,6 +17,7 @@ import {
   getDestinationFormSuccessNotificationMessage,
   getDestinationFormTitle,
 } from '../../../shared/labels/forms/destination-form';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'add-destination',
@@ -35,6 +36,7 @@ export class AddDestinationComponent implements OnInit {
   /* Injections */
   public userService: UserService = inject(UserService);
   public airportService: AirportService = inject(AirportService);
+  public router: Router = inject(Router);
 
   constructor(readonly notificationService: NotificationService) {}
 
@@ -59,6 +61,8 @@ export class AddDestinationComponent implements OnInit {
           )} ${getDestinationFormTitle()}`.toUpperCase(),
           `${getDestinationFormSuccessNotificationMessage(this.formMode)}`,
         );
+        // Redirection to destinations list
+        this.router.navigate(['destinations', 'list']);
       } else {
         /* Technical error notification showing */
         this.notificationService.showErrorNotification(

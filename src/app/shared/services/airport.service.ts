@@ -8,9 +8,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class AirportService {
   readonly hubs$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  readonly destinations$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
   constructor() {
     this.refreshHubsList();
+    this.refreshDestinationsList();
   }
 
   /* Hubs list loading */
@@ -20,9 +22,21 @@ export class AirportService {
     });
   }
 
+  /* Destinations list loading */
+  public refreshDestinationsList(): void {
+    this.findAllDestinations().then((destinations) => {
+      this.destinations$.next(destinations);
+    });
+  }
+
   /* Hubs list reading */
   public get hubs(): Observable<any[]> {
     return this.hubs$;
+  }
+
+  /* Destinations list reading */
+  public get destinations(): Observable<any[]> {
+    return this.destinations$;
   }
 
   /* All hubs retrieving */
@@ -31,6 +45,16 @@ export class AirportService {
       .from('AIRPORT')
       .select()
       .eq('airportHub', true);
+
+    return data || [];
+  }
+
+  /* All destinations retrieving */
+  public async findAllDestinations(): Promise<any[]> {
+    const { data } = await supabase
+      .from('AIRPORT')
+      .select()
+      .eq('airportHub', false);
 
     return data || [];
   }
@@ -74,6 +98,7 @@ export class AirportService {
       .select();
 
     this.refreshHubsList();
+    this.refreshDestinationsList();
     return data;
   }
 
