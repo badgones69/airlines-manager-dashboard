@@ -9,8 +9,11 @@ import { getDestinationsListTitle } from '../../../shared/labels/lists';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
 import { ListAirportsComponent } from '../../../shared/components/list-airports/list-airports.component';
 import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
+import { DeleteDestinationComponent } from '../delete-destination/delete-destination.component';
 import { Airport } from '../../../shared/models/Airport';
 import { Router } from '@angular/router';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'list-destinations',
@@ -29,7 +32,7 @@ export class ListDestinationsComponent implements OnInit {
   public userService: UserService = inject(UserService);
   public router: Router = inject(Router);
 
-  constructor() {}
+  constructor(readonly dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.destinationsListTitle = getDestinationsListTitle();
@@ -42,7 +45,21 @@ export class ListDestinationsComponent implements OnInit {
   }
 
   /* Destination form (edit mode) opening */
-    openDestinationForm(destination: Airport) {
-      this.router.navigate(['destinations', 'edit', destination.uuid]);
-    }
+  openDestinationForm(destination: Airport) {
+    this.router.navigate(['destinations', 'edit', destination.uuid]);
+  }
+
+  /* Destination deletion confirmation dialog opening */
+  deleteDestination(destination: Airport) {
+    let dialogRef: MatDialogRef<DeleteDestinationComponent> = this.dialog.open(
+      DeleteDestinationComponent,
+      {
+        disableClose: false,
+        autoFocus: true,
+        scrollStrategy: new NoopScrollStrategy(),
+      },
+    );
+    dialogRef.componentInstance.destinationUUID = destination.uuid!;
+    dialogRef.afterClosed().subscribe(() => this.ngOnInit());
+  }
 }

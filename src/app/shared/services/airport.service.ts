@@ -142,6 +142,7 @@ export class AirportService {
       .eq('airportUUID', airportUUID);
 
     this.refreshHubsList();
+    this.refreshDestinationsList();
     return response;
   }
 }
