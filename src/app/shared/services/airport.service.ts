@@ -130,6 +130,7 @@ export class AirportService {
       .select();
 
     this.refreshHubsList();
+    this.refreshDestinationsList();
     return data;
   }
 

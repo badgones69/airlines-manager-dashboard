@@ -9,6 +9,8 @@ import { getDestinationsListTitle } from '../../../shared/labels/lists';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
 import { ListAirportsComponent } from '../../../shared/components/list-airports/list-airports.component';
 import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
+import { Airport } from '../../../shared/models/Airport';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'list-destinations',
@@ -25,6 +27,7 @@ export class ListDestinationsComponent implements OnInit {
 
   /* Injections */
   public userService: UserService = inject(UserService);
+  public router: Router = inject(Router);
 
   constructor() {}
 
@@ -37,4 +40,9 @@ export class ListDestinationsComponent implements OnInit {
       }
     });
   }
+
+  /* Destination form (edit mode) opening */
+    openDestinationForm(destination: Airport) {
+      this.router.navigate(['destinations', 'edit', destination.uuid]);
+    }
 }

@@ -1,0 +1,21 @@
+@if (authenticatedUser) {
+  @if (authenticatedUser.profile < 3) {
+    @if (initDestinationToEdit) {
+      <!-- DESTINATION FORM (EDIT MODE) -->
+      <airport-form
+        (submitted)="editDestination($event)"
+        [formMode]="formMode"
+        [formTitle]="formTitle"
+        [airport]="initDestinationToEdit"
+        [isHub]=false
+      >
+      </airport-form>
+    }
+  } @else {
+    <!-- FORBIDDEN ERROR PAGE -->
+    <forbidden></forbidden>
+  }
+} @else {
+  <!-- UNAUTHORIZED ERROR PAGE -->
+  <unauthorized></unauthorized>
+}
