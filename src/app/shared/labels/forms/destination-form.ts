@@ -9,6 +9,8 @@ export function getDestinationDeleteDialogMessage(): string {
   return `${getDeleteDialogMessage().replace('{}', 'cette destination')}`;
 }
 
-export function getDestinationFormSuccessNotificationMessage(formMode: string): string {
+export function getDestinationFormSuccessNotificationMessage(
+  formMode: string,
+): string {
   return `Votre destination a bien été ${getFormActionLabel(formMode)} !`;
 }

@@ -102,7 +102,11 @@
     }
     <!-- DESTINATION SUBMENU -->
     @if (authenticatedUser) {
-      <button mat-button (click)="destinationSubMenuToggle()" class="menu-button">
+      <button
+        mat-button
+        (click)="destinationSubMenuToggle()"
+        class="menu-button"
+      >
         @if (destinationSubMenuExpanded) {
           <i class="material-icons">expand_more</i>
         } @else {
@@ -114,13 +118,21 @@
       @if (destinationSubMenuExpanded) {
         @if (authenticatedUser.profile < 3) {
           <!-- DESTINATION ADDING FORM BUTTON -->
-          <button mat-icon-button class="submenu-button" routerLink="destinations/add">
+          <button
+            mat-icon-button
+            class="submenu-button"
+            routerLink="destinations/add"
+          >
             <i class="material-icons">add</i>
             <span>Ajouter</span>
           </button>
         }
         <!-- DESTINATIONS LIST BUTTON -->
-        <button mat-icon-button class="submenu-button" routerLink="destinations/list">
+        <button
+          mat-icon-button
+          class="submenu-button"
+          routerLink="destinations/list"
+        >
           <i class="material-icons">list</i>
           <span>Liste</span>
         </button>

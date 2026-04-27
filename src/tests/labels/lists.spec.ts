@@ -1,4 +1,8 @@
-import { getDestinationsListTitle, getHubsListTitle, getUsersListTitle } from '../../app/shared/labels/lists';
+import {
+  getDestinationsListTitle,
+  getHubsListTitle,
+  getUsersListTitle,
+} from '../../app/shared/labels/lists';
 import { describe, it, expect } from 'vitest';
 
 describe('ListsLabels', () => {

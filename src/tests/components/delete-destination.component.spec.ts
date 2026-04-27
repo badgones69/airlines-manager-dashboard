@@ -13,7 +13,10 @@ import { DELETE_FORM_MODE } from '../../app/shared/constants/forms-constants';
 import { TestBed } from '@angular/core/testing';
 import { getFormModeLabel } from '../../app/shared/labels/commons/form-common';
 import { DeleteDestinationComponent } from '../../app/destination/pages/delete-destination/delete-destination.component';
-import { getDestinationFormSuccessNotificationMessage, getDestinationFormTitle } from '../../app/shared/labels/forms/destination-form';
+import {
+  getDestinationFormSuccessNotificationMessage,
+  getDestinationFormTitle,
+} from '../../app/shared/labels/forms/destination-form';
 
 describe('DeleteDestinationComponent', () => {
   @Component({})
@@ -28,18 +31,19 @@ describe('DeleteDestinationComponent', () => {
 
   it('#ngOnInit should initialize "Delete destination" component', () => {
     TestBed.runInInjectionContext(() => {
-      const deleteDestinationComponent: DeleteDestinationComponent = new DeleteDestinationComponent(
-        Inject(NotificationService),
-      );
+      const deleteDestinationComponent: DeleteDestinationComponent =
+        new DeleteDestinationComponent(Inject(NotificationService));
       deleteDestinationComponent.ngOnInit();
 
-      expect(deleteDestinationComponent.deleteDestinationDialogTitle).toStrictEqual(
-        "Suppression d'une destination",
-      );
-      expect(deleteDestinationComponent.deleteDestinationDialogMode).toStrictEqual(
-        CONFIRMATION_DIALOG_MODE,
-      );
-      expect(deleteDestinationComponent.deleteDestinationDialogMessage).toStrictEqual(
+      expect(
+        deleteDestinationComponent.deleteDestinationDialogTitle,
+      ).toStrictEqual("Suppression d'une destination");
+      expect(
+        deleteDestinationComponent.deleteDestinationDialogMode,
+      ).toStrictEqual(CONFIRMATION_DIALOG_MODE);
+      expect(
+        deleteDestinationComponent.deleteDestinationDialogMessage,
+      ).toStrictEqual(
         'Confirmez-vous la suppression définitive de cette destination ?',
       );
     });
@@ -49,10 +53,12 @@ describe('DeleteDestinationComponent', () => {
     TestBed.runInInjectionContext(() => {
       let mockDeleteDestinationComponent: MockDeleteDestinationComponent =
         new MockDeleteDestinationComponent();
-      const deleteDestinationComponent: DeleteDestinationComponent = new DeleteDestinationComponent(
-        Inject(NotificationService),
-      );
-      vi.spyOn(deleteDestinationComponent, 'deleteDestination').mockImplementation(() => {
+      const deleteDestinationComponent: DeleteDestinationComponent =
+        new DeleteDestinationComponent(Inject(NotificationService));
+      vi.spyOn(
+        deleteDestinationComponent,
+        'deleteDestination',
+      ).mockImplementation(() => {
         mockDeleteDestinationComponent.airportService
           .deleteAirport('uuid-destination-to-delete')
           .then(async (result) => {
@@ -63,7 +69,9 @@ describe('DeleteDestinationComponent', () => {
                   `${getDestinationFormSuccessNotificationMessage(DELETE_FORM_MODE)}`,
                 );
               expect(toastrSuccess.toastId).toStrictEqual(2);
-              expect(toastrSuccess.title).toStrictEqual("SUPPRESSION D'UNE DESTINATION");
+              expect(toastrSuccess.title).toStrictEqual(
+                "SUPPRESSION D'UNE DESTINATION",
+              );
               expect(toastrSuccess.message).toStrictEqual(
                 'Votre destination a bien été supprimé(e) !',
               );

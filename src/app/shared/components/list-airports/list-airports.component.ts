@@ -106,7 +106,8 @@ export class ListAirportsComponent implements OnInit, AfterViewInit {
       });
     } else {
       this.airportService.destinations.subscribe((destinations) => {
-        this.airportsList.data = this.airportMapper.airportsListFromDB(destinations);
+        this.airportsList.data =
+          this.airportMapper.airportsListFromDB(destinations);
       });
     }
   }

@@ -50,9 +50,12 @@ export class EditDestinationComponent implements OnInit {
   ngOnInit(): void {
     this.destinationUUID = this.route.snapshot.paramMap.get('uuid') ?? '';
 
-    this.airportService.findAirport(this.destinationUUID).then((destination) => {
-      this.initDestinationToEdit = this.airportMapper.airportFromDB(destination);
-    });
+    this.airportService
+      .findAirport(this.destinationUUID)
+      .then((destination) => {
+        this.initDestinationToEdit =
+          this.airportMapper.airportFromDB(destination);
+      });
 
     this.userService.user.subscribe((user) => {
       if (user) {

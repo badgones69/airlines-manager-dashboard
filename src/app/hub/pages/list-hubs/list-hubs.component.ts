@@ -1,8 +1,4 @@
-import {
-  Component,
-  inject,
-  OnInit,
-} from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { User } from '../../../shared/models/User';
 import { UserService } from '../../../shared/services/user.service';
 import { getHubsListTitle } from '../../../shared/labels/lists';

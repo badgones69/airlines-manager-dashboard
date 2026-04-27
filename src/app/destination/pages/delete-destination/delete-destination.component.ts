@@ -16,7 +16,8 @@ import {
 } from '../../../shared/labels/errors';
 
 @Component({
-  templateUrl: '../../pages/delete-destination/delete-destination.component.html',
+  templateUrl:
+    '../../pages/delete-destination/delete-destination.component.html',
   standalone: true,
   imports: [DialogComponent],
 })
@@ -45,22 +46,24 @@ export class DeleteDestinationComponent implements OnInit {
     // If deletion is confirmed by user
     if (isDeletionDialogConfirmed) {
       // Destination deletion
-      this.airportService.deleteAirport(this.destinationUUID).then((response) => {
-        // If destination is deleted
-        if (response.status === 204) {
-          /* Success notification showing */
-          this.notificationService.showSuccessNotification(
-            this.deleteDestinationDialogTitle.toUpperCase(),
-            getDestinationFormSuccessNotificationMessage(DELETE_FORM_MODE),
-          );
-        } else {
-          /* Technical error notification showing */
-          this.notificationService.showErrorNotification(
-            `${getTechnicalErrorTitle()}`,
-            `${getTechnicalErrorMessage()}`,
-          );
-        }
-      });
+      this.airportService
+        .deleteAirport(this.destinationUUID)
+        .then((response) => {
+          // If destination is deleted
+          if (response.status === 204) {
+            /* Success notification showing */
+            this.notificationService.showSuccessNotification(
+              this.deleteDestinationDialogTitle.toUpperCase(),
+              getDestinationFormSuccessNotificationMessage(DELETE_FORM_MODE),
+            );
+          } else {
+            /* Technical error notification showing */
+            this.notificationService.showErrorNotification(
+              `${getTechnicalErrorTitle()}`,
+              `${getTechnicalErrorMessage()}`,
+            );
+          }
+        });
     }
   }
 }

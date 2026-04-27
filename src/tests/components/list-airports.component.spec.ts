@@ -25,24 +25,31 @@ describe('ListAirportsComponent', () => {
     TestBed.runInInjectionContext(() => {
       const mockListAirportsComponent: MockListAirportsComponent =
         new MockListAirportsComponent();
-      const listAirportsComponent: ListAirportsComponent = new ListAirportsComponent(
-        Inject(MatDialog),
-      );
+      const listAirportsComponent: ListAirportsComponent =
+        new ListAirportsComponent(Inject(MatDialog));
       vi.spyOn(listAirportsComponent, 'ngOnInit').mockImplementation(() => {
         mockListAirportsComponent.userService.user.subscribe((user) => {
           if (user) {
-            listAirportsComponent.authenticatedUser = JSON.parse(user.toString());
+            listAirportsComponent.authenticatedUser = JSON.parse(
+              user.toString(),
+            );
           }
         });
-        
+
         if (listAirportsComponent.isHub) {
           mockListAirportsComponent.airportService.hubs.subscribe((hubs) => {
-            listAirportsComponent.airportsList.data = mockListAirportsComponent.airportMapper.airportsListFromDB(hubs);
+            listAirportsComponent.airportsList.data =
+              mockListAirportsComponent.airportMapper.airportsListFromDB(hubs);
           });
         } else {
-          mockListAirportsComponent.airportService.destinations.subscribe((destinations) => {
-            listAirportsComponent.airportsList.data = mockListAirportsComponent.airportMapper.airportsListFromDB(destinations);
-          });
+          mockListAirportsComponent.airportService.destinations.subscribe(
+            (destinations) => {
+              listAirportsComponent.airportsList.data =
+                mockListAirportsComponent.airportMapper.airportsListFromDB(
+                  destinations,
+                );
+            },
+          );
         }
       });
       listAirportsComponent.isHub = true;
