@@ -1,5 +1,4 @@
 import { describe, it, expect, vi } from 'vitest';
-import { AddHubComponent } from '../../app/hub/pages/add-hub/add-hub.component';
 import { Component, Inject } from '@angular/core';
 import { MockAirportService } from '../mocks/mock-airport-service';
 import { MockNotificationService } from '../mocks/mock-notification-service';
@@ -13,16 +12,14 @@ import {
 import { getFormModeLabel } from '../../app/shared/labels/commons/form-common';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingHarness } from '@angular/router/testing';
-import { MockListHubsComponent } from '../mocks/mock-list-hubs-component';
 import { MockUserService } from '../mocks/mock-user-service';
-import {
-  getHubFormSuccessNotificationMessage,
-  getHubFormTitle,
-} from '../../app/shared/labels/forms/hub-form';
+import { AddDestinationComponent } from '../../app/destination/pages/add-destination/add-destination.component';
+import { MockListDestinationsComponent } from '../mocks/mock-list-destinations-component';
+import { getDestinationFormSuccessNotificationMessage, getDestinationFormTitle } from '../../app/shared/labels/forms/destination-form';
 
-describe('AddHubComponent', () => {
+describe('AddDestinationComponent', () => {
   @Component({})
-  class MockAddHubComponent {
+  class MockAddDestinationComponent {
     constructor(
       readonly userService: MockUserService = new MockUserService(),
       readonly airportService: MockAirportService = new MockAirportService(),
@@ -32,22 +29,22 @@ describe('AddHubComponent', () => {
     ) {}
   }
 
-  it('#ngOnInit should initialize "Add hub" component', () => {
+  it('#ngOnInit should initialize "Add destination" component', () => {
     TestBed.runInInjectionContext(() => {
-      let mockAddHubComponent: MockAddHubComponent = new MockAddHubComponent();
-      const addHubComponent: AddHubComponent = new AddHubComponent(
+      let mockAddDestinationComponent: MockAddDestinationComponent = new MockAddDestinationComponent();
+      const addDestinationComponent: AddDestinationComponent = new AddDestinationComponent(
         Inject(NotificationService),
       );
-      vi.spyOn(addHubComponent, 'ngOnInit').mockImplementation(() => {
-        mockAddHubComponent.userService.user.subscribe((user) => {
+      vi.spyOn(addDestinationComponent, 'ngOnInit').mockImplementation(() => {
+        mockAddDestinationComponent.userService.user.subscribe((user) => {
           if (user) {
-            addHubComponent.authenticatedUser = JSON.parse(user.toString());
+            addDestinationComponent.authenticatedUser = JSON.parse(user.toString());
           }
         });
       });
-      addHubComponent.ngOnInit();
+      addDestinationComponent.ngOnInit();
 
-      expect(addHubComponent.authenticatedUser).toStrictEqual({
+      expect(addDestinationComponent.authenticatedUser).toStrictEqual({
         id: 7,
         uuid: 'uuid-authenticated-user',
         givenName: 'Authneticated',
@@ -58,66 +55,66 @@ describe('AddHubComponent', () => {
     });
   });
 
-  it('#addHub should create hub in DB', async () => {
+  it('#addDestination should create destination in DB', async () => {
     TestBed.configureTestingModule({
-      imports: [AddHubComponent],
+      imports: [AddDestinationComponent],
       providers: [
         provideRouter([
-          { path: 'hubs/list', component: MockListHubsComponent },
+          { path: 'destinations/list', component: MockListDestinationsComponent },
         ]),
       ],
     });
 
     const harness: RouterTestingHarness = await RouterTestingHarness.create();
     TestBed.runInInjectionContext(() => {
-      const hubToCreate: any = {
-        airportUUID: 'hub-created-uuid',
+      const destinationToCreate: any = {
+        airportUUID: 'destination-created-uuid',
         airportIATA: 'CRE',
         airportName: 'Airport-Created',
         airportCity: 'Cracovie',
         airportLatitude: 1.5,
         airportLongitude: 5.5,
         airportCountry: 155,
-        airportHub: true,
+        airportHub: false,
       };
 
-      let mockAddHubComponent: MockAddHubComponent = new MockAddHubComponent();
-      const addHubComponent: AddHubComponent = new AddHubComponent(
+      let mockAddDestinationComponent: MockAddDestinationComponent = new MockAddDestinationComponent();
+      const addDestinationComponent: AddDestinationComponent = new AddDestinationComponent(
         Inject(NotificationService),
       );
-      vi.spyOn(addHubComponent, 'addHub').mockImplementation(() => {
-        mockAddHubComponent.airportService
-          .createAirport(hubToCreate)
+      vi.spyOn(addDestinationComponent, 'addDestination').mockImplementation(() => {
+        mockAddDestinationComponent.airportService
+          .createAirport(destinationToCreate)
           .then(async (result) => {
             if (result.data) {
               expect(result.data).toStrictEqual({
                 airportID: 21,
-                airportUUID: 'hub-created-uuid',
+                airportUUID: 'destination-created-uuid',
                 airportIATA: 'CRE',
                 airportName: 'Airport-Created',
                 airportCity: 'Cracovie',
                 airportLatitude: 1.5,
                 airportLongitude: 5.5,
                 airportCountry: 155,
-                airportHub: true,
+                airportHub: false,
               });
 
               const toastrSuccess: any =
-                mockAddHubComponent.notificationService.showSuccessNotification(
-                  `${getFormModeLabel(addHubComponent.formMode)} ${getHubFormTitle()}`.toUpperCase(),
-                  `${getHubFormSuccessNotificationMessage(addHubComponent.formMode)}`,
+                mockAddDestinationComponent.notificationService.showSuccessNotification(
+                  `${getFormModeLabel(addDestinationComponent.formMode)} ${getDestinationFormTitle()}`.toUpperCase(),
+                  `${getDestinationFormSuccessNotificationMessage(addDestinationComponent.formMode)}`,
                 );
               expect(toastrSuccess.toastId).toStrictEqual(2);
-              expect(toastrSuccess.title).toStrictEqual("AJOUT D'UN HUB");
+              expect(toastrSuccess.title).toStrictEqual("AJOUT D'UNE DESTINATION");
               expect(toastrSuccess.message).toStrictEqual(
-                'Votre hub a bien été créé(e) !',
+                'Votre destination a bien été créé(e) !',
               );
 
-              await harness.navigateByUrl('/hubs/list');
-              expect(harness.routeNativeElement?.textContent).toBe('List hubs');
+              await harness.navigateByUrl('/destinations/list');
+              expect(harness.routeNativeElement?.textContent).toBe('List destinations');
             } else {
               const toastrError: any =
-                mockAddHubComponent.notificationService.showErrorNotification(
+                mockAddDestinationComponent.notificationService.showErrorNotification(
                   `${getTechnicalErrorTitle()}`,
                   `${getTechnicalErrorMessage()}`,
                 );
@@ -129,7 +126,7 @@ describe('AddHubComponent', () => {
             }
           });
       });
-      addHubComponent.addHub(hubToCreate);
+      addDestinationComponent.addDestination(destinationToCreate);
     });
   });
 });
