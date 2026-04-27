@@ -14,18 +14,15 @@ import { getFormModeLabel } from '../../app/shared/labels/commons/form-common';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { MockAirportService } from '../mocks/mock-airport-service';
-import { EditHubComponent } from '../../app/hub/pages/edit-hub/edit-hub.component';
-import { MockListHubsComponent } from '../mocks/mock-list-hubs-component';
-import {
-  getHubFormSuccessNotificationMessage,
-  getHubFormTitle,
-} from '../../app/shared/labels/forms/hub-form';
+import { EditDestinationComponent } from '../../app/destination/pages/edit-destination/edit-destination.component';
+import { MockListDestinationsComponent } from '../mocks/mock-list-destinations-component';
+import { getDestinationFormSuccessNotificationMessage, getDestinationFormTitle } from '../../app/shared/labels/forms/destination-form';
 
-describe('EditHubComponent', () => {
+describe('EditDestinationComponent', () => {
   @Component({})
-  class MockEditHubComponent {
+  class MockEditDestinationComponent {
     public authenticatedUser!: User;
-    public hubUUID!: string;
+    public destinationUUID!: string;
 
     constructor(
       readonly userService: MockUserService = new MockUserService(),
@@ -34,32 +31,32 @@ describe('EditHubComponent', () => {
         Inject(ToastrService),
       ),
       readonly route: any = {
-        snapshot: { paramMap: new Map().set('uuid', 'hub-created-uuid') },
+        snapshot: { paramMap: new Map().set('uuid', 'destination-created-uuid') },
       },
     ) {}
   }
 
-  it('#ngOnInit should initialize "Edit hub" component', async () => {
+  it('#ngOnInit should initialize "Edit destination" component', async () => {
     TestBed.runInInjectionContext(() => {
-      let mockEditHubComponent: MockEditHubComponent =
-        new MockEditHubComponent();
-      const editHubComponent: EditHubComponent = new EditHubComponent(
+      let mockEditDestinationComponent: MockEditDestinationComponent =
+        new MockEditDestinationComponent();
+      const editDestinationComponent: EditDestinationComponent = new EditDestinationComponent(
         Inject(ActivatedRoute),
         Inject(NotificationService),
       );
-      vi.spyOn(editHubComponent, 'ngOnInit').mockImplementation(() => {
-        editHubComponent.hubUUID =
-          mockEditHubComponent.route.snapshot.paramMap.get('uuid') ?? '';
+      vi.spyOn(editDestinationComponent, 'ngOnInit').mockImplementation(() => {
+        editDestinationComponent.destinationUUID =
+          mockEditDestinationComponent.route.snapshot.paramMap.get('uuid') ?? '';
 
-        mockEditHubComponent.airportService
-          .findAirport(editHubComponent.hubUUID)
-          .then(async (hubToEdit) => {
-            editHubComponent.initHubToEdit =
-              editHubComponent.airportMapper.airportFromDB(hubToEdit.data);
+        mockEditDestinationComponent.airportService
+          .findAirport(editDestinationComponent.destinationUUID)
+          .then(async (destinationToEdit) => {
+            editDestinationComponent.initDestinationToEdit =
+              editDestinationComponent.airportMapper.airportFromDB(destinationToEdit.data);
 
-            expect(editHubComponent.initHubToEdit).toStrictEqual({
+            expect(editDestinationComponent.initDestinationToEdit).toStrictEqual({
               id: 21,
-              uuid: 'hub-created-uuid',
+              uuid: 'destination-created-uuid',
               iata: 'CRE',
               name: 'Airport-Created',
               city: 'Cracovie',
@@ -67,21 +64,21 @@ describe('EditHubComponent', () => {
               longitude: 5.5,
               country: { id: 155, name: 'Pologne', icao: 'SP', flagCode: 'pl' },
               region: undefined,
-              hub: true,
+              hub: false,
             });
           });
 
-        mockEditHubComponent.userService.user.subscribe((user) => {
+        mockEditDestinationComponent.userService.user.subscribe((user) => {
           if (user) {
-            editHubComponent.authenticatedUser = JSON.parse(user.toString());
+            editDestinationComponent.authenticatedUser = JSON.parse(user.toString());
           }
         });
       });
-      editHubComponent.ngOnInit();
+      editDestinationComponent.ngOnInit();
 
-      expect(editHubComponent.hubUUID).toStrictEqual('hub-created-uuid');
+      expect(editDestinationComponent.destinationUUID).toStrictEqual('destination-created-uuid');
 
-      expect(editHubComponent.authenticatedUser).toStrictEqual({
+      expect(editDestinationComponent.authenticatedUser).toStrictEqual({
         id: 7,
         uuid: 'uuid-authenticated-user',
         givenName: 'Authneticated',
@@ -92,71 +89,71 @@ describe('EditHubComponent', () => {
     });
   });
 
-  it('#editHub should update hub in DB', async () => {
+  it('#editDestination should update destination in DB', async () => {
     TestBed.configureTestingModule({
-      imports: [EditHubComponent],
+      imports: [EditDestinationComponent],
       providers: [
         provideRouter([
-          { path: 'hubs/list', component: MockListHubsComponent },
+          { path: 'destinations/list', component: MockListDestinationsComponent },
         ]),
       ],
     });
 
     const harness: RouterTestingHarness = await RouterTestingHarness.create();
     TestBed.runInInjectionContext(() => {
-      const hubToUpdate: any = {
+      const destinationToUpdate: any = {
         airportID: 21,
-        airportUUID: 'hub-created-uuid',
+        airportUUID: 'destination-created-uuid',
         airportIATA: 'UPD',
         airportName: 'Airport-Updated',
         airportCity: 'Varsovie',
         airportLatitude: 1.5,
         airportLongitude: 5.5,
         airportCountry: 155,
-        airportHub: true,
+        airportHub: false,
       };
 
-      let mockEditHubComponent: MockEditHubComponent =
-        new MockEditHubComponent();
-      const editHubComponent: EditHubComponent = new EditHubComponent(
+      let mockEditDestinationComponent: MockEditDestinationComponent =
+        new MockEditDestinationComponent();
+      const editDestinationComponent: EditDestinationComponent = new EditDestinationComponent(
         Inject(ActivatedRoute),
         Inject(NotificationService),
       );
-      vi.spyOn(editHubComponent, 'editHub').mockImplementation(() => {
-        mockEditHubComponent.airportService
-          .updateAirport(hubToUpdate)
+      vi.spyOn(editDestinationComponent, 'editDestination').mockImplementation(() => {
+        mockEditDestinationComponent.airportService
+          .updateAirport(destinationToUpdate)
           .then(async (result) => {
             if (result.data) {
               expect(result.data).toStrictEqual({
                 airportID: 21,
-                airportUUID: 'hub-created-uuid',
+                airportUUID: 'destination-created-uuid',
                 airportIATA: 'UPD',
                 airportName: 'Airport-Updated',
                 airportCity: 'Varsovie',
                 airportLatitude: 1.5,
                 airportLongitude: 5.5,
                 airportCountry: 155,
-                airportHub: true,
+                airportHub: false,
               });
 
               const toastrSuccess: any =
-                mockEditHubComponent.notificationService.showSuccessNotification(
-                  `${getFormModeLabel(editHubComponent.formMode)} ${getHubFormTitle()}`.toUpperCase(),
-                  `${getHubFormSuccessNotificationMessage(editHubComponent.formMode)}`,
+                mockEditDestinationComponent.notificationService.showSuccessNotification(
+                  `${getFormModeLabel(editDestinationComponent.formMode)} ${getDestinationFormTitle()}`.toUpperCase(),
+                  `${getDestinationFormSuccessNotificationMessage(editDestinationComponent.formMode)}`,
                 );
               expect(toastrSuccess.toastId).toStrictEqual(2);
               expect(toastrSuccess.title).toStrictEqual(
-                "MODIFICATION D'UN HUB",
+                "MODIFICATION D'UNE DESTINATION",
               );
               expect(toastrSuccess.message).toStrictEqual(
-                'Votre hub a bien été modifié(e) !',
+                'Votre destination a bien été modifié(e) !',
               );
 
-              await harness.navigateByUrl('/hubs/list');
-              expect(harness.routeNativeElement?.textContent).toBe('List hubs');
+              await harness.navigateByUrl('/destinations/list');
+              expect(harness.routeNativeElement?.textContent).toBe('List destinations');
             } else {
               const toastrError: any =
-                mockEditHubComponent.notificationService.showErrorNotification(
+                mockEditDestinationComponent.notificationService.showErrorNotification(
                   `${getTechnicalErrorTitle()}`,
                   `${getTechnicalErrorMessage()}`,
                 );
@@ -168,7 +165,7 @@ describe('EditHubComponent', () => {
             }
           });
       });
-      editHubComponent.editHub(hubToUpdate);
+      editDestinationComponent.editDestination(destinationToUpdate);
     });
   });
 });
