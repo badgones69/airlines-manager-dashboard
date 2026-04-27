@@ -8,7 +8,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class AirportService {
   readonly hubs$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
-  readonly destinations$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  readonly destinations$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
+    [],
+  );
 
   constructor() {
     this.refreshHubsList();

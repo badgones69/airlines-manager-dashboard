@@ -13,7 +13,8 @@ describe('DestinationFormLabels', () => {
   });
 
   it('#getDestinationDeleteDialogMessage should return destination delete dialog message', () => {
-    const destinationDeleteDialogMessage: string = getDestinationDeleteDialogMessage();
+    const destinationDeleteDialogMessage: string =
+      getDestinationDeleteDialogMessage();
     expect(destinationDeleteDialogMessage).toStrictEqual(
       'Confirmez-vous la suppression définitive de cette destination ?',
     );

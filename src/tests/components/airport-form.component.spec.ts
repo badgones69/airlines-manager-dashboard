@@ -18,12 +18,17 @@ import {
   getFormModeLabel,
   getSubmitButtonIcon,
 } from '../../app/shared/labels/commons/form-common';
-import {
-  getSubmitButtonLabel,
-} from '../../app/shared/labels/commons/form-common';
+import { getSubmitButtonLabel } from '../../app/shared/labels/commons/form-common';
 import { TestBed } from '@angular/core/testing';
 import { AirportFormComponent } from '../../app/shared/components/airport-form/airport-form.component';
-import { getCityLabel, getCountryLabel, getIATALabel, getLatitudeInputLabel, getLongitudeInputLabel, getRegionLabel } from '../../app/shared/labels/commons/airport-common';
+import {
+  getCityLabel,
+  getCountryLabel,
+  getIATALabel,
+  getLatitudeInputLabel,
+  getLongitudeInputLabel,
+  getRegionLabel,
+} from '../../app/shared/labels/commons/airport-common';
 import { getHubFormTitle } from '../../app/shared/labels/forms/hub-form';
 import { getDestinationFormTitle } from '../../app/shared/labels/forms/destination-form';
 import { Country } from '../../app/shared/models/Country';
@@ -45,51 +50,42 @@ describe('AirportFormComponent', () => {
         airportFormComponent.longitudeInputLabel = getLongitudeInputLabel();
         airportFormComponent.countryInputLabel = getCountryLabel();
         airportFormComponent.regionInputLabel = getRegionLabel();
-        airportFormComponent.submitButtonLabel = getSubmitButtonLabel(airportFormComponent.formMode);
-        airportFormComponent.submitButtonIcon = getSubmitButtonIcon(airportFormComponent.formMode);
-        airportFormComponent.resetButtonLabel =
-          getResetButtonLabel(airportFormComponent.formMode);
-        airportFormComponent.resetButtonIcon =
-          getResetButtonIcon(airportFormComponent.formMode);
-        airportFormComponent.resetButtonType =
-          getResetButtonType(airportFormComponent.formMode);
+        airportFormComponent.submitButtonLabel = getSubmitButtonLabel(
+          airportFormComponent.formMode,
+        );
+        airportFormComponent.submitButtonIcon = getSubmitButtonIcon(
+          airportFormComponent.formMode,
+        );
+        airportFormComponent.resetButtonLabel = getResetButtonLabel(
+          airportFormComponent.formMode,
+        );
+        airportFormComponent.resetButtonIcon = getResetButtonIcon(
+          airportFormComponent.formMode,
+        );
+        airportFormComponent.resetButtonType = getResetButtonType(
+          airportFormComponent.formMode,
+        );
       });
       airportFormComponent.formMode = ADD_FORM_MODE;
       airportFormComponent.formTitle = getHubFormTitle();
       airportFormComponent.ngOnInit();
 
       expect(airportFormComponent.airportFormTitle).toStrictEqual(
-        'Ajout d\'un hub',
+        "Ajout d'un hub",
       );
-      expect(airportFormComponent.iataInputLabel).toStrictEqual(
-        'IATA',
-      );
-      expect(airportFormComponent.nameInputLabel).toStrictEqual(
-        'NOM',
-      );
-      expect(airportFormComponent.cityInputLabel).toStrictEqual(
-        'VILLE',
-      );
-      expect(airportFormComponent.latitudeInputLabel).toStrictEqual(
-        'LATITUDE',
-      );
+      expect(airportFormComponent.iataInputLabel).toStrictEqual('IATA');
+      expect(airportFormComponent.nameInputLabel).toStrictEqual('NOM');
+      expect(airportFormComponent.cityInputLabel).toStrictEqual('VILLE');
+      expect(airportFormComponent.latitudeInputLabel).toStrictEqual('LATITUDE');
       expect(airportFormComponent.longitudeInputLabel).toStrictEqual(
         'LONGITUDE',
       );
-      expect(airportFormComponent.countryInputLabel).toStrictEqual(
-        'PAYS',
-      );
-      expect(airportFormComponent.regionInputLabel).toStrictEqual(
-        'RÉGION',
-      );
-      expect(airportFormComponent.submitButtonLabel).toStrictEqual(
-        'Créer',
-      );
+      expect(airportFormComponent.countryInputLabel).toStrictEqual('PAYS');
+      expect(airportFormComponent.regionInputLabel).toStrictEqual('RÉGION');
+      expect(airportFormComponent.submitButtonLabel).toStrictEqual('Créer');
       expect(airportFormComponent.submitButtonIcon).toStrictEqual('add');
       expect(airportFormComponent.resetButtonLabel).toStrictEqual('Effacer');
-      expect(airportFormComponent.resetButtonIcon).toStrictEqual(
-        'ink_eraser',
-      );
+      expect(airportFormComponent.resetButtonIcon).toStrictEqual('ink_eraser');
       expect(airportFormComponent.resetButtonType).toStrictEqual('reset');
 
       airportFormComponent.formMode = EDIT_FORM_MODE;
@@ -97,16 +93,12 @@ describe('AirportFormComponent', () => {
       airportFormComponent.ngOnInit();
 
       expect(airportFormComponent.airportFormTitle).toStrictEqual(
-        'Modification d\'une destination',
+        "Modification d'une destination",
       );
-      expect(airportFormComponent.submitButtonLabel).toStrictEqual(
-        'Modifier',
-      );
+      expect(airportFormComponent.submitButtonLabel).toStrictEqual('Modifier');
       expect(airportFormComponent.submitButtonIcon).toStrictEqual('edit');
       expect(airportFormComponent.resetButtonLabel).toStrictEqual('Annuler');
-      expect(airportFormComponent.resetButtonIcon).toStrictEqual(
-        'undo',
-      );
+      expect(airportFormComponent.resetButtonIcon).toStrictEqual('undo');
       expect(airportFormComponent.resetButtonType).toStrictEqual('button');
     });
   });
@@ -148,7 +140,7 @@ describe('AirportFormComponent', () => {
       expect(
         airportFormComponent.airportForm
           .get(airportFormComponent.regionFieldIdentifier)
-          ?.hasError(UNKNOWN_REGION_ERROR)
+          ?.hasError(UNKNOWN_REGION_ERROR),
       ).toBeFalsy();
 
       airportFormComponent.countryFlag = 'us';
@@ -156,7 +148,7 @@ describe('AirportFormComponent', () => {
       expect(
         airportFormComponent.airportForm
           .get(airportFormComponent.regionFieldIdentifier)
-          ?.hasError(UNKNOWN_REGION_ERROR)
+          ?.hasError(UNKNOWN_REGION_ERROR),
       ).toBeFalsy();
 
       airportFormComponent.countryFlag = 'au';
@@ -164,7 +156,7 @@ describe('AirportFormComponent', () => {
       expect(
         airportFormComponent.airportForm
           .get(airportFormComponent.regionFieldIdentifier)
-          ?.hasError(UNKNOWN_REGION_ERROR)
+          ?.hasError(UNKNOWN_REGION_ERROR),
       ).toBeTruthy();
     });
   });
@@ -173,11 +165,14 @@ describe('AirportFormComponent', () => {
     TestBed.runInInjectionContext(() => {
       const airportFormComponent: AirportFormComponent =
         new AirportFormComponent();
-      expect(airportFormComponent.displayCountry(
-        { id: 67, name: 'France', icao: 'F', flagCode: 'fr' }
-      )).toStrictEqual(
-        'France',
-      );
+      expect(
+        airportFormComponent.displayCountry({
+          id: 67,
+          name: 'France',
+          icao: 'F',
+          flagCode: 'fr',
+        }),
+      ).toStrictEqual('France');
     });
   });
 
@@ -185,11 +180,13 @@ describe('AirportFormComponent', () => {
     TestBed.runInInjectionContext(() => {
       const airportFormComponent: AirportFormComponent =
         new AirportFormComponent();
-      expect(airportFormComponent.displayRegion(
-        { id: 1, code: 'NY', name: 'New York' }
-      )).toStrictEqual(
-        'New York (NY)',
-      );
+      expect(
+        airportFormComponent.displayRegion({
+          id: 1,
+          code: 'NY',
+          name: 'New York',
+        }),
+      ).toStrictEqual('New York (NY)');
     });
   });
 
@@ -201,33 +198,33 @@ describe('AirportFormComponent', () => {
         .get(airportFormComponent.iataFieldIdentifier)
         ?.setErrors({ [REQUIRED_ERROR]: true });
 
-      expect(
-        airportFormComponent.displayIATAErrorMessage(),
-      ).toStrictEqual('champ obligatoire');
+      expect(airportFormComponent.displayIATAErrorMessage()).toStrictEqual(
+        'champ obligatoire',
+      );
 
       airportFormComponent.airportForm
         .get(airportFormComponent.iataFieldIdentifier)
         ?.setErrors({ [MIN_LENGTH_ERROR]: true });
 
-      expect(
-        airportFormComponent.displayIATAErrorMessage(),
-      ).toStrictEqual('3 lettres obligatoires');
+      expect(airportFormComponent.displayIATAErrorMessage()).toStrictEqual(
+        '3 lettres obligatoires',
+      );
 
       airportFormComponent.airportForm
         .get(airportFormComponent.iataFieldIdentifier)
         ?.setErrors({ [MAX_LENGTH_ERROR]: true });
 
-      expect(
-        airportFormComponent.displayIATAErrorMessage(),
-      ).toStrictEqual('3 lettres obligatoires');
+      expect(airportFormComponent.displayIATAErrorMessage()).toStrictEqual(
+        '3 lettres obligatoires',
+      );
 
       airportFormComponent.airportForm
         .get(airportFormComponent.iataFieldIdentifier)
         ?.setErrors({ [PATTERN_ERROR]: true });
 
-      expect(
-        airportFormComponent.displayIATAErrorMessage(),
-      ).toStrictEqual('3 lettres obligatoires');
+      expect(airportFormComponent.displayIATAErrorMessage()).toStrictEqual(
+        '3 lettres obligatoires',
+      );
     });
   });
 
@@ -239,17 +236,17 @@ describe('AirportFormComponent', () => {
         .get(airportFormComponent.nameFieldIdentifier)
         ?.setErrors({ [REQUIRED_ERROR]: true });
 
-      expect(
-        airportFormComponent.displayNameErrorMessage(),
-      ).toStrictEqual('champ obligatoire');
+      expect(airportFormComponent.displayNameErrorMessage()).toStrictEqual(
+        'champ obligatoire',
+      );
 
       airportFormComponent.airportForm
         .get(airportFormComponent.nameFieldIdentifier)
         ?.setErrors({ [BLANK_VALUE_ERROR]: true });
 
-      expect(
-        airportFormComponent.displayNameErrorMessage(),
-      ).toStrictEqual('min. 1 caractère obligatoire');
+      expect(airportFormComponent.displayNameErrorMessage()).toStrictEqual(
+        'min. 1 caractère obligatoire',
+      );
     });
   });
 
@@ -261,17 +258,17 @@ describe('AirportFormComponent', () => {
         .get(airportFormComponent.latitudeFieldIdentifier)
         ?.setErrors({ [REQUIRED_ERROR]: true });
 
-      expect(
-        airportFormComponent.displayLatitudeErrorMessage(),
-      ).toStrictEqual('champ obligatoire');
+      expect(airportFormComponent.displayLatitudeErrorMessage()).toStrictEqual(
+        'champ obligatoire',
+      );
 
       airportFormComponent.airportForm
         .get(airportFormComponent.latitudeFieldIdentifier)
         ?.setErrors({ [PATTERN_ERROR]: true });
 
-      expect(
-        airportFormComponent.displayLatitudeErrorMessage(),
-      ).toStrictEqual('coordonnée invalide (format décimal)');
+      expect(airportFormComponent.displayLatitudeErrorMessage()).toStrictEqual(
+        'coordonnée invalide (format décimal)',
+      );
     });
   });
 
@@ -283,17 +280,17 @@ describe('AirportFormComponent', () => {
         .get(airportFormComponent.longitudeFieldIdentifier)
         ?.setErrors({ [REQUIRED_ERROR]: true });
 
-      expect(
-        airportFormComponent.displayLongitudeErrorMessage(),
-      ).toStrictEqual('champ obligatoire');
+      expect(airportFormComponent.displayLongitudeErrorMessage()).toStrictEqual(
+        'champ obligatoire',
+      );
 
       airportFormComponent.airportForm
         .get(airportFormComponent.longitudeFieldIdentifier)
         ?.setErrors({ [PATTERN_ERROR]: true });
 
-      expect(
-        airportFormComponent.displayLongitudeErrorMessage(),
-      ).toStrictEqual('coordonnée invalide (format décimal)');
+      expect(airportFormComponent.displayLongitudeErrorMessage()).toStrictEqual(
+        'coordonnée invalide (format décimal)',
+      );
     });
   });
 
@@ -305,9 +302,9 @@ describe('AirportFormComponent', () => {
         .get(airportFormComponent.countryFieldIdentifier)
         ?.setErrors({ [REQUIRED_ERROR]: true });
 
-      expect(
-        airportFormComponent.displayCountryErrorMessage(),
-      ).toStrictEqual('champ obligatoire');
+      expect(airportFormComponent.displayCountryErrorMessage()).toStrictEqual(
+        'champ obligatoire',
+      );
 
       airportFormComponent.airportForm
         .get(airportFormComponent.countryFieldIdentifier)
@@ -318,12 +315,12 @@ describe('AirportFormComponent', () => {
       expect(
         airportFormComponent.airportForm
           .get(airportFormComponent.countryFieldIdentifier)
-          ?.hasError(UNKNOWN_COUNTRY_ERROR)
+          ?.hasError(UNKNOWN_COUNTRY_ERROR),
       ).toBeTruthy();
 
-      expect(
-        airportFormComponent.displayCountryErrorMessage(),
-      ).toStrictEqual('pays inconnu');
+      expect(airportFormComponent.displayCountryErrorMessage()).toStrictEqual(
+        'pays inconnu',
+      );
     });
   });
 
@@ -335,17 +332,17 @@ describe('AirportFormComponent', () => {
         .get(airportFormComponent.regionFieldIdentifier)
         ?.setErrors({ [REQUIRED_ERROR]: true });
 
-      expect(
-        airportFormComponent.displayRegionErrorMessage(),
-      ).toStrictEqual('champ obligatoire');
+      expect(airportFormComponent.displayRegionErrorMessage()).toStrictEqual(
+        'champ obligatoire',
+      );
 
       airportFormComponent.airportForm
         .get(airportFormComponent.regionFieldIdentifier)
         ?.setErrors({ [UNKNOWN_REGION_ERROR]: true });
 
-      expect(
-        airportFormComponent.displayRegionErrorMessage(),
-      ).toStrictEqual('région inconnue');
+      expect(airportFormComponent.displayRegionErrorMessage()).toStrictEqual(
+        'région inconnue',
+      );
     });
   });
 
@@ -365,29 +362,27 @@ describe('AirportFormComponent', () => {
         country: null,
         region: null,
       });
-      
+
       airportFormComponent.airportForm
         .get(airportFormComponent.countryFieldIdentifier)
         ?.setValue('états-unis');
 
       airportFormComponent.airportForm
-      .get(airportFormComponent.regionFieldIdentifier)
-      ?.setValue('new york');
-      
+        .get(airportFormComponent.regionFieldIdentifier)
+        ?.setValue('new york');
+
       vi.spyOn(airportFormComponent.submitted, 'emit');
       airportFormComponent.submitAirportForm();
-      expect(airportFormComponent.submitted.emit).toHaveBeenCalledWith(
-        {
-          airportIATA: 'LGA',
-          airportName: 'La Guardia',
-          airportCity: 'New York',
-          airportLatitude: 63.63,
-          airportLongitude: 1.1,
-          airportCountry: 63,
-          airportRegion: 1,
-          airportHub: false,
-        },
-      );
+      expect(airportFormComponent.submitted.emit).toHaveBeenCalledWith({
+        airportIATA: 'LGA',
+        airportName: 'La Guardia',
+        airportCity: 'New York',
+        airportLatitude: 63.63,
+        airportLongitude: 1.1,
+        airportCountry: 63,
+        airportRegion: 1,
+        airportHub: false,
+      });
     });
   });
 });

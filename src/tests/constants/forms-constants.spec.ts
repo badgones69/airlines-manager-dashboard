@@ -54,7 +54,9 @@ describe('FormsConstants', () => {
   });
 
   it('LATITUDE_LONGITUDE_PATTERN should return latitude/longitude fields pattern', () => {
-    expect(LATITUDE_LONGITUDE_PATTERN).toStrictEqual(String.raw`^-?\d+([.]\d+)?$`);
+    expect(LATITUDE_LONGITUDE_PATTERN).toStrictEqual(
+      String.raw`^-?\d+([.]\d+)?$`,
+    );
   });
 
   it('REQUIRED_ERROR should return "required" error code', () => {

@@ -15,7 +15,10 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { MockUserService } from '../mocks/mock-user-service';
 import { AddDestinationComponent } from '../../app/destination/pages/add-destination/add-destination.component';
 import { MockListDestinationsComponent } from '../mocks/mock-list-destinations-component';
-import { getDestinationFormSuccessNotificationMessage, getDestinationFormTitle } from '../../app/shared/labels/forms/destination-form';
+import {
+  getDestinationFormSuccessNotificationMessage,
+  getDestinationFormTitle,
+} from '../../app/shared/labels/forms/destination-form';
 
 describe('AddDestinationComponent', () => {
   @Component({})
@@ -31,14 +34,16 @@ describe('AddDestinationComponent', () => {
 
   it('#ngOnInit should initialize "Add destination" component', () => {
     TestBed.runInInjectionContext(() => {
-      let mockAddDestinationComponent: MockAddDestinationComponent = new MockAddDestinationComponent();
-      const addDestinationComponent: AddDestinationComponent = new AddDestinationComponent(
-        Inject(NotificationService),
-      );
+      let mockAddDestinationComponent: MockAddDestinationComponent =
+        new MockAddDestinationComponent();
+      const addDestinationComponent: AddDestinationComponent =
+        new AddDestinationComponent(Inject(NotificationService));
       vi.spyOn(addDestinationComponent, 'ngOnInit').mockImplementation(() => {
         mockAddDestinationComponent.userService.user.subscribe((user) => {
           if (user) {
-            addDestinationComponent.authenticatedUser = JSON.parse(user.toString());
+            addDestinationComponent.authenticatedUser = JSON.parse(
+              user.toString(),
+            );
           }
         });
       });
@@ -60,7 +65,10 @@ describe('AddDestinationComponent', () => {
       imports: [AddDestinationComponent],
       providers: [
         provideRouter([
-          { path: 'destinations/list', component: MockListDestinationsComponent },
+          {
+            path: 'destinations/list',
+            component: MockListDestinationsComponent,
+          },
         ]),
       ],
     });
@@ -78,54 +86,60 @@ describe('AddDestinationComponent', () => {
         airportHub: false,
       };
 
-      let mockAddDestinationComponent: MockAddDestinationComponent = new MockAddDestinationComponent();
-      const addDestinationComponent: AddDestinationComponent = new AddDestinationComponent(
-        Inject(NotificationService),
+      let mockAddDestinationComponent: MockAddDestinationComponent =
+        new MockAddDestinationComponent();
+      const addDestinationComponent: AddDestinationComponent =
+        new AddDestinationComponent(Inject(NotificationService));
+      vi.spyOn(addDestinationComponent, 'addDestination').mockImplementation(
+        () => {
+          mockAddDestinationComponent.airportService
+            .createAirport(destinationToCreate)
+            .then(async (result) => {
+              if (result.data) {
+                expect(result.data).toStrictEqual({
+                  airportID: 21,
+                  airportUUID: 'destination-created-uuid',
+                  airportIATA: 'CRE',
+                  airportName: 'Airport-Created',
+                  airportCity: 'Cracovie',
+                  airportLatitude: 1.5,
+                  airportLongitude: 5.5,
+                  airportCountry: 155,
+                  airportHub: false,
+                });
+
+                const toastrSuccess: any =
+                  mockAddDestinationComponent.notificationService.showSuccessNotification(
+                    `${getFormModeLabel(addDestinationComponent.formMode)} ${getDestinationFormTitle()}`.toUpperCase(),
+                    `${getDestinationFormSuccessNotificationMessage(addDestinationComponent.formMode)}`,
+                  );
+                expect(toastrSuccess.toastId).toStrictEqual(2);
+                expect(toastrSuccess.title).toStrictEqual(
+                  "AJOUT D'UNE DESTINATION",
+                );
+                expect(toastrSuccess.message).toStrictEqual(
+                  'Votre destination a bien été créé(e) !',
+                );
+
+                await harness.navigateByUrl('/destinations/list');
+                expect(harness.routeNativeElement?.textContent).toBe(
+                  'List destinations',
+                );
+              } else {
+                const toastrError: any =
+                  mockAddDestinationComponent.notificationService.showErrorNotification(
+                    `${getTechnicalErrorTitle()}`,
+                    `${getTechnicalErrorMessage()}`,
+                  );
+                expect(toastrError.toastId).toStrictEqual(1);
+                expect(toastrError.title).toStrictEqual('ERREUR TECHNIQUE');
+                expect(toastrError.message).toStrictEqual(
+                  'Une erreur est survenue : veuillez réessayer...',
+                );
+              }
+            });
+        },
       );
-      vi.spyOn(addDestinationComponent, 'addDestination').mockImplementation(() => {
-        mockAddDestinationComponent.airportService
-          .createAirport(destinationToCreate)
-          .then(async (result) => {
-            if (result.data) {
-              expect(result.data).toStrictEqual({
-                airportID: 21,
-                airportUUID: 'destination-created-uuid',
-                airportIATA: 'CRE',
-                airportName: 'Airport-Created',
-                airportCity: 'Cracovie',
-                airportLatitude: 1.5,
-                airportLongitude: 5.5,
-                airportCountry: 155,
-                airportHub: false,
-              });
-
-              const toastrSuccess: any =
-                mockAddDestinationComponent.notificationService.showSuccessNotification(
-                  `${getFormModeLabel(addDestinationComponent.formMode)} ${getDestinationFormTitle()}`.toUpperCase(),
-                  `${getDestinationFormSuccessNotificationMessage(addDestinationComponent.formMode)}`,
-                );
-              expect(toastrSuccess.toastId).toStrictEqual(2);
-              expect(toastrSuccess.title).toStrictEqual("AJOUT D'UNE DESTINATION");
-              expect(toastrSuccess.message).toStrictEqual(
-                'Votre destination a bien été créé(e) !',
-              );
-
-              await harness.navigateByUrl('/destinations/list');
-              expect(harness.routeNativeElement?.textContent).toBe('List destinations');
-            } else {
-              const toastrError: any =
-                mockAddDestinationComponent.notificationService.showErrorNotification(
-                  `${getTechnicalErrorTitle()}`,
-                  `${getTechnicalErrorMessage()}`,
-                );
-              expect(toastrError.toastId).toStrictEqual(1);
-              expect(toastrError.title).toStrictEqual('ERREUR TECHNIQUE');
-              expect(toastrError.message).toStrictEqual(
-                'Une erreur est survenue : veuillez réessayer...',
-              );
-            }
-          });
-      });
       addDestinationComponent.addDestination(destinationToCreate);
     });
   });

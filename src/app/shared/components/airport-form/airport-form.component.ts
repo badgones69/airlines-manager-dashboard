@@ -240,7 +240,9 @@ export class AirportFormComponent implements OnInit {
       longitude: this.airport?.longitude,
     });
 
-    this.airportForm.get(this.countryFieldIdentifier)?.setValue(this.airport?.country);
+    this.airportForm
+      .get(this.countryFieldIdentifier)
+      ?.setValue(this.airport?.country);
     this.countryFlag = this.airport?.country?.flagCode;
   }
 
@@ -335,11 +337,17 @@ export class AirportFormComponent implements OnInit {
 
   /* ICAO field error message(s) display */
   displayIATAErrorMessage(): string {
-    if (this.airportForm.get(this.iataFieldIdentifier)?.hasError(REQUIRED_ERROR)) {
+    if (
+      this.airportForm.get(this.iataFieldIdentifier)?.hasError(REQUIRED_ERROR)
+    ) {
       return getRequiredFieldErrorMessage();
     } else if (
-      this.airportForm.get(this.iataFieldIdentifier)?.hasError(MIN_LENGTH_ERROR) ||
-      this.airportForm.get(this.iataFieldIdentifier)?.hasError(MAX_LENGTH_ERROR) ||
+      this.airportForm
+        .get(this.iataFieldIdentifier)
+        ?.hasError(MIN_LENGTH_ERROR) ||
+      this.airportForm
+        .get(this.iataFieldIdentifier)
+        ?.hasError(MAX_LENGTH_ERROR) ||
       this.airportForm.get(this.iataFieldIdentifier)?.hasError(PATTERN_ERROR)
     ) {
       return getICAO_IATA_FieldsErrorMessage();
@@ -349,10 +357,14 @@ export class AirportFormComponent implements OnInit {
 
   /* Name field error message(s) display */
   displayNameErrorMessage(): string {
-    if (this.airportForm.get(this.nameFieldIdentifier)?.hasError(REQUIRED_ERROR)) {
+    if (
+      this.airportForm.get(this.nameFieldIdentifier)?.hasError(REQUIRED_ERROR)
+    ) {
       return getRequiredFieldErrorMessage();
     } else if (
-      this.airportForm.get(this.nameFieldIdentifier)?.hasError(BLANK_VALUE_ERROR)
+      this.airportForm
+        .get(this.nameFieldIdentifier)
+        ?.hasError(BLANK_VALUE_ERROR)
     ) {
       return getBlankStringFieldErrorMessage();
     }
@@ -362,11 +374,15 @@ export class AirportFormComponent implements OnInit {
   /* Latitude field error message(s) display */
   displayLatitudeErrorMessage(): string {
     if (
-      this.airportForm.get(this.latitudeFieldIdentifier)?.hasError(REQUIRED_ERROR)
+      this.airportForm
+        .get(this.latitudeFieldIdentifier)
+        ?.hasError(REQUIRED_ERROR)
     ) {
       return getRequiredFieldErrorMessage();
     } else if (
-      this.airportForm.get(this.latitudeFieldIdentifier)?.hasError(PATTERN_ERROR)
+      this.airportForm
+        .get(this.latitudeFieldIdentifier)
+        ?.hasError(PATTERN_ERROR)
     ) {
       return getLatitudeLongitudeFieldsErrorMessage();
     }
@@ -376,11 +392,15 @@ export class AirportFormComponent implements OnInit {
   /* Longitude field error message(s) display */
   displayLongitudeErrorMessage(): string {
     if (
-      this.airportForm.get(this.longitudeFieldIdentifier)?.hasError(REQUIRED_ERROR)
+      this.airportForm
+        .get(this.longitudeFieldIdentifier)
+        ?.hasError(REQUIRED_ERROR)
     ) {
       return getRequiredFieldErrorMessage();
     } else if (
-      this.airportForm.get(this.longitudeFieldIdentifier)?.hasError(PATTERN_ERROR)
+      this.airportForm
+        .get(this.longitudeFieldIdentifier)
+        ?.hasError(PATTERN_ERROR)
     ) {
       return getLatitudeLongitudeFieldsErrorMessage();
     }
@@ -390,7 +410,9 @@ export class AirportFormComponent implements OnInit {
   /* Country field error message(s) display */
   displayCountryErrorMessage(): string {
     if (
-      this.airportForm.get(this.countryFieldIdentifier)?.hasError(REQUIRED_ERROR)
+      this.airportForm
+        .get(this.countryFieldIdentifier)
+        ?.hasError(REQUIRED_ERROR)
     ) {
       return getRequiredFieldErrorMessage();
     } else if ('xx' === this.countryFlag) {
@@ -423,14 +445,16 @@ export class AirportFormComponent implements OnInit {
   submitAirportForm() {
     this.airportForm.value.hub = this.isHub;
     this.airportForm.value.country = getCountryByName(
-      typeof this.airportForm.get(this.countryFieldIdentifier)?.value === 'string'
+      typeof this.airportForm.get(this.countryFieldIdentifier)?.value ===
+        'string'
         ? this.airportForm.get(this.countryFieldIdentifier)?.value
         : this.airportForm.get(this.countryFieldIdentifier)?.value.name,
     );
 
     if (this.airportForm.value.country.regions) {
       this.airportForm.value.region = getRegionByName(
-        typeof this.airportForm.get(this.regionFieldIdentifier)?.value === 'string'
+        typeof this.airportForm.get(this.regionFieldIdentifier)?.value ===
+          'string'
           ? this.airportForm.get(this.regionFieldIdentifier)?.value
           : this.airportForm.get(this.regionFieldIdentifier)?.value.name,
         this.countryFlag,

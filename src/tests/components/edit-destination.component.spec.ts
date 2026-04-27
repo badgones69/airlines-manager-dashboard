@@ -16,7 +16,10 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { MockAirportService } from '../mocks/mock-airport-service';
 import { EditDestinationComponent } from '../../app/destination/pages/edit-destination/edit-destination.component';
 import { MockListDestinationsComponent } from '../mocks/mock-list-destinations-component';
-import { getDestinationFormSuccessNotificationMessage, getDestinationFormTitle } from '../../app/shared/labels/forms/destination-form';
+import {
+  getDestinationFormSuccessNotificationMessage,
+  getDestinationFormTitle,
+} from '../../app/shared/labels/forms/destination-form';
 
 describe('EditDestinationComponent', () => {
   @Component({})
@@ -31,7 +34,9 @@ describe('EditDestinationComponent', () => {
         Inject(ToastrService),
       ),
       readonly route: any = {
-        snapshot: { paramMap: new Map().set('uuid', 'destination-created-uuid') },
+        snapshot: {
+          paramMap: new Map().set('uuid', 'destination-created-uuid'),
+        },
       },
     ) {}
   }
@@ -40,21 +45,27 @@ describe('EditDestinationComponent', () => {
     TestBed.runInInjectionContext(() => {
       let mockEditDestinationComponent: MockEditDestinationComponent =
         new MockEditDestinationComponent();
-      const editDestinationComponent: EditDestinationComponent = new EditDestinationComponent(
-        Inject(ActivatedRoute),
-        Inject(NotificationService),
-      );
+      const editDestinationComponent: EditDestinationComponent =
+        new EditDestinationComponent(
+          Inject(ActivatedRoute),
+          Inject(NotificationService),
+        );
       vi.spyOn(editDestinationComponent, 'ngOnInit').mockImplementation(() => {
         editDestinationComponent.destinationUUID =
-          mockEditDestinationComponent.route.snapshot.paramMap.get('uuid') ?? '';
+          mockEditDestinationComponent.route.snapshot.paramMap.get('uuid') ??
+          '';
 
         mockEditDestinationComponent.airportService
           .findAirport(editDestinationComponent.destinationUUID)
           .then(async (destinationToEdit) => {
             editDestinationComponent.initDestinationToEdit =
-              editDestinationComponent.airportMapper.airportFromDB(destinationToEdit.data);
+              editDestinationComponent.airportMapper.airportFromDB(
+                destinationToEdit.data,
+              );
 
-            expect(editDestinationComponent.initDestinationToEdit).toStrictEqual({
+            expect(
+              editDestinationComponent.initDestinationToEdit,
+            ).toStrictEqual({
               id: 21,
               uuid: 'destination-created-uuid',
               iata: 'CRE',
@@ -70,13 +81,17 @@ describe('EditDestinationComponent', () => {
 
         mockEditDestinationComponent.userService.user.subscribe((user) => {
           if (user) {
-            editDestinationComponent.authenticatedUser = JSON.parse(user.toString());
+            editDestinationComponent.authenticatedUser = JSON.parse(
+              user.toString(),
+            );
           }
         });
       });
       editDestinationComponent.ngOnInit();
 
-      expect(editDestinationComponent.destinationUUID).toStrictEqual('destination-created-uuid');
+      expect(editDestinationComponent.destinationUUID).toStrictEqual(
+        'destination-created-uuid',
+      );
 
       expect(editDestinationComponent.authenticatedUser).toStrictEqual({
         id: 7,
@@ -94,7 +109,10 @@ describe('EditDestinationComponent', () => {
       imports: [EditDestinationComponent],
       providers: [
         provideRouter([
-          { path: 'destinations/list', component: MockListDestinationsComponent },
+          {
+            path: 'destinations/list',
+            component: MockListDestinationsComponent,
+          },
         ]),
       ],
     });
@@ -115,56 +133,61 @@ describe('EditDestinationComponent', () => {
 
       let mockEditDestinationComponent: MockEditDestinationComponent =
         new MockEditDestinationComponent();
-      const editDestinationComponent: EditDestinationComponent = new EditDestinationComponent(
-        Inject(ActivatedRoute),
-        Inject(NotificationService),
+      const editDestinationComponent: EditDestinationComponent =
+        new EditDestinationComponent(
+          Inject(ActivatedRoute),
+          Inject(NotificationService),
+        );
+      vi.spyOn(editDestinationComponent, 'editDestination').mockImplementation(
+        () => {
+          mockEditDestinationComponent.airportService
+            .updateAirport(destinationToUpdate)
+            .then(async (result) => {
+              if (result.data) {
+                expect(result.data).toStrictEqual({
+                  airportID: 21,
+                  airportUUID: 'destination-created-uuid',
+                  airportIATA: 'UPD',
+                  airportName: 'Airport-Updated',
+                  airportCity: 'Varsovie',
+                  airportLatitude: 1.5,
+                  airportLongitude: 5.5,
+                  airportCountry: 155,
+                  airportHub: false,
+                });
+
+                const toastrSuccess: any =
+                  mockEditDestinationComponent.notificationService.showSuccessNotification(
+                    `${getFormModeLabel(editDestinationComponent.formMode)} ${getDestinationFormTitle()}`.toUpperCase(),
+                    `${getDestinationFormSuccessNotificationMessage(editDestinationComponent.formMode)}`,
+                  );
+                expect(toastrSuccess.toastId).toStrictEqual(2);
+                expect(toastrSuccess.title).toStrictEqual(
+                  "MODIFICATION D'UNE DESTINATION",
+                );
+                expect(toastrSuccess.message).toStrictEqual(
+                  'Votre destination a bien été modifié(e) !',
+                );
+
+                await harness.navigateByUrl('/destinations/list');
+                expect(harness.routeNativeElement?.textContent).toBe(
+                  'List destinations',
+                );
+              } else {
+                const toastrError: any =
+                  mockEditDestinationComponent.notificationService.showErrorNotification(
+                    `${getTechnicalErrorTitle()}`,
+                    `${getTechnicalErrorMessage()}`,
+                  );
+                expect(toastrError.toastId).toStrictEqual(1);
+                expect(toastrError.title).toStrictEqual('ERREUR TECHNIQUE');
+                expect(toastrError.message).toStrictEqual(
+                  'Une erreur est survenue : veuillez réessayer...',
+                );
+              }
+            });
+        },
       );
-      vi.spyOn(editDestinationComponent, 'editDestination').mockImplementation(() => {
-        mockEditDestinationComponent.airportService
-          .updateAirport(destinationToUpdate)
-          .then(async (result) => {
-            if (result.data) {
-              expect(result.data).toStrictEqual({
-                airportID: 21,
-                airportUUID: 'destination-created-uuid',
-                airportIATA: 'UPD',
-                airportName: 'Airport-Updated',
-                airportCity: 'Varsovie',
-                airportLatitude: 1.5,
-                airportLongitude: 5.5,
-                airportCountry: 155,
-                airportHub: false,
-              });
-
-              const toastrSuccess: any =
-                mockEditDestinationComponent.notificationService.showSuccessNotification(
-                  `${getFormModeLabel(editDestinationComponent.formMode)} ${getDestinationFormTitle()}`.toUpperCase(),
-                  `${getDestinationFormSuccessNotificationMessage(editDestinationComponent.formMode)}`,
-                );
-              expect(toastrSuccess.toastId).toStrictEqual(2);
-              expect(toastrSuccess.title).toStrictEqual(
-                "MODIFICATION D'UNE DESTINATION",
-              );
-              expect(toastrSuccess.message).toStrictEqual(
-                'Votre destination a bien été modifié(e) !',
-              );
-
-              await harness.navigateByUrl('/destinations/list');
-              expect(harness.routeNativeElement?.textContent).toBe('List destinations');
-            } else {
-              const toastrError: any =
-                mockEditDestinationComponent.notificationService.showErrorNotification(
-                  `${getTechnicalErrorTitle()}`,
-                  `${getTechnicalErrorMessage()}`,
-                );
-              expect(toastrError.toastId).toStrictEqual(1);
-              expect(toastrError.title).toStrictEqual('ERREUR TECHNIQUE');
-              expect(toastrError.message).toStrictEqual(
-                'Une erreur est survenue : veuillez réessayer...',
-              );
-            }
-          });
-      });
       editDestinationComponent.editDestination(destinationToUpdate);
     });
   });

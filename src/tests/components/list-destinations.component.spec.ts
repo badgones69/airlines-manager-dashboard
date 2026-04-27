@@ -50,21 +50,25 @@ describe('ListDestinationsComponent', () => {
     TestBed.runInInjectionContext(() => {
       const mockListDestinationsComponent: MockListDestinationsComponent =
         new MockListDestinationsComponent();
-      const listDestinationsComponent: ListDestinationsComponent = new ListDestinationsComponent(
-        Inject(MatDialog),
-      );
+      const listDestinationsComponent: ListDestinationsComponent =
+        new ListDestinationsComponent(Inject(MatDialog));
       vi.spyOn(listDestinationsComponent, 'ngOnInit').mockImplementation(() => {
-        listDestinationsComponent.destinationsListTitle = getDestinationsListTitle();
+        listDestinationsComponent.destinationsListTitle =
+          getDestinationsListTitle();
 
         mockListDestinationsComponent.userService.user.subscribe((user) => {
           if (user) {
-            listDestinationsComponent.authenticatedUser = JSON.parse(user.toString());
+            listDestinationsComponent.authenticatedUser = JSON.parse(
+              user.toString(),
+            );
           }
         });
       });
       listDestinationsComponent.ngOnInit();
 
-      expect(listDestinationsComponent.destinationsListTitle).toStrictEqual('Liste des destinations');
+      expect(listDestinationsComponent.destinationsListTitle).toStrictEqual(
+        'Liste des destinations',
+      );
 
       expect(listDestinationsComponent.authenticatedUser).toStrictEqual({
         id: 7,
@@ -82,7 +86,10 @@ describe('ListDestinationsComponent', () => {
       imports: [ListDestinationsComponent],
       providers: [
         provideRouter([
-          { path: 'destinations/edit/:uuid', component: MockEditDestinationComponent },
+          {
+            path: 'destinations/edit/:uuid',
+            component: MockEditDestinationComponent,
+          },
         ]),
       ],
     });
@@ -91,9 +98,8 @@ describe('ListDestinationsComponent', () => {
     await harness.navigateByUrl('/destinations/edit/:uuid');
 
     TestBed.runInInjectionContext(() => {
-      const listDestinationsComponent: ListDestinationsComponent = new ListDestinationsComponent(
-        Inject(MatDialog),
-      );
+      const listDestinationsComponent: ListDestinationsComponent =
+        new ListDestinationsComponent(Inject(MatDialog));
 
       const spy = vi
         .spyOn(listDestinationsComponent, 'openDestinationForm')
@@ -106,7 +112,13 @@ describe('ListDestinationsComponent', () => {
         city: 'Houston',
         latitude: 4.4,
         longitude: 63.63,
-        country: { id: 63, name: 'États-Unis', icao: 'N', flagCode: 'us', regions: USA_REGIONS_FR },
+        country: {
+          id: 63,
+          name: 'États-Unis',
+          icao: 'N',
+          flagCode: 'us',
+          regions: USA_REGIONS_FR,
+        },
         region: { id: 4, code: 'TX', name: 'Texas' },
         hub: false,
       });
@@ -120,7 +132,13 @@ describe('ListDestinationsComponent', () => {
           city: 'Houston',
           latitude: 4.4,
           longitude: 63.63,
-          country: { id: 63, name: 'États-Unis', icao: 'N', flagCode: 'us', regions: USA_REGIONS_FR },
+          country: {
+            id: 63,
+            name: 'États-Unis',
+            icao: 'N',
+            flagCode: 'us',
+            regions: USA_REGIONS_FR,
+          },
           region: { id: 4, code: 'TX', name: 'Texas' },
           hub: false,
         }),
@@ -132,11 +150,16 @@ describe('ListDestinationsComponent', () => {
     TestBed.runInInjectionContext(() => {
       const mockListDestinationsComponent: MockListDestinationsComponent =
         new MockListDestinationsComponent();
-      const listDestinationsComponent: ListDestinationsComponent = new ListDestinationsComponent(
-        Inject(MatDialog),
-      );
-      vi.spyOn(listDestinationsComponent, 'deleteDestination').mockImplementation(() => {
-        vi.spyOn(mockListDestinationsComponent, 'deleteDestination').mockImplementation(() => {
+      const listDestinationsComponent: ListDestinationsComponent =
+        new ListDestinationsComponent(Inject(MatDialog));
+      vi.spyOn(
+        listDestinationsComponent,
+        'deleteDestination',
+      ).mockImplementation(() => {
+        vi.spyOn(
+          mockListDestinationsComponent,
+          'deleteDestination',
+        ).mockImplementation(() => {
           expect(mockListDestinationsComponent.open).toHaveBeenCalledWith(
             DeleteDestinationComponent,
             {
@@ -155,7 +178,13 @@ describe('ListDestinationsComponent', () => {
         city: 'Houston',
         latitude: 4.4,
         longitude: 63.63,
-        country: { id: 63, name: 'États-Unis', icao: 'N', flagCode: 'us', regions: USA_REGIONS_FR },
+        country: {
+          id: 63,
+          name: 'États-Unis',
+          icao: 'N',
+          flagCode: 'us',
+          regions: USA_REGIONS_FR,
+        },
         region: { id: 4, code: 'TX', name: 'Texas' },
         hub: false,
       });
