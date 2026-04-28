@@ -13,8 +13,8 @@
 </p>
 
 <p align="center">
-    <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/v1.1.3-F317F9.svg"></a>
-    <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/March 30th, 2026-7E7E7E.svg"></a>
+    <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/v1.2.0-FF0000.svg"></a>
+    <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/April 28th, 2026-7E7E7E.svg"></a>
     <br />
     <img src="https://img.shields.io/badge/SonarQube%20%3A%2098%20%25-0000AA?logo=sonar&logoColor=FFFFFF">
 </p>
