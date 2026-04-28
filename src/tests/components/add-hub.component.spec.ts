@@ -71,7 +71,7 @@ describe('AddHubComponent', () => {
     const harness: RouterTestingHarness = await RouterTestingHarness.create();
     TestBed.runInInjectionContext(() => {
       const hubToCreate: any = {
-        airportUUID: 'airport-created-uuid',
+        airportUUID: 'hub-created-uuid',
         airportIATA: 'CRE',
         airportName: 'Airport-Created',
         airportCity: 'Cracovie',
@@ -92,7 +92,7 @@ describe('AddHubComponent', () => {
             if (result.data) {
               expect(result.data).toStrictEqual({
                 airportID: 21,
-                airportUUID: 'airport-created-uuid',
+                airportUUID: 'hub-created-uuid',
                 airportIATA: 'CRE',
                 airportName: 'Airport-Created',
                 airportCity: 'Cracovie',

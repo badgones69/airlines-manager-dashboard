@@ -29,11 +29,11 @@ import {
   getSubmitButtonIcon,
   getSubmitButtonLabel,
   getUnknownCountryErrorMessage,
-} from '../../shared/labels/commons/form-common';
-import { Airport } from '../../shared/models/Airport';
+} from '../../labels/commons/form-common';
+import { Airport } from '../../models/Airport';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { onlyWhitespaceValueValidator } from '../../shared/forms-validators/commons-validators';
+import { onlyWhitespaceValueValidator } from '../../forms-validators/commons-validators';
 import {
   BLANK_VALUE_ERROR,
   EDIT_FORM_MODE,
@@ -45,16 +45,16 @@ import {
   REQUIRED_ERROR,
   UNKNOWN_COUNTRY_ERROR,
   UNKNOWN_REGION_ERROR,
-} from '../../shared/constants/forms-constants';
-import { AirportMapper } from '../../shared/mappers/AirportMapper';
-import { Country } from '../../shared/models/Country';
-import { capitalize } from '../../shared/utils/labels-utils';
+} from '../../constants/forms-constants';
+import { AirportMapper } from '../../mappers/AirportMapper';
+import { Country } from '../../models/Country';
+import { capitalize } from '../../utils/labels-utils';
 import {
   getCountries,
   getCountryByName,
   getRegionByName,
   getRegions,
-} from '../../shared/utils/geographical-utils';
+} from '../../utils/geographical-utils';
 import {
   distinctUntilChanged,
   map,
@@ -71,18 +71,16 @@ import {
   getCountryLabel,
   getRegionLabel,
   getUnknownRegionErrorMessage,
-} from '../../shared/labels/commons/airport-common';
-import { getHubFormTitle } from '../../shared/labels/forms/hub-form';
+} from '../../labels/commons/airport-common';
 import { AsyncPipe } from '@angular/common';
 import {
   MatAutocomplete,
   MatAutocompleteTrigger,
   MatOption,
 } from '@angular/material/autocomplete';
-import { Region } from '../../shared/models/Region';
-
+import { Region } from '../../models/Region';
 @Component({
-  selector: 'hub-form',
+  selector: 'airport-form',
   standalone: true,
   imports: [
     FormsModule,
@@ -97,26 +95,28 @@ import { Region } from '../../shared/models/Region';
     MatOption,
     MatAutocompleteTrigger,
   ],
-  templateUrl: './hub-form.component.html',
+  templateUrl: './airport-form.component.html',
   styleUrls: [
-    '../../shared/styles/forms.scss',
-    '../../shared/styles/commons.scss',
-    '../../shared/styles/forms.scss',
-    '../../shared/styles/flag-icons.css',
+    '../../styles/forms.scss',
+    '../../styles/commons.scss',
+    '../../styles/forms.scss',
+    '../../styles/flag-icons.css',
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HubFormComponent implements OnInit {
+export class AirportFormComponent implements OnInit {
   @Input() public formMode!: string;
-  @Input() public hub!: Airport;
+  @Input() public formTitle!: string;
+  @Input() public airport!: Airport;
+  @Input() public isHub!: boolean;
   @Output() public submitted = new EventEmitter();
   public isEditMode!: boolean;
 
   public airportMapper: AirportMapper = new AirportMapper();
 
   /* Form properties */
-  public hubForm!: FormGroup;
-  public hubFormTitle: string = '';
+  public airportForm!: FormGroup;
+  public airportFormTitle: string = '';
   public countryFlag: string = 'xx';
 
   /* Form fields identifiers */
@@ -155,7 +155,7 @@ export class HubFormComponent implements OnInit {
 
   constructor() {
     /* Form fields creation & constraints definition */
-    this.hubForm = new FormGroup({
+    this.airportForm = new FormGroup({
       iata: new FormControl('', [
         Validators.required,
         Validators.pattern(new RegExp(ICAO_IATA_CODE_PATTERN)),
@@ -182,9 +182,9 @@ export class HubFormComponent implements OnInit {
     this.isEditMode = this.formMode === EDIT_FORM_MODE;
 
     /* Form title, fields and buttons initialization */
-    this.hubFormTitle = `${getFormModeLabel(
+    this.airportFormTitle = `${getFormModeLabel(
       this.formMode,
-    )} ${getHubFormTitle()}`;
+    )} ${this.formTitle}`;
     this.iataInputLabel = getIATALabel();
     this.nameInputLabel = getNameLabel();
     this.cityInputLabel = getCityLabel();
@@ -199,7 +199,7 @@ export class HubFormComponent implements OnInit {
     this.resetButtonType = getResetButtonType(this.formMode);
 
     // @ts-ignore
-    this.filteredCountries = this.hubForm
+    this.filteredCountries = this.airportForm
       .get(this.countryFieldIdentifier)
       ?.valueChanges.pipe(
         distinctUntilChanged(),
@@ -210,7 +210,7 @@ export class HubFormComponent implements OnInit {
       );
 
     // @ts-ignore
-    this.filteredRegions = this.hubForm
+    this.filteredRegions = this.airportForm
       .get(this.regionFieldIdentifier)
       ?.valueChanges.pipe(
         distinctUntilChanged(),
@@ -220,28 +220,30 @@ export class HubFormComponent implements OnInit {
         ),
       );
 
-    this.hubForm
+    this.airportForm
       .get(this.countryFieldIdentifier)
       ?.valueChanges.pipe(takeUntil(new Subject<void>()))
       .subscribe((countryValueChanged) =>
         this.changeCountry(countryValueChanged),
       );
 
-    this.hubForm
+    this.airportForm
       .get(this.regionFieldIdentifier)
       ?.valueChanges.pipe(takeUntil(new Subject<void>()))
       .subscribe((regionValueChanged) => this.changeRegion(regionValueChanged));
 
-    this.hubForm.patchValue({
-      iata: this.hub?.iata,
-      name: this.hub?.name,
-      city: this.hub?.city,
-      latitude: this.hub?.latitude,
-      longitude: this.hub?.longitude,
+    this.airportForm.patchValue({
+      iata: this.airport?.iata,
+      name: this.airport?.name,
+      city: this.airport?.city,
+      latitude: this.airport?.latitude,
+      longitude: this.airport?.longitude,
     });
 
-    this.hubForm.get(this.countryFieldIdentifier)?.setValue(this.hub?.country);
-    this.countryFlag = this.hub?.country?.flagCode;
+    this.airportForm
+      .get(this.countryFieldIdentifier)
+      ?.setValue(this.airport?.country);
+    this.countryFlag = this.airport?.country?.flagCode;
   }
 
   /* Country field listener (flag & regions) */
@@ -259,18 +261,21 @@ export class HubFormComponent implements OnInit {
 
         if (countryFound.regions) {
           this.regions = getRegions(countryFound.id);
-          this.hubForm
+          this.airportForm
             .get(this.regionFieldIdentifier)
             ?.setValidators(Validators.required);
-          this.hubForm
-            .get(this.regionFieldIdentifier)
-            ?.setValue(this.hub?.region);
+
+          if (countryFound.id === this.airport?.country.id) { 
+            this.airportForm
+              .get(this.regionFieldIdentifier)
+              ?.setValue(this.airport?.region);
+          }
         }
       } else {
         this.countryFlag = 'xx';
         this.regions = [];
-        this.hubForm.get(this.regionFieldIdentifier)?.setValidators([]);
-        this.hubForm.get(this.regionFieldIdentifier)?.setValue(null);
+        this.airportForm.get(this.regionFieldIdentifier)?.setValidators([]);
+        this.airportForm.get(this.regionFieldIdentifier)?.setValue(null);
       }
     }
   }
@@ -286,7 +291,7 @@ export class HubFormComponent implements OnInit {
       const regionFound = getRegionByName(filterValue, this.countryFlag);
 
       if (!regionFound) {
-        this.hubForm
+        this.airportForm
           .get(this.regionFieldIdentifier)
           ?.setErrors({ [UNKNOWN_REGION_ERROR]: true });
       }
@@ -335,12 +340,18 @@ export class HubFormComponent implements OnInit {
 
   /* ICAO field error message(s) display */
   displayIATAErrorMessage(): string {
-    if (this.hubForm.get(this.iataFieldIdentifier)?.hasError(REQUIRED_ERROR)) {
+    if (
+      this.airportForm.get(this.iataFieldIdentifier)?.hasError(REQUIRED_ERROR)
+    ) {
       return getRequiredFieldErrorMessage();
     } else if (
-      this.hubForm.get(this.iataFieldIdentifier)?.hasError(MIN_LENGTH_ERROR) ||
-      this.hubForm.get(this.iataFieldIdentifier)?.hasError(MAX_LENGTH_ERROR) ||
-      this.hubForm.get(this.iataFieldIdentifier)?.hasError(PATTERN_ERROR)
+      this.airportForm
+        .get(this.iataFieldIdentifier)
+        ?.hasError(MIN_LENGTH_ERROR) ||
+      this.airportForm
+        .get(this.iataFieldIdentifier)
+        ?.hasError(MAX_LENGTH_ERROR) ||
+      this.airportForm.get(this.iataFieldIdentifier)?.hasError(PATTERN_ERROR)
     ) {
       return getICAO_IATA_FieldsErrorMessage();
     }
@@ -349,10 +360,14 @@ export class HubFormComponent implements OnInit {
 
   /* Name field error message(s) display */
   displayNameErrorMessage(): string {
-    if (this.hubForm.get(this.nameFieldIdentifier)?.hasError(REQUIRED_ERROR)) {
+    if (
+      this.airportForm.get(this.nameFieldIdentifier)?.hasError(REQUIRED_ERROR)
+    ) {
       return getRequiredFieldErrorMessage();
     } else if (
-      this.hubForm.get(this.nameFieldIdentifier)?.hasError(BLANK_VALUE_ERROR)
+      this.airportForm
+        .get(this.nameFieldIdentifier)
+        ?.hasError(BLANK_VALUE_ERROR)
     ) {
       return getBlankStringFieldErrorMessage();
     }
@@ -362,11 +377,15 @@ export class HubFormComponent implements OnInit {
   /* Latitude field error message(s) display */
   displayLatitudeErrorMessage(): string {
     if (
-      this.hubForm.get(this.latitudeFieldIdentifier)?.hasError(REQUIRED_ERROR)
+      this.airportForm
+        .get(this.latitudeFieldIdentifier)
+        ?.hasError(REQUIRED_ERROR)
     ) {
       return getRequiredFieldErrorMessage();
     } else if (
-      this.hubForm.get(this.latitudeFieldIdentifier)?.hasError(PATTERN_ERROR)
+      this.airportForm
+        .get(this.latitudeFieldIdentifier)
+        ?.hasError(PATTERN_ERROR)
     ) {
       return getLatitudeLongitudeFieldsErrorMessage();
     }
@@ -376,11 +395,15 @@ export class HubFormComponent implements OnInit {
   /* Longitude field error message(s) display */
   displayLongitudeErrorMessage(): string {
     if (
-      this.hubForm.get(this.longitudeFieldIdentifier)?.hasError(REQUIRED_ERROR)
+      this.airportForm
+        .get(this.longitudeFieldIdentifier)
+        ?.hasError(REQUIRED_ERROR)
     ) {
       return getRequiredFieldErrorMessage();
     } else if (
-      this.hubForm.get(this.longitudeFieldIdentifier)?.hasError(PATTERN_ERROR)
+      this.airportForm
+        .get(this.longitudeFieldIdentifier)
+        ?.hasError(PATTERN_ERROR)
     ) {
       return getLatitudeLongitudeFieldsErrorMessage();
     }
@@ -390,11 +413,13 @@ export class HubFormComponent implements OnInit {
   /* Country field error message(s) display */
   displayCountryErrorMessage(): string {
     if (
-      this.hubForm.get(this.countryFieldIdentifier)?.hasError(REQUIRED_ERROR)
+      this.airportForm
+        .get(this.countryFieldIdentifier)
+        ?.hasError(REQUIRED_ERROR)
     ) {
       return getRequiredFieldErrorMessage();
     } else if ('xx' === this.countryFlag) {
-      this.hubForm
+      this.airportForm
         .get(this.countryFieldIdentifier)
         ?.setErrors({ [UNKNOWN_COUNTRY_ERROR]: true });
 
@@ -406,11 +431,11 @@ export class HubFormComponent implements OnInit {
   /* Region field error message(s) display */
   displayRegionErrorMessage(): string {
     if (
-      this.hubForm.get(this.regionFieldIdentifier)?.hasError(REQUIRED_ERROR)
+      this.airportForm.get(this.regionFieldIdentifier)?.hasError(REQUIRED_ERROR)
     ) {
       return getRequiredFieldErrorMessage();
     } else if (
-      this.hubForm
+      this.airportForm
         .get(this.regionFieldIdentifier)
         ?.hasError(UNKNOWN_REGION_ERROR)
     ) {
@@ -420,23 +445,25 @@ export class HubFormComponent implements OnInit {
   }
 
   /* Form submit */
-  submitHubForm() {
-    this.hubForm.value.hub = true;
-    this.hubForm.value.country = getCountryByName(
-      typeof this.hubForm.get(this.countryFieldIdentifier)?.value === 'string'
-        ? this.hubForm.get(this.countryFieldIdentifier)?.value
-        : this.hubForm.get(this.countryFieldIdentifier)?.value.name,
+  submitAirportForm() {
+    this.airportForm.value.hub = this.isHub;
+    this.airportForm.value.country = getCountryByName(
+      typeof this.airportForm.get(this.countryFieldIdentifier)?.value ===
+        'string'
+        ? this.airportForm.get(this.countryFieldIdentifier)?.value
+        : this.airportForm.get(this.countryFieldIdentifier)?.value.name,
     );
 
-    if (this.hubForm.value.country.regions) {
-      this.hubForm.value.region = getRegionByName(
-        typeof this.hubForm.get(this.regionFieldIdentifier)?.value === 'string'
-          ? this.hubForm.get(this.regionFieldIdentifier)?.value
-          : this.hubForm.get(this.regionFieldIdentifier)?.value.name,
+    if (this.airportForm.value.country.regions) {
+      this.airportForm.value.region = getRegionByName(
+        typeof this.airportForm.get(this.regionFieldIdentifier)?.value ===
+          'string'
+          ? this.airportForm.get(this.regionFieldIdentifier)?.value
+          : this.airportForm.get(this.regionFieldIdentifier)?.value.name,
         this.countryFlag,
       );
     }
 
-    this.submitted.emit(this.airportMapper.airportToDB(this.hubForm.value));
+    this.submitted.emit(this.airportMapper.airportToDB(this.airportForm.value));
   }
 }

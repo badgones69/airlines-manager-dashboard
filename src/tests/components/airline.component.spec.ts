@@ -392,11 +392,14 @@ describe('AirlineComponent', () => {
         .get(airlineComponent.nationalityFieldIdentifier)
         ?.setErrors([]);
       airlineComponent.nationalityFlag = 'xx';
+      airlineComponent.displayNationalityErrorMessage();
+
       expect(
         airlineComponent.airlineForm
           .get(airlineComponent.nationalityFieldIdentifier)
           ?.hasError(UNKNOWN_COUNTRY_ERROR),
-      );
+      ).toBeTruthy();
+
       expect(airlineComponent.displayNationalityErrorMessage()).toStrictEqual(
         'pays inconnu',
       );

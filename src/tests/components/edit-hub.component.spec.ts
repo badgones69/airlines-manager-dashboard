@@ -34,7 +34,7 @@ describe('EditHubComponent', () => {
         Inject(ToastrService),
       ),
       readonly route: any = {
-        snapshot: { paramMap: new Map().set('uuid', 'airport-created-uuid') },
+        snapshot: { paramMap: new Map().set('uuid', 'hub-created-uuid') },
       },
     ) {}
   }
@@ -59,7 +59,7 @@ describe('EditHubComponent', () => {
 
             expect(editHubComponent.initHubToEdit).toStrictEqual({
               id: 21,
-              uuid: 'airport-created-uuid',
+              uuid: 'hub-created-uuid',
               iata: 'CRE',
               name: 'Airport-Created',
               city: 'Cracovie',
@@ -79,7 +79,7 @@ describe('EditHubComponent', () => {
       });
       editHubComponent.ngOnInit();
 
-      expect(editHubComponent.hubUUID).toStrictEqual('airport-created-uuid');
+      expect(editHubComponent.hubUUID).toStrictEqual('hub-created-uuid');
 
       expect(editHubComponent.authenticatedUser).toStrictEqual({
         id: 7,
@@ -106,7 +106,7 @@ describe('EditHubComponent', () => {
     TestBed.runInInjectionContext(() => {
       const hubToUpdate: any = {
         airportID: 21,
-        airportUUID: 'airport-created-uuid',
+        airportUUID: 'hub-created-uuid',
         airportIATA: 'UPD',
         airportName: 'Airport-Updated',
         airportCity: 'Varsovie',
@@ -129,7 +129,7 @@ describe('EditHubComponent', () => {
             if (result.data) {
               expect(result.data).toStrictEqual({
                 airportID: 21,
-                airportUUID: 'airport-created-uuid',
+                airportUUID: 'hub-created-uuid',
                 airportIATA: 'UPD',
                 airportName: 'Airport-Updated',
                 airportCity: 'Varsovie',

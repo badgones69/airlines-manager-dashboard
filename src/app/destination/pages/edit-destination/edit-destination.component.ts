@@ -15,26 +15,26 @@ import {
 } from '../../../shared/labels/errors';
 import { AirportService } from '../../../shared/services/airport.service';
 import {
-  getHubFormSuccessNotificationMessage,
-  getHubFormTitle,
-} from '../../../shared/labels/forms/hub-form';
+  getDestinationFormSuccessNotificationMessage,
+  getDestinationFormTitle,
+} from '../../../shared/labels/forms/destination-form';
 import { AirportMapper } from '../../../shared/mappers/AirportMapper';
 
 @Component({
-  selector: 'edit-hub',
+  selector: 'edit-destination',
   standalone: true,
   imports: [AirportFormComponent, ForbiddenComponent, UnauthorizedComponent],
-  templateUrl: './edit-hub.component.html',
+  templateUrl: './edit-destination.component.html',
   styleUrls: [],
 })
-export class EditHubComponent implements OnInit {
+export class EditDestinationComponent implements OnInit {
   public authenticatedUser!: User;
 
-  public initHubToEdit!: Airport;
+  public initDestinationToEdit!: Airport;
   public formMode: string = EDIT_FORM_MODE;
-  public formTitle: string = getHubFormTitle();
+  public formTitle: string = getDestinationFormTitle();
 
-  public hubUUID!: string;
+  public destinationUUID!: string;
   public airportMapper: AirportMapper = new AirportMapper();
 
   /* Injections */
@@ -48,11 +48,14 @@ export class EditHubComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.hubUUID = this.route.snapshot.paramMap.get('uuid') ?? '';
+    this.destinationUUID = this.route.snapshot.paramMap.get('uuid') ?? '';
 
-    this.airportService.findAirport(this.hubUUID).then((hub) => {
-      this.initHubToEdit = this.airportMapper.airportFromDB(hub);
-    });
+    this.airportService
+      .findAirport(this.destinationUUID)
+      .then((destination) => {
+        this.initDestinationToEdit =
+          this.airportMapper.airportFromDB(destination);
+      });
 
     this.userService.user.subscribe((user) => {
       if (user) {
@@ -61,22 +64,22 @@ export class EditHubComponent implements OnInit {
     });
   }
 
-  /* Hub editing */
-  editHub(hub: any): void {
-    hub.airportUUID = this.hubUUID;
-    // Hub updating
-    this.airportService.updateAirport(hub).then((result: any) => {
-      // If hub is updated
+  /* Destination editing */
+  editDestination(destination: any): void {
+    destination.airportUUID = this.destinationUUID;
+    // Destination updating
+    this.airportService.updateAirport(destination).then((result: any) => {
+      // If destination is updated
       if (result.data) {
         /* Success notification showing */
         this.notificationService.showSuccessNotification(
           `${getFormModeLabel(
             this.formMode,
-          )} ${getHubFormTitle()}`.toUpperCase(),
-          `${getHubFormSuccessNotificationMessage(this.formMode)}`,
+          )} ${getDestinationFormTitle()}`.toUpperCase(),
+          `${getDestinationFormSuccessNotificationMessage(this.formMode)}`,
         );
-        // Redirection to hubs list
-        this.router.navigate(['hubs', 'list']);
+        // Redirection to destinations list
+        this.router.navigate(['destinations', 'list']);
       } else {
         /* Technical error notification showing */
         this.notificationService.showErrorNotification(
