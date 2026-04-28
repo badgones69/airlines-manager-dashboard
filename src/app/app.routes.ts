@@ -9,6 +9,9 @@ import { ResetUserPasswordComponent } from './user/pages/reset-user-password/res
 import { AddHubComponent } from './hub/pages/add-hub/add-hub.component';
 import { ListHubsComponent } from './hub/pages/list-hubs/list-hubs.component';
 import { EditHubComponent } from './hub/pages/edit-hub/edit-hub.component';
+import { AddDestinationComponent } from './destination/pages/add-destination/add-destination.component';
+import { ListDestinationsComponent } from './destination/pages/list-destinations/list-destinations.component';
+import { EditDestinationComponent } from './destination/pages/edit-destination/edit-destination.component';
 
 export const routes: Routes = [
   /* Authentication form (default route) */
@@ -42,6 +45,16 @@ export const routes: Routes = [
       { path: 'add', component: AddHubComponent },
       { path: 'list', component: ListHubsComponent },
       { path: 'edit/:uuid', component: EditHubComponent },
+    ],
+  },
+
+  /* Destination pages */
+  {
+    path: 'destinations',
+    children: [
+      { path: 'add', component: AddDestinationComponent },
+      { path: 'list', component: ListDestinationsComponent },
+      { path: 'edit/:uuid', component: EditDestinationComponent },
     ],
   },
 ];

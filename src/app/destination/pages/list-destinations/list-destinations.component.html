@@ -1,0 +1,13 @@
+@if (authenticatedUser) {
+  <!-- DESTINATIONS LIST -->
+  <list-airports
+    [airportsListTitle]="destinationsListTitle"
+    [isHub]="false"
+    [openAirportForm]="openDestinationForm"
+    [deleteAirport]="deleteDestination"
+  >
+  </list-airports>
+} @else {
+  <!-- UNAUTHORIZED ERROR PAGE -->
+  <unauthorized></unauthorized>
+}

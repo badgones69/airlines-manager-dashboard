@@ -12,7 +12,6 @@ import { DeleteHubComponent } from '../../app/hub/pages/delete-hub/delete-hub.co
 import { ComponentType, NoopScrollStrategy } from '@angular/cdk/overlay';
 import { ListHubsComponent } from '../../app/hub/pages/list-hubs/list-hubs.component';
 import { MockAirportService } from '../mocks/mock-airport-service';
-import { USA_REGIONS_FR } from '../../app/shared/constants/geographical-constants';
 
 describe('ListHubsComponent', () => {
   @Component({
@@ -61,12 +60,6 @@ describe('ListHubsComponent', () => {
             listHubsComponent.authenticatedUser = JSON.parse(user.toString());
           }
         });
-        mockListHubsComponent.airportService.hubs.subscribe((hubs) => {
-          if (hubs) {
-            listHubsComponent.hubsList.data =
-              mockListHubsComponent.airportMapper.airportsListFromDB(hubs);
-          }
-        });
       });
       listHubsComponent.ngOnInit();
 
@@ -80,39 +73,6 @@ describe('ListHubsComponent', () => {
         login: 'a.u',
         profile: 1,
       });
-
-      expect(listHubsComponent.hubsList.data).toStrictEqual([
-        {
-          id: 1,
-          uuid: 'uuid-airport',
-          iata: 'JFK',
-          name: 'John F. Kennedy',
-          city: 'New York',
-          latitude: 63.63,
-          longitude: 1.1,
-          country: {
-            id: 63,
-            name: 'États-Unis',
-            icao: 'N',
-            flagCode: 'us',
-            regions: USA_REGIONS_FR,
-          },
-          region: { id: 1, code: 'NY', name: 'New York' },
-          hub: true,
-        },
-        {
-          id: 2,
-          uuid: 'airport-uuid',
-          iata: 'CDG',
-          name: 'Roissy-Charles de Gaulle',
-          city: 'Paris',
-          latitude: 6.6,
-          longitude: 7.7,
-          country: { id: 67, name: 'France', icao: 'F', flagCode: 'fr' },
-          region: undefined,
-          hub: true,
-        },
-      ]);
     });
   });
 
@@ -139,7 +99,7 @@ describe('ListHubsComponent', () => {
         .mockImplementation(() => harness.routeNativeElement?.textContent);
       listHubsComponent.openHubForm({
         id: 2,
-        uuid: 'airport-uuid',
+        uuid: 'hub-uuid',
         iata: 'CDG',
         name: 'Roissy-Charles de Gaulle',
         city: 'Paris',
@@ -152,7 +112,7 @@ describe('ListHubsComponent', () => {
       expect(
         listHubsComponent.openHubForm({
           id: 2,
-          uuid: 'airport-uuid',
+          uuid: 'hub-uuid',
           iata: 'CDG',
           name: 'Roissy-Charles de Gaulle',
           city: 'Paris',
@@ -186,7 +146,7 @@ describe('ListHubsComponent', () => {
       });
       listHubsComponent.deleteHub({
         id: 2,
-        uuid: 'airport-uuid',
+        uuid: 'hub-uuid',
         iata: 'CDG',
         name: 'Roissy-Charles de Gaulle',
         city: 'Paris',

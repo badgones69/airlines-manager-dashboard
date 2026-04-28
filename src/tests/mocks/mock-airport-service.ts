@@ -10,7 +10,7 @@ export class MockAirportService {
   public hubs: Observable<any[]> = of([
     {
       airportID: 1,
-      airportUUID: 'uuid-airport',
+      airportUUID: 'uuid-hub',
       airportIATA: 'JFK',
       airportName: 'John F. Kennedy',
       airportCity: 'New York',
@@ -22,7 +22,7 @@ export class MockAirportService {
     },
     {
       airportID: 2,
-      airportUUID: 'airport-uuid',
+      airportUUID: 'hub-uuid',
       airportIATA: 'CDG',
       airportName: 'Roissy-Charles de Gaulle',
       airportCity: 'Paris',
@@ -33,18 +33,45 @@ export class MockAirportService {
     },
   ]);
 
+  public destinations: Observable<any[]> = of([
+    {
+      airportID: 3,
+      airportUUID: 'uuid-destination',
+      airportIATA: 'LGA',
+      airportName: 'La Guardia',
+      airportCity: 'New York',
+      airportLatitude: 63.63,
+      airportLongitude: 1.1,
+      airportCountry: 63,
+      airportRegion: 1,
+      airportHub: false,
+    },
+    {
+      airportID: 4,
+      airportUUID: 'destination-uuid',
+      airportIATA: 'IAH',
+      airportName: 'George Bush',
+      airportCity: 'Houston',
+      airportLatitude: 4.4,
+      airportLongitude: 63.63,
+      airportCountry: 63,
+      airportRegion: 4,
+      airportHub: false,
+    },
+  ]);
+
   public findAirport = (airportUUID: string): Promise<any> => {
     return Promise.resolve({
       data: {
         airportID: 21,
-        airportUUID: 'airport-created-uuid',
+        airportUUID: airportUUID,
         airportIATA: 'CRE',
         airportName: 'Airport-Created',
         airportCity: 'Cracovie',
         airportLatitude: 1.5,
         airportLongitude: 5.5,
         airportCountry: 155,
-        airportHub: true,
+        airportHub: airportUUID === 'hub-created-uuid',
       },
     });
   };
@@ -53,14 +80,14 @@ export class MockAirportService {
     return Promise.resolve({
       data: {
         airportID: 21,
-        airportUUID: 'airport-created-uuid',
+        airportUUID: airportToCreate.airportUUID,
         airportIATA: 'CRE',
         airportName: 'Airport-Created',
         airportCity: 'Cracovie',
         airportLatitude: 1.5,
         airportLongitude: 5.5,
         airportCountry: 155,
-        airportHub: true,
+        airportHub: airportToCreate.airportHub,
       },
     });
   };
@@ -69,14 +96,14 @@ export class MockAirportService {
     return Promise.resolve({
       data: {
         airportID: 21,
-        airportUUID: 'airport-created-uuid',
+        airportUUID: airportToUpdate.airportUUID,
         airportIATA: 'UPD',
         airportName: 'Airport-Updated',
         airportCity: 'Varsovie',
         airportLatitude: 1.5,
         airportLongitude: 5.5,
         airportCountry: 155,
-        airportHub: true,
+        airportHub: airportToUpdate.airportHub,
       },
     });
   };
