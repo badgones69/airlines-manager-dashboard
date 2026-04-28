@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
   public airlineSubMenuExpanded: boolean = false;
   public userSubMenuExpanded: boolean = false;
   public hubSubMenuExpanded: boolean = false;
+  public destinationSubMenuExpanded: boolean = false;
 
   /* Injections */
   public userService: UserService = inject(UserService);
@@ -61,6 +62,7 @@ export class AppComponent implements OnInit {
       this.airlineSubMenuExpanded = false;
       this.userSubMenuExpanded = false;
       this.hubSubMenuExpanded = false;
+      this.destinationSubMenuExpanded = false;
     }
   }
 
@@ -77,6 +79,11 @@ export class AppComponent implements OnInit {
   /* Hub submenu opening/closing */
   hubSubMenuToggle(): void {
     this.hubSubMenuExpanded = !this.hubSubMenuExpanded;
+  }
+
+  /* Destination submenu opening/closing */
+  destinationSubMenuToggle(): void {
+    this.destinationSubMenuExpanded = !this.destinationSubMenuExpanded;
   }
 
   /* About dialog opening */

@@ -10,6 +10,9 @@ import { ResetUserPasswordComponent } from '../app/user/pages/reset-user-passwor
 import { AddHubComponent } from '../app/hub/pages/add-hub/add-hub.component';
 import { ListHubsComponent } from '../app/hub/pages/list-hubs/list-hubs.component';
 import { EditHubComponent } from '../app/hub/pages/edit-hub/edit-hub.component';
+import { AddDestinationComponent } from '../app/destination/pages/add-destination/add-destination.component';
+import { ListDestinationsComponent } from '../app/destination/pages/list-destinations/list-destinations.component';
+import { EditDestinationComponent } from '../app/destination/pages/edit-destination/edit-destination.component';
 
 describe('App routes', () => {
   it('First route should return default route ("authentication")', () => {
@@ -59,5 +62,22 @@ describe('App routes', () => {
     expect(routes[5].children?.[1].component).toStrictEqual(ListHubsComponent);
     expect(routes[5].children?.[2].path).toStrictEqual('edit/:uuid');
     expect(routes[5].children?.[2].component).toStrictEqual(EditHubComponent);
+  });
+
+  it('Seventh route should return "destinations" subroutes ("add", "list", "edit")', () => {
+    expect(routes[6].path).toStrictEqual('destinations');
+    expect(routes[6].children?.length).toStrictEqual(3);
+    expect(routes[6].children?.[0].path).toStrictEqual('add');
+    expect(routes[6].children?.[0].component).toStrictEqual(
+      AddDestinationComponent,
+    );
+    expect(routes[6].children?.[1].path).toStrictEqual('list');
+    expect(routes[6].children?.[1].component).toStrictEqual(
+      ListDestinationsComponent,
+    );
+    expect(routes[6].children?.[2].path).toStrictEqual('edit/:uuid');
+    expect(routes[6].children?.[2].component).toStrictEqual(
+      EditDestinationComponent,
+    );
   });
 });

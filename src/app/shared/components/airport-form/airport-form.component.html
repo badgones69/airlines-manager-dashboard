@@ -1,7 +1,7 @@
 <!-- FORM -->
-<form id="form" [formGroup]="hubForm" (ngSubmit)="submitHubForm()">
+<form id="form" [formGroup]="airportForm" (ngSubmit)="submitAirportForm()">
   <!-- TITLE -->
-  <mat-label class="form-title">{{ hubFormTitle }}</mat-label>
+  <mat-label class="form-title">{{ airportFormTitle }}</mat-label>
 
   <!-- IATA FIELD -->
   <mat-form-field>
@@ -99,7 +99,7 @@
       class="submit-form-button"
       mat-fab
       extended
-      [disabled]="hubForm.invalid"
+      [disabled]="airportForm.invalid"
     >
       <i class="material-icons">edit</i>
       {{ submitButtonLabel }}

@@ -70,6 +70,7 @@ describe('AppComponent', () => {
       expect(appComponent.airlineSubMenuExpanded).toBeFalsy();
       expect(appComponent.userSubMenuExpanded).toBeFalsy();
       expect(appComponent.hubSubMenuExpanded).toBeFalsy();
+      expect(appComponent.destinationSubMenuExpanded).toBeFalsy();
     });
   });
 
@@ -100,6 +101,16 @@ describe('AppComponent', () => {
       expect(appComponent.hubSubMenuExpanded).toBeTruthy();
       appComponent.hubSubMenuToggle();
       expect(appComponent.hubSubMenuExpanded).toBeFalsy();
+    });
+  });
+
+  it('#destinationSubMenuToggle should open/close "destination" submenu items', () => {
+    TestBed.runInInjectionContext(() => {
+      const appComponent: AppComponent = new AppComponent(Inject(MatDialog));
+      appComponent.destinationSubMenuToggle();
+      expect(appComponent.destinationSubMenuExpanded).toBeTruthy();
+      appComponent.destinationSubMenuToggle();
+      expect(appComponent.destinationSubMenuExpanded).toBeFalsy();
     });
   });
 

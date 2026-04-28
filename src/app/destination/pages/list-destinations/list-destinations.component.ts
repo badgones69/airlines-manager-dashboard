@@ -1,27 +1,27 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { User } from '../../../shared/models/User';
 import { UserService } from '../../../shared/services/user.service';
-import { getHubsListTitle } from '../../../shared/labels/lists';
+import { getDestinationsListTitle } from '../../../shared/labels/lists';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
-import { Router } from '@angular/router';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { DeleteHubComponent } from '../delete-hub/delete-hub.component';
-import { Airport } from '../../../shared/models/Airport';
-import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { ListAirportsComponent } from '../../../shared/components/list-airports/list-airports.component';
+import { DeleteDestinationComponent } from '../delete-destination/delete-destination.component';
+import { Airport } from '../../../shared/models/Airport';
+import { Router } from '@angular/router';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'list-hubs',
+  selector: 'list-destinations',
   standalone: true,
   imports: [ListAirportsComponent, UnauthorizedComponent],
-  templateUrl: './list-hubs.component.html',
+  templateUrl: './list-destinations.component.html',
   styleUrls: [],
 })
-export class ListHubsComponent implements OnInit {
+export class ListDestinationsComponent implements OnInit {
   public authenticatedUser!: User;
 
   /* List properties */
-  public hubsListTitle!: string;
+  public destinationsListTitle!: string;
 
   /* Injections */
   public userService: UserService = inject(UserService);
@@ -30,7 +30,7 @@ export class ListHubsComponent implements OnInit {
   constructor(readonly dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.hubsListTitle = getHubsListTitle();
+    this.destinationsListTitle = getDestinationsListTitle();
 
     this.userService.user.subscribe((user) => {
       if (user) {
@@ -39,22 +39,22 @@ export class ListHubsComponent implements OnInit {
     });
   }
 
-  /* Hub form (edit mode) opening */
-  openHubForm(hub: Airport) {
-    this.router.navigate(['hubs', 'edit', hub.uuid]);
+  /* Destination form (edit mode) opening */
+  openDestinationForm(destination: Airport) {
+    this.router.navigate(['destinations', 'edit', destination.uuid]);
   }
 
-  /* Hub deletion confirmation dialog opening */
-  deleteHub(hub: Airport) {
-    let dialogRef: MatDialogRef<DeleteHubComponent> = this.dialog.open(
-      DeleteHubComponent,
+  /* Destination deletion confirmation dialog opening */
+  deleteDestination(destination: Airport) {
+    let dialogRef: MatDialogRef<DeleteDestinationComponent> = this.dialog.open(
+      DeleteDestinationComponent,
       {
         disableClose: false,
         autoFocus: true,
         scrollStrategy: new NoopScrollStrategy(),
       },
     );
-    dialogRef.componentInstance.hubUUID = hub.uuid!;
+    dialogRef.componentInstance.destinationUUID = destination.uuid!;
     dialogRef.afterClosed().subscribe(() => this.ngOnInit());
   }
 }
