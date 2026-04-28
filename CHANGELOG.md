@@ -1,5 +1,19 @@
 <h1 align="center">AM Dashboard</h1>
 <h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.2.0">1.2.0</a>
+    (2026-04-28)
+</h1>
+
+<h3>Features</h3>
+
+<ul>
+  <li><h4><ins>ADMINISTRATOR OR MANAGER PROFILE</ins></h4></li>
+  <ul>
+    <li><b>DESTINATION :</b> adding, editing, deleting</li>
+  </ul>
+</ul>
+<br />
+<h1 align="center">
     <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.1.3">1.1.3</a>
     (2026-03-30)
 </h1>
