@@ -4,7 +4,6 @@ import { UserService } from '../../../shared/services/user.service';
 import { getDestinationsListTitle } from '../../../shared/labels/lists';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
 import { ListAirportsComponent } from '../../../shared/components/list-airports/list-airports.component';
-import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
 import { DeleteDestinationComponent } from '../delete-destination/delete-destination.component';
 import { Airport } from '../../../shared/models/Airport';
 import { Router } from '@angular/router';
@@ -14,7 +13,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'list-destinations',
   standalone: true,
-  imports: [ListAirportsComponent, ForbiddenComponent, UnauthorizedComponent],
+  imports: [ListAirportsComponent, UnauthorizedComponent],
   templateUrl: './list-destinations.component.html',
   styleUrls: [],
 })

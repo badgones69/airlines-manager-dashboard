@@ -9,12 +9,11 @@ import { DeleteHubComponent } from '../delete-hub/delete-hub.component';
 import { Airport } from '../../../shared/models/Airport';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { ListAirportsComponent } from '../../../shared/components/list-airports/list-airports.component';
-import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
 
 @Component({
   selector: 'list-hubs',
   standalone: true,
-  imports: [ListAirportsComponent, ForbiddenComponent, UnauthorizedComponent],
+  imports: [ListAirportsComponent, UnauthorizedComponent],
   templateUrl: './list-hubs.component.html',
   styleUrls: [],
 })
