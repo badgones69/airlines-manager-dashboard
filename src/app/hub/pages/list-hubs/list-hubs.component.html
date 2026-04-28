@@ -1,17 +1,12 @@
 @if (authenticatedUser) {
-  @if (authenticatedUser.profile < 3) {
-    <!-- HUBS LIST -->
-    <list-airports
-      [airportsListTitle]="hubsListTitle"
-      [isHub]="true"
-      [openAirportForm]="openHubForm"
-      [deleteAirport]="deleteHub"
-    >
-    </list-airports>
-  } @else {
-    <!-- FORBIDDEN ERROR PAGE -->
-    <forbidden></forbidden>
-  }
+  <!-- HUBS LIST -->
+  <list-airports
+    [airportsListTitle]="hubsListTitle"
+    [isHub]="true"
+    [openAirportForm]="openHubForm"
+    [deleteAirport]="deleteHub"
+  >
+  </list-airports>
 } @else {
   <!-- UNAUTHORIZED ERROR PAGE -->
   <unauthorized></unauthorized>
