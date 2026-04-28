@@ -264,9 +264,12 @@ export class AirportFormComponent implements OnInit {
           this.airportForm
             .get(this.regionFieldIdentifier)
             ?.setValidators(Validators.required);
-          this.airportForm
-            .get(this.regionFieldIdentifier)
-            ?.setValue(this.airport?.region);
+
+          if (countryFound.id === this.airport?.country.id) { 
+            this.airportForm
+              .get(this.regionFieldIdentifier)
+              ?.setValue(this.airport?.region);
+          }
         }
       } else {
         this.countryFlag = 'xx';
