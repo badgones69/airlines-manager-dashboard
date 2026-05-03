@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../shared/services/user.service';
 import { User } from '../../../shared/models/User';
 import { Airport } from '../../../shared/models/Airport';
-import { AirportFormComponent } from '../../../shared/components/airport-form/airport-form.component';
+import { AirportFormComponent, showIATAUniquenessErrorNotification } from '../../../shared/components/airport-form/airport-form.component';
 import { EDIT_FORM_MODE } from '../../../shared/constants/forms-constants';
 import { getFormModeLabel } from '../../../shared/labels/commons/form-common';
 import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
@@ -19,7 +19,6 @@ import {
   getHubFormTitle,
 } from '../../../shared/labels/forms/hub-form';
 import { AirportMapper } from '../../../shared/mappers/AirportMapper';
-import { getIATAUniquenessErrorMessage } from '../../../shared/labels/commons/airport-common';
 
 @Component({
   selector: 'edit-hub',
@@ -80,12 +79,7 @@ export class EditHubComponent implements OnInit {
         this.router.navigate(['hubs', 'list']);
       } else if (result.status === 409) {
         /* IATA uniqueness error notification showing */
-        this.notificationService.showErrorNotification(
-          `${getFormModeLabel(
-            this.formMode,
-          )} ${getHubFormTitle()}`.toUpperCase(),
-          `${getIATAUniquenessErrorMessage()}`,
-        );
+        showIATAUniquenessErrorNotification(this.notificationService, this.formMode, this.formTitle);
       } else {
         /* Technical error notification showing */
         this.notificationService.showErrorNotification(
