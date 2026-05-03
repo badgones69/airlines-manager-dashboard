@@ -19,6 +19,7 @@ import {
   getHubFormSuccessNotificationMessage,
   getHubFormTitle,
 } from '../../app/shared/labels/forms/hub-form';
+import { getIATAUniquenessErrorMessage } from '../../app/shared/labels/commons/airport-common';
 
 describe('AddHubComponent', () => {
   @Component({})
@@ -115,6 +116,17 @@ describe('AddHubComponent', () => {
 
               await harness.navigateByUrl('/hubs/list');
               expect(harness.routeNativeElement?.textContent).toBe('List hubs');
+            } else if (result.status === 409) {
+              const toastrError: any =
+                mockAddHubComponent.notificationService.showErrorNotification(
+                  `${getFormModeLabel(addHubComponent.formMode)} ${getHubFormTitle()}`.toUpperCase(),
+                  `${getIATAUniquenessErrorMessage()}`,
+                );
+              expect(toastrError.toastId).toStrictEqual(1);
+              expect(toastrError.title).toStrictEqual("AJOUT D'UN HUB");
+              expect(toastrError.message).toStrictEqual(
+                'Code IATA déjà lié à un autre aéroport existant !',
+              );
             } else {
               const toastrError: any =
                 mockAddHubComponent.notificationService.showErrorNotification(

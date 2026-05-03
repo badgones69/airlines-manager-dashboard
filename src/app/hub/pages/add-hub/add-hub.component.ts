@@ -18,6 +18,7 @@ import {
   getHubFormSuccessNotificationMessage,
   getHubFormTitle,
 } from '../../../shared/labels/forms/hub-form';
+import { getIATAUniquenessErrorMessage } from '../../../shared/labels/commons/airport-common';
 
 @Component({
   selector: 'add-hub',
@@ -63,6 +64,14 @@ export class AddHubComponent implements OnInit {
         );
         // Redirection to hubs list
         this.router.navigate(['hubs', 'list']);
+      } else if (result.status === 409) {
+        /* IATA uniqueness error notification showing */
+        this.notificationService.showErrorNotification(
+          `${getFormModeLabel(
+            this.formMode,
+          )} ${getHubFormTitle()}`.toUpperCase(),
+          `${getIATAUniquenessErrorMessage()}`,
+        );
       } else {
         /* Technical error notification showing */
         this.notificationService.showErrorNotification(
