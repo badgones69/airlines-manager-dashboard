@@ -22,6 +22,10 @@ export function getRegionLabel(): string {
   return 'RÉGION';
 }
 
+export function getIATAUniquenessErrorMessage(): string {
+  return 'Code IATA déjà lié à un autre aéroport existant !';
+}
+
 export function getUnknownRegionErrorMessage(): string {
   return 'région inconnue';
 }

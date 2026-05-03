@@ -18,6 +18,7 @@ import {
   getDestinationFormTitle,
 } from '../../../shared/labels/forms/destination-form';
 import { Router } from '@angular/router';
+import { getIATAUniquenessErrorMessage } from '../../../shared/labels/commons/airport-common';
 
 @Component({
   selector: 'add-destination',
@@ -63,6 +64,14 @@ export class AddDestinationComponent implements OnInit {
         );
         // Redirection to destinations list
         this.router.navigate(['destinations', 'list']);
+      } else if (result.status === 409) {
+        /* IATA uniqueness error notification showing */
+        this.notificationService.showErrorNotification(
+          `${getFormModeLabel(
+            this.formMode,
+          )} ${getDestinationFormTitle()}`.toUpperCase(),
+          `${getIATAUniquenessErrorMessage()}`,
+        );
       } else {
         /* Technical error notification showing */
         this.notificationService.showErrorNotification(
