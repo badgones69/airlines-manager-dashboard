@@ -19,6 +19,7 @@ import {
   getDestinationFormSuccessNotificationMessage,
   getDestinationFormTitle,
 } from '../../app/shared/labels/forms/destination-form';
+import { getIATAUniquenessErrorMessage } from '../../app/shared/labels/commons/airport-common';
 
 describe('AddDestinationComponent', () => {
   @Component({})
@@ -124,6 +125,17 @@ describe('AddDestinationComponent', () => {
                 await harness.navigateByUrl('/destinations/list');
                 expect(harness.routeNativeElement?.textContent).toBe(
                   'List destinations',
+                );
+              } else if (result.status === 409) {
+                const toastrError: any =
+                  mockAddDestinationComponent.notificationService.showErrorNotification(
+                    `${getFormModeLabel(addDestinationComponent.formMode)} ${getDestinationFormTitle()}`.toUpperCase(),
+                    `${getIATAUniquenessErrorMessage()}`,
+                  );
+                expect(toastrError.toastId).toStrictEqual(1);
+                expect(toastrError.title).toStrictEqual("AJOUT D'UNE DESTINATION");
+                expect(toastrError.message).toStrictEqual(
+                  'Code IATA déjà lié à un autre aéroport existant !',
                 );
               } else {
                 const toastrError: any =
