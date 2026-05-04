@@ -3,7 +3,7 @@ import { NotificationService } from '../../../shared/services/notification.servi
 import { UserService } from '../../../shared/services/user.service';
 import { User } from '../../../shared/models/User';
 import { Airport } from '../../../shared/models/Airport';
-import { AirportFormComponent, showIATAUniquenessErrorNotification } from '../../../shared/components/airport-form/airport-form.component';
+import { AirportFormComponent } from '../../../shared/components/airport-form/airport-form.component';
 import { ADD_FORM_MODE } from '../../../shared/constants/forms-constants';
 import { getFormModeLabel } from '../../../shared/labels/commons/form-common';
 import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
@@ -63,9 +63,6 @@ export class AddDestinationComponent implements OnInit {
         );
         // Redirection to destinations list
         this.router.navigate(['destinations', 'list']);
-      } else if (result.status === 409) {
-        /* IATA uniqueness error notification showing */
-        showIATAUniquenessErrorNotification(this.notificationService, this.formMode, this.formTitle);
       } else {
         /* Technical error notification showing */
         this.notificationService.showErrorNotification(

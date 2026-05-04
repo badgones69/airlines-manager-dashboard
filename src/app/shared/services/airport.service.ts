@@ -2,6 +2,11 @@ import { Injectable } from '@angular/core';
 import supabase from '../constants/services-constants';
 import { v7 as uuidv7 } from 'uuid';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { showIATAUniquenessErrorNotification } from '../components/airport-form/airport-form.component';
+import { NotificationService } from './notification.service';
+import { ADD_FORM_MODE } from '../constants/forms-constants';
+import { getHubFormTitle } from '../labels/forms/hub-form';
+import { getDestinationFormTitle } from '../labels/forms/destination-form';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +17,7 @@ export class AirportService {
     [],
   );
 
-  constructor() {
+  constructor(readonly notificationService: NotificationService) {
     this.refreshHubsList();
     this.refreshDestinationsList();
   }
@@ -84,7 +89,7 @@ export class AirportService {
       airportHub,
     } = airportToCreate;
 
-    const data = await supabase
+    const response = await supabase
       .from('AIRPORT')
       .insert({
         airportUUID: uuidv7(),
@@ -101,7 +106,15 @@ export class AirportService {
 
     this.refreshHubsList();
     this.refreshDestinationsList();
-    return data;
+    
+    if (response.status === 409) {
+      /* IATA uniqueness error notification showing */
+      showIATAUniquenessErrorNotification(this.notificationService, ADD_FORM_MODE,
+        airportHub ? getHubFormTitle() : getDestinationFormTitle()
+      );
+    } else {
+      return response.data;
+    }
   }
 
   /* Airport updating */
@@ -117,7 +130,7 @@ export class AirportService {
       airportRegion,
     } = airportUpdated;
 
-    const data = await supabase
+    const response = await supabase
       .from('AIRPORT')
       .update({
         airportIATA,
@@ -133,7 +146,15 @@ export class AirportService {
 
     this.refreshHubsList();
     this.refreshDestinationsList();
-    return data;
+    
+    if (response.status === 409) {
+      /* IATA uniqueness error notification showing */
+      showIATAUniquenessErrorNotification(this.notificationService, ADD_FORM_MODE,
+        airportUpdated.airportHub ? getHubFormTitle() : getDestinationFormTitle()
+      );
+    } else {
+      return response.data;
+    }
   }
 
   /* Airport deletion */
