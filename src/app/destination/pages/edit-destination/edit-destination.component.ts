@@ -19,7 +19,6 @@ import {
   getDestinationFormTitle,
 } from '../../../shared/labels/forms/destination-form';
 import { AirportMapper } from '../../../shared/mappers/AirportMapper';
-import { getIATAUniquenessErrorMessage } from '../../../shared/labels/commons/airport-common';
 
 @Component({
   selector: 'edit-destination',
@@ -81,14 +80,6 @@ export class EditDestinationComponent implements OnInit {
         );
         // Redirection to destinations list
         this.router.navigate(['destinations', 'list']);
-      } else if (result.status === 409) {
-        /* IATA uniqueness error notification showing */
-        this.notificationService.showErrorNotification(
-          `${getFormModeLabel(
-            this.formMode,
-          )} ${getDestinationFormTitle()}`.toUpperCase(),
-          `${getIATAUniquenessErrorMessage()}`,
-        );
       } else {
         /* Technical error notification showing */
         this.notificationService.showErrorNotification(
