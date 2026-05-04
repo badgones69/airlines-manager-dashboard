@@ -71,6 +71,7 @@ import {
   getCountryLabel,
   getRegionLabel,
   getUnknownRegionErrorMessage,
+  getIATAUniquenessErrorMessage,
 } from '../../labels/commons/airport-common';
 import { AsyncPipe } from '@angular/common';
 import {
@@ -79,6 +80,7 @@ import {
   MatOption,
 } from '@angular/material/autocomplete';
 import { Region } from '../../models/Region';
+import { NotificationService } from '../../services/notification.service';
 @Component({
   selector: 'airport-form',
   standalone: true,
@@ -338,7 +340,7 @@ export class AirportFormComponent implements OnInit {
     return region ? `${region.name} (${region.code})` : '';
   }
 
-  /* ICAO field error message(s) display */
+  /* IATA field error message(s) display */
   displayIATAErrorMessage(): string {
     if (
       this.airportForm.get(this.iataFieldIdentifier)?.hasError(REQUIRED_ERROR)
@@ -466,4 +468,13 @@ export class AirportFormComponent implements OnInit {
 
     this.submitted.emit(this.airportMapper.airportToDB(this.airportForm.value));
   }
+}
+
+export function showIATAUniquenessErrorNotification(notificationService: NotificationService, formMode: string, formTitle: string): void {
+  notificationService.showErrorNotification(
+    `${getFormModeLabel(
+      formMode,
+    )} ${formTitle}`.toUpperCase(),
+    `${getIATAUniquenessErrorMessage()}`,
+  );
 }
