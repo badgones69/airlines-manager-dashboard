@@ -4,7 +4,7 @@ import { v7 as uuidv7 } from 'uuid';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { showIATAUniquenessErrorNotification } from '../components/airport-form/airport-form.component';
 import { NotificationService } from './notification.service';
-import { ADD_FORM_MODE } from '../constants/forms-constants';
+import { ADD_FORM_MODE, EDIT_FORM_MODE } from '../constants/forms-constants';
 import { getHubFormTitle } from '../labels/forms/hub-form';
 import { getDestinationFormTitle } from '../labels/forms/destination-form';
 
@@ -149,7 +149,7 @@ export class AirportService {
     
     if (response.status === 409) {
       /* IATA uniqueness error notification showing */
-      showIATAUniquenessErrorNotification(this.notificationService, ADD_FORM_MODE,
+      showIATAUniquenessErrorNotification(this.notificationService, EDIT_FORM_MODE,
         airportUpdated.airportHub ? getHubFormTitle() : getDestinationFormTitle()
       );
     } else {
