@@ -6,6 +6,10 @@ import { AUTHENTICATED_USER_STORAGE_NAME } from '../constants/storage-constants'
 import supabase from '../constants/services-constants';
 import { v7 as uuidv7 } from 'uuid';
 import { hash } from 'bcrypt-ts';
+import { NotificationService } from './notification.service';
+import { ADD_FORM_MODE, EDIT_FORM_MODE } from '../constants/forms-constants';
+import { getFormModeLabel } from '../labels/commons/form-common';
+import { getLoginUniquenessErrorNotificationMessage, getUserFormTitle } from '../labels/forms/user-form';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +18,7 @@ export class UserService {
   readonly user$: BehaviorSubject<any> = new BehaviorSubject<any>({});
   readonly users$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
-  constructor() {
+  constructor(readonly notificationService: NotificationService) {
     this.refreshUser();
     this.refreshUsersList();
   }
@@ -91,7 +95,7 @@ export class UserService {
 
     const hashedPassword = await hash(userPassword, 13);
 
-    const data = await supabase
+    const response = await supabase
       .from('USER')
       .insert({
         userUUID: uuidv7(),
@@ -104,7 +108,18 @@ export class UserService {
       .select();
 
     this.refreshUsersList();
-    return data;
+    
+    if (response.status === 409) {
+      /* Login uniqueness error notification showing */
+      this.notificationService.showErrorNotification(
+        `${getFormModeLabel(
+          ADD_FORM_MODE,
+        )} ${getUserFormTitle()}`.toUpperCase(),
+        `${getLoginUniquenessErrorNotificationMessage()}`,
+      );
+    } else {
+      return response.data;
+    }
   }
 
   /* User password reset */
@@ -130,7 +145,7 @@ export class UserService {
     const { userUUID, userGivenName, userSurname, userLogin, userProfile } =
       userUpdated;
 
-    const data = await supabase
+    const response = await supabase
       .from('USER')
       .update({
         userGivenName,
@@ -142,7 +157,18 @@ export class UserService {
       .select();
 
     this.refreshUsersList();
-    return data;
+    
+    if (response.status === 409) {
+      /* Login uniqueness error notification showing */
+      this.notificationService.showErrorNotification(
+        `${getFormModeLabel(
+          EDIT_FORM_MODE,
+        )} ${getUserFormTitle()}`.toUpperCase(),
+        `${getLoginUniquenessErrorNotificationMessage()}`,
+      );
+    } else {
+      return response.data;
+    }
   }
 
   /* User deletion */
