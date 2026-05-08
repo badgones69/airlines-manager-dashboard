@@ -231,7 +231,7 @@ describe('AuthenticationComponent', () => {
                       'AUTHENTIFICATION',
                     );
                     expect(toastrSuccess.message).toStrictEqual(
-                      'Login et/ou mot de passe incorrects !',
+                      'Identifiant et/ou mot de passe incorrects !',
                     );
                   }
                 },

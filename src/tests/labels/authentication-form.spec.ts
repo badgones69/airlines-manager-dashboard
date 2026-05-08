@@ -19,7 +19,7 @@ describe('AuthenticationFormLabels', () => {
   it('#getErrorNotificationMessage should return error notification message', () => {
     const errorNotificationMessage: string = getErrorNotificationMessage();
     expect(errorNotificationMessage).toStrictEqual(
-      'Login et/ou mot de passe incorrects !',
+      'Identifiant et/ou mot de passe incorrects !',
     );
   });
 });
