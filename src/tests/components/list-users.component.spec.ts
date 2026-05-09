@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { User } from '../../app/shared/models/User';
 import { ListUsersComponent } from '../../app/user/pages/list-users/list-users.component';
 import { provideRouter } from '@angular/router';
@@ -11,8 +11,15 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { DeleteUserComponent } from '../../app/user/pages/delete-user/delete-user.component';
 import { ComponentType, NoopScrollStrategy } from '@angular/cdk/overlay';
+import { provideToastr, ToastNoAnimation } from 'ngx-toastr';
 
 describe('ListUsersComponent', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [provideToastr({toastComponent: ToastNoAnimation})]
+    }).compileComponents();
+  });
+
   @Component({
     template: '<h1>Edit user</h1>',
   })

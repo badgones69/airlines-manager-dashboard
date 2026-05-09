@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   BLANK_VALUE_ERROR,
   EDIT_FORM_MODE,
@@ -38,6 +38,7 @@ import {
 } from '../../app/shared/labels/errors';
 import { AirlineLogoComponent } from '../../app/airline/airline-logo/airline-logo.component';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { provideToastr, ToastNoAnimation } from 'ngx-toastr';
 
 function testOnInit(airlineComponent: AirlineComponent): void {
   let mockAirlineComponent: MockAirlineComponent = new MockAirlineComponent();
@@ -198,6 +199,12 @@ function testAirlineServiceWithAirlineEdited(
 }
 
 describe('AirlineComponent', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [provideToastr({toastComponent: ToastNoAnimation})]
+    }).compileComponents();
+  });
+
   it('#ngOnInit should initialize "Airline" component', async () => {
     TestBed.runInInjectionContext(() => {
       const airlineComponent: AirlineComponent = new AirlineComponent(
