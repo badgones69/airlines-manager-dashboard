@@ -34,3 +34,7 @@ export function getUserFormSuccessNotificationMessage(
 ): string {
   return `Votre utilisateur a bien été ${getFormActionLabel(formMode)} !`;
 }
+
+export function getLoginUniquenessErrorNotificationMessage(): string {
+  return 'Identifiant déjà lié à un autre utilisateur existant !';
+}

@@ -1,10 +1,10 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { DeleteUserComponent } from '../../app/user/pages/delete-user/delete-user.component';
 import { Component, Inject } from '@angular/core';
 import { MockUserService } from '../mocks/mock-user-service';
 import { MockNotificationService } from '../mocks/mock-notification-service';
 import { NotificationService } from '../../app/shared/services/notification.service';
-import { ToastrService } from 'ngx-toastr';
+import { provideToastr, ToastNoAnimation, ToastrService } from 'ngx-toastr';
 import {
   getTechnicalErrorMessage,
   getTechnicalErrorTitle,
@@ -19,6 +19,12 @@ import { getFormModeLabel } from '../../app/shared/labels/commons/form-common';
 import { TestBed } from '@angular/core/testing';
 
 describe('DeleteUserComponent', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [provideToastr({toastComponent: ToastNoAnimation})]
+    }).compileComponents();
+  });
+
   @Component({})
   class MockDeleteUserComponent {
     constructor(

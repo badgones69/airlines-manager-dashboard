@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { EditUserComponent } from '../../app/user/pages/edit-user/edit-user.component';
 import { Component, Inject } from '@angular/core';
 import { User } from '../../app/shared/models/User';
@@ -6,7 +6,7 @@ import { MockUserService } from '../mocks/mock-user-service';
 import { MockNotificationService } from '../mocks/mock-notification-service';
 import { ActivatedRoute, provideRouter } from '@angular/router';
 import { NotificationService } from '../../app/shared/services/notification.service';
-import { ToastrService } from 'ngx-toastr';
+import { provideToastr, ToastNoAnimation, ToastrService } from 'ngx-toastr';
 import {
   getTechnicalErrorMessage,
   getTechnicalErrorTitle,
@@ -15,12 +15,19 @@ import { getFormModeLabel } from '../../app/shared/labels/commons/form-common';
 import {
   getUserFormTitle,
   getUserFormSuccessNotificationMessage,
+  getLoginUniquenessErrorNotificationMessage,
 } from '../../app/shared/labels/forms/user-form';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { MockListUsersComponent } from '../mocks/mock-list-users-component';
 
 describe('EditUserComponent', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [provideToastr({toastComponent: ToastNoAnimation})]
+    }).compileComponents();
+  });
+
   @Component({})
   class MockEditUserComponent {
     public authenticatedUser!: User;
@@ -142,6 +149,17 @@ describe('EditUserComponent', () => {
               await harness.navigateByUrl('/users/list');
               expect(harness.routeNativeElement?.textContent).toBe(
                 'List users',
+              );
+            } else if (result.status === 409) {
+              const toastrError: any =
+                mockEditUserComponent.notificationService.showErrorNotification(
+                  `${getFormModeLabel(editUserComponent.formMode)} ${getUserFormTitle()}`.toUpperCase(),
+                  `${getLoginUniquenessErrorNotificationMessage()}`,
+                );
+              expect(toastrError.toastId).toStrictEqual(1);
+              expect(toastrError.title).toStrictEqual("MODIFICATION D'UN UTILISATEUR");
+              expect(toastrError.message).toStrictEqual(
+                'Identifiant déjà lié à un autre utilisateur existant !',
               );
             } else {
               const toastrError: any =

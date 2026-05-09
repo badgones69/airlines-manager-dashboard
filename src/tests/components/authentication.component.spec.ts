@@ -1,10 +1,10 @@
 import { Component, Inject } from '@angular/core';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { User } from '../../app/shared/models/User';
 import { mockSessionStorage } from '../mocks/mock-session-storage';
 import { MockUserService } from '../mocks/mock-user-service';
 import { MockNotificationService } from '../mocks/mock-notification-service';
-import { ToastrService } from 'ngx-toastr';
+import { provideToastr, ToastNoAnimation, ToastrService } from 'ngx-toastr';
 import { provideRouter } from '@angular/router';
 import { NotificationService } from '../../app/shared/services/notification.service';
 import {
@@ -44,6 +44,12 @@ Object.defineProperty(globalThis, 'sessionStorage', {
 });
 
 describe('AuthenticationComponent', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [provideToastr({toastComponent: ToastNoAnimation})]
+    }).compileComponents();
+  });
+
   @Component({})
   class MockAuthenticationComponent {
     constructor(
@@ -231,7 +237,7 @@ describe('AuthenticationComponent', () => {
                       'AUTHENTIFICATION',
                     );
                     expect(toastrSuccess.message).toStrictEqual(
-                      'Login et/ou mot de passe incorrects !',
+                      'Identifiant et/ou mot de passe incorrects !',
                     );
                   }
                 },

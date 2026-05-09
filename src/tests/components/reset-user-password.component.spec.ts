@@ -1,9 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { User } from '../../app/shared/models/User';
 import { MockUserService } from '../mocks/mock-user-service';
 import { MockNotificationService } from '../mocks/mock-notification-service';
-import { ToastrService } from 'ngx-toastr';
+import { provideToastr, ToastNoAnimation, ToastrService } from 'ngx-toastr';
 import { ResetUserPasswordComponent } from '../../app/user/pages/reset-user-password/reset-user-password.component';
 import { ActivatedRoute, provideRouter } from '@angular/router';
 import { NotificationService } from '../../app/shared/services/notification.service';
@@ -39,6 +39,12 @@ import {
 } from '../../app/shared/labels/errors';
 
 describe('ResetUserPasswordComponent', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [provideToastr({toastComponent: ToastNoAnimation})]
+    }).compileComponents();
+  });
+
   @Component({})
   class MockResetUserPasswordComponent {
     public authenticatedUser!: User;
