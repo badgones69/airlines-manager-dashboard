@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { User } from '../../app/shared/models/User';
 import { ListAirportsComponent } from '../../app/shared/components/list-airports/list-airports.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,8 +8,15 @@ import { MockAirportService } from '../mocks/mock-airport-service';
 import { AirportMapper } from '../../app/shared/mappers/AirportMapper';
 import { TestBed } from '@angular/core/testing';
 import { USA_REGIONS_FR } from '../../app/shared/constants/geographical-constants';
+import { provideToastr, ToastNoAnimation } from 'ngx-toastr';
 
 describe('ListAirportsComponent', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [provideToastr({toastComponent: ToastNoAnimation})]
+    }).compileComponents();
+  });
+
   @Component({})
   class MockListAirportsComponent {
     public authenticatedUser!: User;

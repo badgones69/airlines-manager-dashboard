@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { User } from '../../app/shared/models/User';
 import { provideRouter } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -13,8 +13,15 @@ import { MockAirportService } from '../mocks/mock-airport-service';
 import { DeleteDestinationComponent } from '../../app/destination/pages/delete-destination/delete-destination.component';
 import { ListDestinationsComponent } from '../../app/destination/pages/list-destinations/list-destinations.component';
 import { USA_REGIONS_FR } from '../../app/shared/constants/geographical-constants';
+import { provideToastr, ToastNoAnimation } from 'ngx-toastr';
 
 describe('ListDestinationsComponent', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [provideToastr({toastComponent: ToastNoAnimation})]
+    }).compileComponents();
+  });
+
   @Component({
     template: '<h1>Edit destination</h1>',
   })

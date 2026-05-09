@@ -8,6 +8,7 @@ import {
   getPasswordFieldFormatErrorMessage,
   getRepeatedPasswordFieldFormatErrorMessage,
   getUserFormSuccessNotificationMessage,
+  getLoginUniquenessErrorNotificationMessage,
 } from '../../app/shared/labels/forms/user-form';
 import { describe, it, expect } from 'vitest';
 
@@ -62,6 +63,14 @@ describe('UserFormLabels', () => {
       getUserFormSuccessNotificationMessage(ADD_FORM_MODE);
     expect(successNotificationMessage).toStrictEqual(
       'Votre utilisateur a bien été créé(e) !',
+    );
+  });
+
+  it('#getLoginUniquenessErrorNotificationMessage', () => {
+    const loginUniquenessErrorNotificationMessage: string =
+      getLoginUniquenessErrorNotificationMessage();
+    expect(loginUniquenessErrorNotificationMessage).toStrictEqual(
+      'Identifiant déjà lié à un autre utilisateur existant !'
     );
   });
 });
