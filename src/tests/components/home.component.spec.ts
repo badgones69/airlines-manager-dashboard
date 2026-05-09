@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { HomeComponent } from '../../app/home/home.component';
 import {
   getAirlineWelcomeMessage,
@@ -6,6 +6,7 @@ import {
 } from '../../app/shared/labels/pages/home';
 import { MockHomeComponent } from '../mocks/mock-home-component';
 import { TestBed } from '@angular/core/testing';
+import { provideToastr, ToastNoAnimation } from 'ngx-toastr';
 
 function testAirlineService(
   mockHomeComponent: MockHomeComponent,
@@ -32,6 +33,12 @@ function testAirlineService(
 }
 
 describe('HomeComponent', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [provideToastr({toastComponent: ToastNoAnimation})]
+    }).compileComponents();
+  });
+
   it('#ngOnInit should initialize "Home" component', () => {
     TestBed.runInInjectionContext(() => {
       let mockHomeComponent: MockHomeComponent = new MockHomeComponent();

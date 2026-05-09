@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { User } from '../../app/shared/models/User';
 import { provideRouter } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -12,8 +12,15 @@ import { DeleteHubComponent } from '../../app/hub/pages/delete-hub/delete-hub.co
 import { ComponentType, NoopScrollStrategy } from '@angular/cdk/overlay';
 import { ListHubsComponent } from '../../app/hub/pages/list-hubs/list-hubs.component';
 import { MockAirportService } from '../mocks/mock-airport-service';
+import { provideToastr, ToastNoAnimation } from 'ngx-toastr';
 
 describe('ListHubsComponent', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [provideToastr({toastComponent: ToastNoAnimation})]
+    }).compileComponents();
+  });
+
   @Component({
     template: '<h1>Edit hub</h1>',
   })
