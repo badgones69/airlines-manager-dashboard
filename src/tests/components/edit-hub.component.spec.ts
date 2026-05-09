@@ -1,11 +1,11 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Component, Inject } from '@angular/core';
 import { User } from '../../app/shared/models/User';
 import { MockUserService } from '../mocks/mock-user-service';
 import { MockNotificationService } from '../mocks/mock-notification-service';
 import { ActivatedRoute, provideRouter } from '@angular/router';
 import { NotificationService } from '../../app/shared/services/notification.service';
-import { ToastrService } from 'ngx-toastr';
+import { provideToastr, ToastNoAnimation, ToastrService } from 'ngx-toastr';
 import {
   getTechnicalErrorMessage,
   getTechnicalErrorTitle,
@@ -23,6 +23,12 @@ import {
 import { getIATAUniquenessErrorMessage } from '../../app/shared/labels/commons/airport-common';
 
 describe('EditHubComponent', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [provideToastr({toastComponent: ToastNoAnimation})]
+    }).compileComponents();
+  });
+
   @Component({})
   class MockEditHubComponent {
     public authenticatedUser!: User;

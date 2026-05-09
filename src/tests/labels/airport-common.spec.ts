@@ -6,6 +6,7 @@ import {
   getCountryLabel,
   getRegionLabel,
   getUnknownRegionErrorMessage,
+  getIATAUniquenessErrorMessage,
 } from '../../app/shared/labels/commons/airport-common';
 import { describe, it, expect } from 'vitest';
 
@@ -38,6 +39,11 @@ describe('AirportCommonLabels', () => {
   it('#getRegionLabel should return "region" label', () => {
     const regionlabel: string = getRegionLabel();
     expect(regionlabel).toStrictEqual('RÉGION');
+  });
+
+  it('#getIATAUniquenessErrorMessage should return IATA uniqueness error message', () => {
+    const iataUniquenessErrorMessage: string = getIATAUniquenessErrorMessage();
+    expect(iataUniquenessErrorMessage).toStrictEqual('Code IATA déjà lié à un autre aéroport existant !');
   });
 
   it('#getUnknownRegionErrorMessage should return region field error message', () => {

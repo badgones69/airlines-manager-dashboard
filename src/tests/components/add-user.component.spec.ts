@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { AddUserComponent } from '../../app/user/pages/add-user/add-user.component';
 import { Component, Inject } from '@angular/core';
 import { User } from '../../app/shared/models/User';
@@ -6,7 +6,7 @@ import { MockUserService } from '../mocks/mock-user-service';
 import { MockNotificationService } from '../mocks/mock-notification-service';
 import { provideRouter } from '@angular/router';
 import { NotificationService } from '../../app/shared/services/notification.service';
-import { ToastrService } from 'ngx-toastr';
+import { provideToastr, ToastNoAnimation, ToastrService } from 'ngx-toastr';
 import {
   getTechnicalErrorMessage,
   getTechnicalErrorTitle,
@@ -22,6 +22,12 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { MockListUsersComponent } from '../mocks/mock-list-users-component';
 
 describe('AddUserComponent', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [provideToastr({toastComponent: ToastNoAnimation})]
+    }).compileComponents();
+  });
+
   @Component({})
   class MockAddUserComponent {
     public authenticatedUser!: User;

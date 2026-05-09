@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { User } from '../../app/shared/models/User';
-import { describe, it, vi, expect } from 'vitest';
+import { describe, it, vi, expect, beforeEach } from 'vitest';
 import { MockUserService } from '../mocks/mock-user-service';
 import { AppComponent } from '../../app/app.component';
 import { provideRouter } from '@angular/router';
@@ -10,8 +10,15 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { AboutComponent } from '../../app/about/about.component';
 import { ComponentType, NoopScrollStrategy } from '@angular/cdk/overlay';
 import { MockAuthenticationComponent } from '../mocks/mock-authentication-component';
+import { provideToastr, ToastNoAnimation } from 'ngx-toastr';
 
 describe('AppComponent', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [provideToastr({toastComponent: ToastNoAnimation})]
+    }).compileComponents();
+  });
+
   @Component({})
   class MockAppComponent {
     public authenticatedUser!: User;

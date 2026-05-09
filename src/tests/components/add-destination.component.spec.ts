@@ -1,10 +1,10 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Component, Inject } from '@angular/core';
 import { MockAirportService } from '../mocks/mock-airport-service';
 import { MockNotificationService } from '../mocks/mock-notification-service';
 import { provideRouter } from '@angular/router';
 import { NotificationService } from '../../app/shared/services/notification.service';
-import { ToastrService } from 'ngx-toastr';
+import { provideToastr, ToastNoAnimation, ToastrService } from 'ngx-toastr';
 import {
   getTechnicalErrorMessage,
   getTechnicalErrorTitle,
@@ -22,6 +22,12 @@ import {
 import { getIATAUniquenessErrorMessage } from '../../app/shared/labels/commons/airport-common';
 
 describe('AddDestinationComponent', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [provideToastr({toastComponent: ToastNoAnimation})]
+    }).compileComponents();
+  });
+
   @Component({})
   class MockAddDestinationComponent {
     constructor(
