@@ -53,7 +53,7 @@ export class AddHubComponent implements OnInit {
     // Hub creation
     this.airportService.createAirport(hub).then((result: any) => {
       // If hub is created
-      if (result.data) {
+      if (result) {
         /* Success notification showing */
         this.notificationService.showSuccessNotification(
           `${getFormModeLabel(

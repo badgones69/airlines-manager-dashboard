@@ -67,7 +67,7 @@ export class EditHubComponent implements OnInit {
     // Hub updating
     this.airportService.updateAirport(hub).then((result: any) => {
       // If hub is updated
-      if (result.data) {
+      if (result) {
         /* Success notification showing */
         this.notificationService.showSuccessNotification(
           `${getFormModeLabel(

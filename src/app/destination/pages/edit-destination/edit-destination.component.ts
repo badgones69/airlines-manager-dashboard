@@ -70,7 +70,7 @@ export class EditDestinationComponent implements OnInit {
     // Destination updating
     this.airportService.updateAirport(destination).then((result: any) => {
       // If destination is updated
-      if (result.data) {
+      if (result) {
         /* Success notification showing */
         this.notificationService.showSuccessNotification(
           `${getFormModeLabel(
