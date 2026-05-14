@@ -69,7 +69,7 @@ export class EditUserComponent implements OnInit {
     // User updating
     this.userService.updateUser(user).then((result: any) => {
       // If user is updated
-      if (result.data) {
+      if (result) {
         /* Success notification showing */
         this.notificationService.showSuccessNotification(
           `${getFormModeLabel(this.formMode)} ${getUserFormTitle()}`,
