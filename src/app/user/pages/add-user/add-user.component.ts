@@ -49,7 +49,7 @@ export class AddUserComponent implements OnInit {
     // User creation
     this.userService.createUser(user).then((result: any) => {
       // If user is created
-      if (result.data) {
+      if (result) {
         /* Success notification showing */
         this.notificationService.showSuccessNotification(
           `${getFormModeLabel(

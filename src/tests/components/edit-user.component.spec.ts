@@ -123,8 +123,8 @@ describe('EditUserComponent', () => {
         mockEditUserComponent.userService
           .updateUser(userToUpdate)
           .then(async (result) => {
-            if (result.data) {
-              expect(result.data).toStrictEqual({
+            if (result) {
+              expect(result).toStrictEqual({
                 userID: 21,
                 userUUID: 'user-created-uuid',
                 userGivenName: 'User',
