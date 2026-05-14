@@ -53,7 +53,7 @@ export class AddDestinationComponent implements OnInit {
     // Destination creation
     this.airportService.createAirport(destination).then((result: any) => {
       // If destination is created
-      if (result.data) {
+      if (result) {
         /* Success notification showing */
         this.notificationService.showSuccessNotification(
           `${getFormModeLabel(

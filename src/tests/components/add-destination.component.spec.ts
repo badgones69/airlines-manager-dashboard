@@ -102,8 +102,8 @@ describe('AddDestinationComponent', () => {
           mockAddDestinationComponent.airportService
             .createAirport(destinationToCreate)
             .then(async (result) => {
-              if (result.data) {
-                expect(result.data).toStrictEqual({
+              if (result) {
+                expect(result).toStrictEqual({
                   airportID: 21,
                   airportUUID: 'destination-created-uuid',
                   airportIATA: 'CRE',

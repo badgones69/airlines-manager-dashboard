@@ -133,8 +133,8 @@ describe('EditHubComponent', () => {
         mockEditHubComponent.airportService
           .updateAirport(hubToUpdate)
           .then(async (result) => {
-            if (result.data) {
-              expect(result.data).toStrictEqual({
+            if (result) {
+              expect(result).toStrictEqual({
                 airportID: 21,
                 airportUUID: 'hub-created-uuid',
                 airportIATA: 'UPD',
