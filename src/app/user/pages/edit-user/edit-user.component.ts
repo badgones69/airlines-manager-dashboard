@@ -14,10 +14,6 @@ import {
 import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
 import { AuthenticatedUserUneditableComponent } from '../authenticated-user-uneditable/authenticated-user-uneditable.component';
-import {
-  getTechnicalErrorMessage,
-  getTechnicalErrorTitle,
-} from '../../../shared/labels/errors';
 
 @Component({
   selector: 'edit-user',
@@ -77,12 +73,6 @@ export class EditUserComponent implements OnInit {
         );
         // Redirection to users list
         this.router.navigate(['users', 'list']);
-      } else {
-        /* Technical error notification showing */
-        this.notificationService.showErrorNotification(
-          `${getTechnicalErrorTitle()}`,
-          `${getTechnicalErrorMessage()}`,
-        );
       }
     });
   }

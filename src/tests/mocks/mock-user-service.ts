@@ -99,12 +99,15 @@ export class MockUserService {
 
   public createUser = (userToCreate: any): Promise<any> => {
     return Promise.resolve({
-      userID: 21,
-      userUUID: 'user-created-uuid',
-      userGivenName: 'User',
-      userSurname: 'CREATED',
-      userLogin: 'u.c',
-      userProfile: 2,
+      status: 200,
+      data: {
+        userID: 21,
+        userUUID: 'user-created-uuid',
+        userGivenName: 'User',
+        userSurname: 'CREATED',
+        userLogin: 'u.c',
+        userProfile: 2,
+      }
     });
   };
 
@@ -123,12 +126,15 @@ export class MockUserService {
 
   public updateUser = (userToUpdate: any): Promise<any> => {
     return Promise.resolve({
-      userID: 21,
-      userUUID: 'user-created-uuid',
-      userGivenName: 'User',
-      userSurname: 'TO-UPDATE',
-      userLogin: 'u.t-u',
-      userProfile: 3,
+      status: 200,
+      data: {
+        userID: 21,
+        userUUID: 'user-created-uuid',
+        userGivenName: 'User',
+        userSurname: 'TO-UPDATE',
+        userLogin: 'u.t-u',
+        userProfile: 3,
+      }
     });
   };
 
