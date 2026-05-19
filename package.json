@@ -1,9 +1,9 @@
 {
   "private": true,
   "productName": "AM Dashboard",
-  "version": "1.2.5",
-  "releaseNumber": "17",
-  "releaseDate": "2026-05-14",
+  "version": "1.2.6",
+  "releaseNumber": "18",
+  "releaseDate": "2026-05-19",
   "author": "Florian RENARD",
   "scripts": {
     "ng": "ng",
