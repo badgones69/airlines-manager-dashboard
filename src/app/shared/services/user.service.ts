@@ -173,8 +173,14 @@ export class UserService {
         )} ${getUserFormTitle()}`.toUpperCase(),
         `${getLoginUniquenessErrorNotificationMessage()}`,
       );
-    } else {
+    } else if (response.status.toString().startsWith('20')) {
       return response.data;
+    } else {
+      /* Technical error notification showing */
+      this.notificationService.showErrorNotification(
+        `${getTechnicalErrorTitle()}`,
+        `${getTechnicalErrorMessage()}`,
+      );
     }
   }
 
