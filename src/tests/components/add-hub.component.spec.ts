@@ -96,17 +96,31 @@ describe('AddHubComponent', () => {
         mockAddHubComponent.airportService
           .createAirport(hubToCreate)
           .then(async (result) => {
-            if (result) {
+            if (result.status === 409) {
+              const toastrError: any =
+                mockAddHubComponent.notificationService.showErrorNotification(
+                  `${getFormModeLabel(addHubComponent.formMode)} ${getHubFormTitle()}`.toUpperCase(),
+                  `${getIATAUniquenessErrorMessage()}`,
+                );
+              expect(toastrError.toastId).toStrictEqual(1);
+              expect(toastrError.title).toStrictEqual("AJOUT D'UN HUB");
+              expect(toastrError.message).toStrictEqual(
+                'Code IATA déjà lié à un autre aéroport existant !',
+              );
+            } else if (result.status.toString().startsWith('20')) {
               expect(result).toStrictEqual({
-                airportID: 21,
-                airportUUID: 'hub-created-uuid',
-                airportIATA: 'CRE',
-                airportName: 'Airport-Created',
-                airportCity: 'Cracovie',
-                airportLatitude: 1.5,
-                airportLongitude: 5.5,
-                airportCountry: 155,
-                airportHub: true,
+                status: 200,
+                data : {
+                  airportID: 21,
+                  airportUUID: 'hub-created-uuid',
+                  airportIATA: 'CRE',
+                  airportName: 'Airport-Created',
+                  airportCity: 'Cracovie',
+                  airportLatitude: 1.5,
+                  airportLongitude: 5.5,
+                  airportCountry: 155,
+                  airportHub: true,
+                }
               });
 
               const toastrSuccess: any =
@@ -122,17 +136,6 @@ describe('AddHubComponent', () => {
 
               await harness.navigateByUrl('/hubs/list');
               expect(harness.routeNativeElement?.textContent).toBe('List hubs');
-            } else if (result.status === 409) {
-              const toastrError: any =
-                mockAddHubComponent.notificationService.showErrorNotification(
-                  `${getFormModeLabel(addHubComponent.formMode)} ${getHubFormTitle()}`.toUpperCase(),
-                  `${getIATAUniquenessErrorMessage()}`,
-                );
-              expect(toastrError.toastId).toStrictEqual(1);
-              expect(toastrError.title).toStrictEqual("AJOUT D'UN HUB");
-              expect(toastrError.message).toStrictEqual(
-                'Code IATA déjà lié à un autre aéroport existant !',
-              );
             } else {
               const toastrError: any =
                 mockAddHubComponent.notificationService.showErrorNotification(
