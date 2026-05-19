@@ -78,29 +78,35 @@ export class MockAirportService {
 
   public createAirport = (airportToCreate: any): Promise<any> => {
     return Promise.resolve({
-      airportID: 21,
-      airportUUID: airportToCreate.airportUUID,
-      airportIATA: 'CRE',
-      airportName: 'Airport-Created',
-      airportCity: 'Cracovie',
-      airportLatitude: 1.5,
-      airportLongitude: 5.5,
-      airportCountry: 155,
-      airportHub: airportToCreate.airportHub,
+      status: 200,
+      data: {
+        airportID: 21,
+        airportUUID: airportToCreate.airportUUID,
+        airportIATA: 'CRE',
+        airportName: 'Airport-Created',
+        airportCity: 'Cracovie',
+        airportLatitude: 1.5,
+        airportLongitude: 5.5,
+        airportCountry: 155,
+        airportHub: airportToCreate.airportHub,
+      }
     });
   };
 
   public updateAirport = (airportToUpdate: any): Promise<any> => {
     return Promise.resolve({
-      airportID: 21,
-      airportUUID: airportToUpdate.airportUUID,
-      airportIATA: 'UPD',
-      airportName: 'Airport-Updated',
-      airportCity: 'Varsovie',
-      airportLatitude: 1.5,
-      airportLongitude: 5.5,
-      airportCountry: 155,
-      airportHub: airportToUpdate.airportHub,
+      status: 200,
+      data: {
+        airportID: 21,
+        airportUUID: airportToUpdate.airportUUID,
+        airportIATA: 'UPD',
+        airportName: 'Airport-Updated',
+        airportCity: 'Varsovie',
+        airportLatitude: 1.5,
+        airportLongitude: 5.5,
+        airportCountry: 155,
+        airportHub: airportToUpdate.airportHub,
+      }
     });
   };
 
