@@ -150,17 +150,31 @@ describe('EditDestinationComponent', () => {
           mockEditDestinationComponent.airportService
             .updateAirport(destinationToUpdate)
             .then(async (result) => {
-              if (result) {
+              if (result.status === 409) {
+                const toastrError: any =
+                  mockEditDestinationComponent.notificationService.showErrorNotification(
+                    `${getFormModeLabel(editDestinationComponent.formMode)} ${getDestinationFormTitle()}`.toUpperCase(),
+                    `${getIATAUniquenessErrorMessage()}`,
+                  );
+                expect(toastrError.toastId).toStrictEqual(1);
+                expect(toastrError.title).toStrictEqual("MODIFICATION D'UNE DESTINATION");
+                expect(toastrError.message).toStrictEqual(
+                  'Code IATA déjà lié à un autre aéroport existant !',
+                );
+              } else if (result.status.toString().startsWith('20')) {
                 expect(result).toStrictEqual({
-                  airportID: 21,
-                  airportUUID: 'destination-created-uuid',
-                  airportIATA: 'UPD',
-                  airportName: 'Airport-Updated',
-                  airportCity: 'Varsovie',
-                  airportLatitude: 1.5,
-                  airportLongitude: 5.5,
-                  airportCountry: 155,
-                  airportHub: false,
+                  status: 200,
+                  data : {
+                    airportID: 21,
+                    airportUUID: 'destination-created-uuid',
+                    airportIATA: 'UPD',
+                    airportName: 'Airport-Updated',
+                    airportCity: 'Varsovie',
+                    airportLatitude: 1.5,
+                    airportLongitude: 5.5,
+                    airportCountry: 155,
+                    airportHub: false,
+                  }
                 });
 
                 const toastrSuccess: any =
@@ -179,17 +193,6 @@ describe('EditDestinationComponent', () => {
                 await harness.navigateByUrl('/destinations/list');
                 expect(harness.routeNativeElement?.textContent).toBe(
                   'List destinations',
-                );
-              } else if (result.status === 409) {
-                const toastrError: any =
-                  mockEditDestinationComponent.notificationService.showErrorNotification(
-                    `${getFormModeLabel(editDestinationComponent.formMode)} ${getDestinationFormTitle()}`.toUpperCase(),
-                    `${getIATAUniquenessErrorMessage()}`,
-                  );
-                expect(toastrError.toastId).toStrictEqual(1);
-                expect(toastrError.title).toStrictEqual("MODIFICATION D'UNE DESTINATION");
-                expect(toastrError.message).toStrictEqual(
-                  'Code IATA déjà lié à un autre aéroport existant !',
                 );
               } else {
                 const toastrError: any =

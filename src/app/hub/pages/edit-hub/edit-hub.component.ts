@@ -9,10 +9,6 @@ import { EDIT_FORM_MODE } from '../../../shared/constants/forms-constants';
 import { getFormModeLabel } from '../../../shared/labels/commons/form-common';
 import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
-import {
-  getTechnicalErrorTitle,
-  getTechnicalErrorMessage,
-} from '../../../shared/labels/errors';
 import { AirportService } from '../../../shared/services/airport.service';
 import {
   getHubFormSuccessNotificationMessage,
@@ -77,12 +73,6 @@ export class EditHubComponent implements OnInit {
         );
         // Redirection to hubs list
         this.router.navigate(['hubs', 'list']);
-      } else {
-        /* Technical error notification showing */
-        this.notificationService.showErrorNotification(
-          `${getTechnicalErrorTitle()}`,
-          `${getTechnicalErrorMessage()}`,
-        );
       }
     });
   }

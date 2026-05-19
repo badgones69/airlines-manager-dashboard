@@ -123,14 +123,28 @@ describe('EditUserComponent', () => {
         mockEditUserComponent.userService
           .updateUser(userToUpdate)
           .then(async (result) => {
-            if (result) {
+            if (result.status === 409) {
+              const toastrError: any =
+                mockEditUserComponent.notificationService.showErrorNotification(
+                  `${getFormModeLabel(editUserComponent.formMode)} ${getUserFormTitle()}`.toUpperCase(),
+                  `${getLoginUniquenessErrorNotificationMessage()}`,
+                );
+              expect(toastrError.toastId).toStrictEqual(1);
+              expect(toastrError.title).toStrictEqual("MODIFICATION D'UN UTILISATEUR");
+              expect(toastrError.message).toStrictEqual(
+                'Identifiant déjà lié à un autre utilisateur existant !',
+              );
+            } else if (result.status.toString().startsWith('20')) {
               expect(result).toStrictEqual({
-                userID: 21,
-                userUUID: 'user-created-uuid',
-                userGivenName: 'User',
-                userSurname: 'TO-UPDATE',
-                userLogin: 'u.t-u',
-                userProfile: 3,
+                status: 200,
+                data : {
+                  userID: 21,
+                  userUUID: 'user-created-uuid',
+                  userGivenName: 'User',
+                  userSurname: 'TO-UPDATE',
+                  userLogin: 'u.t-u',
+                  userProfile: 3,
+                }
               });
 
               const toastrSuccess: any =
@@ -149,17 +163,6 @@ describe('EditUserComponent', () => {
               await harness.navigateByUrl('/users/list');
               expect(harness.routeNativeElement?.textContent).toBe(
                 'List users',
-              );
-            } else if (result.status === 409) {
-              const toastrError: any =
-                mockEditUserComponent.notificationService.showErrorNotification(
-                  `${getFormModeLabel(editUserComponent.formMode)} ${getUserFormTitle()}`.toUpperCase(),
-                  `${getLoginUniquenessErrorNotificationMessage()}`,
-                );
-              expect(toastrError.toastId).toStrictEqual(1);
-              expect(toastrError.title).toStrictEqual("MODIFICATION D'UN UTILISATEUR");
-              expect(toastrError.message).toStrictEqual(
-                'Identifiant déjà lié à un autre utilisateur existant !',
               );
             } else {
               const toastrError: any =

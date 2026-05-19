@@ -96,14 +96,28 @@ describe('AddUserComponent', () => {
         mockAddUserComponent.userService
           .createUser(userToCreate)
           .then(async (result) => {
-            if (result) {
+            if (result.status === 409) {
+              const toastrError: any =
+                mockAddUserComponent.notificationService.showErrorNotification(
+                  `${getFormModeLabel(addUserComponent.formMode)} ${getUserFormTitle()}`.toUpperCase(),
+                  `${getLoginUniquenessErrorNotificationMessage()}`,
+                );
+              expect(toastrError.toastId).toStrictEqual(1);
+              expect(toastrError.title).toStrictEqual("AJOUT D'UN UTILISATEUR");
+              expect(toastrError.message).toStrictEqual(
+                'Identifiant déjà lié à un autre utilisateur existant !',
+              );
+            } else if (result.status.toString().startsWith('20')) {
               expect(result).toStrictEqual({
-                userID: 21,
-                userUUID: 'user-created-uuid',
-                userGivenName: 'User',
-                userSurname: 'CREATED',
-                userLogin: 'u.c',
-                userProfile: 2,
+                status: 200,
+                data : {
+                  userID: 21,
+                  userUUID: 'user-created-uuid',
+                  userGivenName: 'User',
+                  userSurname: 'CREATED',
+                  userLogin: 'u.c',
+                  userProfile: 2,
+                }
               });
 
               const toastrSuccess: any =
@@ -122,17 +136,6 @@ describe('AddUserComponent', () => {
               await harness.navigateByUrl('/users/list');
               expect(harness.routeNativeElement?.textContent).toBe(
                 'List users',
-              );
-            } else if (result.status === 409) {
-              const toastrError: any =
-                mockAddUserComponent.notificationService.showErrorNotification(
-                  `${getFormModeLabel(addUserComponent.formMode)} ${getUserFormTitle()}`.toUpperCase(),
-                  `${getLoginUniquenessErrorNotificationMessage()}`,
-                );
-              expect(toastrError.toastId).toStrictEqual(1);
-              expect(toastrError.title).toStrictEqual("AJOUT D'UN UTILISATEUR");
-              expect(toastrError.message).toStrictEqual(
-                'Identifiant déjà lié à un autre utilisateur existant !',
               );
             } else {
               const toastrError: any =

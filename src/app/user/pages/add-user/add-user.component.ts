@@ -12,10 +12,6 @@ import {
 } from '../../../shared/labels/forms/user-form';
 import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
-import {
-  getTechnicalErrorTitle,
-  getTechnicalErrorMessage,
-} from '../../../shared/labels/errors';
 
 @Component({
   selector: 'add-user',
@@ -59,12 +55,6 @@ export class AddUserComponent implements OnInit {
         );
         // Redirection to users list
         this.router.navigate(['users', 'list']);
-      } else {
-        /* Technical error notification showing */
-        this.notificationService.showErrorNotification(
-          `${getTechnicalErrorTitle()}`,
-          `${getTechnicalErrorMessage()}`,
-        );
       }
     });
   }
