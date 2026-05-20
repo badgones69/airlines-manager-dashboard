@@ -1,0 +1,17 @@
+@if (authenticatedUser) {
+  @if (authenticatedUser.profile < 3) {
+    <!-- ROUTE FORM (ADD MODE) -->
+    <route-form
+      (submitted)="addRoute($event)"
+      [formMode]="formMode"
+      [route]="initRouteToAdd"
+    >
+    </route-form>
+  } @else {
+    <!-- FORBIDDEN ERROR PAGE -->
+    <forbidden></forbidden>
+  }
+} @else {
+  <!-- UNAUTHORIZED ERROR PAGE -->
+  <unauthorized></unauthorized>
+}

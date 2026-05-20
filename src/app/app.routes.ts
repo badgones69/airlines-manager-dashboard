@@ -12,6 +12,7 @@ import { EditHubComponent } from './hub/pages/edit-hub/edit-hub.component';
 import { AddDestinationComponent } from './destination/pages/add-destination/add-destination.component';
 import { ListDestinationsComponent } from './destination/pages/list-destinations/list-destinations.component';
 import { EditDestinationComponent } from './destination/pages/edit-destination/edit-destination.component';
+import { AddRouteComponent } from './route/pages/add-route/add-route.component';
 
 export const routes: Routes = [
   /* Authentication form (default route) */
@@ -55,6 +56,14 @@ export const routes: Routes = [
       { path: 'add', component: AddDestinationComponent },
       { path: 'list', component: ListDestinationsComponent },
       { path: 'edit/:uuid', component: EditDestinationComponent },
+    ],
+  },
+
+  /* Route pages */
+  {
+    path: 'routes',
+    children: [
+      { path: 'add', component: AddRouteComponent },
     ],
   },
 ];
