@@ -20,3 +20,4 @@ export const PATTERN_ERROR = 'pattern';
 export const NOT_IDENTICAL_PASS_WORD_ERROR = 'notIdenticalPassword';
 export const UNKNOWN_COUNTRY_ERROR = 'unknownCountry';
 export const UNKNOWN_REGION_ERROR = 'unknownRegion';
+export const UNKNOWN_AIRPORT_ERROR = 'unknownAirport';

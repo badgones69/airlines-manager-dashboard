@@ -1,0 +1,81 @@
+<!-- FORM -->
+<form id="form" [formGroup]="routeForm" (ngSubmit)="submitRouteForm()">
+  <!-- TITLE -->
+  <mat-label class="form-title">{{ routeFormTitle }}</mat-label>
+
+  <!-- DEPARTURE HUB FIELD -->
+  <div class="country-field-container">
+    <span class="flag fi fi-{{ this.departureHubFlag }}"></span>
+    <mat-form-field class="airport-form-field">
+      <mat-label>{{ departureHubInputLabel }}</mat-label>
+      <input
+        matInput
+        [formControlName]="this.departureHubFieldIdentifier"
+        [matAutocomplete]="autoDepartureHub"
+      />
+      <mat-autocomplete
+        #autoDepartureHub="matAutocomplete"
+        [displayWith]="displayAirport"
+        (optionSelected)="changeDepartureHub($event.option.value)"
+      >
+        @for (departureHub of filteredHubs | async; track departureHub) {
+          <mat-option [value]="departureHub">
+            <span class="flag fi fi-{{ departureHub.country.flagCode }}"></span>
+            <span class="airports-list-item">{{ departureHub.iata }}</span> {{ departureHub.name }} {{departureHub.region ? `(${departureHub.region.code})` : ''}}
+          </mat-option>
+        }
+      </mat-autocomplete>
+      <mat-error>{{ displayDepartureHubErrorMessage() }}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- ARRIVAL AIRPORT FIELD -->
+  <div class="country-field-container">
+    <span class="flag fi fi-{{ this.arrivalAirportFlag }}"></span>
+    <mat-form-field class="airport-form-field">
+      <mat-label>{{ arrivalAirportInputLabel }}</mat-label>
+      <input
+        matInput
+        [formControlName]="this.arrivalAirportFieldIdentifier"
+        [matAutocomplete]="autoArrivalAirport"
+      />
+      <mat-autocomplete
+        #autoArrivalAirport="matAutocomplete"
+        [displayWith]="displayAirport"
+        (optionSelected)="changeArrivalAirport($event.option.value)"
+      >
+        @for (arrivalAirport of filteredDestinations | async; track arrivalAirport) {
+          <mat-option [value]="arrivalAirport">
+            <span class="flag fi fi-{{ arrivalAirport.country.flagCode }}"></span>
+            <span class="airports-list-item">{{ arrivalAirport.iata }}</span> {{ arrivalAirport.name }} {{arrivalAirport.region ? `(${arrivalAirport.region.code})` : ''}}
+          </mat-option>
+        }
+      </mat-autocomplete>
+      <mat-error>{{ displayArrivalAirportErrorMessage() }}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="form-buttons">
+    <button
+      type="submit"
+      class="submit-form-button"
+      mat-fab
+      extended
+      [disabled]="routeForm.invalid"
+    >
+      <i class="material-icons">{{ submitButtonIcon }}</i>
+      {{ submitButtonLabel }}
+    </button>
+    <button
+      type="button"
+      class="reset-form-button"
+      mat-fab
+      extended
+      (click)="ngOnInit()"
+    >
+      <i class="material-icons">{{ resetButtonIcon }}</i>
+      {{ resetButtonLabel }}
+    </button>
+  </div>
+</form>
