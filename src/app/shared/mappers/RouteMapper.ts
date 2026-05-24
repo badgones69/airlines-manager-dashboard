@@ -4,6 +4,16 @@ import { AirportMapper } from './AirportMapper';
 export class RouteMapper {
   public airportMapper: AirportMapper = new AirportMapper();
 
+  /* DB => DTO mapping (routes list) */
+  public routesListFromDB(routesListFromDB: any[]): Route[] {
+    let routesList: Route[] = [];
+
+    for (const routeFromDB of routesListFromDB) {
+      routesList.push(this.routeFromDB(routeFromDB));
+    }
+    return routesList;
+  }
+
   /* DB => DTO mapping */
   public routeFromDB(routeFromDB: any): Route {
     return {

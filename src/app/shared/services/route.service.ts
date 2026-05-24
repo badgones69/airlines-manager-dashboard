@@ -6,13 +6,42 @@ import { ADD_FORM_MODE } from '../constants/forms-constants';
 import { getExistingRouteErrorNotificationMessage, getRouteFormTitle } from '../labels/forms/route-form';
 import { NotificationService } from './notification.service';
 import { getTechnicalErrorMessage, getTechnicalErrorTitle } from '../labels/errors';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RouteService {
+  readonly routes$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
-  constructor(readonly notificationService: NotificationService) {}
+  constructor(readonly notificationService: NotificationService) {
+    this.refreshRoutesList();
+  }
+
+  /* Routes list loading */
+  public refreshRoutesList(): void {
+    this.findAllRoutes().then((routes) => {
+      this.routes$.next(routes);
+    });
+  }
+
+  /* Routes list reading */
+  public get routes(): Observable<any[]> {
+    return this.routes$;
+  }
+
+  /* All routes retrieving */
+  public async findAllRoutes(): Promise<any[]> {
+    const { data } = await supabase.from('ROUTE')
+    .select(
+      `*,
+        routeDepartureHub:AIRPORT!routeDepartureHub(*),
+        routeArrivalAirport:AIRPORT!routeArrivalAirport(*)
+      `
+    );
+
+    return data || [];
+  }
 
   /* Route creation */
   public async createRoute(routeToCreate: any): Promise<any> {
@@ -29,6 +58,8 @@ export class RouteService {
         routeArrivalAirport,
       })
       .select();
+
+    this.refreshRoutesList();
 
     if (response.status === 409) {
       /* Existing route error notification showing */

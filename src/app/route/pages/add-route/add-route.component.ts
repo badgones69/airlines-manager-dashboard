@@ -53,6 +53,8 @@ export class AddRouteComponent implements OnInit {
           )} ${getRouteFormTitle()}`.toUpperCase(),
           `${getRouteFormSuccessNotificationMessage(this.formMode)}`,
         );
+        // Redirection to routes list
+        this.router.navigate(['routes', 'list']);
       }
     });
   }
