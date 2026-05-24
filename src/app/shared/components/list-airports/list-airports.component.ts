@@ -43,6 +43,7 @@ import { MatDialog } from '@angular/material/dialog';
   ],
   templateUrl: './list-airports.component.html',
   styleUrls: [
+    '../../../shared/styles/commons.scss',
     '../../../shared/styles/lists.scss',
     '../../../shared/styles/flag-icons.css',
     './list-airports.component.scss',

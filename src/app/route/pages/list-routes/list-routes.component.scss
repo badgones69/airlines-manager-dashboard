@@ -1,0 +1,13 @@
+/* Columns */
+.mat-column-departure-hub,
+.mat-column-arrival-airport {
+  text-align: center;
+  padding: 3px;
+}
+.mat-column-departure-hub {
+  border-right: 2px solid var(--app-red);
+}
+
+.iata {
+  font-weight: bold;
+}
