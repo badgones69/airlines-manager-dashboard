@@ -14,6 +14,7 @@ import { ListDestinationsComponent } from './destination/pages/list-destinations
 import { EditDestinationComponent } from './destination/pages/edit-destination/edit-destination.component';
 import { AddRouteComponent } from './route/pages/add-route/add-route.component';
 import { ListRoutesComponent } from './route/pages/list-routes/list-routes.component';
+import { EditRouteComponent } from './route/pages/edit-route/edit-route.component';
 
 export const routes: Routes = [
   /* Authentication form (default route) */
@@ -66,6 +67,7 @@ export const routes: Routes = [
     children: [
       { path: 'add', component: AddRouteComponent },
       { path: 'list', component: ListRoutesComponent },
+      { path: 'edit/:uuid', component: EditRouteComponent },
     ],
   },
 ];
