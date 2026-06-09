@@ -1,13 +1,16 @@
 /* Columns */
 .mat-column-departure-hub,
-.mat-column-arrival-airport {
+.column-arrival-airport,
+.mat-column-actions {
   text-align: center;
   padding: 3px;
 }
-.mat-column-departure-hub {
+.mat-column-departure-hub,
+.mat-column-arrival-airport {
   border-right: 2px solid var(--app-red);
 }
 
+/* IATA code (in cell value) */
 .iata {
   font-weight: bold;
 }

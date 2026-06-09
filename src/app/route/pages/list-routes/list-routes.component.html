@@ -18,15 +18,34 @@
     <ng-container [matColumnDef]="columnsIdentifiers[1]">
       <th
         mat-header-cell
+        class="column-arrival-airport"
+        [class.mat-column-arrival-airport]="authenticatedUser.profile < 3"
         *matHeaderCellDef
       >
         {{ columnsHeaders[1] }}
       </th>
-      <td mat-cell *matCellDef="let route">
+      <td
+        mat-cell
+        class="column-arrival-airport"
+        [class.mat-column-arrival-airport]="authenticatedUser.profile < 3"
+        *matCellDef="let route"
+      >
         <span class="flag fi fi-{{ route.arrivalAirport.country.flagCode }}"></span>
         <span class="iata">{{ route.arrivalAirport.iata }}</span> {{ route.arrivalAirport.name }} {{route.arrivalAirport.region ? `(${route.arrivalAirport.region.code})` : ''}}
       </td>
     </ng-container>
+
+    @if (authenticatedUser.profile < 3) {
+      <!-- ACTIONS BUTTONS -->
+      <ng-container [matColumnDef]="columnsIdentifiers[2]">
+        <th id="actions" mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let route">
+          <button mat-icon-button (click)="openRouteForm(route)">
+            <i class="material-icons">edit</i>
+          </button>
+        </td>
+      </ng-container>
+    }
 
     <tr mat-header-row *matHeaderRowDef="columnsIdentifiers"></tr>
     <tr mat-row *matRowDef="let row; columns: columnsIdentifiers"></tr>

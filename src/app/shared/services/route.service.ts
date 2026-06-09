@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import supabase from '../constants/services-constants';
 import { v7 as uuidv7 } from 'uuid';
 import { getFormModeLabel } from '../labels/commons/form-common';
-import { ADD_FORM_MODE } from '../constants/forms-constants';
+import { ADD_FORM_MODE, EDIT_FORM_MODE } from '../constants/forms-constants';
 import { getExistingRouteErrorNotificationMessage, getRouteFormTitle } from '../labels/forms/route-form';
 import { NotificationService } from './notification.service';
 import { getTechnicalErrorMessage, getTechnicalErrorTitle } from '../labels/errors';
@@ -32,7 +32,8 @@ export class RouteService {
 
   /* All routes retrieving */
   public async findAllRoutes(): Promise<any[]> {
-    const { data } = await supabase.from('ROUTE')
+    const { data } = await supabase
+    .from('ROUTE')
     .select(
       `*,
         routeDepartureHub:AIRPORT!routeDepartureHub(*),
@@ -41,6 +42,21 @@ export class RouteService {
     );
 
     return data || [];
+  }
+
+  /* Route retrieving */
+  public async findRoute(routeUUID: string): Promise<any> {
+    const { data } = await supabase
+      .from('ROUTE')
+      .select(
+        `*,
+          routeDepartureHub:AIRPORT!routeDepartureHub(*),
+          routeArrivalAirport:AIRPORT!routeArrivalAirport(*)
+        `
+      )
+      .eq('routeUUID', routeUUID);
+
+    return data?.[0];
   }
 
   /* Route creation */
@@ -66,6 +82,44 @@ export class RouteService {
       this.notificationService.showErrorNotification(
         `${getFormModeLabel(
           ADD_FORM_MODE,
+        )} ${getRouteFormTitle()}`.toUpperCase(),
+        `${getExistingRouteErrorNotificationMessage()}`,
+      );
+    } else if (response.status.toString().startsWith('20')) {
+      return response.data;
+    } else {
+      /* Technical error notification showing */
+      this.notificationService.showErrorNotification(
+        `${getTechnicalErrorTitle()}`,
+        `${getTechnicalErrorMessage()}`,
+      );
+    }
+  }
+
+  /* Route updating */
+  public async updateRoute(routeUpdated: any): Promise<any> {
+    const {
+      routeUUID,
+      routeDepartureHub,
+      routeArrivalAirport,
+    } = routeUpdated;
+
+    const response = await supabase
+      .from('ROUTE')
+      .update({
+        routeDepartureHub,
+        routeArrivalAirport,
+      })
+      .eq('routeUUID', routeUUID)
+      .select();
+
+    this.refreshRoutesList();
+    
+    if (response.status === 409) {
+      /* Existing route error notification showing */
+      this.notificationService.showErrorNotification(
+        `${getFormModeLabel(
+          EDIT_FORM_MODE,
         )} ${getRouteFormTitle()}`.toUpperCase(),
         `${getExistingRouteErrorNotificationMessage()}`,
       );

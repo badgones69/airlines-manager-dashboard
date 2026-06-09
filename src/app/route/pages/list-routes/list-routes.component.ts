@@ -79,6 +79,13 @@ export class ListRoutesComponent implements OnInit, AfterViewInit {
     this.userService.user.subscribe((user) => {
       if (user) {
         this.authenticatedUser = JSON.parse(user.toString());
+
+        if (
+          this.authenticatedUser.profile < 3 &&
+          !this.columnsIdentifiers.includes('actions')
+        ) {
+          this.columnsIdentifiers.push('actions');
+        }
       }
     });
     
@@ -89,5 +96,10 @@ export class ListRoutesComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.routesList.paginator = this.paginator;
+  }
+
+  /* Route form (edit mode) opening */
+  openRouteForm(route: Route) {
+    this.router.navigate(['routes', 'edit', route.uuid]);
   }
 }
