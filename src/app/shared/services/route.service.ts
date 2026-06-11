@@ -133,4 +133,15 @@ export class RouteService {
       );
     }
   }
+
+  /* Route deletion */
+  public async deleteRoute(routeUUID: string): Promise<any> {
+    const response = await supabase
+      .from('ROUTE')
+      .delete()
+      .eq('routeUUID', routeUUID);
+
+    this.refreshRoutesList();
+    return response;
+  }
 }

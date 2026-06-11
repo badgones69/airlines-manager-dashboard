@@ -1,3 +1,4 @@
+import { getDeleteDialogMessage } from "../commons/dialog-common";
 import { getFormActionLabel } from "../commons/form-common";
 
 export function getRouteFormTitle(): string {
@@ -10,6 +11,10 @@ export function getDepartureHubLabel(): string {
 
 export function getArrivalAirportLabel(): string {
   return "AÉROPORT D'ARRIVÉE";
+}
+
+export function getRouteDeleteDialogMessage(): string {
+  return `${getDeleteDialogMessage().replace('{}', 'cette ligne')}`;
 }
 
 export function getUnknownAirportErrorMessage(): string {
