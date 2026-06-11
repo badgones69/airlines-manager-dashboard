@@ -21,9 +21,11 @@ import { MatLabel } from '@angular/material/form-field';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
 import { Route } from '../../../shared/models/Route';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DeleteRouteComponent } from '../delete-route/delete-route.component';
 import { getArrivalAirportLabel, getDepartureHubLabel } from '../../../shared/labels/forms/route-form';
 import { getRoutesListTitle } from '../../../shared/labels/lists';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'list-airports',
@@ -101,5 +103,19 @@ export class ListRoutesComponent implements OnInit, AfterViewInit {
   /* Route form (edit mode) opening */
   openRouteForm(route: Route) {
     this.router.navigate(['routes', 'edit', route.uuid]);
+  }
+
+  /* Route deletion confirmation dialog opening */
+  deleteRoute(route: Route) {
+    let dialogRef: MatDialogRef<DeleteRouteComponent> = this.dialog.open(
+      DeleteRouteComponent,
+      {
+        disableClose: false,
+        autoFocus: true,
+        scrollStrategy: new NoopScrollStrategy(),
+      },
+    );
+    dialogRef.componentInstance.routeUUID = route.uuid!;
+    dialogRef.afterClosed().subscribe(() => this.ngOnInit());
   }
 }
