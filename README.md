@@ -90,14 +90,6 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
 />
 </p>
 
-**<ins>TESTS :<ins>**
-<p>
-<img
-    src="https://img.shields.io/badge/Vitest v4.1.5-729B1B?logo=vitest&logoColor=FFFFFF"
-    alt="Vitest"
-/>
-</p>
-
 ## Connection & Users
 
 - Authenticate with default admin user
