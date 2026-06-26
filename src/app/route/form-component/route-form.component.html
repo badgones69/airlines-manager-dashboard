@@ -21,7 +21,9 @@
         @for (departureHub of filteredHubs | async; track departureHub) {
           <mat-option [value]="departureHub">
             <span class="flag fi fi-{{ departureHub.country.flagCode }}"></span>
-            <span class="airports-list-item">{{ departureHub.iata }}</span> {{ departureHub.name }} {{departureHub.region ? `(${departureHub.region.code})` : ''}}
+            <span class="airports-list-item">{{ departureHub.iata }}</span>
+            {{ departureHub.name }}
+            {{ departureHub.region ? `(${departureHub.region.code})` : "" }}
           </mat-option>
         }
       </mat-autocomplete>
@@ -44,10 +46,17 @@
         [displayWith]="displayAirport"
         (optionSelected)="changeArrivalAirport($event.option.value)"
       >
-        @for (arrivalAirport of filteredDestinations | async; track arrivalAirport) {
+        @for (
+          arrivalAirport of filteredDestinations | async;
+          track arrivalAirport
+        ) {
           <mat-option [value]="arrivalAirport">
-            <span class="flag fi fi-{{ arrivalAirport.country.flagCode }}"></span>
-            <span class="airports-list-item">{{ arrivalAirport.iata }}</span> {{ arrivalAirport.name }} {{arrivalAirport.region ? `(${arrivalAirport.region.code})` : ''}}
+            <span
+              class="flag fi fi-{{ arrivalAirport.country.flagCode }}"
+            ></span>
+            <span class="airports-list-item">{{ arrivalAirport.iata }}</span>
+            {{ arrivalAirport.name }}
+            {{ arrivalAirport.region ? `(${arrivalAirport.region.code})` : "" }}
           </mat-option>
         }
       </mat-autocomplete>

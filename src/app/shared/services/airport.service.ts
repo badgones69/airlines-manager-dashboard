@@ -7,7 +7,10 @@ import { NotificationService } from './notification.service';
 import { ADD_FORM_MODE, EDIT_FORM_MODE } from '../constants/forms-constants';
 import { getHubFormTitle } from '../labels/forms/hub-form';
 import { getDestinationFormTitle } from '../labels/forms/destination-form';
-import { getTechnicalErrorMessage, getTechnicalErrorTitle } from '../labels/errors';
+import {
+  getTechnicalErrorMessage,
+  getTechnicalErrorTitle,
+} from '../labels/errors';
 
 @Injectable({
   providedIn: 'root',
@@ -107,11 +110,13 @@ export class AirportService {
 
     this.refreshHubsList();
     this.refreshDestinationsList();
-    
+
     if (response.status === 409) {
       /* IATA uniqueness error notification showing */
-      showIATAUniquenessErrorNotification(this.notificationService, ADD_FORM_MODE,
-        airportHub ? getHubFormTitle() : getDestinationFormTitle()
+      showIATAUniquenessErrorNotification(
+        this.notificationService,
+        ADD_FORM_MODE,
+        airportHub ? getHubFormTitle() : getDestinationFormTitle(),
       );
     } else if (response.status.toString().startsWith('20')) {
       return response.data;
@@ -153,11 +158,15 @@ export class AirportService {
 
     this.refreshHubsList();
     this.refreshDestinationsList();
-    
+
     if (response.status === 409) {
       /* IATA uniqueness error notification showing */
-      showIATAUniquenessErrorNotification(this.notificationService, EDIT_FORM_MODE,
-        airportUpdated.airportHub ? getHubFormTitle() : getDestinationFormTitle()
+      showIATAUniquenessErrorNotification(
+        this.notificationService,
+        EDIT_FORM_MODE,
+        airportUpdated.airportHub
+          ? getHubFormTitle()
+          : getDestinationFormTitle(),
       );
     } else if (response.status.toString().startsWith('20')) {
       return response.data;

@@ -15,7 +15,7 @@ import { EditDestinationComponent } from './destination/pages/edit-destination/e
 import { AddRouteComponent } from './route/pages/add-route/add-route.component';
 import { ListRoutesComponent } from './route/pages/list-routes/list-routes.component';
 import { EditRouteComponent } from './route/pages/edit-route/edit-route.component';
-import { NetworkComponent } from './route/pages/network/network.component';
+import { RoutesNetworkComponent } from './route/pages/network/network.component';
 
 export const routes: Routes = [
   /* Authentication form (default route) */
@@ -69,7 +69,7 @@ export const routes: Routes = [
       { path: 'add', component: AddRouteComponent },
       { path: 'list', component: ListRoutesComponent },
       { path: 'edit/:uuid', component: EditRouteComponent },
-      { path: 'network', component: NetworkComponent },
+      { path: 'network', component: RoutesNetworkComponent },
     ],
   },
 ];

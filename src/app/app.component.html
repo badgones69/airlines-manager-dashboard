@@ -140,11 +140,7 @@
     }
     <!-- ROUTE SUBMENU -->
     @if (authenticatedUser) {
-      <button
-        mat-button
-        (click)="routeSubMenuToggle()"
-        class="menu-button"
-      >
+      <button mat-button (click)="routeSubMenuToggle()" class="menu-button">
         @if (routeSubMenuExpanded) {
           <i class="material-icons">expand_more</i>
         } @else {
@@ -166,11 +162,7 @@
           </button>
         }
         <!-- ROUTES LIST BUTTON -->
-        <button
-          mat-icon-button
-          class="submenu-button"
-          routerLink="routes/list"
-        >
+        <button mat-icon-button class="submenu-button" routerLink="routes/list">
           <i class="material-icons">list</i>
           <span>Liste</span>
         </button>
