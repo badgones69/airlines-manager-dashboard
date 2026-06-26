@@ -16,7 +16,7 @@
     <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/v1.2.6-F317F9.svg"></a>
     <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/May 19th, 2026-7E7E7E.svg"></a>
     <br />
-    <img src="https://img.shields.io/badge/SonarQube%20%3A%2098%20%25-0000AA?logo=sonar&logoColor=FFFFFF">
+    <img src="https://img.shields.io/badge/SonarQube%20%3A%200%20issue(s)%20-0000AA?logo=sonar&logoColor=FFFFFF">
 </p>
 
 AM Dashboard is a free web app for people who plays to <a href="https://www.airlines-manager.com/">Airlines Manager : Plane Tycoon®</a>. Thanks to it, they may :
