@@ -13,8 +13,6 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@analogjs/vite-plugin-angular": "^2.5.0",
-    "@analogjs/vitest-angular": "^2.5.0",
     "@angular/animations": "^21.2.12",
     "@angular/cdk": "^21.2.10",
     "@angular/common": "^21.2.12",
@@ -47,8 +45,7 @@
     "@angular/compiler-cli": "^21.2.12",
     "@types/node": "^25.6.2",
     "jsdom": "^29.1.1",
-    "typescript": "^6.0.3",
-    "vitest": "^4.1.5"
+    "typescript": "^6.0.3"
   },
   "overrides": {
     "rimraf": "^6.1.3",
