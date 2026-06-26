@@ -35,9 +35,7 @@ import {
   UNKNOWN_AIRPORT_ERROR,
 } from '../../shared/constants/forms-constants';
 import { RouteMapper } from '../../shared/mappers/RouteMapper';
-import {
-  capitalize,
-} from '../../shared/utils/labels-utils';
+import { capitalize } from '../../shared/utils/labels-utils';
 import {
   distinctUntilChanged,
   map,
@@ -53,7 +51,12 @@ import {
   MatOption,
 } from '@angular/material/autocomplete';
 import { Airport } from '../../shared/models/Airport';
-import { getArrivalAirportLabel, getDepartureHubLabel, getRouteFormTitle, getUnknownAirportErrorMessage } from '../../shared/labels/forms/route-form';
+import {
+  getArrivalAirportLabel,
+  getDepartureHubLabel,
+  getRouteFormTitle,
+  getUnknownAirportErrorMessage,
+} from '../../shared/labels/forms/route-form';
 import { AirportService } from '../../shared/services/airport.service';
 import { AirportMapper } from '../../shared/mappers/AirportMapper';
 @Component({
@@ -123,7 +126,9 @@ export class RouteFormComponent implements OnInit {
   // Arrival airport field available values
   public destinations: Airport[] = [];
   // List of destinations matching to arrival airport field value
-  public filteredDestinations: Observable<Airport[]> = new Observable<Airport[]>();
+  public filteredDestinations: Observable<Airport[]> = new Observable<
+    Airport[]
+  >();
 
   /* Injections */
   public airportService = inject(AirportService);
@@ -156,12 +161,15 @@ export class RouteFormComponent implements OnInit {
       this.hubs = this.allHubs;
 
       this.airportService.destinations.subscribe((destinations) => {
-        this.allDestinations = [...this.allHubs, ...this.airportMapper.airportsListFromDB(destinations)];
+        this.allDestinations = [
+          ...this.allHubs,
+          ...this.airportMapper.airportsListFromDB(destinations),
+        ];
         this.destinations = this.allDestinations;
       });
-    
+
       this.setAvailableDepartureHubs(this.hubs);
-      this.setAvailableArrivalAirports(this.destinations);      
+      this.setAvailableArrivalAirports(this.destinations);
     });
 
     this.routeForm
@@ -175,7 +183,8 @@ export class RouteFormComponent implements OnInit {
       .get(this.arrivalAirportFieldIdentifier)
       ?.valueChanges.pipe(takeUntil(new Subject<void>()))
       .subscribe((arrivalAirportValueChanged) =>
-        this.changeArrivalAirport(arrivalAirportValueChanged));
+        this.changeArrivalAirport(arrivalAirportValueChanged),
+      );
 
     this.routeForm.patchValue({
       departureHub: this.route?.departureHub,
@@ -201,9 +210,7 @@ export class RouteFormComponent implements OnInit {
       ?.valueChanges.pipe(
         distinctUntilChanged(),
         startWith(''),
-        map((hub) =>
-          hub ? this.filterHubs(hub) : listHubs.slice(),
-        ),
+        map((hub) => (hub ? this.filterHubs(hub) : listHubs.slice())),
       );
   }
 
@@ -216,7 +223,9 @@ export class RouteFormComponent implements OnInit {
         distinctUntilChanged(),
         startWith(''),
         map((destination) =>
-          destination ? this.filterDestinations(destination) : listDestinations.slice(),
+          destination
+            ? this.filterDestinations(destination)
+            : listDestinations.slice(),
         ),
       );
   }
@@ -225,12 +234,13 @@ export class RouteFormComponent implements OnInit {
   changeDepartureHub(departureHubValueChanged: any): void {
     if (departureHubValueChanged != null) {
       const departureHubValue: string =
-      typeof departureHubValueChanged === 'string'
-        ? capitalize(departureHubValueChanged)
-        : capitalize(departureHubValueChanged.iata);
+        typeof departureHubValueChanged === 'string'
+          ? capitalize(departureHubValueChanged)
+          : capitalize(departureHubValueChanged.iata);
 
       const departureHubFound: Airport | undefined = this.allHubs.find(
-        (hub) => capitalize(hub.name) === capitalize(departureHubValue) ||
+        (hub) =>
+          capitalize(hub.name) === capitalize(departureHubValue) ||
           capitalize(hub.iata) === capitalize(departureHubValue),
       );
 
@@ -238,7 +248,7 @@ export class RouteFormComponent implements OnInit {
         this.departureHubFlag = departureHubFound.country.flagCode;
 
         this.destinations = this.allDestinations.filter(
-          (destination) => destination.iata !== departureHubFound.iata  
+          (destination) => destination.iata !== departureHubFound.iata,
         );
         this.setAvailableArrivalAirports(this.destinations);
       } else {
@@ -252,20 +262,22 @@ export class RouteFormComponent implements OnInit {
   changeArrivalAirport(arrivalAirportValueChanged: any): void {
     if (arrivalAirportValueChanged != null) {
       const arrivalAirportValue: string =
-      typeof arrivalAirportValueChanged === 'string'
-        ? capitalize(arrivalAirportValueChanged)
-        : capitalize(arrivalAirportValueChanged.iata);
+        typeof arrivalAirportValueChanged === 'string'
+          ? capitalize(arrivalAirportValueChanged)
+          : capitalize(arrivalAirportValueChanged.iata);
 
-      const arrivalAirportFound: Airport | undefined = this.allDestinations.find(
-        (destination) => capitalize(destination.name) === capitalize(arrivalAirportValue) ||
-          capitalize(destination.iata) === capitalize(arrivalAirportValue),
-      );
+      const arrivalAirportFound: Airport | undefined =
+        this.allDestinations.find(
+          (destination) =>
+            capitalize(destination.name) === capitalize(arrivalAirportValue) ||
+            capitalize(destination.iata) === capitalize(arrivalAirportValue),
+        );
 
       if (arrivalAirportFound) {
         this.arrivalAirportFlag = arrivalAirportFound.country.flagCode;
 
         this.hubs = this.allHubs.filter(
-          (hub) => hub.iata !== arrivalAirportFound.iata  
+          (hub) => hub.iata !== arrivalAirportFound.iata,
         );
         this.setAvailableDepartureHubs(this.hubs);
       } else {
@@ -285,9 +297,10 @@ export class RouteFormComponent implements OnInit {
       typeof departureHubValue === 'string'
         ? capitalize(departureHubValue)
         : capitalize(departureHubValue.iata);
-    return this.hubs.filter((hub) =>
-      capitalize(hub.iata).startsWith(filterValue) ||
-      capitalize(hub.name).startsWith(capitalize(filterValue)),
+    return this.hubs.filter(
+      (hub) =>
+        capitalize(hub.iata).startsWith(filterValue) ||
+        capitalize(hub.name).startsWith(capitalize(filterValue)),
     );
   }
 
@@ -301,9 +314,10 @@ export class RouteFormComponent implements OnInit {
       typeof arrivalAirportValue === 'string'
         ? capitalize(arrivalAirportValue)
         : capitalize(arrivalAirportValue.iata);
-    return this.destinations.filter((destination) =>
-      capitalize(destination.iata).startsWith(filterValue) ||
-      capitalize(destination.name).startsWith(capitalize(filterValue)),
+    return this.destinations.filter(
+      (destination) =>
+        capitalize(destination.iata).startsWith(filterValue) ||
+        capitalize(destination.name).startsWith(capitalize(filterValue)),
     );
   }
 
@@ -333,7 +347,9 @@ export class RouteFormComponent implements OnInit {
   /* Arrival airport field error message(s) display */
   displayArrivalAirportErrorMessage(): string {
     if (
-      this.routeForm.get(this.arrivalAirportFieldIdentifier)?.hasError(REQUIRED_ERROR)
+      this.routeForm
+        .get(this.arrivalAirportFieldIdentifier)
+        ?.hasError(REQUIRED_ERROR)
     ) {
       return getRequiredFieldErrorMessage();
     } else if ('xx' === this.arrivalAirportFlag) {
@@ -348,22 +364,28 @@ export class RouteFormComponent implements OnInit {
 
   /* Form submit */
   submitRouteForm() {
-    const departureHubValue = this.routeForm.get(this.departureHubFieldIdentifier)?.value;
+    const departureHubValue = this.routeForm.get(
+      this.departureHubFieldIdentifier,
+    )?.value;
 
     if (typeof departureHubValue === 'string') {
       this.routeForm.value.departureHub = this.allHubs.find(
-        (hub) => capitalize(hub.name) === capitalize(departureHubValue) ||
+        (hub) =>
+          capitalize(hub.name) === capitalize(departureHubValue) ||
           capitalize(hub.iata) === capitalize(departureHubValue),
       )?.id;
     } else {
       this.routeForm.value.departureHub = departureHubValue.id;
     }
 
-    const arrivalAirportValue = this.routeForm.get(this.arrivalAirportFieldIdentifier)?.value;
+    const arrivalAirportValue = this.routeForm.get(
+      this.arrivalAirportFieldIdentifier,
+    )?.value;
 
     if (typeof arrivalAirportValue === 'string') {
       this.routeForm.value.arrivalAirport = this.allDestinations.find(
-        (destination) => capitalize(destination.name) === capitalize(arrivalAirportValue) ||
+        (destination) =>
+          capitalize(destination.name) === capitalize(arrivalAirportValue) ||
           capitalize(destination.iata) === capitalize(arrivalAirportValue),
       )?.id;
     } else {

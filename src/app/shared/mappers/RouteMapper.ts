@@ -19,8 +19,12 @@ export class RouteMapper {
     return {
       id: routeFromDB.routeID,
       uuid: routeFromDB.routeUUID,
-      departureHub: this.airportMapper.airportFromDB(routeFromDB.routeDepartureHub),
-      arrivalAirport: this.airportMapper.airportFromDB(routeFromDB.routeArrivalAirport),
+      departureHub: this.airportMapper.airportFromDB(
+        routeFromDB.routeDepartureHub,
+      ),
+      arrivalAirport: this.airportMapper.airportFromDB(
+        routeFromDB.routeArrivalAirport,
+      ),
     } as Route;
   }
 

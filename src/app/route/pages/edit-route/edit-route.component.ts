@@ -10,7 +10,10 @@ import { EDIT_FORM_MODE } from '../../../shared/constants/forms-constants';
 import { getFormModeLabel } from '../../../shared/labels/commons/form-common';
 import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
-import { getRouteFormSuccessNotificationMessage, getRouteFormTitle } from '../../../shared/labels/forms/route-form';
+import {
+  getRouteFormSuccessNotificationMessage,
+  getRouteFormTitle,
+} from '../../../shared/labels/forms/route-form';
 import { RouteMapper } from '../../../shared/mappers/RouteMapper';
 
 @Component({

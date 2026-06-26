@@ -3,9 +3,15 @@ import supabase from '../constants/services-constants';
 import { v7 as uuidv7 } from 'uuid';
 import { getFormModeLabel } from '../labels/commons/form-common';
 import { ADD_FORM_MODE, EDIT_FORM_MODE } from '../constants/forms-constants';
-import { getExistingRouteErrorNotificationMessage, getRouteFormTitle } from '../labels/forms/route-form';
+import {
+  getExistingRouteErrorNotificationMessage,
+  getRouteFormTitle,
+} from '../labels/forms/route-form';
 import { NotificationService } from './notification.service';
-import { getTechnicalErrorMessage, getTechnicalErrorTitle } from '../labels/errors';
+import {
+  getTechnicalErrorMessage,
+  getTechnicalErrorTitle,
+} from '../labels/errors';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -32,13 +38,11 @@ export class RouteService {
 
   /* All routes retrieving */
   public async findAllRoutes(): Promise<any[]> {
-    const { data } = await supabase
-    .from('ROUTE')
-    .select(
+    const { data } = await supabase.from('ROUTE').select(
       `*,
         routeDepartureHub:AIRPORT!routeDepartureHub(*),
         routeArrivalAirport:AIRPORT!routeArrivalAirport(*)
-      `
+      `,
     );
 
     return data || [];
@@ -52,7 +56,7 @@ export class RouteService {
         `*,
           routeDepartureHub:AIRPORT!routeDepartureHub(*),
           routeArrivalAirport:AIRPORT!routeArrivalAirport(*)
-        `
+        `,
       )
       .eq('routeUUID', routeUUID);
 
@@ -61,10 +65,7 @@ export class RouteService {
 
   /* Route creation */
   public async createRoute(routeToCreate: any): Promise<any> {
-    const {
-      routeDepartureHub,
-      routeArrivalAirport,
-    } = routeToCreate;
+    const { routeDepartureHub, routeArrivalAirport } = routeToCreate;
 
     const response = await supabase
       .from('ROUTE')
@@ -98,11 +99,7 @@ export class RouteService {
 
   /* Route updating */
   public async updateRoute(routeUpdated: any): Promise<any> {
-    const {
-      routeUUID,
-      routeDepartureHub,
-      routeArrivalAirport,
-    } = routeUpdated;
+    const { routeUUID, routeDepartureHub, routeArrivalAirport } = routeUpdated;
 
     const response = await supabase
       .from('ROUTE')
@@ -114,7 +111,7 @@ export class RouteService {
       .select();
 
     this.refreshRoutesList();
-    
+
     if (response.status === 409) {
       /* Existing route error notification showing */
       this.notificationService.showErrorNotification(

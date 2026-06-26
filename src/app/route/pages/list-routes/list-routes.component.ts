@@ -23,12 +23,15 @@ import { Route } from '../../../shared/models/Route';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteRouteComponent } from '../delete-route/delete-route.component';
-import { getArrivalAirportLabel, getDepartureHubLabel } from '../../../shared/labels/forms/route-form';
+import {
+  getArrivalAirportLabel,
+  getDepartureHubLabel,
+} from '../../../shared/labels/forms/route-form';
 import { getRoutesListTitle } from '../../../shared/labels/lists';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 
 @Component({
-  selector: 'list-airports',
+  selector: 'list-routes',
   standalone: true,
   imports: [
     MatTableModule,
@@ -55,10 +58,7 @@ export class ListRoutesComponent implements OnInit, AfterViewInit {
   public routesList: MatTableDataSource<Route> = new MatTableDataSource();
 
   /* List columns identifiers */
-  public columnsIdentifiers: string[] = [
-    'departure-hub',
-    'arrival-airport',
-  ];
+  public columnsIdentifiers: string[] = ['departure-hub', 'arrival-airport'];
 
   /* List columns headers labels */
   public columnsHeaders: string[] = [
@@ -90,7 +90,7 @@ export class ListRoutesComponent implements OnInit, AfterViewInit {
         }
       }
     });
-    
+
     this.routeService.routes.subscribe((routes) => {
       this.routesList.data = this.routeMapper.routesListFromDB(routes);
     });

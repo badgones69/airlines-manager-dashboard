@@ -1,5 +1,5 @@
-import { getDeleteDialogMessage } from "../commons/dialog-common";
-import { getFormActionLabel } from "../commons/form-common";
+import { getDeleteDialogMessage } from '../commons/dialog-common';
+import { getFormActionLabel } from '../commons/form-common';
 
 export function getRouteFormTitle(): string {
   return "d'une ligne";

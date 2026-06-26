@@ -267,7 +267,7 @@ export class AirportFormComponent implements OnInit {
             .get(this.regionFieldIdentifier)
             ?.setValidators(Validators.required);
 
-          if (countryFound.id === this.airport?.country.id) { 
+          if (countryFound.id === this.airport?.country.id) {
             this.airportForm
               .get(this.regionFieldIdentifier)
               ?.setValue(this.airport?.region);
@@ -470,11 +470,13 @@ export class AirportFormComponent implements OnInit {
   }
 }
 
-export function showIATAUniquenessErrorNotification(notificationService: NotificationService, formMode: string, formTitle: string): void {
+export function showIATAUniquenessErrorNotification(
+  notificationService: NotificationService,
+  formMode: string,
+  formTitle: string,
+): void {
   notificationService.showErrorNotification(
-    `${getFormModeLabel(
-      formMode,
-    )} ${formTitle}`.toUpperCase(),
+    `${getFormModeLabel(formMode)} ${formTitle}`.toUpperCase(),
     `${getIATAUniquenessErrorMessage()}`,
   );
 }
