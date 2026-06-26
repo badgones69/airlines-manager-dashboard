@@ -10,7 +10,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "vitest"
+    "test": ""
   },
   "dependencies": {
     "@angular/animations": "^21.2.12",

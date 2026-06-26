@@ -7,9 +7,12 @@
   <div class="country-field-container">
     <span class="flag fi fi-{{ this.departureHubFlag }}"></span>
     <mat-form-field class="airport-form-field">
-      <mat-label>{{ departureHubInputLabel }}</mat-label>
+      <mat-label id="departureHubInputLabel">
+        {{ departureHubInputLabel }}
+      </mat-label>
       <input
         matInput
+        aria-labelledby="departureHubInputLabel"
         [formControlName]="this.departureHubFieldIdentifier"
         [matAutocomplete]="autoDepartureHub"
       />
@@ -35,9 +38,12 @@
   <div class="country-field-container">
     <span class="flag fi fi-{{ this.arrivalAirportFlag }}"></span>
     <mat-form-field class="airport-form-field">
-      <mat-label>{{ arrivalAirportInputLabel }}</mat-label>
+      <mat-label id="arrivalAirportInputLabel">
+        {{ arrivalAirportInputLabel }}
+      </mat-label>
       <input
         matInput
+        aria-labelledby="arrivalAirportInputLabel"
         [formControlName]="this.arrivalAirportFieldIdentifier"
         [matAutocomplete]="autoArrivalAirport"
       />
