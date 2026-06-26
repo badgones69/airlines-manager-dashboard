@@ -5,9 +5,10 @@
 
   <!-- IATA FIELD -->
   <mat-form-field>
-    <mat-label>{{ iataInputLabel }}</mat-label>
+    <mat-label id="iataInputLabel">{{ iataInputLabel }}</mat-label>
     <input
       matInput
+      aria-labelledby="iataInputLabel"
       [formControlName]="this.iataFieldIdentifier"
       minlength="3"
       maxlength="3"
@@ -17,28 +18,44 @@
 
   <!-- NAME FIELD -->
   <mat-form-field>
-    <mat-label>{{ nameInputLabel }}</mat-label>
-    <input matInput [formControlName]="this.nameFieldIdentifier" />
+    <mat-label id="nameInputLabel">{{ nameInputLabel }}</mat-label>
+    <input
+      matInput
+      aria-labelledby="nameInputLabel"
+      [formControlName]="this.nameFieldIdentifier"
+    />
     <mat-error>{{ displayNameErrorMessage() }}</mat-error>
   </mat-form-field>
 
   <!-- CITY FIELD -->
   <mat-form-field>
-    <mat-label>{{ cityInputLabel }}</mat-label>
-    <input matInput [formControlName]="this.cityFieldIdentifier" />
+    <mat-label id="cityInputLabel">{{ cityInputLabel }}</mat-label>
+    <input
+      matInput
+      aria-labelledby="cityInputLabel"
+      [formControlName]="this.cityFieldIdentifier"
+    />
   </mat-form-field>
 
   <!-- LATITUDE FIELD -->
   <mat-form-field>
-    <mat-label>{{ latitudeInputLabel }}</mat-label>
-    <input matInput [formControlName]="this.latitudeFieldIdentifier" />
+    <mat-label id="latitudeInputLabel">{{ latitudeInputLabel }}</mat-label>
+    <input
+      matInput
+      aria-labelledby="latitudeInputLabel"
+      [formControlName]="this.latitudeFieldIdentifier"
+    />
     <mat-error>{{ displayLatitudeErrorMessage() }}</mat-error>
   </mat-form-field>
 
   <!-- LONGITUDE FIELD -->
   <mat-form-field>
-    <mat-label>{{ longitudeInputLabel }}</mat-label>
-    <input matInput [formControlName]="this.longitudeFieldIdentifier" />
+    <mat-label id="longitudeInputLabel">{{ longitudeInputLabel }}</mat-label>
+    <input
+      matInput
+      aria-labelledby="longitudeInputLabel"
+      [formControlName]="this.longitudeFieldIdentifier"
+    />
     <mat-error>{{ displayLongitudeErrorMessage() }}</mat-error>
   </mat-form-field>
 
@@ -46,9 +63,10 @@
   <div class="country-field-container">
     <span class="flag fi fi-{{ this.countryFlag }}"></span>
     <mat-form-field>
-      <mat-label>{{ countryInputLabel }}</mat-label>
+      <mat-label id="countryInputLabel">{{ countryInputLabel }}</mat-label>
       <input
         matInput
+        aria-labelledby="countryInputLabel"
         [formControlName]="this.countryFieldIdentifier"
         [matAutocomplete]="autoCountry"
       />
@@ -71,9 +89,10 @@
   <!-- REGION FIELD -->
   @if (regions.length > 0) {
     <mat-form-field>
-      <mat-label>{{ regionInputLabel }}</mat-label>
+      <mat-label id="regionInputLabel">{{ regionInputLabel }}</mat-label>
       <input
         matInput
+        aria-labelledby="regionInputLabel"
         [formControlName]="this.regionFieldIdentifier"
         [matAutocomplete]="autoRegion"
       />
