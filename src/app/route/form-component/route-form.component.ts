@@ -31,6 +31,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {
   EDIT_FORM_MODE,
+  IDENTICAL_AIRPORTS_ERROR,
   REQUIRED_ERROR,
   UNKNOWN_AIRPORT_ERROR,
 } from '../../shared/constants/forms-constants';
@@ -54,11 +55,16 @@ import { Airport } from '../../shared/models/Airport';
 import {
   getArrivalAirportLabel,
   getDepartureHubLabel,
+  getIdenticalAirportsErrorMessage,
   getRouteFormTitle,
   getUnknownAirportErrorMessage,
 } from '../../shared/labels/forms/route-form';
 import { AirportService } from '../../shared/services/airport.service';
 import { AirportMapper } from '../../shared/mappers/AirportMapper';
+import {
+  compareAirportsNameAndIATA,
+  identicalAirportsValidator,
+} from '../../shared/forms-validators/route-form-validators';
 @Component({
   selector: 'route-form',
   standalone: true,
@@ -135,10 +141,21 @@ export class RouteFormComponent implements OnInit {
 
   constructor() {
     /* Form fields creation & constraints definition */
-    this.routeForm = new FormGroup({
-      departureHub: new FormControl('', Validators.required),
-      arrivalAirport: new FormControl('', Validators.required),
-    });
+    this.routeForm = new FormGroup(
+      {
+        departureHub: new FormControl('', Validators.required),
+        arrivalAirport: new FormControl('', Validators.required),
+      },
+      {
+        validators: [
+          identicalAirportsValidator(
+            this.departureHubFieldIdentifier,
+            this.arrivalAirportFieldIdentifier,
+          ),
+        ],
+        updateOn: 'change',
+      },
+    );
   }
 
   ngOnInit(): void {
@@ -251,6 +268,22 @@ export class RouteFormComponent implements OnInit {
           (destination) => destination.iata !== departureHubFound.iata,
         );
         this.setAvailableArrivalAirports(this.destinations);
+
+        if (
+          compareAirportsNameAndIATA(
+            this.routeForm.get(this.departureHubFieldIdentifier)?.value,
+            this.routeForm.get(this.arrivalAirportFieldIdentifier)?.value,
+            departureHubFound,
+          )
+        ) {
+          this.routeForm
+            .get(this.arrivalAirportFieldIdentifier)
+            ?.setErrors({ [IDENTICAL_AIRPORTS_ERROR]: true });
+        } else {
+          this.routeForm
+            .get(this.arrivalAirportFieldIdentifier)
+            ?.setErrors(null);
+        }
       } else {
         this.departureHubFlag = 'xx';
         this.setAvailableArrivalAirports(this.allDestinations);
@@ -280,6 +313,22 @@ export class RouteFormComponent implements OnInit {
           (hub) => hub.iata !== arrivalAirportFound.iata,
         );
         this.setAvailableDepartureHubs(this.hubs);
+
+        if (
+          compareAirportsNameAndIATA(
+            this.routeForm.get(this.departureHubFieldIdentifier)?.value,
+            this.routeForm.get(this.arrivalAirportFieldIdentifier)?.value,
+            arrivalAirportFound,
+          )
+        ) {
+          this.routeForm
+            .get(this.arrivalAirportFieldIdentifier)
+            ?.setErrors({ [IDENTICAL_AIRPORTS_ERROR]: true });
+        } else {
+          this.routeForm
+            .get(this.arrivalAirportFieldIdentifier)
+            ?.setErrors(null);
+        }
       } else {
         this.arrivalAirportFlag = 'xx';
         this.setAvailableDepartureHubs(this.allHubs);
@@ -352,6 +401,12 @@ export class RouteFormComponent implements OnInit {
         ?.hasError(REQUIRED_ERROR)
     ) {
       return getRequiredFieldErrorMessage();
+    } else if (
+      this.routeForm
+        .get(this.arrivalAirportFieldIdentifier)
+        ?.hasError(IDENTICAL_AIRPORTS_ERROR)
+    ) {
+      return getIdenticalAirportsErrorMessage();
     } else if ('xx' === this.arrivalAirportFlag) {
       this.routeForm
         .get(this.arrivalAirportFieldIdentifier)

@@ -17,6 +17,10 @@ export function getRouteDeleteDialogMessage(): string {
   return `${getDeleteDialogMessage().replace('{}', 'cette ligne')}`;
 }
 
+export function getIdenticalAirportsErrorMessage(): string {
+  return 'aéroports identiques';
+}
+
 export function getUnknownAirportErrorMessage(): string {
   return 'aéroport inconnu';
 }
