@@ -29,11 +29,11 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
 **<ins>SERVER & DATABASE :<ins>**
 <p>
 <img
-    src="https://img.shields.io/badge/Vercel v53.3.1-000000?logo=vercel&logoColor=FFFFFF"
+    src="https://img.shields.io/badge/Vercel v54.18.1-000000?logo=vercel&logoColor=FFFFFF"
     alt="Vercel"
 />
 <img
-    src="https://img.shields.io/badge/Supabase--JS v2.105.4-008000?logo=supabase&logoColor=FFFFFF"
+    src="https://img.shields.io/badge/Supabase--JS v2.108.2-008000?logo=supabase&logoColor=FFFFFF"
     alt="Supabase-JS"
 />
 </p>
@@ -41,7 +41,7 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
 **<ins>FRAMEWORK & LANGUAGE :<ins>**
 <p>
 <img
-    src="https://img.shields.io/badge/Angular v21.2.12-purple?logo=angular&logoColor=FFFFFF"
+    src="https://img.shields.io/badge/Angular v22.0.4-purple?logo=angular&logoColor=FFFFFF"
     alt="Angular"
 />
 <img
@@ -77,7 +77,7 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
 **<ins>SECURITY :<ins>**
 <p>
 <img
-    src="https://img.shields.io/badge/UUID v14.0.0-grey.svg"
+    src="https://img.shields.io/badge/UUID v14.0.1-grey.svg"
     alt="UUID"
 />
 <img
