@@ -138,6 +138,46 @@
         </button>
       }
     }
+    <!-- ROUTE SUBMENU -->
+    @if (authenticatedUser) {
+      <button mat-button (click)="routeSubMenuToggle()" class="menu-button">
+        @if (routeSubMenuExpanded) {
+          <i class="material-icons">expand_more</i>
+        } @else {
+          <i class="material-icons">chevron_right</i>
+        }
+        <i class="material-icons">arrow_range</i>
+        <span>Ligne</span>
+      </button>
+      @if (routeSubMenuExpanded) {
+        @if (authenticatedUser.profile < 3) {
+          <!-- ROUTE ADDING FORM BUTTON -->
+          <button
+            mat-icon-button
+            class="submenu-button"
+            routerLink="routes/add"
+          >
+            <i class="material-icons">add</i>
+            <span>Ajouter</span>
+          </button>
+        }
+        <!-- ROUTES LIST BUTTON -->
+        <button mat-icon-button class="submenu-button" routerLink="routes/list">
+          <i class="material-icons">list</i>
+          <span>Liste</span>
+        </button>
+
+        <!-- ROUTES NETWORK BUTTON -->
+        <button
+          mat-icon-button
+          class="submenu-button"
+          routerLink="routes/network"
+        >
+          <i class="material-icons">map</i>
+          <span>Réseau</span>
+        </button>
+      }
+    }
     <!-- ABOUT SUBMENU -->
     <button mat-button (click)="openAboutDialog()" class="menu-button">
       <i class="material-icons">info</i>

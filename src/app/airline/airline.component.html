@@ -7,9 +7,10 @@
 
       <!-- ICAO FIELD -->
       <mat-form-field>
-        <mat-label>{{ icaoInputLabel }}</mat-label>
+        <mat-label id="icaoInputLabel">{{ icaoInputLabel }}</mat-label>
         <input
           matInput
+          aria-labelledby="icaoInputLabel"
           [formControlName]="this.icaoFieldIdentifier"
           minlength="3"
           maxlength="3"
@@ -19,8 +20,12 @@
 
       <!-- NAME FIELD -->
       <mat-form-field>
-        <mat-label>{{ nameInputLabel }}</mat-label>
-        <input matInput [formControlName]="this.nameFieldIdentifier" />
+        <mat-label id="nameInputLabel">{{ nameInputLabel }}</mat-label>
+        <input
+          matInput
+          aria-labelledby="nameInputLabel"
+          [formControlName]="this.nameFieldIdentifier"
+        />
         <mat-error>{{ displayNameErrorMessage() }}</mat-error>
       </mat-form-field>
 
@@ -55,9 +60,12 @@
       <div class="country-field-container">
         <span class="flag fi fi-{{ this.nationalityFlag }}"></span>
         <mat-form-field>
-          <mat-label>{{ nationalityInputLabel }}</mat-label>
+          <mat-label id="nationalityInputLabel">
+            {{ nationalityInputLabel }}
+          </mat-label>
           <input
             matInput
+            aria-labelledby="nationalityInputLabel"
             [formControlName]="this.nationalityFieldIdentifier"
             [matAutocomplete]="auto"
           />

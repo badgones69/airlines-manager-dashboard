@@ -20,6 +20,13 @@ mat-form-field .error-hint {
   color: var(--app-red);
 }
 
+.airport-form-field {
+  min-width: 400px;
+}
+.airport-form-field .airports-list-item {
+  font-weight: bold;
+}
+
 /* Country field container */
 .country-field-container {
   display: flex;
@@ -29,6 +36,7 @@ mat-form-field .error-hint {
 /* Buttons */
 .form-buttons {
   display: flex;
+  justify-content: center;
   column-gap: 50px;
   margin-top: 10px;
 }
