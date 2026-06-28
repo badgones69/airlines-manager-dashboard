@@ -5,16 +5,21 @@
 
   <!-- LOGIN FIELD -->
   <mat-form-field>
-    <mat-label>{{ loginInputLabel }}</mat-label>
-    <input matInput [formControlName]="this.loginFieldIdentifier" />
+    <mat-label id="loginInputLabel">{{ loginInputLabel }}</mat-label>
+    <input
+      matInput
+      aria-labelledby="loginInputLabel"
+      [formControlName]="this.loginFieldIdentifier"
+    />
     <mat-error>{{ displayLoginErrorMessage() }}</mat-error>
   </mat-form-field>
 
   <!-- PASSWORD FIELD -->
   <mat-form-field>
-    <mat-label>{{ passwordInputLabel }}</mat-label>
+    <mat-label id="passwordInputLabel">{{ passwordInputLabel }}</mat-label>
     <input
       matInput
+      aria-labelledby="passwordInputLabel"
       [formControlName]="this.pass_wordFieldIdentifier"
       [type]="showPassword ? 'text' : 'password'"
     />

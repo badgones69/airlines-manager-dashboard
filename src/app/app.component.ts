@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
   public userSubMenuExpanded: boolean = false;
   public hubSubMenuExpanded: boolean = false;
   public destinationSubMenuExpanded: boolean = false;
+  public routeSubMenuExpanded: boolean = false;
 
   /* Injections */
   public userService: UserService = inject(UserService);
@@ -63,6 +64,7 @@ export class AppComponent implements OnInit {
       this.userSubMenuExpanded = false;
       this.hubSubMenuExpanded = false;
       this.destinationSubMenuExpanded = false;
+      this.routeSubMenuExpanded = false;
     }
   }
 
@@ -84,6 +86,11 @@ export class AppComponent implements OnInit {
   /* Destination submenu opening/closing */
   destinationSubMenuToggle(): void {
     this.destinationSubMenuExpanded = !this.destinationSubMenuExpanded;
+  }
+
+  /* Route submenu opening/closing */
+  routeSubMenuToggle(): void {
+    this.routeSubMenuExpanded = !this.routeSubMenuExpanded;
   }
 
   /* About dialog opening */

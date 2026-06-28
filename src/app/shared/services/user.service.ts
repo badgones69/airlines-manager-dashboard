@@ -9,8 +9,14 @@ import { hash } from 'bcrypt-ts';
 import { NotificationService } from './notification.service';
 import { ADD_FORM_MODE, EDIT_FORM_MODE } from '../constants/forms-constants';
 import { getFormModeLabel } from '../labels/commons/form-common';
-import { getLoginUniquenessErrorNotificationMessage, getUserFormTitle } from '../labels/forms/user-form';
-import { getTechnicalErrorMessage, getTechnicalErrorTitle } from '../labels/errors';
+import {
+  getLoginUniquenessErrorNotificationMessage,
+  getUserFormTitle,
+} from '../labels/forms/user-form';
+import {
+  getTechnicalErrorMessage,
+  getTechnicalErrorTitle,
+} from '../labels/errors';
 
 @Injectable({
   providedIn: 'root',
@@ -109,7 +115,7 @@ export class UserService {
       .select();
 
     this.refreshUsersList();
-    
+
     if (response.status === 409) {
       /* Login uniqueness error notification showing */
       this.notificationService.showErrorNotification(
@@ -164,7 +170,7 @@ export class UserService {
       .select();
 
     this.refreshUsersList();
-    
+
     if (response.status === 409) {
       /* Login uniqueness error notification showing */
       this.notificationService.showErrorNotification(
