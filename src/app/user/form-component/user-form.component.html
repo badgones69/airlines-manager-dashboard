@@ -5,31 +5,44 @@
 
   <!-- GIVEN NAME FIELD -->
   <mat-form-field floatLabel="always">
-    <mat-label>{{ givenNameInputLabel }}</mat-label>
-    <input matInput [formControlName]="givenNameFieldIdentifier" />
+    <mat-label id="givenNameInputLabel">{{ givenNameInputLabel }}</mat-label>
+    <input
+      matInput
+      aria-labelledby="givenNameInputLabel"
+      [formControlName]="givenNameFieldIdentifier"
+    />
     <mat-error>{{ displayGivenNameErrorMessage() }}</mat-error>
   </mat-form-field>
 
   <!-- SURNAME FIELD -->
   <mat-form-field floatLabel="always">
-    <mat-label>{{ surnameInputLabel }}</mat-label>
-    <input matInput [formControlName]="surnameFieldIdentifier" />
+    <mat-label id="surnameInputLabel">{{ surnameInputLabel }}</mat-label>
+    <input
+      matInput
+      aria-labelledby="surnameInputLabel"
+      [formControlName]="surnameFieldIdentifier"
+    />
     <mat-error>{{ displaySurnameErrorMessage() }}</mat-error>
   </mat-form-field>
 
   <!-- LOGIN FIELD -->
   <mat-form-field floatLabel="always">
-    <mat-label>{{ loginInputLabel }}</mat-label>
-    <input matInput [formControlName]="loginFieldIdentifier" />
+    <mat-label id="loginInputLabel">{{ loginInputLabel }}</mat-label>
+    <input
+      matInput
+      aria-labelledby="loginInputLabel"
+      [formControlName]="loginFieldIdentifier"
+    />
     <mat-error>{{ displayLoginErrorMessage() }}</mat-error>
   </mat-form-field>
 
   @if (!isEditMode) {
     <!-- PASSWORD FIELD -->
     <mat-form-field floatLabel="always">
-      <mat-label>{{ passwordInputLabel }}</mat-label>
+      <mat-label id="passwordInputLabel">{{ passwordInputLabel }}</mat-label>
       <input
         matInput
+        aria-labelledby="passwordInputLabel"
         [formControlName]="pass_wordFieldIdentifier"
         [type]="showPassword ? 'text' : 'password'"
       />
@@ -60,9 +73,12 @@
   @if (!isEditMode && userForm.get(pass_wordFieldIdentifier)?.valid) {
     <!-- REPEATED PASSWORD FIELD -->
     <mat-form-field floatLabel="always">
-      <mat-label>{{ repeatedPasswordInputLabel }}</mat-label>
+      <mat-label id="repeatedPasswordInputLabel">
+        {{ repeatedPasswordInputLabel }}
+      </mat-label>
       <input
         matInput
+        aria-labelledby="repeatedPasswordInputLabel"
         [formControlName]="repeatedPass_wordFieldIdentifier"
         [type]="showRepeatedPassword ? 'text' : 'password'"
         [style]="

@@ -9,3 +9,7 @@ export function getHubsListTitle(): string {
 export function getDestinationsListTitle(): string {
   return 'Liste des destinations';
 }
+
+export function getRoutesListTitle(): string {
+  return 'Liste des lignes';
+}
