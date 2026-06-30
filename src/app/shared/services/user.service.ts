@@ -73,7 +73,11 @@ export class UserService {
   public async authenticateUser(login: string): Promise<any> {
     const { data } = await supabase
       .from('USER')
-      .select()
+      .select(
+        `*,
+          userAirline:AIRLINE!userAirline(*)
+        `,
+      )
       .eq('userLogin', login);
     return data;
   }
@@ -97,7 +101,7 @@ export class UserService {
 
   /* User creation */
   public async createUser(userToCreate: any): Promise<any> {
-    const { userGivenName, userSurname, userLogin, userPassword, userProfile } =
+    const { userGivenName, userSurname, userLogin, userPassword, userProfile, userAirline } =
       userToCreate;
 
     const hashedPassword = await hash(userPassword, 13);
@@ -111,6 +115,7 @@ export class UserService {
         userLogin,
         userPassword: hashedPassword,
         userProfile,
+        userAirline,
       })
       .select();
 
