@@ -5,8 +5,11 @@ import {
   capitalizeSpaceSeparatedWordsFirstLetter,
   capitalize,
 } from '../utils/labels-utils';
+import { AirlineMapper } from './AirlineMapper';
 
 export class UserMapper {
+  public airlineMapper: AirlineMapper = new AirlineMapper();
+
   /* DB => DTO mapping (users list) */
   public usersListFromDB(usersListFromDB: any[]): User[] {
     let usersList: User[] = [];
@@ -26,6 +29,9 @@ export class UserMapper {
       surname: userFromDB.userSurname,
       login: userFromDB.userLogin,
       profile: userFromDB.userProfile,
+      airline: this.airlineMapper.airlineFromDB(
+        userFromDB.userAirline,
+      ),
     } as User;
   }
 
@@ -47,6 +53,7 @@ export class UserMapper {
       userLogin: userToDB.login,
       userPassword: userToDB.password,
       userProfile: userToDB.profile,
+      userAirline: userToDB.airline,
     };
   }
 }

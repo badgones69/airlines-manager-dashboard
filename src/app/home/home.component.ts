@@ -37,17 +37,15 @@ export class HomeComponent implements OnInit {
     this.userService.user.subscribe((user) => {
       if (user) {
         this.authenticatedUser = JSON.parse(user.toString());
-        this.airlineService.findAirline().then((airline) => {
-          this.welcomeMessage = airline.airlineName
-            ? getAirlineWelcomeMessage(airline.airlineName)
+        this.welcomeMessage = this.authenticatedUser.airline.name
+            ? getAirlineWelcomeMessage(this.authenticatedUser.airline.name)
             : getDefaultWelcomeMessage();
-
-          this.welcomeLogo = 'src/images/'.concat(
-            airline.airlineLogo
-              ? `logos/256x256/${airline.airlineLogo}.png`
-              : 'favicon.ico',
-          );
-        });
+        
+        this.welcomeLogo = 'src/images/'.concat(
+          this.authenticatedUser.airline.logo
+            ? `logos/256x256/${this.authenticatedUser.airline.logo}.png`
+            : 'favicon.ico',
+        );
       }
     });
   }
