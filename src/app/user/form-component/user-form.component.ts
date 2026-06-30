@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, inject } from '@angular/core';
 import {
   FormGroup,
   Validators,
@@ -50,6 +50,7 @@ import {
 } from '../../shared/constants/forms-constants';
 import { UserMapper } from '../../shared/mappers/UserMapper';
 import { Profile } from '../../shared/models/Profile';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
   selector: 'user-form',
@@ -107,6 +108,9 @@ export class UserFormComponent implements OnInit {
   public resetButtonIcon: string = '';
   public resetButtonType: string = '';
 
+  /* Injections */
+  public userService = inject(UserService);
+  
   constructor() {
     /* Form fields creation & constraints definition */
     this.userForm = new FormGroup(
@@ -300,6 +304,12 @@ export class UserFormComponent implements OnInit {
 
   /* Form submit */
   submitUserForm() {
-    this.submitted.emit(this.userMapper.userToDB(this.userForm.value));
+    this.userService.user.subscribe((user) => {
+      if (user) {
+        let authenticatedUser = JSON.parse(user.toString());
+        this.userForm.value.airline = authenticatedUser.airline.id;
+        this.submitted.emit(this.userMapper.userToDB(this.userForm.value));
+      }
+    });
   }
 }

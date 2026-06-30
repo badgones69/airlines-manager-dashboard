@@ -1,3 +1,5 @@
+import { Airline } from "./Airline";
+
 export class User {
   id?: number;
   uuid!: string;
@@ -6,4 +8,5 @@ export class User {
   login!: string;
   password?: string;
   profile!: number;
+  airline!: Airline;
 }
