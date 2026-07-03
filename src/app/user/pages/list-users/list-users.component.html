@@ -52,7 +52,7 @@
           <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[4] }}</th>
           <td mat-cell *matCellDef="let user">
             @if (authenticatedUser && authenticatedUser.uuid !== user.uuid) {
-              <a routerLink="../reset-password/{{ user.uuid }}">{{
+              <a href="users/reset-password" (click)="openResetUserPasswordForm($event, user)">{{
                 passwordResetColumnButtonName
               }}</a>
             }

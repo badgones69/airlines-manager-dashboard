@@ -28,7 +28,7 @@ import {
 } from '../../../shared/labels/commons/user-common';
 import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteUserComponent } from '../delete-user/delete-user.component';
@@ -43,7 +43,6 @@ import { getSubmitButtonLabel } from '../../../shared/labels/forms/reset-user-pa
     MatPaginatorModule,
     MatButtonModule,
     MatLabel,
-    RouterLink,
     ForbiddenComponent,
     UnauthorizedComponent,
   ],
@@ -122,6 +121,12 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
     return (
       this.profiles.find((profile) => profile.id === userProfileId)?.name ?? ''
     );
+  }
+
+  /* Reset user password form opening */
+  openResetUserPasswordForm(event: PointerEvent, user: User) {
+    this.router.navigate(['users', 'reset-password'], { state: {userToResetPassword: JSON.stringify(user)} });
+    event.preventDefault();
   }
 
   /* User form (edit mode) opening */

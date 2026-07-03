@@ -38,7 +38,7 @@ export const routes: Routes = [
       { path: 'add', component: AddUserComponent },
       { path: 'list', component: ListUsersComponent },
       { path: 'edit/:uuid', component: EditUserComponent },
-      { path: 'reset-password/:uuid', component: ResetUserPasswordComponent },
+      { path: 'reset-password', component: ResetUserPasswordComponent },
     ],
   },
 
