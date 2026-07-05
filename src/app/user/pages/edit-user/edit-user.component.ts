@@ -33,24 +33,21 @@ export class EditUserComponent implements OnInit {
   public initUserToEdit!: User;
   public formMode: string = EDIT_FORM_MODE;
 
-  public userUUID!: string;
   public userMapper: UserMapper = new UserMapper();
 
   /* Injections */
   public userService: UserService = inject(UserService);
   public router: Router = inject(Router);
+  public route: ActivatedRoute = inject(ActivatedRoute);
 
   constructor(
     readonly notificationService: NotificationService,
-    public route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
-    this.userUUID = this.route.snapshot.paramMap.get('uuid') ?? '';
-
-    this.userService.findUser(this.userUUID).then((user) => {
-      this.initUserToEdit = this.userMapper.userFromDB(user);
-    });
+    if (history.state.user) {
+      this.initUserToEdit = JSON.parse(history.state.user);
+    }
 
     this.userService.user.subscribe((user) => {
       if (user) {
@@ -61,7 +58,7 @@ export class EditUserComponent implements OnInit {
 
   /* User editing */
   editUser(user: any): void {
-    user.userUUID = this.userUUID;
+    user.userUUID = this.initUserToEdit.uuid;
     // User updating
     this.userService.updateUser(user).then((result: any) => {
       // If user is updated
