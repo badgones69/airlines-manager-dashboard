@@ -75,7 +75,6 @@ import {
 export class ResetUserPasswordComponent implements OnInit {
   public authenticatedUser!: User;
 
-  public userUUID!: string;
   public initUserToResetPassword!: User;
 
   public userMapper: UserMapper = new UserMapper();
@@ -107,10 +106,10 @@ export class ResetUserPasswordComponent implements OnInit {
   /* Injections */
   public userService: UserService = inject(UserService);
   public router: Router = inject(Router);
+  public route: ActivatedRoute = inject(ActivatedRoute);
 
   constructor(
     readonly notificationService: NotificationService,
-    readonly route: ActivatedRoute,
   ) {
     /* Form fields creation & constraints definition */
     this.resetUserPasswordForm = new FormGroup(
@@ -136,15 +135,14 @@ export class ResetUserPasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userUUID = this.route.snapshot.paramMap.get('uuid') ?? '';
-
-    this.userService.findUser(this.userUUID).then((userFromDB) => {
-      this.initUserToResetPassword = this.userMapper.userFromDB(userFromDB);
+    if (history.state.userToResetPassword) {
+      this.initUserToResetPassword = JSON.parse(history.state.userToResetPassword);
+      
       this.resetUserPasswordForm.patchValue({
         givenName: this.initUserToResetPassword?.givenName,
         surname: this.initUserToResetPassword?.surname,
       });
-    });
+    }
 
     this.userService.user.subscribe((user) => {
       if (user) {
@@ -242,7 +240,7 @@ export class ResetUserPasswordComponent implements OnInit {
     /* User data mapping */
     const userToDB = {
       ...this.resetUserPasswordForm.value,
-      uuid: this.userUUID,
+      uuid: this.initUserToResetPassword.uuid,
       givenName: this.initUserToResetPassword.givenName,
       surname: this.initUserToResetPassword.surname,
       login: this.initUserToResetPassword.login,
