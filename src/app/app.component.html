@@ -42,8 +42,8 @@
         <!-- AIRLINE EDITING FORM BUTTON -->
         <button
           mat-icon-button
-          class="submenu-button"
           routerLink="airline/edit"
+          class="submenu-button"
         >
           <i class="material-icons">edit</i>
           <span>Modifier</span>
@@ -52,91 +52,36 @@
     }
     <!-- USER SUBMENU -->
     @if (authenticatedUser && authenticatedUser.profile === 1) {
-      <button mat-button (click)="userSubMenuToggle()" class="menu-button">
-        @if (userSubMenuExpanded) {
-          <i class="material-icons">expand_more</i>
-        } @else {
-          <i class="material-icons">chevron_right</i>
-        }
+      <button
+        mat-button
+        routerLink="users/list"
+        class="menu-button"
+      >
         <i class="material-icons">person</i>
         <span>Utilisateur</span>
       </button>
-      @if (userSubMenuExpanded) {
-        <!-- USER ADDING FORM BUTTON -->
-        <button mat-icon-button class="submenu-button" routerLink="users/add">
-          <i class="material-icons">add</i>
-          <span>Ajouter</span>
-        </button>
-        <!-- USERS LIST BUTTON -->
-        <button mat-icon-button class="submenu-button" routerLink="users/list">
-          <i class="material-icons">list</i>
-          <span>Liste</span>
-        </button>
-      }
     }
     <!-- HUB SUBMENU -->
     @if (authenticatedUser) {
-      <button mat-button (click)="hubSubMenuToggle()" class="menu-button">
-        @if (hubSubMenuExpanded) {
-          <i class="material-icons">expand_more</i>
-        } @else {
-          <i class="material-icons">chevron_right</i>
-        }
+      <button
+        mat-button
+        routerLink="hubs/list"
+        class="menu-button"
+      >
         <i class="material-icons">share</i>
         <span>Hub</span>
       </button>
-      @if (hubSubMenuExpanded) {
-        @if (authenticatedUser.profile < 3) {
-          <!-- HUB ADDING FORM BUTTON -->
-          <button mat-icon-button class="submenu-button" routerLink="hubs/add">
-            <i class="material-icons">add</i>
-            <span>Ajouter</span>
-          </button>
-        }
-        <!-- HUBS LIST BUTTON -->
-        <button mat-icon-button class="submenu-button" routerLink="hubs/list">
-          <i class="material-icons">list</i>
-          <span>Liste</span>
-        </button>
-      }
     }
     <!-- DESTINATION SUBMENU -->
     @if (authenticatedUser) {
       <button
         mat-button
-        (click)="destinationSubMenuToggle()"
+        routerLink="destinations/list"
         class="menu-button"
       >
-        @if (destinationSubMenuExpanded) {
-          <i class="material-icons">expand_more</i>
-        } @else {
-          <i class="material-icons">chevron_right</i>
-        }
         <i class="material-icons">location_on</i>
         <span>Destination</span>
       </button>
-      @if (destinationSubMenuExpanded) {
-        @if (authenticatedUser.profile < 3) {
-          <!-- DESTINATION ADDING FORM BUTTON -->
-          <button
-            mat-icon-button
-            class="submenu-button"
-            routerLink="destinations/add"
-          >
-            <i class="material-icons">add</i>
-            <span>Ajouter</span>
-          </button>
-        }
-        <!-- DESTINATIONS LIST BUTTON -->
-        <button
-          mat-icon-button
-          class="submenu-button"
-          routerLink="destinations/list"
-        >
-          <i class="material-icons">list</i>
-          <span>Liste</span>
-        </button>
-      }
     }
     <!-- ROUTE SUBMENU -->
     @if (authenticatedUser) {
@@ -150,19 +95,12 @@
         <span>Ligne</span>
       </button>
       @if (routeSubMenuExpanded) {
-        @if (authenticatedUser.profile < 3) {
-          <!-- ROUTE ADDING FORM BUTTON -->
-          <button
-            mat-icon-button
-            class="submenu-button"
-            routerLink="routes/add"
-          >
-            <i class="material-icons">add</i>
-            <span>Ajouter</span>
-          </button>
-        }
         <!-- ROUTES LIST BUTTON -->
-        <button mat-icon-button class="submenu-button" routerLink="routes/list">
+        <button
+          mat-icon-button
+          routerLink="routes/list"
+          class="submenu-button"
+        >
           <i class="material-icons">list</i>
           <span>Liste</span>
         </button>
@@ -170,8 +108,8 @@
         <!-- ROUTES NETWORK BUTTON -->
         <button
           mat-icon-button
-          class="submenu-button"
           routerLink="routes/network"
+          class="submenu-button"
         >
           <i class="material-icons">map</i>
           <span>Réseau</span>

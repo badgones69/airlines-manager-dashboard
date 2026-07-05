@@ -61,7 +61,11 @@
 
         <!-- ACTIONS BUTTONS -->
         <ng-container [matColumnDef]="columnsIdentifiers[5]">
-          <th id="actions" mat-header-cell *matHeaderCellDef></th>
+          <th id="actions" mat-header-cell *matHeaderCellDef>
+            <button mat-icon-button routerLink="../add">
+              <i class="material-icons">add</i>
+            </button>
+          </th>
           <td mat-cell *matCellDef="let user">
             @if (authenticatedUser && authenticatedUser.uuid !== user.uuid) {
               <button mat-icon-button (click)="openUserForm(user)">

@@ -28,17 +28,20 @@ import {
 import { UnauthorizedComponent } from '../unauthorized/unauthorized.component';
 import { getNameLabel } from '../../labels/commons/form-common';
 import { Airport } from '../../models/Airport';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'list-airports',
   standalone: true,
   imports: [
+    CommonModule,
     MatTableModule,
     MatPaginatorModule,
     MatButtonModule,
     MatLabel,
+    RouterLink,
     UnauthorizedComponent,
   ],
   templateUrl: './list-airports.component.html',

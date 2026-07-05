@@ -52,6 +52,7 @@
     background-color: var(--app-blue);
   }
 
+  th .mat-mdc-icon-button.mat-mdc-button-base,
   td .mat-mdc-icon-button.mat-mdc-button-base {
     padding: 0;
     --mat-icon-button-state-layer-size: 36px;

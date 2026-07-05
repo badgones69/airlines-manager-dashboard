@@ -28,21 +28,24 @@ import {
 } from '../../../shared/labels/commons/user-common';
 import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteUserComponent } from '../delete-user/delete-user.component';
 import { getPasswordInputLabel } from '../../../shared/labels/commons/form-common';
 import { getSubmitButtonLabel } from '../../../shared/labels/forms/reset-user-password-form';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'list-users',
   standalone: true,
   imports: [
+    CommonModule,
     MatTableModule,
     MatPaginatorModule,
     MatButtonModule,
     MatLabel,
+    RouterLink,
     ForbiddenComponent,
     UnauthorizedComponent,
   ],
