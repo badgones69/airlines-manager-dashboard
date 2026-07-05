@@ -51,7 +51,7 @@ import { MatDialog } from '@angular/material/dialog';
   providers: [{ provide: MatPaginatorIntl, useClass: InternationalPaginator }],
 })
 export class ListAirportsComponent implements OnInit, AfterViewInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   public authenticatedUser!: User;
   @Input() public airportsListTitle!: string;
   @Input() public isHub!: boolean;

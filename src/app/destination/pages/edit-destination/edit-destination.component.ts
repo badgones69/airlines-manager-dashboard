@@ -30,28 +30,22 @@ export class EditDestinationComponent implements OnInit {
   public formMode: string = EDIT_FORM_MODE;
   public formTitle: string = getDestinationFormTitle();
 
-  public destinationUUID!: string;
   public airportMapper: AirportMapper = new AirportMapper();
 
   /* Injections */
   public userService: UserService = inject(UserService);
   public airportService: AirportService = inject(AirportService);
   public router: Router = inject(Router);
+  public route: ActivatedRoute = inject(ActivatedRoute);
 
   constructor(
     readonly notificationService: NotificationService,
-    readonly route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
-    this.destinationUUID = this.route.snapshot.paramMap.get('uuid') ?? '';
-
-    this.airportService
-      .findAirport(this.destinationUUID)
-      .then((destination) => {
-        this.initDestinationToEdit =
-          this.airportMapper.airportFromDB(destination);
-      });
+    if (history.state.destination) {
+      this.initDestinationToEdit = JSON.parse(history.state.destination);
+    }
 
     this.userService.user.subscribe((user) => {
       if (user) {
@@ -62,7 +56,7 @@ export class EditDestinationComponent implements OnInit {
 
   /* Destination editing */
   editDestination(destination: any): void {
-    destination.airportUUID = this.destinationUUID;
+    destination.airportUUID = this.initDestinationToEdit.uuid;
     // Destination updating
     this.airportService.updateAirport(destination).then((result: any) => {
       // If destination is updated

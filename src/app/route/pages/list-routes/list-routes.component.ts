@@ -50,7 +50,7 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
   providers: [{ provide: MatPaginatorIntl, useClass: InternationalPaginator }],
 })
 export class ListRoutesComponent implements OnInit, AfterViewInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   public authenticatedUser!: User;
 
   /* List properties */
@@ -102,7 +102,7 @@ export class ListRoutesComponent implements OnInit, AfterViewInit {
 
   /* Route form (edit mode) opening */
   openRouteForm(route: Route) {
-    this.router.navigate(['routes', 'edit', route.uuid]);
+    this.router.navigate(['routes', 'edit'], { state: {route: JSON.stringify(route)} });
   }
 
   /* Route deletion confirmation dialog opening */

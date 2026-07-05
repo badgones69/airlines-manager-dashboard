@@ -30,25 +30,22 @@ export class EditHubComponent implements OnInit {
   public formMode: string = EDIT_FORM_MODE;
   public formTitle: string = getHubFormTitle();
 
-  public hubUUID!: string;
   public airportMapper: AirportMapper = new AirportMapper();
 
   /* Injections */
   public userService: UserService = inject(UserService);
   public airportService: AirportService = inject(AirportService);
   public router: Router = inject(Router);
+  public route: ActivatedRoute = inject(ActivatedRoute);
 
   constructor(
     readonly notificationService: NotificationService,
-    readonly route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
-    this.hubUUID = this.route.snapshot.paramMap.get('uuid') ?? '';
-
-    this.airportService.findAirport(this.hubUUID).then((hub) => {
-      this.initHubToEdit = this.airportMapper.airportFromDB(hub);
-    });
+    if (history.state.hub) {
+      this.initHubToEdit = JSON.parse(history.state.hub);
+    }
 
     this.userService.user.subscribe((user) => {
       if (user) {
@@ -59,7 +56,7 @@ export class EditHubComponent implements OnInit {
 
   /* Hub editing */
   editHub(hub: any): void {
-    hub.airportUUID = this.hubUUID;
+    hub.airportUUID = this.initHubToEdit.uuid;
     // Hub updating
     this.airportService.updateAirport(hub).then((result: any) => {
       // If hub is updated
