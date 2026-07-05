@@ -1,21 +1,17 @@
-@if (authenticatedUser) {
-  @if (authenticatedUser.profile < 3) {
-    @if (initHubToEdit) {
-      <!-- HUB FORM (EDIT MODE) -->
-      <airport-form
-        (submitted)="editHub($event)"
-        [formMode]="formMode"
-        [formTitle]="formTitle"
-        [airport]="initHubToEdit"
-        [isHub]="true"
-      >
-      </airport-form>
-    }
-  } @else {
-    <!-- FORBIDDEN ERROR PAGE -->
-    <forbidden></forbidden>
-  }
-} @else {
+@if (!authenticatedUser) {
   <!-- UNAUTHORIZED ERROR PAGE -->
   <unauthorized></unauthorized>
+} @else if (authenticatedUser.profile > 2) {
+  <!-- FORBIDDEN ERROR PAGE -->
+  <forbidden></forbidden>
+} @else {
+  <!-- HUB FORM (EDIT MODE) -->
+  <airport-form
+    (submitted)="editHub($event)"
+    [formMode]="formMode"
+    [formTitle]="formTitle"
+    [airport]="initHubToEdit"
+    [isHub]="true"
+  >
+  </airport-form>
 }

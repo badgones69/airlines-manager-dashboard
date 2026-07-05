@@ -37,7 +37,7 @@ export const routes: Routes = [
     children: [
       { path: 'add', component: AddUserComponent },
       { path: 'list', component: ListUsersComponent },
-      { path: 'edit/:uuid', component: EditUserComponent },
+      { path: 'edit', component: EditUserComponent },
       { path: 'reset-password', component: ResetUserPasswordComponent },
     ],
   },
@@ -48,7 +48,7 @@ export const routes: Routes = [
     children: [
       { path: 'add', component: AddHubComponent },
       { path: 'list', component: ListHubsComponent },
-      { path: 'edit/:uuid', component: EditHubComponent },
+      { path: 'edit', component: EditHubComponent },
     ],
   },
 
@@ -58,7 +58,7 @@ export const routes: Routes = [
     children: [
       { path: 'add', component: AddDestinationComponent },
       { path: 'list', component: ListDestinationsComponent },
-      { path: 'edit/:uuid', component: EditDestinationComponent },
+      { path: 'edit', component: EditDestinationComponent },
     ],
   },
 
@@ -68,7 +68,7 @@ export const routes: Routes = [
     children: [
       { path: 'add', component: AddRouteComponent },
       { path: 'list', component: ListRoutesComponent },
-      { path: 'edit/:uuid', component: EditRouteComponent },
+      { path: 'edit', component: EditRouteComponent },
       { path: 'network', component: RoutesNetworkComponent },
     ],
   },

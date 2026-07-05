@@ -41,7 +41,7 @@ export class ListDestinationsComponent implements OnInit {
 
   /* Destination form (edit mode) opening */
   openDestinationForm(destination: Airport) {
-    this.router.navigate(['destinations', 'edit', destination.uuid]);
+    this.router.navigate(['destinations', 'edit'], { state: {destination: JSON.stringify(destination)} });
   }
 
   /* Destination deletion confirmation dialog opening */

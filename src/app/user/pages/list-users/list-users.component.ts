@@ -54,7 +54,7 @@ import { getSubmitButtonLabel } from '../../../shared/labels/forms/reset-user-pa
   providers: [{ provide: MatPaginatorIntl, useClass: InternationalPaginator }],
 })
 export class ListUsersComponent implements OnInit, AfterViewInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   public authenticatedUser!: User;
 
   /* List properties */
@@ -131,7 +131,7 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
 
   /* User form (edit mode) opening */
   openUserForm(user: User) {
-    this.router.navigate(['users', 'edit', user.uuid]);
+    this.router.navigate(['users', 'edit'], { state: {user: JSON.stringify(user)} });
   }
 
   /* User deletion confirmation dialog opening */

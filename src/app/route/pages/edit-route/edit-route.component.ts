@@ -29,40 +29,33 @@ export class EditRouteComponent implements OnInit {
   public initRouteToEdit!: Route;
   public formMode: string = EDIT_FORM_MODE;
 
-  public routeUUID!: string;
   public routeMapper: RouteMapper = new RouteMapper();
-
-  public isLoading: boolean = false;
 
   /* Injections */
   public userService: UserService = inject(UserService);
   public routeService: RouteService = inject(RouteService);
   public router: Router = inject(Router);
+  public route: ActivatedRoute = inject(ActivatedRoute);
 
   constructor(
     readonly notificationService: NotificationService,
-    readonly route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
-    this.routeUUID = this.route.snapshot.paramMap.get('uuid') ?? '';
+    if (history.state.route) {
+      this.initRouteToEdit = JSON.parse(history.state.route);
+    }
 
     this.userService.user.subscribe((user) => {
       if (user) {
         this.authenticatedUser = JSON.parse(user.toString());
       }
     });
-
-    this.routeService.findRoute(this.routeUUID).then((route) => {
-      this.initRouteToEdit = this.routeMapper.routeFromDB(route);
-      this.isLoading = false;
-    });
   }
 
   /* Route editing */
   editRoute(route: any): void {
-    route.routeUUID = this.routeUUID;
+    route.routeUUID = this.initRouteToEdit.uuid;
     // Route updating
     this.routeService.updateRoute(route).then((result: any) => {
       // If route is updated
