@@ -1,19 +1,15 @@
-@if (!isLoading) {
-  @if (authenticatedUser) {
-    @if (authenticatedUser.profile < 3) {
-      <!-- ROUTE FORM (EDIT MODE) -->
-      <route-form
-        (submitted)="editRoute($event)"
-        [formMode]="formMode"
-        [route]="initRouteToEdit"
-      >
-      </route-form>
-    } @else {
-      <!-- FORBIDDEN ERROR PAGE -->
-      <forbidden></forbidden>
-    }
-  } @else {
-    <!-- UNAUTHORIZED ERROR PAGE -->
-    <unauthorized></unauthorized>
-  }
+@if (!authenticatedUser) {
+  <!-- UNAUTHORIZED ERROR PAGE -->
+  <unauthorized></unauthorized>  
+} @else if (authenticatedUser.profile > 2) {
+  <!-- FORBIDDEN ERROR PAGE -->
+  <forbidden></forbidden>
+} @else {
+  <!-- ROUTE FORM (EDIT MODE) -->
+  <route-form
+    (submitted)="editRoute($event)"
+    [formMode]="formMode"
+    [route]="initRouteToEdit"
+  >
+  </route-form>
 }
