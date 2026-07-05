@@ -1,5 +1,31 @@
 <h1 align="center">AM Dashboard</h1>
 <h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.3.3">1.3.3</a>
+    (2026-07-05)
+</h1>
+
+<h3>Bug fixes</h3>
+
+<ul>
+  <li><b>USER :</b></li>
+  <ul>
+    <li>edit form & reset password form (blank page)</li>
+  </ul>
+  <li><b>HUB :</b></li>
+  <ul>
+    <li>edit form (blank page)</li>
+  </ul>
+  <li><b>DESTINATION :</b></li>
+  <ul>
+    <li>edit form (blank page)</li>
+  </ul>
+  <li><b>ROUTE :</b></li>
+  <ul>
+    <li>edit form (blank page)</li>
+  </ul>
+</ul>
+<br />
+<h1 align="center">
     <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.3.2">1.3.2</a>
     (2026-06-30)
 </h1>
