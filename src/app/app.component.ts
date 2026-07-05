@@ -52,11 +52,11 @@ export class AppComponent implements OnInit {
   }
 
   /* Menu opening/closing */
-  menuToggle(): void {
+  menuToggle(autoClose: boolean): void {
     this.menuOpened = !this.menuOpened;
 
     /* All submenu closing */
-    if (!this.menuOpened) {
+    if (!autoClose && !this.menuOpened) {
       this.airlineSubMenuExpanded = false;
       this.routeSubMenuExpanded = false;
     }
