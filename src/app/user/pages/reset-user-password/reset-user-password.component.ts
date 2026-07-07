@@ -108,9 +108,7 @@ export class ResetUserPasswordComponent implements OnInit {
   public router: Router = inject(Router);
   public route: ActivatedRoute = inject(ActivatedRoute);
 
-  constructor(
-    readonly notificationService: NotificationService,
-  ) {
+  constructor(readonly notificationService: NotificationService) {
     /* Form fields creation & constraints definition */
     this.resetUserPasswordForm = new FormGroup(
       {
@@ -136,8 +134,10 @@ export class ResetUserPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     if (history.state.userToResetPassword) {
-      this.initUserToResetPassword = JSON.parse(history.state.userToResetPassword);
-      
+      this.initUserToResetPassword = JSON.parse(
+        history.state.userToResetPassword,
+      );
+
       this.resetUserPasswordForm.patchValue({
         givenName: this.initUserToResetPassword?.givenName,
         surname: this.initUserToResetPassword?.surname,

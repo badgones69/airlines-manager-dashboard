@@ -379,7 +379,9 @@ export class AirlineComponent implements OnInit {
             // If airline is updated
             if (result.data) {
               /* Authenticated user's airline refresh */
-              this.authenticatedUser.airline = this.airlineMapper.airlineFromDB(result.data[0]);
+              this.authenticatedUser.airline = this.airlineMapper.airlineFromDB(
+                result.data[0],
+              );
               this.userService.connectUser(this.authenticatedUser);
 
               /* Success notification showing */

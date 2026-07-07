@@ -40,9 +40,7 @@ export class EditUserComponent implements OnInit {
   public router: Router = inject(Router);
   public route: ActivatedRoute = inject(ActivatedRoute);
 
-  constructor(
-    readonly notificationService: NotificationService,
-  ) {}
+  constructor(readonly notificationService: NotificationService) {}
 
   ngOnInit(): void {
     if (history.state.user) {

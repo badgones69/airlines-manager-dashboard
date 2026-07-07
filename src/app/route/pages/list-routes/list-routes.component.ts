@@ -105,7 +105,9 @@ export class ListRoutesComponent implements OnInit, AfterViewInit {
 
   /* Route form (edit mode) opening */
   openRouteForm(route: Route) {
-    this.router.navigate(['routes', 'edit'], { state: {route: JSON.stringify(route)} });
+    this.router.navigate(['routes', 'edit'], {
+      state: { route: JSON.stringify(route) },
+    });
   }
 
   /* Route deletion confirmation dialog opening */
