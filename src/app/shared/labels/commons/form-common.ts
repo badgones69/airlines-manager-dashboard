@@ -58,6 +58,14 @@ export function getResetButtonType(formMode: string): string {
   return formMode === ADD_FORM_MODE ? 'reset' : 'button';
 }
 
+export function getBackButtonLabel(): string {
+  return 'Retour';
+}
+
+export function getBackButtonIcon(): string {
+  return 'arrow_back';
+}
+
 export function getRequiredFieldErrorMessage(): string {
   return 'champ obligatoire';
 }

@@ -17,6 +17,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ToastrModule } from 'ngx-toastr';
 import {
+  getBackButtonIcon,
+  getBackButtonLabel,
   getBlankStringFieldErrorMessage,
   getFormModeLabel,
   getICAO_IATA_FieldsErrorMessage,
@@ -73,7 +75,7 @@ import {
   getUnknownRegionErrorMessage,
   getIATAUniquenessErrorMessage,
 } from '../../labels/commons/airport-common';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import {
   MatAutocomplete,
   MatAutocompleteTrigger,
@@ -81,10 +83,12 @@ import {
 } from '@angular/material/autocomplete';
 import { Region } from '../../models/Region';
 import { NotificationService } from '../../services/notification.service';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'airport-form',
   standalone: true,
   imports: [
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -96,6 +100,7 @@ import { NotificationService } from '../../services/notification.service';
     MatAutocomplete,
     MatOption,
     MatAutocompleteTrigger,
+    RouterLink,
   ],
   templateUrl: './airport-form.component.html',
   styleUrls: [
@@ -119,7 +124,7 @@ export class AirportFormComponent implements OnInit {
   /* Form properties */
   public airportForm!: FormGroup;
   public airportFormTitle: string = '';
-  public countryFlag: string = 'xx';
+  public countryFlag: string = '';
 
   /* Form fields identifiers */
   public iataFieldIdentifier: string = 'iata';
@@ -140,6 +145,8 @@ export class AirportFormComponent implements OnInit {
   public regionInputLabel: string = '';
 
   /* Buttons labels and icons */
+  public backButtonLabel: string = '';
+  public backButtonIcon: string = '';
   public submitButtonLabel: string = '';
   public submitButtonIcon: string = '';
   public resetButtonLabel: string = '';
@@ -194,6 +201,8 @@ export class AirportFormComponent implements OnInit {
     this.longitudeInputLabel = getLongitudeInputLabel();
     this.countryInputLabel = getCountryLabel();
     this.regionInputLabel = getRegionLabel();
+    this.backButtonLabel = getBackButtonLabel();
+    this.backButtonIcon = getBackButtonIcon();
     this.submitButtonLabel = getSubmitButtonLabel(this.formMode);
     this.submitButtonIcon = getSubmitButtonIcon(this.formMode);
     this.resetButtonLabel = getResetButtonLabel(this.formMode);
@@ -274,7 +283,11 @@ export class AirportFormComponent implements OnInit {
           }
         }
       } else {
-        this.countryFlag = 'xx';
+        if (countryValueChanged === '') {
+          this.countryFlag = '';
+        } else {
+          this.countryFlag = 'xx';
+        }
         this.regions = [];
         this.airportForm.get(this.regionFieldIdentifier)?.setValidators([]);
         this.airportForm.get(this.regionFieldIdentifier)?.setValue(null);
