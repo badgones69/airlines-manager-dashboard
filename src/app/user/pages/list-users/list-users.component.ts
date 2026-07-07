@@ -128,13 +128,17 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
 
   /* Reset user password form opening */
   openResetUserPasswordForm(event: PointerEvent, user: User) {
-    this.router.navigate(['users', 'reset-password'], { state: {userToResetPassword: JSON.stringify(user)} });
+    this.router.navigate(['users', 'reset-password'], {
+      state: { userToResetPassword: JSON.stringify(user) },
+    });
     event.preventDefault();
   }
 
   /* User form (edit mode) opening */
   openUserForm(user: User) {
-    this.router.navigate(['users', 'edit'], { state: {user: JSON.stringify(user)} });
+    this.router.navigate(['users', 'edit'], {
+      state: { user: JSON.stringify(user) },
+    });
   }
 
   /* User deletion confirmation dialog opening */

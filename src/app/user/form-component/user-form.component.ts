@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, Output, EventEmitter, inject } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  Output,
+  EventEmitter,
+  inject,
+} from '@angular/core';
 import {
   FormGroup,
   Validators,
@@ -69,7 +76,7 @@ import { RouterLink } from '@angular/router';
     MatSelectModule,
     MatButtonModule,
     MatIconModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './user-form.component.html',
   styleUrl: '../../shared/styles/forms.scss',
@@ -118,7 +125,7 @@ export class UserFormComponent implements OnInit {
 
   /* Injections */
   public userService = inject(UserService);
-  
+
   constructor() {
     /* Form fields creation & constraints definition */
     this.userForm = new FormGroup(

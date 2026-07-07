@@ -41,7 +41,9 @@ export class ListHubsComponent implements OnInit {
 
   /* Hub form (edit mode) opening */
   openHubForm(hub: Airport) {
-    this.router.navigate(['hubs', 'edit'], { state: {hub: JSON.stringify(hub)} });
+    this.router.navigate(['hubs', 'edit'], {
+      state: { hub: JSON.stringify(hub) },
+    });
   }
 
   /* Hub deletion confirmation dialog opening */
