@@ -18,6 +18,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ToastrModule } from 'ngx-toastr';
 import {
+  getBackButtonIcon,
+  getBackButtonLabel,
   getFormModeLabel,
   getRequiredFieldErrorMessage,
   getResetButtonIcon,
@@ -45,7 +47,7 @@ import {
   Subject,
   takeUntil,
 } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import {
   MatAutocomplete,
   MatAutocompleteTrigger,
@@ -65,10 +67,12 @@ import {
   compareAirportsNameAndIATA,
   identicalAirportsValidator,
 } from '../../shared/forms-validators/route-form-validators';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'route-form',
   standalone: true,
   imports: [
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -80,6 +84,7 @@ import {
     MatAutocomplete,
     MatOption,
     MatAutocompleteTrigger,
+    RouterLink,
   ],
   templateUrl: './route-form.component.html',
   styleUrls: [
@@ -103,8 +108,8 @@ export class RouteFormComponent implements OnInit {
   /* Form properties */
   public routeForm!: FormGroup;
   public routeFormTitle: string = '';
-  public departureHubFlag: string = 'xx';
-  public arrivalAirportFlag: string = 'xx';
+  public departureHubFlag: string = '';
+  public arrivalAirportFlag: string = '';
 
   /* Form fields identifiers */
   public departureHubFieldIdentifier: string = 'departureHub';
@@ -115,6 +120,8 @@ export class RouteFormComponent implements OnInit {
   public arrivalAirportInputLabel: string = '';
 
   /* Buttons labels and icons */
+  public backButtonLabel: string = '';
+  public backButtonIcon: string = '';
   public submitButtonLabel: string = '';
   public submitButtonIcon: string = '';
   public resetButtonLabel: string = '';
@@ -167,6 +174,8 @@ export class RouteFormComponent implements OnInit {
     )} ${getRouteFormTitle()}`;
     this.departureHubInputLabel = getDepartureHubLabel();
     this.arrivalAirportInputLabel = getArrivalAirportLabel();
+    this.backButtonLabel = getBackButtonLabel();
+    this.backButtonIcon = getBackButtonIcon();
     this.submitButtonLabel = getSubmitButtonLabel(this.formMode);
     this.submitButtonIcon = getSubmitButtonIcon(this.formMode);
     this.resetButtonLabel = getResetButtonLabel(this.formMode);
@@ -285,7 +294,11 @@ export class RouteFormComponent implements OnInit {
             ?.setErrors(null);
         }
       } else {
-        this.departureHubFlag = 'xx';
+        if (departureHubValueChanged === '') {
+          this.departureHubFlag = '';
+        } else {
+          this.departureHubFlag = 'xx';
+        }
         this.setAvailableArrivalAirports(this.allDestinations);
       }
     }
@@ -330,7 +343,11 @@ export class RouteFormComponent implements OnInit {
             ?.setErrors(null);
         }
       } else {
-        this.arrivalAirportFlag = 'xx';
+        if (arrivalAirportValueChanged === '') {
+          this.arrivalAirportFlag = '';
+        } else {
+          this.arrivalAirportFlag = 'xx';
+        }
         this.setAvailableDepartureHubs(this.allHubs);
       }
     }

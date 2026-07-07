@@ -60,10 +60,12 @@
   </mat-form-field>
 
   <!-- COUNTRY FIELD -->
-  <div class="country-field-container">
-    <span class="flag fi fi-{{ this.countryFlag }}"></span>
-    <mat-form-field>
-      <mat-label id="countryInputLabel">{{ countryInputLabel }}</mat-label>
+  <mat-form-field>
+    <mat-label id="countryInputLabel">{{ countryInputLabel }}</mat-label>
+    <div class="country-field-container">
+      @if (this.countryFlag && this.countryFlag !== '') {
+        <span class="flag fi fi-{{ this.countryFlag }}"></span>
+      }
       <input
         matInput
         aria-labelledby="countryInputLabel"
@@ -82,9 +84,9 @@
           </mat-option>
         }
       </mat-autocomplete>
-      <mat-error>{{ displayCountryErrorMessage() }}</mat-error>
-    </mat-form-field>
-  </div>
+    </div>
+    <mat-error>{{ displayCountryErrorMessage() }}</mat-error>
+  </mat-form-field>
 
   <!-- REGION FIELD -->
   @if (regions.length > 0) {
@@ -113,6 +115,16 @@
 
   <!-- BUTTONS -->
   <div class="form-buttons">
+    <button
+      type="button"
+      class="back-button"
+      mat-fab
+      extended
+      routerLink="../list"
+    >
+      <i class="material-icons">{{ backButtonIcon }}</i>
+      {{ backButtonLabel }}
+    </button>
     <button
       type="submit"
       class="submit-form-button"

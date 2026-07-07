@@ -123,7 +123,7 @@ export class AirlineComponent implements OnInit {
   public airlineFormTitle: string = '';
   public airlineLogoImage!: string;
   public noLogoLabel: string = getNoLogoLabel();
-  public nationalityFlag: string = 'xx';
+  public nationalityFlag: string = '';
 
   /* Form fields identifiers */
   public icaoFieldIdentifier: string = 'icao';
@@ -269,6 +269,8 @@ export class AirlineComponent implements OnInit {
 
       if (countryFound) {
         this.nationalityFlag = countryFound.flagCode;
+      } else if (countryValueChanged === '') {
+        this.nationalityFlag = '';
       } else {
         this.nationalityFlag = 'xx';
       }
@@ -376,6 +378,10 @@ export class AirlineComponent implements OnInit {
           .then((result: any) => {
             // If airline is updated
             if (result.data) {
+              /* Authenticated user's airline refresh */
+              this.authenticatedUser.airline = this.airlineMapper.airlineFromDB(result.data[0]);
+              this.userService.connectUser(this.authenticatedUser);
+
               /* Success notification showing */
               this.notificationService.showSuccessNotification(
                 `${getFormModeLabel(EDIT_FORM_MODE)} ${getAirlineFormTitle()}`.toUpperCase(),

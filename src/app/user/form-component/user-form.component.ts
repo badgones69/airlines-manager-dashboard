@@ -18,6 +18,8 @@ import {
   getIdentityFieldsErrorMessage,
 } from '../../shared/labels/forms/user-form';
 import {
+  getBackButtonIcon,
+  getBackButtonLabel,
   getFormModeLabel,
   getPasswordInputLabel,
   getRequiredFieldErrorMessage,
@@ -51,11 +53,14 @@ import {
 import { UserMapper } from '../../shared/mappers/UserMapper';
 import { Profile } from '../../shared/models/Profile';
 import { UserService } from '../../shared/services/user.service';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'user-form',
   standalone: true,
   imports: [
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -64,6 +69,7 @@ import { UserService } from '../../shared/services/user.service';
     MatSelectModule,
     MatButtonModule,
     MatIconModule,
+    RouterLink
   ],
   templateUrl: './user-form.component.html',
   styleUrl: '../../shared/styles/forms.scss',
@@ -107,6 +113,8 @@ export class UserFormComponent implements OnInit {
   public resetButtonLabel: string = '';
   public resetButtonIcon: string = '';
   public resetButtonType: string = '';
+  public backButtonLabel: string = '';
+  public backButtonIcon: string = '';
 
   /* Injections */
   public userService = inject(UserService);
@@ -171,6 +179,8 @@ export class UserFormComponent implements OnInit {
     this.submitButtonIcon = getSubmitButtonIcon(this.formMode);
     this.resetButtonLabel = getResetButtonLabel(this.formMode);
     this.resetButtonIcon = getResetButtonIcon(this.formMode);
+    this.backButtonLabel = getBackButtonLabel();
+    this.backButtonIcon = getBackButtonIcon();
     this.resetButtonType = getResetButtonType(this.formMode);
 
     this.userForm.patchValue({
