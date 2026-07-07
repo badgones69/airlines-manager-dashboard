@@ -29,9 +29,7 @@ export class UserMapper {
       surname: userFromDB.userSurname,
       login: userFromDB.userLogin,
       profile: userFromDB.userProfile,
-      airline: this.airlineMapper.airlineFromDB(
-        userFromDB.userAirline,
-      ),
+      airline: this.airlineMapper.airlineFromDB(userFromDB.userAirline),
     } as User;
   }
 

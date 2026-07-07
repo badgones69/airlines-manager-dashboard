@@ -57,12 +57,14 @@
       </div>
 
       <!-- NATIONALITY FIELD -->
-      <div class="country-field-container">
-        <span class="flag fi fi-{{ this.nationalityFlag }}"></span>
-        <mat-form-field>
-          <mat-label id="nationalityInputLabel">
-            {{ nationalityInputLabel }}
-          </mat-label>
+      <mat-form-field>
+        <mat-label id="nationalityInputLabel">
+          {{ nationalityInputLabel }}
+        </mat-label>
+        <div class="country-field-container">
+          @if (this.nationalityFlag && this.nationalityFlag !== "") {
+            <span class="flag fi fi-{{ this.nationalityFlag }}"></span>
+          }
           <input
             matInput
             aria-labelledby="nationalityInputLabel"
@@ -81,9 +83,9 @@
               </mat-option>
             }
           </mat-autocomplete>
-          <mat-error>{{ displayNationalityErrorMessage() }}</mat-error>
-        </mat-form-field>
-      </div>
+        </div>
+        <mat-error>{{ displayNationalityErrorMessage() }}</mat-error>
+      </mat-form-field>
 
       <!-- BUTTONS -->
       <div class="form-buttons">

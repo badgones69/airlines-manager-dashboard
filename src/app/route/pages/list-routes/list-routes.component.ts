@@ -20,7 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatLabel } from '@angular/material/form-field';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
 import { Route } from '../../../shared/models/Route';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteRouteComponent } from '../delete-route/delete-route.component';
 import {
@@ -29,15 +29,18 @@ import {
 } from '../../../shared/labels/forms/route-form';
 import { getRoutesListTitle } from '../../../shared/labels/lists';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'list-routes',
   standalone: true,
   imports: [
+    CommonModule,
     MatTableModule,
     MatPaginatorModule,
     MatButtonModule,
     MatLabel,
+    RouterLink,
     UnauthorizedComponent,
   ],
   templateUrl: './list-routes.component.html',
@@ -102,7 +105,9 @@ export class ListRoutesComponent implements OnInit, AfterViewInit {
 
   /* Route form (edit mode) opening */
   openRouteForm(route: Route) {
-    this.router.navigate(['routes', 'edit'], { state: {route: JSON.stringify(route)} });
+    this.router.navigate(['routes', 'edit'], {
+      state: { route: JSON.stringify(route) },
+    });
   }
 
   /* Route deletion confirmation dialog opening */

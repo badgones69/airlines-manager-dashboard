@@ -38,9 +38,9 @@ export class HomeComponent implements OnInit {
       if (user) {
         this.authenticatedUser = JSON.parse(user.toString());
         this.welcomeMessage = this.authenticatedUser.airline.name
-            ? getAirlineWelcomeMessage(this.authenticatedUser.airline.name)
-            : getDefaultWelcomeMessage();
-        
+          ? getAirlineWelcomeMessage(this.authenticatedUser.airline.name)
+          : getDefaultWelcomeMessage();
+
         this.welcomeLogo = 'src/images/'.concat(
           this.authenticatedUser.airline.logo
             ? `logos/256x256/${this.authenticatedUser.airline.logo}.png`

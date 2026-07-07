@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, Output, EventEmitter, inject } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  Output,
+  EventEmitter,
+  inject,
+} from '@angular/core';
 import {
   FormGroup,
   Validators,
@@ -18,6 +25,8 @@ import {
   getIdentityFieldsErrorMessage,
 } from '../../shared/labels/forms/user-form';
 import {
+  getBackButtonIcon,
+  getBackButtonLabel,
   getFormModeLabel,
   getPasswordInputLabel,
   getRequiredFieldErrorMessage,
@@ -51,11 +60,14 @@ import {
 import { UserMapper } from '../../shared/mappers/UserMapper';
 import { Profile } from '../../shared/models/Profile';
 import { UserService } from '../../shared/services/user.service';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'user-form',
   standalone: true,
   imports: [
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -64,6 +76,7 @@ import { UserService } from '../../shared/services/user.service';
     MatSelectModule,
     MatButtonModule,
     MatIconModule,
+    RouterLink,
   ],
   templateUrl: './user-form.component.html',
   styleUrl: '../../shared/styles/forms.scss',
@@ -102,6 +115,8 @@ export class UserFormComponent implements OnInit {
   public profiles: Profile[] = getProfilesValues();
 
   /* Buttons labels and icons */
+  public backButtonLabel: string = '';
+  public backButtonIcon: string = '';
   public submitButtonLabel: string = '';
   public submitButtonIcon: string = '';
   public resetButtonLabel: string = '';
@@ -110,7 +125,7 @@ export class UserFormComponent implements OnInit {
 
   /* Injections */
   public userService = inject(UserService);
-  
+
   constructor() {
     /* Form fields creation & constraints definition */
     this.userForm = new FormGroup(
@@ -167,6 +182,8 @@ export class UserFormComponent implements OnInit {
     this.passwordInputLabel = getPasswordInputLabel();
     this.repeatedPasswordInputLabel = getRepeatedPasswordInputLabel();
     this.profileInputLabel = getProfileLabel();
+    this.backButtonLabel = getBackButtonLabel();
+    this.backButtonIcon = getBackButtonIcon();
     this.submitButtonLabel = getSubmitButtonLabel(this.formMode);
     this.submitButtonIcon = getSubmitButtonIcon(this.formMode);
     this.resetButtonLabel = getResetButtonLabel(this.formMode);

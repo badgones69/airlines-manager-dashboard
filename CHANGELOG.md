@@ -1,5 +1,17 @@
 <h1 align="center">AM Dashboard</h1>
 <h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.4.0">1.4.0</a>
+    (2026-07-07)
+</h1>
+
+<h3>Features</h3>
+
+<ul>
+  <li><b>MENU :</b> refactoring & auto-closing</li>
+  <li><b>FORMS :</b> "Back" button</li>
+</ul>
+<br />
+<h1 align="center">
     <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.3.3">1.3.3</a>
     (2026-07-05)
 </h1>

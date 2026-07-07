@@ -1,4 +1,4 @@
-import { Airline } from "./Airline";
+import { Airline } from './Airline';
 
 export class User {
   id?: number;
