@@ -41,9 +41,13 @@ mat-form-field .error-hint {
   margin-top: 10px;
 }
 
+.back-button,
 .submit-form-button,
 .reset-form-button {
   font-weight: bold;
+}
+.back-button {
+  background-color: var(--app-red);
 }
 .submit-form-button {
   background-color: var(--app-blue);

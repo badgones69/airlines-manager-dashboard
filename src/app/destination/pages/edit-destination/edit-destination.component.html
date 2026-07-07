@@ -4,7 +4,7 @@
 } @else if (authenticatedUser.profile > 2) {
   <!-- FORBIDDEN ERROR PAGE -->
   <forbidden></forbidden>
-} @else  {
+} @else {
   <!-- DESTINATION FORM (EDIT MODE) -->
   <airport-form
     (submitted)="editDestination($event)"
