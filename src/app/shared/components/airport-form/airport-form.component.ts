@@ -283,16 +283,20 @@ export class AirportFormComponent implements OnInit {
           }
         }
       } else {
-        if (countryValueChanged === '') {
-          this.countryFlag = '';
-        } else {
-          this.countryFlag = 'xx';
-        }
-        this.regions = [];
-        this.airportForm.get(this.regionFieldIdentifier)?.setValidators([]);
-        this.airportForm.get(this.regionFieldIdentifier)?.setValue(null);
+        this.resetCountryFlagAndRegion(countryValueChanged);
       }
     }
+  }
+
+  private resetCountryFlagAndRegion(countryValueChanged: any): void {
+    if (countryValueChanged === '') {
+      this.countryFlag = '';
+    } else {
+      this.countryFlag = 'xx';
+    }
+    this.regions = [];
+    this.airportForm.get(this.regionFieldIdentifier)?.setValidators([]);
+    this.airportForm.get(this.regionFieldIdentifier)?.setValue(null);
   }
 
   /* Region field listener */
