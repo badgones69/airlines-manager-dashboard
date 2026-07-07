@@ -101,8 +101,14 @@ export class UserService {
 
   /* User creation */
   public async createUser(userToCreate: any): Promise<any> {
-    const { userGivenName, userSurname, userLogin, userPassword, userProfile, userAirline } =
-      userToCreate;
+    const {
+      userGivenName,
+      userSurname,
+      userLogin,
+      userPassword,
+      userProfile,
+      userAirline,
+    } = userToCreate;
 
     const hashedPassword = await hash(userPassword, 13);
 

@@ -33,9 +33,6 @@ export class AppComponent implements OnInit {
 
   public menuOpened: boolean = false;
   public airlineSubMenuExpanded: boolean = false;
-  public userSubMenuExpanded: boolean = false;
-  public hubSubMenuExpanded: boolean = false;
-  public destinationSubMenuExpanded: boolean = false;
   public routeSubMenuExpanded: boolean = false;
 
   /* Injections */
@@ -55,15 +52,12 @@ export class AppComponent implements OnInit {
   }
 
   /* Menu opening/closing */
-  menuToggle(): void {
+  menuToggle(autoClose: boolean): void {
     this.menuOpened = !this.menuOpened;
 
     /* All submenu closing */
-    if (!this.menuOpened) {
+    if (!autoClose && !this.menuOpened) {
       this.airlineSubMenuExpanded = false;
-      this.userSubMenuExpanded = false;
-      this.hubSubMenuExpanded = false;
-      this.destinationSubMenuExpanded = false;
       this.routeSubMenuExpanded = false;
     }
   }
@@ -71,21 +65,6 @@ export class AppComponent implements OnInit {
   /* Airline submenu opening/closing */
   airlineSubMenuToggle(): void {
     this.airlineSubMenuExpanded = !this.airlineSubMenuExpanded;
-  }
-
-  /* User submenu opening/closing */
-  userSubMenuToggle(): void {
-    this.userSubMenuExpanded = !this.userSubMenuExpanded;
-  }
-
-  /* Hub submenu opening/closing */
-  hubSubMenuToggle(): void {
-    this.hubSubMenuExpanded = !this.hubSubMenuExpanded;
-  }
-
-  /* Destination submenu opening/closing */
-  destinationSubMenuToggle(): void {
-    this.destinationSubMenuExpanded = !this.destinationSubMenuExpanded;
   }
 
   /* Route submenu opening/closing */

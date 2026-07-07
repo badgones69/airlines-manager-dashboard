@@ -17,6 +17,8 @@ import {
 } from '../../../shared/constants/forms-constants';
 import { notIdenticalPasswordsValidator } from '../../../shared/forms-validators/user-form-validators';
 import {
+  getBackButtonIcon,
+  getBackButtonLabel,
   getPasswordInputLabel,
   getRequiredFieldErrorMessage,
   getResetButtonIcon,
@@ -45,7 +47,7 @@ import {
 } from '../../../shared/labels/forms/reset-user-password-form';
 import { UserService } from '../../../shared/services/user.service';
 import { NotificationService } from '../../../shared/services/notification.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ForbiddenComponent } from '../../../shared/components/forbidden/forbidden.component';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
 import { AuthenticatedUserUneditableComponent } from '../authenticated-user-uneditable/authenticated-user-uneditable.component';
@@ -53,10 +55,12 @@ import {
   getTechnicalErrorTitle,
   getTechnicalErrorMessage,
 } from '../../../shared/labels/errors';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'reset-user-password',
   imports: [
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -65,6 +69,7 @@ import {
     MatSelectModule,
     MatButtonModule,
     MatIconModule,
+    RouterLink,
     ForbiddenComponent,
     UnauthorizedComponent,
     AuthenticatedUserUneditableComponent,
@@ -98,6 +103,8 @@ export class ResetUserPasswordComponent implements OnInit {
   public repeatedPasswordInputLabel: string = '';
 
   /* Buttons labels and icons */
+  public backButtonLabel: string = '';
+  public backButtonIcon: string = '';
   public submitButtonLabel: string = '';
   public resetButtonLabel: string = '';
   public resetButtonIcon: string = '';
@@ -108,9 +115,7 @@ export class ResetUserPasswordComponent implements OnInit {
   public router: Router = inject(Router);
   public route: ActivatedRoute = inject(ActivatedRoute);
 
-  constructor(
-    readonly notificationService: NotificationService,
-  ) {
+  constructor(readonly notificationService: NotificationService) {
     /* Form fields creation & constraints definition */
     this.resetUserPasswordForm = new FormGroup(
       {
@@ -136,8 +141,10 @@ export class ResetUserPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     if (history.state.userToResetPassword) {
-      this.initUserToResetPassword = JSON.parse(history.state.userToResetPassword);
-      
+      this.initUserToResetPassword = JSON.parse(
+        history.state.userToResetPassword,
+      );
+
       this.resetUserPasswordForm.patchValue({
         givenName: this.initUserToResetPassword?.givenName,
         surname: this.initUserToResetPassword?.surname,
@@ -156,6 +163,8 @@ export class ResetUserPasswordComponent implements OnInit {
     this.surnameInputLabel = getSurnameLabel();
     this.passwordInputLabel = getPasswordInputLabel();
     this.repeatedPasswordInputLabel = getRepeatedPasswordInputLabel();
+    this.backButtonLabel = getBackButtonLabel();
+    this.backButtonIcon = getBackButtonIcon();
     this.submitButtonLabel = getSubmitButtonLabel();
     this.resetButtonLabel = getResetButtonLabel(ADD_FORM_MODE);
     this.resetButtonIcon = getResetButtonIcon(ADD_FORM_MODE);

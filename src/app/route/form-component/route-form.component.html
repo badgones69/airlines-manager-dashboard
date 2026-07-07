@@ -4,12 +4,14 @@
   <mat-label class="form-title">{{ routeFormTitle }}</mat-label>
 
   <!-- DEPARTURE HUB FIELD -->
-  <div class="country-field-container">
-    <span class="flag fi fi-{{ this.departureHubFlag }}"></span>
-    <mat-form-field class="airport-form-field">
-      <mat-label id="departureHubInputLabel">
-        {{ departureHubInputLabel }}
-      </mat-label>
+  <mat-form-field class="airport-form-field">
+    <mat-label id="departureHubInputLabel">
+      {{ departureHubInputLabel }}
+    </mat-label>
+    <div class="country-field-container">
+      @if (this.departureHubFlag && this.departureHubFlag !== "") {
+        <span class="flag fi fi-{{ this.departureHubFlag }}"></span>
+      }
       <input
         matInput
         aria-labelledby="departureHubInputLabel"
@@ -30,17 +32,19 @@
           </mat-option>
         }
       </mat-autocomplete>
-      <mat-error>{{ displayDepartureHubErrorMessage() }}</mat-error>
-    </mat-form-field>
-  </div>
+    </div>
+    <mat-error>{{ displayDepartureHubErrorMessage() }}</mat-error>
+  </mat-form-field>
 
   <!-- ARRIVAL AIRPORT FIELD -->
-  <div class="country-field-container">
-    <span class="flag fi fi-{{ this.arrivalAirportFlag }}"></span>
-    <mat-form-field class="airport-form-field">
-      <mat-label id="arrivalAirportInputLabel">
-        {{ arrivalAirportInputLabel }}
-      </mat-label>
+  <mat-form-field class="airport-form-field">
+    <mat-label id="arrivalAirportInputLabel">
+      {{ arrivalAirportInputLabel }}
+    </mat-label>
+    <div class="country-field-container">
+      @if (this.arrivalAirportFlag && this.arrivalAirportFlag !== "") {
+        <span class="flag fi fi-{{ this.arrivalAirportFlag }}"></span>
+      }
       <input
         matInput
         aria-labelledby="arrivalAirportInputLabel"
@@ -66,12 +70,22 @@
           </mat-option>
         }
       </mat-autocomplete>
-      <mat-error>{{ displayArrivalAirportErrorMessage() }}</mat-error>
-    </mat-form-field>
-  </div>
+    </div>
+    <mat-error>{{ displayArrivalAirportErrorMessage() }}</mat-error>
+  </mat-form-field>
 
   <!-- BUTTONS -->
   <div class="form-buttons">
+    <button
+      type="button"
+      class="back-button"
+      mat-fab
+      extended
+      routerLink="../list"
+    >
+      <i class="material-icons">{{ backButtonIcon }}</i>
+      {{ backButtonLabel }}
+    </button>
     <button
       type="submit"
       class="submit-form-button"
