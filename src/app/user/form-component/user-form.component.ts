@@ -115,13 +115,13 @@ export class UserFormComponent implements OnInit {
   public profiles: Profile[] = getProfilesValues();
 
   /* Buttons labels and icons */
+  public backButtonLabel: string = '';
+  public backButtonIcon: string = '';
   public submitButtonLabel: string = '';
   public submitButtonIcon: string = '';
   public resetButtonLabel: string = '';
   public resetButtonIcon: string = '';
   public resetButtonType: string = '';
-  public backButtonLabel: string = '';
-  public backButtonIcon: string = '';
 
   /* Injections */
   public userService = inject(UserService);
@@ -182,12 +182,12 @@ export class UserFormComponent implements OnInit {
     this.passwordInputLabel = getPasswordInputLabel();
     this.repeatedPasswordInputLabel = getRepeatedPasswordInputLabel();
     this.profileInputLabel = getProfileLabel();
+    this.backButtonLabel = getBackButtonLabel();
+    this.backButtonIcon = getBackButtonIcon();
     this.submitButtonLabel = getSubmitButtonLabel(this.formMode);
     this.submitButtonIcon = getSubmitButtonIcon(this.formMode);
     this.resetButtonLabel = getResetButtonLabel(this.formMode);
     this.resetButtonIcon = getResetButtonIcon(this.formMode);
-    this.backButtonLabel = getBackButtonLabel();
-    this.backButtonIcon = getBackButtonIcon();
     this.resetButtonType = getResetButtonType(this.formMode);
 
     this.userForm.patchValue({
