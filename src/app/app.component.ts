@@ -10,7 +10,7 @@ import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { AboutComponent } from './about/about.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from './shared/services/user.service';
-import { User } from './shared/models/User';
+import { User } from './shared/dto/User';
 
 @Component({
   selector: 'app',

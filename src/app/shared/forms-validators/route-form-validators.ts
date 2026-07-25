@@ -1,7 +1,7 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { IDENTICAL_AIRPORTS_ERROR } from '../constants/forms-constants';
 import { capitalize } from '../utils/labels-utils';
-import { Airport } from '../models/Airport';
+import { Airport } from '../dto/Airport';
 
 export function identicalAirportsValidator(
   departureHubFieldIdentifier: string,

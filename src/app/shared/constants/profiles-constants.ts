@@ -1,4 +1,4 @@
-import { Profile } from '../models/Profile';
+import { Profile } from '../dto/Profile';
 
 export function getProfiles(
   administratorLabel: string,

@@ -3,7 +3,7 @@ import { UserService } from '../../../shared/services/user.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { EDIT_FORM_MODE } from '../../../shared/constants/forms-constants';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from '../../../shared/models/User';
+import { User } from '../../../shared/dto/User';
 import { UserFormComponent } from '../../form-component/user-form.component';
 import { UserMapper } from '../../../shared/mappers/UserMapper';
 import { getFormModeLabel } from '../../../shared/labels/commons/form-common';

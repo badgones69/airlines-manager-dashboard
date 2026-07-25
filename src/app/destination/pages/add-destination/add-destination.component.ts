@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { UserService } from '../../../shared/services/user.service';
-import { User } from '../../../shared/models/User';
-import { Airport } from '../../../shared/models/Airport';
+import { User } from '../../../shared/dto/User';
+import { Airport } from '../../../shared/dto/Airport';
 import { AirportFormComponent } from '../../../shared/components/airport-form/airport-form.component';
 import { ADD_FORM_MODE } from '../../../shared/constants/forms-constants';
 import { getFormModeLabel } from '../../../shared/labels/commons/form-common';
