@@ -1,11 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { User } from '../../../shared/models/User';
+import { User } from '../../../shared/dto/User';
 import { UserService } from '../../../shared/services/user.service';
 import { getDestinationsListTitle } from '../../../shared/labels/lists';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
 import { ListAirportsComponent } from '../../../shared/components/list-airports/list-airports.component';
 import { DeleteDestinationComponent } from '../delete-destination/delete-destination.component';
-import { Airport } from '../../../shared/models/Airport';
+import { Airport } from '../../../shared/dto/Airport';
 import { Router } from '@angular/router';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';

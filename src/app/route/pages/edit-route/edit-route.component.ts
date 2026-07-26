@@ -3,8 +3,8 @@ import { NotificationService } from '../../../shared/services/notification.servi
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../shared/services/user.service';
 import { RouteService } from '../../../shared/services/route.service';
-import { User } from '../../../shared/models/User';
-import { Route } from '../../../shared/models/Route';
+import { User } from '../../../shared/dto/User';
+import { Route } from '../../../shared/dto/Route';
 import { RouteFormComponent } from '../../form-component/route-form.component';
 import { EDIT_FORM_MODE } from '../../../shared/constants/forms-constants';
 import { getFormModeLabel } from '../../../shared/labels/commons/form-common';

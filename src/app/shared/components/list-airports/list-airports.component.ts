@@ -12,7 +12,7 @@ import {
   MatPaginatorModule,
 } from '@angular/material/paginator';
 import { InternationalPaginator } from '../international-paginator';
-import { User } from '../../models/User';
+import { User } from '../../dto/User';
 import { UserService } from '../../services/user.service';
 import { AirportService } from '../../services/airport.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -27,7 +27,7 @@ import {
 } from '../../labels/commons/airport-common';
 import { UnauthorizedComponent } from '../unauthorized/unauthorized.component';
 import { getNameLabel } from '../../labels/commons/form-common';
-import { Airport } from '../../models/Airport';
+import { Airport } from '../../dto/Airport';
 import { Router, RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';

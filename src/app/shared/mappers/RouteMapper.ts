@@ -1,4 +1,4 @@
-import { Route } from '../models/Route';
+import { Route } from '../dto/Route';
 import { AirportMapper } from './AirportMapper';
 
 export class RouteMapper {
