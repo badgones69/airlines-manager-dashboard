@@ -28,7 +28,7 @@ import {
   getSubmitButtonIcon,
   getSubmitButtonLabel,
 } from '../../shared/labels/commons/form-common';
-import { Route } from '../../shared/models/Route';
+import { Route } from '../../shared/dto/Route';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {
@@ -53,7 +53,7 @@ import {
   MatAutocompleteTrigger,
   MatOption,
 } from '@angular/material/autocomplete';
-import { Airport } from '../../shared/models/Airport';
+import { Airport } from '../../shared/dto/Airport';
 import {
   getArrivalAirportLabel,
   getDepartureHubLabel,

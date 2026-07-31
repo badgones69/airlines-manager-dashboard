@@ -1,7 +1,7 @@
-import { Region } from '../models/Region';
-import { Country } from '../models/Country';
+import { Region } from '../dto/Region';
+import { Country } from '../dto/Country';
 
-export const AUSTRALIA_REGIONS_FR = [
+export const AUSTRALIA_REGIONS_FR: Region[] = [
   { id: 1, code: 'SA', name: 'Australie-Méridionale' } as Region,
   { id: 2, code: 'WA', name: 'Australie-Occidentale' } as Region,
   { id: 3, code: 'NSW', name: 'Nouvelle-Galles du Sud' } as Region,
@@ -16,7 +16,7 @@ export const AUSTRALIA_REGIONS_FR = [
   { id: 8, code: 'NT', name: 'Territoire du Nord' } as Region,
 ];
 
-export const BRAZIL_REGIONS_FR = [
+export const BRAZIL_REGIONS_FR: Region[] = [
   { id: 1, code: 'AC', name: 'Acre' } as Region,
   { id: 2, code: 'AL', name: 'Alagoas' } as Region,
   { id: 3, code: 'AP', name: 'Amapá' } as Region,
@@ -46,7 +46,7 @@ export const BRAZIL_REGIONS_FR = [
   { id: 27, code: 'TO', name: 'Tocantins' } as Region,
 ];
 
-export const CANADA_REGIONS_FR = [
+export const CANADA_REGIONS_FR: Region[] = [
   { id: 1, code: 'AB', name: 'Alberta' } as Region,
   { id: 2, code: 'BC', name: 'Colombie-Britannique' } as Region,
   { id: 3, code: 'PE', name: 'Île du Prince Édouard' } as Region,
@@ -62,7 +62,7 @@ export const CANADA_REGIONS_FR = [
   { id: 13, code: 'YT', name: 'Yukon' } as Region,
 ];
 
-export const USA_REGIONS_FR = [
+export const USA_REGIONS_FR: Region[] = [
   { id: 1, code: 'NY', name: 'New York' } as Region,
   { id: 2, code: 'CA', name: 'Californie' } as Region,
   { id: 3, code: 'IL', name: 'Illinois' } as Region,
@@ -115,7 +115,7 @@ export const USA_REGIONS_FR = [
   { id: 50, code: 'HI', name: 'Hawaii' } as Region,
 ];
 
-export const COUNTRIES_FR = [
+export const COUNTRIES_FR: Country[] = [
   { id: 1, name: 'Afghanistan', icao: 'YA', flagCode: 'af' } as Country,
   { id: 2, name: 'Afrique du Sud', icao: 'ZS', flagCode: 'za' } as Country,
   { id: 3, name: 'Albanie', icao: 'ZA', flagCode: 'al' } as Country,

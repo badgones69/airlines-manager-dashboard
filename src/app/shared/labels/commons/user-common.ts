@@ -1,4 +1,4 @@
-import { Profile } from '../../models/Profile';
+import { Profile } from '../../dto/Profile';
 import { getProfiles } from '../../constants/profiles-constants';
 
 export function getGivenNameLabel(): string {

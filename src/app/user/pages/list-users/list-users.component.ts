@@ -11,11 +11,11 @@ import {
   MatPaginatorModule,
 } from '@angular/material/paginator';
 import { InternationalPaginator } from '../../../shared/components/international-paginator';
-import { User } from '../../../shared/models/User';
+import { User } from '../../../shared/dto/User';
 import { UserService } from '../../../shared/services/user.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { UserMapper } from '../../../shared/mappers/UserMapper';
-import { Profile } from '../../../shared/models/Profile';
+import { Profile } from '../../../shared/dto/Profile';
 import { MatButtonModule } from '@angular/material/button';
 import { MatLabel } from '@angular/material/form-field';
 import { getUsersListTitle } from '../../../shared/labels/lists';

@@ -1,12 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { User } from '../../../shared/models/User';
+import { User } from '../../../shared/dto/User';
 import { UserService } from '../../../shared/services/user.service';
 import { getHubsListTitle } from '../../../shared/labels/lists';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteHubComponent } from '../delete-hub/delete-hub.component';
-import { Airport } from '../../../shared/models/Airport';
+import { Airport } from '../../../shared/dto/Airport';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { ListAirportsComponent } from '../../../shared/components/list-airports/list-airports.component';
 

@@ -77,7 +77,7 @@
         [displayWith]="displayCountry"
         (optionSelected)="changeCountry($event.option.value)"
       >
-        @for (country of filteredCountries | async; track country) {
+        @for (country of filteredCountries | async; track country.id) {
           <mat-option [value]="country">
             <span class="flag fi fi-{{ country.flagCode }}"></span>
             {{ country.name }}
@@ -103,7 +103,7 @@
         [displayWith]="displayRegion"
         (optionSelected)="changeRegion($event.option.value)"
       >
-        @for (region of filteredRegions | async; track region) {
+        @for (region of filteredRegions | async; track region.id) {
           <mat-option [value]="region">
             {{ region.name }} ({{ region.code }})
           </mat-option>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { User } from '../models/User';
+import { User } from '../dto/User';
 import { getStoredItem, removeStoredItem } from '../utils/storage-utils';
 import { AUTHENTICATED_USER_STORAGE_NAME } from '../constants/storage-constants';
 import supabase from '../constants/services-constants';

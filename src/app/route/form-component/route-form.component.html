@@ -23,7 +23,7 @@
         [displayWith]="displayAirport"
         (optionSelected)="changeDepartureHub($event.option.value)"
       >
-        @for (departureHub of filteredHubs | async; track departureHub) {
+        @for (departureHub of filteredHubs | async; track departureHub.id) {
           <mat-option [value]="departureHub">
             <span class="flag fi fi-{{ departureHub.country.flagCode }}"></span>
             <span class="airports-list-item">{{ departureHub.iata }}</span>
