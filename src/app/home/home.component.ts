@@ -3,7 +3,7 @@ import { UserService } from '../shared/services/user.service';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { UnauthorizedComponent } from '../shared/components/unauthorized/unauthorized.component';
-import { User } from '../shared/models/User';
+import { User } from '../shared/dto/User';
 import { AirlineService } from '../shared/services/airline.service';
 import {
   getAirlineWelcomeMessage,

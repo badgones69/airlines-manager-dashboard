@@ -32,7 +32,7 @@ import {
   getSubmitButtonLabel,
   getUnknownCountryErrorMessage,
 } from '../../labels/commons/form-common';
-import { Airport } from '../../models/Airport';
+import { Airport } from '../../dto/Airport';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { onlyWhitespaceValueValidator } from '../../forms-validators/commons-validators';
@@ -49,7 +49,7 @@ import {
   UNKNOWN_REGION_ERROR,
 } from '../../constants/forms-constants';
 import { AirportMapper } from '../../mappers/AirportMapper';
-import { Country } from '../../models/Country';
+import { Country } from '../../dto/Country';
 import { capitalize } from '../../utils/labels-utils';
 import {
   getCountries,
@@ -81,7 +81,7 @@ import {
   MatAutocompleteTrigger,
   MatOption,
 } from '@angular/material/autocomplete';
-import { Region } from '../../models/Region';
+import { Region } from '../../dto/Region';
 import { NotificationService } from '../../services/notification.service';
 import { RouterLink } from '@angular/router';
 @Component({
@@ -309,7 +309,7 @@ export class AirportFormComponent implements OnInit {
 
       const regionFound = getRegionByName(filterValue, this.countryFlag);
 
-      if (!regionFound) {
+      if (!regionFound && filterValue !== '') {
         this.airportForm
           .get(this.regionFieldIdentifier)
           ?.setErrors({ [UNKNOWN_REGION_ERROR]: true });

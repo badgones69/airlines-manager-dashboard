@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { Router } from '@angular/router';
 import { UserService } from '../../../shared/services/user.service';
-import { User } from '../../../shared/models/User';
+import { User } from '../../../shared/dto/User';
 import { UserFormComponent } from '../../form-component/user-form.component';
 import { ADD_FORM_MODE } from '../../../shared/constants/forms-constants';
 import { getFormModeLabel } from '../../../shared/labels/commons/form-common';
