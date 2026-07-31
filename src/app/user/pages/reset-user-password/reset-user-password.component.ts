@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { User } from '../../../shared/models/User';
+import { User } from '../../../shared/dto/User';
 import { UserMapper } from '../../../shared/mappers/UserMapper';
 import {
   ADD_FORM_MODE,

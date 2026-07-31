@@ -43,7 +43,7 @@ import {
   getProfileLabel,
   getProfilesValues,
 } from '../../shared/labels/commons/user-common';
-import { User } from '../../shared/models/User';
+import { User } from '../../shared/dto/User';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
@@ -58,7 +58,7 @@ import {
   REQUIRED_ERROR,
 } from '../../shared/constants/forms-constants';
 import { UserMapper } from '../../shared/mappers/UserMapper';
-import { Profile } from '../../shared/models/Profile';
+import { Profile } from '../../shared/dto/Profile';
 import { UserService } from '../../shared/services/user.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';

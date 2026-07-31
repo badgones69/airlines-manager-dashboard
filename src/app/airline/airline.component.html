@@ -76,7 +76,7 @@
             [displayWith]="displayCountry"
             (optionSelected)="changeNationalityFlag($event.option.value)"
           >
-            @for (country of filteredCountries | async; track country) {
+            @for (country of filteredCountries | async; track country.id) {
               <mat-option [value]="country">
                 <span class="flag fi fi-{{ country.flagCode }}"></span>
                 {{ country.name }}

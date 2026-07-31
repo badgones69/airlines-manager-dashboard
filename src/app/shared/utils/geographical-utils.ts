@@ -1,6 +1,6 @@
-import { COUNTRIES_FR } from '../constants/geographical-constants';
-import { Country } from '../models/Country';
-import { Region } from '../models/Region';
+import { COUNTRIES_FR } from '../data/countries-regions';
+import { Country } from '../dto/Country';
+import { Region } from '../dto/Region';
 import { sortElementsAlphabetically } from './commons-utils';
 import { capitalize } from './labels-utils';
 

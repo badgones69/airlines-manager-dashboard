@@ -11,7 +11,7 @@ import {
   MatPaginatorModule,
 } from '@angular/material/paginator';
 import { InternationalPaginator } from '../../../shared/components/international-paginator';
-import { User } from '../../../shared/models/User';
+import { User } from '../../../shared/dto/User';
 import { UserService } from '../../../shared/services/user.service';
 import { RouteService } from '../../../shared/services/route.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -19,7 +19,7 @@ import { RouteMapper } from '../../../shared/mappers/RouteMapper';
 import { MatButtonModule } from '@angular/material/button';
 import { MatLabel } from '@angular/material/form-field';
 import { UnauthorizedComponent } from '../../../shared/components/unauthorized/unauthorized.component';
-import { Route } from '../../../shared/models/Route';
+import { Route } from '../../../shared/dto/Route';
 import { Router, RouterLink } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DeleteRouteComponent } from '../delete-route/delete-route.component';

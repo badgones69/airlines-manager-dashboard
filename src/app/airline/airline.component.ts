@@ -55,7 +55,7 @@ import {
   MatAutocompleteTrigger,
   MatOption,
 } from '@angular/material/autocomplete';
-import { Country } from '../shared/models/Country';
+import { Country } from '../shared/dto/Country';
 import {
   distinctUntilChanged,
   map,
@@ -73,11 +73,11 @@ import { onlyWhitespaceValueValidator } from '../shared/forms-validators/commons
 import { ForbiddenComponent } from '../shared/components/forbidden/forbidden.component';
 import { UnauthorizedComponent } from '../shared/components/unauthorized/unauthorized.component';
 import { UserService } from '../shared/services/user.service';
-import { User } from '../shared/models/User';
+import { User } from '../shared/dto/User';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { AirlineLogoComponent } from './airline-logo/airline-logo.component';
-import { Airline } from '../shared/models/Airline';
+import { Airline } from '../shared/dto/Airline';
 import {
   getTechnicalErrorMessage,
   getTechnicalErrorTitle,
@@ -241,7 +241,7 @@ export class AirlineComponent implements OnInit {
   }
 
   /* Logo field listener */
-  changeLogo() {
+  changeLogo(): void {
     let dialogRef: MatDialogRef<AirlineLogoComponent> = this.dialog.open(
       AirlineLogoComponent,
       {

@@ -1,4 +1,4 @@
-import { Airline } from '../models/Airline';
+import { Airline } from '../dto/Airline';
 import { getCountryById } from '../utils/geographical-utils';
 import {
   capitalize,

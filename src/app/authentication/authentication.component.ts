@@ -30,7 +30,7 @@ import {
   getResetButtonType,
 } from '../shared/labels/commons/form-common';
 import { getLoginLabel } from '../shared/labels/commons/user-common';
-import { User } from '../shared/models/User';
+import { User } from '../shared/dto/User';
 import { UserMapper } from '../shared/mappers/UserMapper';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';

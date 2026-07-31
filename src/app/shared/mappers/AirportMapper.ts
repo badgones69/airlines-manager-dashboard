@@ -1,4 +1,4 @@
-import { Airport } from '../models/Airport';
+import { Airport } from '../dto/Airport';
 import { getCountryById, getRegionById } from '../utils/geographical-utils';
 import {
   capitalize,
