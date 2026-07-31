@@ -29,11 +29,11 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
 **<ins>SERVER & DATABASE :<ins>**
 <p>
 <img
-    src="https://img.shields.io/badge/Vercel v54.18.1-000000?logo=vercel&logoColor=FFFFFF"
+    src="https://img.shields.io/badge/Vercel v58.4.4-000000?logo=vercel&logoColor=FFFFFF"
     alt="Vercel"
 />
 <img
-    src="https://img.shields.io/badge/Supabase--JS v2.108.2-008000?logo=supabase&logoColor=FFFFFF"
+    src="https://img.shields.io/badge/Supabase--JS v2.111.0-008000?logo=supabase&logoColor=FFFFFF"
     alt="Supabase-JS"
 />
 </p>
@@ -41,12 +41,12 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
 **<ins>FRAMEWORK & LANGUAGE :<ins>**
 <p>
 <img
-    src="https://img.shields.io/badge/Angular v22.0.4-purple?logo=angular&logoColor=FFFFFF"
+    src="https://img.shields.io/badge/Angular v22.1.0-purple?logo=angular&logoColor=FFFFFF"
     alt="Angular"
 />
 <img
     src="https://img.shields.io/badge/TypeScript v6.0.3-3C91B0?logo=typescript&logoColor=FFFFFF"
-    alt="NGx Toastr"
+    alt="TypeScript"
 />
 </p>
 
@@ -57,7 +57,7 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
     alt="Chart.js"
 />
 <img
-    src="https://img.shields.io/badge/OpenLayers v10.9.0-cyan?logo=openlayers&logoColor=000000"
+    src="https://img.shields.io/badge/OpenLayers v10.10.0-cyan?logo=openlayers&logoColor=000000"
     alt="OpenLayers"
 />
 </p>
@@ -81,7 +81,7 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
     alt="UUID"
 />
 <img
-    src="https://img.shields.io/badge/Bcrypt--TS v8.0.1-9F5540.svg"
+    src="https://img.shields.io/badge/Bcrypt--TS v9.0.1-9F5540.svg"
     alt="Bcrypt-TS"
 />
 <img
