@@ -126,7 +126,7 @@
   <mat-form-field floatLabel="always">
     <mat-label>{{ profileInputLabel }}</mat-label>
     <mat-select [formControlName]="profileFieldIdentifier">
-      @for (profile of profiles; track profile) {
+      @for (profile of profiles; track profile.id) {
         <mat-option [value]="profile.id">{{ profile.name }}</mat-option>
       }
     </mat-select>
