@@ -121,6 +121,18 @@
         </button>
       }
     }
+    <!-- AIRCRAFT SUBMENU -->
+    @if (authenticatedUser) {
+      <button
+        mat-button
+        (click)="menuToggle(true)"
+        routerLink="aircrafts/add"
+        class="menu-button"
+      >
+        <i class="material-icons">travel</i>
+        <span>Avion</span>
+      </button>
+    }
     <!-- ABOUT SUBMENU -->
     <button mat-button (click)="openAboutDialog()" class="menu-button">
       <i class="material-icons">info</i>

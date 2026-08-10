@@ -1,0 +1,150 @@
+<!-- FORM -->
+<form id="form" [formGroup]="aircraftForm" (ngSubmit)="submitAircraftForm()">
+  <!-- TITLE -->
+  <mat-label class="form-title">{{ aircraftFormTitle }}</mat-label>
+
+  <!-- MANUFACTURER FIELD -->
+  <mat-form-field>
+    <mat-label id="manufacturerInputLabel">
+      {{ manufacturerInputLabel }}
+    </mat-label>
+    <div class="country-field-container">
+      @if (this.manufacturerFlag && this.manufacturerFlag !== "") {
+        <span class="flag fi fi-{{ this.manufacturerFlag }}"></span>
+      }
+      <input
+        matInput
+        aria-labelledby="manufacturerInputLabel"
+        [formControlName]="this.manufacturerFieldIdentifier"
+        [matAutocomplete]="autoManufacturer"
+      />
+      <mat-autocomplete
+        #autoManufacturer="matAutocomplete"
+        [displayWith]="displayManufacturer"
+        (optionSelected)="changeManufacturer($event.option.value)"
+      >
+        @for (manufacturer of filteredManufacturers | async; track manufacturer.id) {
+          <mat-option [value]="manufacturer">
+            <span class="flag fi fi-{{ manufacturer.headquarterCountryFlagCode }}"></span>
+            {{ manufacturer.name }}
+          </mat-option>
+        }
+      </mat-autocomplete>
+    </div>
+    <mat-error>{{ displayManufacturerErrorMessage() }}</mat-error>
+  </mat-form-field>
+
+  <!-- MODEL FIELD -->
+  @if (this.models.length > 0) {
+    <mat-form-field>
+      <mat-label id="modelInputLabel">
+        {{ modelInputLabel }}
+      </mat-label>
+      <input
+        matInput
+        aria-labelledby="modelInputLabel"
+        [formControlName]="this.modelFieldIdentifier"
+        [matAutocomplete]="autoModel"
+      />
+      <mat-autocomplete
+        #autoModel="matAutocomplete"
+        [displayWith]="displayModel"
+        (optionSelected)="changeModel($event.option.value)"
+      >
+        @for (model of filteredModels | async; track model.id) {
+          <mat-option [value]="model">
+            <span id="cargo-container">
+              @if (model.cargo) {
+                <i id="cargo-icon" class="material-icons">package_2</i>
+              }
+              {{ model.name }}
+            </span>
+          </mat-option>
+        }
+      </mat-autocomplete>
+      <mat-error>{{ displayModelErrorMessage() }}</mat-error>
+    </mat-form-field>
+  }
+  
+  <!-- HOME HUB FIELD -->
+  <mat-form-field class="airport-form-field">
+    <mat-label id="homeHubInputLabel">
+      {{ homeHubInputLabel }}
+    </mat-label>
+    <div class="country-field-container">
+      @if (this.homeHubFlag && this.homeHubFlag !== "") {
+        <span class="flag fi fi-{{ this.homeHubFlag }}"></span>
+      }
+      <input
+        matInput
+        aria-labelledby="homeHubInputLabel"
+        [formControlName]="this.homeHubFieldIdentifier"
+        [matAutocomplete]="autoHomeHub"
+      />
+      <mat-autocomplete
+        #autoHomeHub="matAutocomplete"
+        [displayWith]="displayHomeHub"
+        (optionSelected)="changeHomeHub($event.option.value)"
+      >
+        @for (homeHub of filteredHubs | async; track homeHub.id) {
+          <mat-option [value]="homeHub">
+            <span class="flag fi fi-{{ homeHub.country.flagCode }}"></span>
+            <span class="airports-list-item">{{ homeHub.iata }}</span>
+            {{ homeHub.name }}
+            {{ homeHub.region ? `(${homeHub.region.code})` : "" }}
+          </mat-option>
+        }
+      </mat-autocomplete>
+    </div>
+    <mat-error>{{ displayHomeHubErrorMessage() }}</mat-error>
+  </mat-form-field>
+
+  <!-- FLIGHTS FIELD -->
+  <div id="flights-form-container">
+    <button
+      type="button"
+      class="submit-form-button"
+      mat-fab
+      extended
+      [disabled]="this.aircraftForm.get(this.homeHubFieldIdentifier)?.invalid"
+      (click)="changeFlights()"
+    >
+      <i class="material-icons">flight_takeoff</i>
+      {{ flightsInputLabel }}
+    </button>
+    <span class="number-flights-message">{{ numberFlightsLabel }}</span>
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="form-buttons">
+    <button
+      type="button"
+      class="back-button"
+      mat-fab
+      extended
+    >
+      <i class="material-icons">{{ backButtonIcon }}</i>
+      {{ backButtonLabel }}
+    </button>
+    <button
+      type="submit"
+      class="submit-form-button"
+      mat-fab
+      extended
+      [disabled]="aircraftForm.invalid || numberFlightsLabel === ''"
+    >
+      <i class="material-icons">{{ submitButtonIcon }}</i>
+      {{ submitButtonLabel }}
+    </button>
+    <button
+      type="button"
+      class="reset-form-button"
+      mat-fab
+      extended
+      (click)="ngOnInit()"
+    >
+      <i class="material-icons">{{ resetButtonIcon }}</i>
+      {{ resetButtonLabel }}
+    </button>
+  </div>
+</form>
