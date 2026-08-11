@@ -45,6 +45,7 @@ import {
   getTechnicalErrorMessage,
   getTechnicalErrorTitle,
 } from '../shared/labels/errors';
+import { FlightService } from '../shared/services/flight.service';
 
 @Component({
   selector: 'authentication',
@@ -86,6 +87,7 @@ export class AuthenticationComponent implements OnInit {
 
   /* Injections */
   public userService: UserService = inject(UserService);
+  public flightService: FlightService = inject(FlightService);
   public router: Router = inject(Router);
 
   constructor(readonly notificationService: NotificationService) {
@@ -171,6 +173,10 @@ export class AuthenticationComponent implements OnInit {
                 const user: User = this.userMapper.userFromDB(userFound);
                 // Session opening
                 this.userService.connectUser(user);
+                /* Flight numbers caching */
+                this.flightService.findAllExistingFlightNumbers().then((existingFlightNumbers) => {
+                  this.flightService.cacheExistingFlightNumbers(existingFlightNumbers.map((flight) => flight.flightNumber));
+                });
                 // Redirection to home page
                 this.router.navigate(['home']);
               } else {

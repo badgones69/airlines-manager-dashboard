@@ -1,0 +1,103 @@
+<!-- TITLE -->
+<h2 mat-dialog-title>{{ aircraftFlightsDialogTitle }}</h2>
+<mat-dialog-content>
+  <!-- FORM -->
+  <form id="form" [formGroup]="aircraftFlightsForm">
+
+    <!-- NUMBER FLIGHTS FIELD -->
+    <mat-form-field class="form-field">
+      <mat-label id="numberFlightsInputLabel">
+        {{ aircraftNumberFlightsInputLabel }}
+      </mat-label>
+      <input
+        matInput
+        aria-labelledby="numberFlightsInputLabel"
+        [formControlName]="this.numberFlightsFieldIdentifier"
+        type="number"
+        min="0"
+        max="12"
+      />
+      <mat-error>{{ displayNumberFlightsErrorMessage() }}</mat-error>
+    </mat-form-field>
+    
+    <!-- FLIGHTS FIELDS -->
+    <div formArrayName="flights" id="flights-fields-array">
+      @for (flight of flights.controls; track flight) {
+        <div [formGroupName]="$index" class="flight-fields-container">
+
+          <!-- ROUTE FIELD -->
+          <mat-form-field class="form-field">
+            <mat-label id="flightRouteInputLabel">
+              {{ aircraftFlightRouteInputLabel }}
+            </mat-label>
+            <div class="country-field-container">
+              @if (getRouteFlag($index) && getRouteFlag($index) !== "") {
+                <span class="flag fi fi-{{ getRouteFlag($index) }}"></span>
+              }
+              <input
+                matInput
+                aria-labelledby="flightRouteInputLabel"
+                [formControlName]="getRouteFieldIdentifier($index)"
+                [matAutocomplete]="autoFlightRoute"
+              />
+              <mat-autocomplete
+                #autoFlightRoute="matAutocomplete"
+                [displayWith]="displayFlightRoute"
+                (optionSelected)="changeFlightRoute($event.option.value, $index)"
+              >
+                @for (route of getFilteredRoutes($index) | async; track route.id) {
+                  <mat-option [value]="route">
+                    <span class="flag fi fi-{{ route.country.flagCode }}"></span>
+                    <span>{{ route.iata }}</span>
+                  </mat-option>
+                }
+              </mat-autocomplete>
+            </div>
+            <mat-error>{{ displayFlightRouteErrorMessage($index) }}</mat-error>
+          </mat-form-field>
+
+          <!-- DEPARTURE TIME FIELD -->
+          <mat-form-field class="form-field">
+            <mat-label id="flightDepartureTimeInputLabel">
+              {{ aircraftFlightDepartureTimeInputLabel }}
+            </mat-label>
+            <input
+              matInput
+              aria-labelledby="flightDepartureTimeInputLabel"
+              [formControlName]="getDepartureTimeFieldIdentifier($index)"
+              type="time"
+            />
+            <mat-error>{{ displayFlightDepartureTimeErrorMessage($index) }}</mat-error>
+          </mat-form-field>
+
+          <!-- LENGTH FIELD -->
+          <mat-form-field class="form-field">
+            <mat-label id="flightLengthInputLabel">
+              {{ aircraftFlightLengthInputLabel }}
+            </mat-label>
+            <input
+              matInput
+              aria-labelledby="flightLengthInputLabel"
+              [formControlName]="getLengthFieldIdentifier($index)"
+              type="time"
+            />
+            <mat-error>{{ displayFlightLengthErrorMessage($index) }}</mat-error>
+          </mat-form-field>
+        </div>
+      }
+    </div>
+  </form>
+</mat-dialog-content>
+
+<!-- BUTTON -->
+<mat-dialog-actions>
+  <button
+    id="ok-button"
+    mat-button
+    mat-dialog-close
+    [disabled]="aircraftFlightsForm.invalid"
+    (click)="submitFlightsForm()"
+  >
+    {{ validateButtonLabel }}
+  </button>
+</mat-dialog-actions>
