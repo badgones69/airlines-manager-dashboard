@@ -13,3 +13,7 @@ export function getDestinationsListTitle(): string {
 export function getRoutesListTitle(): string {
   return 'Liste des lignes';
 }
+
+export function getAircraftsListTitle(): string {
+  return 'Liste des avions';
+}
