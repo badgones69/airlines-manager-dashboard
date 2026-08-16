@@ -15,10 +15,19 @@ import { FlightService } from './flight.service';
 export class AircraftService {
   public flightService: FlightService = inject(FlightService);
 
+  readonly aircrafts$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   readonly aircraftFlights$: BehaviorSubject<any> = new BehaviorSubject<any>({});
 
   constructor(readonly notificationService: NotificationService) {
+    this.refreshAircraftsList();
     this.refreshAircraftFlights();
+  }
+
+  /* Aircrafts list loading */
+  public refreshAircraftsList(): void {
+    this.findAllAircrafts().then((aircrafts) => {
+      this.aircrafts$.next(aircrafts);
+    });
   }
 
   /* Aircraft flights loading */
@@ -28,9 +37,33 @@ export class AircraftService {
     }
   }
 
+  /* Aircrafts list reading */
+  public get aircrafts(): Observable<any[]> {
+    return this.aircrafts$;
+  }
+
   /* Aircraft flights reading */
   public get aircraftFlights(): Observable<any> {
     return this.aircraftFlights$;
+  }
+
+  /* All aircrafts retrieving */
+  public async findAllAircrafts(): Promise<any[]> {
+    const { data } = await supabase.from('AIRCRAFT').select(
+      `*,
+        aircraftHomeHub:AIRPORT!aircraftHomeHub(*),
+        aircraftFlights:FLIGHT(
+          *,
+          flightRoute:ROUTE!flightRoute(
+            *,
+            routeDepartureHub:AIRPORT!routeDepartureHub(*),
+            routeArrivalAirport:AIRPORT!routeArrivalAirport(*)
+          )
+        )
+      `,
+    );
+
+    return data || [];
   }
 
   /* Aircraft creation */
@@ -59,6 +92,8 @@ export class AircraftService {
           flightsResponsesStatus.push(flightResponse.status.toString());
         }
       }));
+
+      this.refreshAircraftsList();
 
       if (flightsResponsesStatus.length == aircraftFlights.length) {
         /* Flight numbers caching */

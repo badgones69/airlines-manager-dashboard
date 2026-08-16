@@ -56,6 +56,8 @@ export class AddAircraftComponent implements OnInit {
           )} ${getAircraftFormTitle()}`.toUpperCase(),
           `${getAircraftFormSuccessNotificationMessage(this.formMode)}`,
         );
+        // Redirection to aircrafts list
+        this.router.navigate(['aircrafts', 'list']);
       }
     });
   }

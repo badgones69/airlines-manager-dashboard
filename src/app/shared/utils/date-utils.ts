@@ -77,10 +77,17 @@ export function convertDateTimeInMinutes(date: Date): number {
   return dateTimeInMinutes;
 }
 
-export function getTakeOff(takeOffTime: string): Date {
-  let takeOff: Date = new Date();
-  takeOff.setHours(getTimeHours(takeOffTime), getTimeMinutes(takeOffTime), 0);
-  return takeOff;
+export function convertStringTimeInDate(stringTime: string, isLandingTime: boolean): Date {
+  let date: Date = new Date();
+  const hours: number = getTimeHours(stringTime);
+  const minutes: number = getTimeMinutes(stringTime);
+
+  date.setHours(hours, minutes, 0);
+
+  if (isLandingTime && hours == 0 && minutes == 0) {
+    date.setHours(hours, minutes + 1440, 0);
+  }
+  return date;
 }
 
 export function getLanding(takeOff: Date, landingTime: string): Date {

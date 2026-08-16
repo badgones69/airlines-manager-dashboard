@@ -64,7 +64,7 @@ import { AirportMapper } from '../../shared/mappers/AirportMapper';
 import { AircraftMapper } from '../../shared/mappers/AircraftMapper';
 import { AircraftService } from '../../shared/services/aircraft.service';
 import { Country } from '../../shared/dto/Country';
-import { generateAircraftRegistration, validateAndFormatFlights } from '../../shared/utils/aviation-utils';
+import { generateAircraftRegistration, getManufacturerByName, getModelByName, validateAndFormatFlights } from '../../shared/utils/aviation-utils';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { AircraftFlightsComponent } from '../pages/aircraft-flights/aircraft-flights.component';
@@ -73,6 +73,7 @@ import { NotificationService } from '../../shared/services/notification.service'
 import { Route } from '../../shared/dto/Route';
 import { RouteService } from '../../shared/services/route.service';
 import { RouteMapper } from '../../shared/mappers/RouteMapper';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'aircraft-form',
@@ -90,6 +91,7 @@ import { RouteMapper } from '../../shared/mappers/RouteMapper';
     MatAutocomplete,
     MatOption,
     MatAutocompleteTrigger,
+    RouterLink,
   ],
   templateUrl: './aircraft-form.component.html',
   styleUrls: [
@@ -551,10 +553,7 @@ export class AircraftFormComponent implements OnInit {
     )?.value;
 
     if (typeof manufacturerValue === 'string') {
-      this.aircraftForm.value.manufacturer = this.manufacturers.find(
-        (manufacturer) =>
-          capitalize(manufacturer.name) === capitalize(manufacturerValue),
-      )?.id;
+      this.aircraftForm.value.manufacturer = getManufacturerByName(manufacturerValue)?.id;
     } else {
       this.aircraftForm.value.manufacturer = manufacturerValue.id;
     }
@@ -564,10 +563,7 @@ export class AircraftFormComponent implements OnInit {
     )?.value;
 
     if (typeof modelValue === 'string') {
-      this.aircraftForm.value.model = this.models.find(
-        (model) =>
-          capitalize(model.name) === capitalize(modelValue),
-      )?.id;
+      this.aircraftForm.value.model = getModelByName(modelValue, this.aircraftForm.value.manufacturer)?.id;
     } else {
       this.aircraftForm.value.model = modelValue.id;
     }

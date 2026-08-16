@@ -2,11 +2,45 @@ import { AUTHENTICATED_USER_STORAGE_NAME, EXISTING_FLIGHT_NUMBERS_STORAGE_NAME }
 import { Flight } from "../dto/Flight";
 import { Route } from "../dto/Route";
 import { generateRandomNumber, generateRandomString } from "./commons-utils";
-import { convertDateTimeInMinutes, getLanding, getTakeOff, hasSchedulesInconsistencies, hasSchedulesOverlap } from "./date-utils";
+import { convertDateTimeInMinutes, getLanding, convertStringTimeInDate, hasSchedulesInconsistencies, hasSchedulesOverlap } from "./date-utils";
 import { getStoredItem } from "./storage-utils";
 import { getDepartureTimeFieldIdentifier, getLengthFieldIdentifier, getRouteFieldIdentifier } from "../labels/forms/aircraft-form";
 import { Country } from "../dto/Country";
 import { getAlphabet } from "../labels/commons/commons";
+import { Manufacturer } from "../dto/Manufacturer";
+import { MANUFACTURERS } from "../data/manufacturers";
+import { capitalize } from "./labels-utils";
+import { Model } from "../dto/Model";
+
+export function getManufacturerById(manufacturerId: number): Manufacturer | undefined {
+  return MANUFACTURERS.find((manufacturer) => manufacturer.id === manufacturerId);
+}
+
+export function getManufacturerByName(manufacturerName: string): Manufacturer | undefined {
+  return MANUFACTURERS.find(
+    (manufacturer) => capitalize(manufacturer.name) === capitalize(manufacturerName),
+  );
+}
+
+export function getModelById(
+  modelId: number,
+  manufacturerId: number,
+): Model | undefined {
+  return getManufacturerById(manufacturerId)?.models?.find(
+    (model) => model.id === modelId,
+  );
+}
+
+export function getModelByName(
+  modelName: string,
+  manufacturerId: number,
+): Model | undefined {
+  return MANUFACTURERS
+    .find((manufacturer) => manufacturer.id === manufacturerId)
+    ?.models?.find(
+      (model) => capitalize(model.name) === capitalize(modelName),
+    );
+}
 
 export function generateAircraftRegistration(homeHubCountry: Country | undefined): string {
   if (homeHubCountry) {
@@ -75,7 +109,7 @@ export function validateAndFormatFlights(flightsFormValues: any, homeHubId: numb
 
   flightsFormValues.forEach((flightFormValue: any, index: number) => {
     const flightLengthValue: string = flightFormValue[getLengthFieldIdentifier(index)];
-    let takeOff: Date = getTakeOff(flightFormValue[getDepartureTimeFieldIdentifier(index)]);
+    let takeOff: Date = convertStringTimeInDate(flightFormValue[getDepartureTimeFieldIdentifier(index)], false);
     let landing: Date = getLanding(takeOff, flightLengthValue);
 
     let flightDestination: any = flightFormValue[getRouteFieldIdentifier(index)];
@@ -137,4 +171,8 @@ export function splitOutboundReturnFlights(flights: Flight[]): Flight[] {
     flightsSplitted.push(outboundFlight, returnFlight);
   });
   return flightsSplitted;
+}
+
+export function sortFlightsByTakeOffTime(flights: Flight[]): Flight[] {
+  return flights.sort((f1, f2) => f1.takeOff.getTime() - f2.takeOff.getTime());
 }
