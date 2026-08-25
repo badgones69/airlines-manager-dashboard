@@ -9,7 +9,6 @@ import { getArrivalAirportLabel } from '../../../shared/labels/forms/route-form'
 import { Flight } from '../../../shared/dto/Flight';
 import { InternationalPaginator } from '../../../shared/components/international-paginator';
 import { DatePipe } from '@angular/common';
-import { sortFlightsByTakeOffTime } from '../../../shared/utils/aviation-utils';
 
 @Component({
   selector: 'flights-details',
@@ -61,7 +60,7 @@ export class FlightsDetailsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.flightsDetailsDialogTitle = `${getFlightsDetailsDialogTitle()}`;
     this.flightsDetailsDialogMode = INFO_DIALOG_MODE;
-    this.flightsList.data = sortFlightsByTakeOffTime(this.aircraft.flights);
+    this.flightsList.data = this.aircraft.flights;
   }
 
   ngAfterViewInit() {

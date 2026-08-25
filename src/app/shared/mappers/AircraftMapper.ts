@@ -1,5 +1,5 @@
 import { Aircraft } from '../dto/Aircraft';
-import { getManufacturerById, getModelById } from '../utils/aviation-utils';
+import { getManufacturerById, getModelById, sortFlightsByTakeOffTime } from '../utils/aviation-utils';
 import { AirportMapper } from './AirportMapper';
 import { FlightMapper } from './FlightMapper';
 
@@ -26,7 +26,7 @@ export class AircraftMapper {
       manufacturer: getManufacturerById(aircraftFromDB.aircraftManufacturer),
       model: getModelById(aircraftFromDB.aircraftModel, aircraftFromDB.aircraftManufacturer),
       homeHub: this.airportMapper.airportFromDB(aircraftFromDB.aircraftHomeHub),
-      flights: this.flightMapper.flightsListFromDB(aircraftFromDB.aircraftFlights),
+      flights: sortFlightsByTakeOffTime(this.flightMapper.flightsListFromDB(aircraftFromDB.aircraftFlights)),
     } as Aircraft;
   }
 

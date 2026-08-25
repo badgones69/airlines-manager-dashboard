@@ -23,6 +23,10 @@ export function getFlightsInputLabel(formMode: string): string {
   return `${getSubmitButtonLabel(formMode)} le(s) vol(s)`;
 }
 
+export function getNumberFlightsLabel(numberFlights: number): string {
+  return `${numberFlights?.toString()} vol(s) aller-retour`;
+}
+
 export function getRouteFieldIdentifier(index: number): string {
   return `flightRoute${index}`;
 }

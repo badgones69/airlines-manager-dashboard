@@ -50,6 +50,17 @@ export class FlightService {
     return data || [];
   }
 
+  /* Flights retrieving by aircraft */
+  public async findFlightsByAircraft(aircraft: number): Promise<any> {
+    const { data } = await supabase
+      .from('FLIGHT')
+      .select()
+      .eq('flightAircraft', aircraft)
+      .order('flightTakeOff');
+
+    return data || [];
+  }
+
   /* Flight creation */
   public async createFlight(flightToCreate: any, aircraftId: number): Promise<any> {
     const { flightNumber, flightRoute, flightTakeOff, flightLanding, flightReturn } = flightToCreate;
@@ -66,6 +77,34 @@ export class FlightService {
         flightReturn,
     })
     .select();
+
+    return response;
+  }
+
+  /* Flight updating */
+  public async updateFlight(flightToUpdate: any): Promise<any> {
+    const { flightUUID, flightRoute, flightTakeOff, flightLanding, flightReturn } = flightToUpdate;
+
+    const response = await supabase
+    .from('FLIGHT')
+    .update({
+        flightRoute,
+        flightTakeOff,
+        flightLanding,
+        flightReturn,
+    })
+    .eq('flightUUID', flightUUID)
+    .select();
+
+    return response;
+  }
+
+  /* Flight deletion */
+  public async deleteFlight(flightUUID: string): Promise<any> {
+    const response = await supabase
+      .from('FLIGHT')
+      .delete()
+      .eq('flightUUID', flightUUID);
 
     return response;
   }

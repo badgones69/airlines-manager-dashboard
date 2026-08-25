@@ -1,9 +1,9 @@
 export function getAircraftFlightsDialogTitle(): string {
-  return "Vol(s) de l'avion";
+  return 'Vol(s)';
 }
 
 export function getAircraftNumberFlightsInputLabel(): string {
-  return 'NOMBRE DE VOLS';
+  return 'NOMBRE DE VOLS (ALLER-RETOUR)';
 }
 
 export function getAircraftFlightRouteInputLabel(): string {
@@ -15,7 +15,7 @@ export function getAircraftFlightDepartureTimeInputLabel(): string {
 }
 
 export function getAircraftFlightLengthInputLabel(): string {
-  return 'DURÉE';
+  return 'DURÉE TOTALE';
 }
 
 export function getNumberFlightsFieldValueErrorMessage(): string {

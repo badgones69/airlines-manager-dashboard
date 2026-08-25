@@ -129,4 +129,11 @@ export class ListAircraftsComponent implements OnInit, AfterViewInit {
     );
     dialogRef.componentInstance.aircraft = aircraft;
   }
+
+  /* Aircraft form (edit mode) opening */
+  openAircraftForm(aircraft: Aircraft) {
+    this.router.navigate(['aircrafts', 'edit'], {
+      state: { aircraft: JSON.stringify(aircraft), flights: aircraft.flights },
+    });
+  }
 }
