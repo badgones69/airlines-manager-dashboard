@@ -18,6 +18,7 @@ import { EditRouteComponent } from './route/pages/edit-route/edit-route.componen
 import { RoutesNetworkComponent } from './route/pages/network/network.component';
 import { AddAircraftComponent } from './aircraft/pages/add-aircraft/add-aircraft.component';
 import { ListAircraftsComponent } from './aircraft/pages/list-aircrafts/list-aircrafts.component';
+import { EditAircraftComponent } from './aircraft/pages/edit-aircraft/edit-aircraft.component';
 
 export const routes: Routes = [
   /* Authentication form (default route) */
@@ -81,6 +82,7 @@ export const routes: Routes = [
     children: [
       { path: 'add', component: AddAircraftComponent },
       { path: 'list', component: ListAircraftsComponent },
+      { path: 'edit', component: EditAircraftComponent },
     ],
   },
 ];

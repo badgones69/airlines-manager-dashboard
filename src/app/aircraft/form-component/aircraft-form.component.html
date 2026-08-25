@@ -65,7 +65,7 @@
       <mat-error>{{ displayModelErrorMessage() }}</mat-error>
     </mat-form-field>
   }
-  
+
   <!-- HOME HUB FIELD -->
   <mat-form-field class="airport-form-field">
     <mat-label id="homeHubInputLabel">
@@ -112,7 +112,7 @@
       <i class="material-icons">flight_takeoff</i>
       {{ flightsInputLabel }}
     </button>
-    <span class="number-flights-message">{{ numberFlightsLabel }}</span>
+    <span class="number-flights-message">{{ numberFlightsLabel$ | async}}</span>
   </div>
 
   <!-- BUTTONS -->
@@ -132,7 +132,7 @@
       class="submit-form-button"
       mat-fab
       extended
-      [disabled]="aircraftForm.invalid || numberFlightsLabel === ''"
+      [disabled]="aircraftForm.invalid"
     >
       <i class="material-icons">{{ submitButtonIcon }}</i>
       {{ submitButtonLabel }}

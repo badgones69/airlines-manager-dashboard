@@ -156,14 +156,15 @@ export class AircraftFlightsComponent implements OnInit {
     if(this.isEdit) {
       this.aircraftService.aircraftFlights.subscribe((aircraftFlights) => {
         if (aircraftFlights) {
-          aircraftFlights.flights.forEach((flight: any, index: number) => {
-            this.setRouteFlag(index, flight[getRouteFieldIdentifier(index)].country.flagCode);
-          });
-
           this.setFlightsFields(aircraftFlights.numberFlights);
+
           this.aircraftFlightsForm.patchValue({
             numberFlights: aircraftFlights.numberFlights,
             flights: aircraftFlights.flights,
+          });
+
+          aircraftFlights.flights.forEach((flight: any, index: number) => {
+            this.setRouteFlag(index, flight[getRouteFieldIdentifier(index)].country.flagCode);
           });
         }
       });
@@ -359,9 +360,9 @@ export class AircraftFlightsComponent implements OnInit {
   }
 
   /* Number flights field listener (flights fields) */
-  setFlightsFields(numberFlights: number) { 
+  setFlightsFields(numberFlights: number) {
     let numberFields: number = this.flights.length;
-    
+
     if (numberFlights > 0 && numberFlights < 13) {
       if (numberFields < numberFlights) {
         while (numberFields < numberFlights) {
@@ -421,7 +422,7 @@ export class AircraftFlightsComponent implements OnInit {
           : capitalize(flightRouteValueChanged.iata);
 
       const flightDestinationFound: Airport | undefined = this.routes.find(
-        (destination) => 
+        (destination) =>
           capitalize(destination.iata) === capitalize(filterValue),
       );
 
@@ -452,7 +453,7 @@ export class AircraftFlightsComponent implements OnInit {
       this.aircraftFlightsForm.get(this.numberFlightsFieldIdentifier)
         ?.hasError(MIN_ERROR) ||
       this.aircraftFlightsForm.get(this.numberFlightsFieldIdentifier)
-      ?.hasError(MAX_ERROR)    
+      ?.hasError(MAX_ERROR)
     ) {
       return getNumberFlightsFieldValueErrorMessage();
     }
@@ -509,8 +510,6 @@ export class AircraftFlightsComponent implements OnInit {
 
   /* Form submit */
   submitFlightsForm(): void {
-    globalThis.setTimeout(() => {
-      this.submitted.emit(this.aircraftFlightsForm.value);
-    }, 1000);
+    this.submitted.emit(this.aircraftFlightsForm.value);
   }
 }

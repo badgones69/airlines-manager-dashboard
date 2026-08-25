@@ -9,7 +9,7 @@ export function capitalizeSpaceSeparatedWordsFirstLetter(
   wordsBlock = wordsBlock.trim();
   const words = wordsBlock.split(' ');
 
-  for (let index = 0; index < words.length; index++) {
+  for (let index: number = 0; index < words.length; index++) {
     words[index] = capitalizeFirstLetter(words[index]);
   }
 
@@ -19,7 +19,7 @@ export function capitalizeSpaceSeparatedWordsFirstLetter(
 export function capitalizeDashedWordsFirstLetter(wordsBlock: string): string {
   const words = wordsBlock.split('-');
 
-  for (let index = 0; index < words.length; index++) {
+  for (let index: number = 0; index < words.length; index++) {
     words[index] = capitalizeFirstLetter(words[index]);
   }
 
