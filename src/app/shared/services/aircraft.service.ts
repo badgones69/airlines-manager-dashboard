@@ -197,4 +197,15 @@ export class AircraftService {
       );
     }
   }
+
+  /* Aircraft deletion */
+  public async deleteAircraft(aircraftUUID: string): Promise<any> {
+    const response = await supabase
+      .from('AIRCRAFT')
+      .delete()
+      .eq('aircraftUUID', aircraftUUID);
+
+    this.refreshAircraftsList();
+    return response;
+  }
 }

@@ -1,3 +1,4 @@
+import { getDeleteDialogMessage } from '../commons/dialog-common';
 import {
   getFormActionLabel,
   getSubmitButtonLabel,
@@ -37,6 +38,10 @@ export function getDepartureTimeFieldIdentifier(index: number): string {
 
 export function getLengthFieldIdentifier(index: number): string {
   return `flightLength${index}`;
+}
+
+export function getAircraftDeleteDialogMessage(): string {
+  return `${getDeleteDialogMessage().replace('{}', 'cet avion')}`;
 }
 
 export function getUnknownManufacturerErrorMessage(): string {
