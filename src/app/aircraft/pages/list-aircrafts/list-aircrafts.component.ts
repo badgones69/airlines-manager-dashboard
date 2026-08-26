@@ -33,6 +33,7 @@ import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { FlightsDetailsComponent } from '../flights-details/flights-details.component';
+import { DeleteAircraftComponent } from '../delete-aircraft/delete-aircraft.component';
 
 @Component({
   selector: 'list-aircrafts',
@@ -135,5 +136,19 @@ export class ListAircraftsComponent implements OnInit, AfterViewInit {
     this.router.navigate(['aircrafts', 'edit'], {
       state: { aircraft: JSON.stringify(aircraft), flights: aircraft.flights },
     });
+  }
+
+  /* Aircraft deletion confirmation dialog opening */
+  deleteAircraft(aircraft: Aircraft) {
+    let dialogRef: MatDialogRef<DeleteAircraftComponent> = this.dialog.open(
+      DeleteAircraftComponent,
+      {
+        disableClose: false,
+        autoFocus: true,
+        scrollStrategy: new NoopScrollStrategy(),
+      },
+    );
+    dialogRef.componentInstance.aircraftUUID = aircraft.uuid!;
+    dialogRef.afterClosed().subscribe(() => this.ngOnInit());
   }
 }
