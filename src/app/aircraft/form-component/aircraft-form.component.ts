@@ -353,24 +353,35 @@ export class AircraftFormComponent implements OnInit {
       if (homeHubFound) {
         this.homeHubFlag = homeHubFound.country.flagCode;
         this.routeService.findRoutesByDepartureHub(homeHubFound.id ?? 0).then((routes) => {
+          const oldHubRoutes: number[] = this.hubRoutes.map((route: any) => route.id);
+          const newHubRoutes: number[] = routes.map((route: any) => route.routeID);
+
+          const isDifferentHub: boolean = oldHubRoutes.length > 0 &&
+            oldHubRoutes.length !== newHubRoutes.length &&
+            newHubRoutes.some((newRoute: any) => !oldHubRoutes.includes(newRoute));
+
           this.hubRoutes = this.routeMapper.routesListFromDB(routes);
           let mustResetFlights: boolean = false;
-          let mustChangeRegistration: boolean = homeHubFound.id != this.aircraft.homeHub.id;
 
           this.aircraftService.aircraftFlights.subscribe((aircraftFlights) => {
-            mustResetFlights = aircraftFlights.numberFlights > 0;
+            if (aircraftFlights.numberFlights) {
+              mustResetFlights = aircraftFlights.numberFlights > 0 && isDifferentHub;
+            }
           });
 
-          if (mustChangeRegistration) {
-            if (mustResetFlights) {
-              this.aircraftService.refreshAircraftFlights(null);
-              this.numberFlightsLabel$.next('');
-              this.aircraftForm.setErrors({});
+          if (mustResetFlights) {
+            this.aircraftService.refreshAircraftFlights(null);
+            this.numberFlightsLabel$.next('');
+          }
+
+          if (this.formMode === EDIT_FORM_MODE) {
+            let mustChangeRegistration: boolean = homeHubFound.id != this.aircraft?.homeHub.id;
+
+            if (mustChangeRegistration) {
+              this.aircraftForm.value.registration = generateAircraftRegistration(homeHubFound.country);
             }
-            this.aircraftForm.value.registration = generateAircraftRegistration(homeHubFound.country);
           }
         });
-
       } else if (homeHubValueChanged === '') {
         this.homeHubFlag = '';
       } else {
