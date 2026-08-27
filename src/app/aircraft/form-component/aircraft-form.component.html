@@ -132,7 +132,7 @@
       class="submit-form-button"
       mat-fab
       extended
-      [disabled]="aircraftForm.invalid"
+      [disabled]="aircraftForm.invalid || (numberFlightsLabel$ | async) === ''"
     >
       <i class="material-icons">{{ submitButtonIcon }}</i>
       {{ submitButtonLabel }}
