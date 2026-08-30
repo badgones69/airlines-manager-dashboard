@@ -69,13 +69,14 @@ import { generateAircraftRegistration, getManufacturerByName, getModelByName, va
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { AircraftFlightsComponent } from '../pages/aircraft-flights/aircraft-flights.component';
-import { getAircraftFlightsDialogTitle, getAircraftFlightsErrorNotificationMessage } from '../../shared/labels/dialogs/aircraft-flights-dialog';
+import { getAircraftFlightsErrorNotificationMessage } from '../../shared/labels/dialogs/aircraft-flights-dialog';
 import { NotificationService } from '../../shared/services/notification.service';
 import { Route } from '../../shared/dto/Route';
 import { RouteService } from '../../shared/services/route.service';
 import { RouteMapper } from '../../shared/mappers/RouteMapper';
 import { RouterLink } from '@angular/router';
 import { FlightMapper } from '../../shared/mappers/FlightMapper';
+import { getFlightsDetailsDialogTitle } from '../../shared/labels/dialogs/flights-details-dialog';
 
 @Component({
   selector: 'aircraft-form',
@@ -576,21 +577,17 @@ export class AircraftFormComponent implements OnInit {
     }
 
     this.aircraftService.aircraftFlights.subscribe((aircraftFlights) => {
-      if (aircraftFlights.numberFlights == 0) {
-        this.aircraftForm.value.flights = [];
-        this.submitted.emit(this.aircraftMapper.aircraftToDB(this.aircraftForm.value));
-      } else {
-        this.aircraftForm.value.flights = validateAndFormatFlights(aircraftFlights.flights, this.aircraftForm.value.homeHub, this.hubRoutes);
-
-        if (this.aircraftForm.value.flights.length == 0) {
-          this.notificationService.showErrorNotification(
-            `${getAircraftFlightsDialogTitle()}`.toUpperCase(),
-            `${getAircraftFlightsErrorNotificationMessage()}`,
-          );
-        } else {
-          this.submitted.emit(this.aircraftMapper.aircraftToDB(this.aircraftForm.value));
-        }
-      }
+      this.numberFlights = aircraftFlights.numberFlights
+      this.aircraftForm.value.flights = validateAndFormatFlights(aircraftFlights.flights, this.aircraftForm.value.homeHub, this.hubRoutes);
     });
+
+    if (this.numberFlights > 0 && this.aircraftForm.value.flights.length == 0) {
+      this.notificationService.showErrorNotification(
+        `${getFlightsDetailsDialogTitle()}`.toUpperCase(),
+        `${getAircraftFlightsErrorNotificationMessage()}`,
+      );
+    } else {
+      this.submitted.emit(this.aircraftMapper.aircraftToDB(this.aircraftForm.value));
+    }
   }
 }

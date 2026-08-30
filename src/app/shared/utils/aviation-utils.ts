@@ -134,12 +134,13 @@ export function validateAndFormatFlights(flightsFormValues: any, homeHubId: numb
       return: false,
     } as Flight;
     flights.push(flight);
-
-    if (hasSchedulesOverlap(flights) || hasSchedulesInconsistencies(flightsDurationsByDestination)) {
-      return [];
-    }
   });
-  return splitOutboundReturnFlights(flights);
+
+  if (hasSchedulesOverlap(flights) || hasSchedulesInconsistencies(flightsDurationsByDestination)) {
+    return [];
+  } else {
+    return splitOutboundReturnFlights(flights);
+  }
 }
 
 export function splitOutboundReturnFlights(flights: Flight[]): Flight[] {

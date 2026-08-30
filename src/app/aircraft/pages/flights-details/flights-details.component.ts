@@ -58,7 +58,7 @@ export class FlightsDetailsComponent implements OnInit, AfterViewInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.flightsDetailsDialogTitle = `${getFlightsDetailsDialogTitle()}`;
+    this.flightsDetailsDialogTitle = `${getFlightsDetailsDialogTitle()} ${this.aircraft.registration}`;
     this.flightsDetailsDialogMode = INFO_DIALOG_MODE;
     this.flightsList.data = this.aircraft.flights;
   }
