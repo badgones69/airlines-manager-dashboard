@@ -23,9 +23,14 @@
         [displayWith]="displayManufacturer"
         (optionSelected)="changeManufacturer($event.option.value)"
       >
-        @for (manufacturer of filteredManufacturers | async; track manufacturer.id) {
+        @for (
+          manufacturer of filteredManufacturers | async;
+          track manufacturer.id
+        ) {
           <mat-option [value]="manufacturer">
-            <span class="flag fi fi-{{ manufacturer.headquarterCountryFlagCode }}"></span>
+            <span
+              class="flag fi fi-{{ manufacturer.headquarterCountryFlagCode }}"
+            ></span>
             {{ manufacturer.name }}
           </mat-option>
         }
@@ -112,7 +117,9 @@
       <i class="material-icons">flight_takeoff</i>
       {{ flightsInputLabel }}
     </button>
-    <span class="number-flights-message">{{ numberFlightsLabel$ | async}}</span>
+    <span class="number-flights-message">
+      {{ numberFlightsLabel$ | async }}
+    </span>
   </div>
 
   <!-- BUTTONS -->

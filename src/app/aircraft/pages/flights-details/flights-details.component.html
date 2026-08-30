@@ -1,4 +1,7 @@
-<app-dialog [dialogTitle]="flightsDetailsDialogTitle" [dialogMode]="flightsDetailsDialogMode">
+<app-dialog
+  [dialogTitle]="flightsDetailsDialogTitle"
+  [dialogMode]="flightsDetailsDialogMode"
+>
   <table mat-table [dataSource]="flightsList">
     <!-- NUMBER COLUMN -->
     <ng-container [matColumnDef]="columnsIdentifiers[0]">
@@ -14,7 +17,9 @@
       <td mat-cell *matCellDef="let flight">
         @if (flight.return) {
           <span
-            class="flag fi fi-{{ flight.route.arrivalAirport.country.flagCode }}"
+            class="flag fi fi-{{
+              flight.route.arrivalAirport.country.flagCode
+            }}"
           ></span>
           <span class="iata">{{ flight.route.arrivalAirport.iata }}</span>
           {{ flight.route.arrivalAirport.name }}
@@ -30,7 +35,9 @@
           <span class="iata">{{ flight.route.departureHub.iata }}</span>
           {{ flight.route.departureHub.name }}
           {{
-            flight.route.departureHub.region ? `(${flight.route.departureHub.region.code})` : ""
+            flight.route.departureHub.region
+              ? `(${flight.route.departureHub.region.code})`
+              : ""
           }}
         }
       </td>
@@ -40,7 +47,7 @@
     <ng-container [matColumnDef]="columnsIdentifiers[2]">
       <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[2] }}</th>
       <td mat-cell *matCellDef="let flight">
-        {{ flight.takeOff | date:'HH:mm' }}
+        {{ flight.takeOff | date: "HH:mm" }}
       </td>
     </ng-container>
 
@@ -48,8 +55,8 @@
     <ng-container [matColumnDef]="columnsIdentifiers[3]">
       <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[3] }}</th>
       <td mat-cell *matCellDef="let flight">
-        {{ flight.landing | date:'HH:mm' }}
-        @if ((flight.landing | date:'HH:mm') === '00:00') {
+        {{ flight.landing | date: "HH:mm" }}
+        @if ((flight.landing | date: "HH:mm") === "00:00") {
           <sup>(+1)</sup>
         }
       </td>
@@ -66,11 +73,15 @@
           <span class="iata">{{ flight.route.departureHub.iata }}</span>
           {{ flight.route.departureHub.name }}
           {{
-            flight.route.departureHub.region ? `(${flight.route.departureHub.region.code})` : ""
+            flight.route.departureHub.region
+              ? `(${flight.route.departureHub.region.code})`
+              : ""
           }}
         } @else {
           <span
-            class="flag fi fi-{{ flight.route.arrivalAirport.country.flagCode }}"
+            class="flag fi fi-{{
+              flight.route.arrivalAirport.country.flagCode
+            }}"
           ></span>
           <span class="iata">{{ flight.route.arrivalAirport.iata }}</span>
           {{ flight.route.arrivalAirport.name }}

@@ -48,7 +48,7 @@ export function getMonthName(monthNumber: string): string {
   }
 }
 
-function splitTime(time: string): string [] {
+function splitTime(time: string): string[] {
   return time.split(':');
 }
 
@@ -65,26 +65,29 @@ function addHoursToDateTime(date: Date, hours: number): number {
 }
 
 export function addMinutesToDateTime(date: Date, minutes: number): number {
- return date.getMinutes() + minutes;
+  return date.getMinutes() + minutes;
 }
 
 export function convertDateTimeInMinutes(date: Date): number {
   let dateTimeInMinutes: number = date.getHours() * 60 + date.getMinutes();
 
-  if (date.getDate() == new Date().getDate() + 1) {
+  if (date.getDate() === new Date().getDate() + 1) {
     dateTimeInMinutes += 1440;
   }
   return dateTimeInMinutes;
 }
 
-export function convertStringTimeInDate(stringTime: string, isLandingTime: boolean): Date {
+export function convertStringTimeInDate(
+  stringTime: string,
+  isLandingTime: boolean,
+): Date {
   let date: Date = new Date();
   const hours: number = getTimeHours(stringTime);
   const minutes: number = getTimeMinutes(stringTime);
 
   date.setHours(hours, minutes, 0);
 
-  if (isLandingTime && hours == 0 && minutes == 0) {
+  if (isLandingTime && hours === 0 && minutes === 0) {
     date.setHours(hours, minutes + 1440, 0);
   }
   return date;
@@ -92,13 +95,17 @@ export function convertStringTimeInDate(stringTime: string, isLandingTime: boole
 
 export function getLanding(takeOff: Date, landingTime: string): Date {
   let landing: Date = new Date();
-  landing.setHours(addHoursToDateTime(takeOff, getTimeHours(landingTime)), addMinutesToDateTime(takeOff, getTimeMinutes(landingTime)), 0);
+  landing.setHours(
+    addHoursToDateTime(takeOff, getTimeHours(landingTime)),
+    addMinutesToDateTime(takeOff, getTimeMinutes(landingTime)),
+    0,
+  );
   return landing;
 }
 
 export function hasSchedulesOverlap(flights: any[]): boolean {
   const flightsSorted: any[] = [...flights]
-    .map(flight => ({
+    .map((flight) => ({
       ...flight,
       start: convertDateTimeInMinutes(flight.takeOff),
       end: convertDateTimeInMinutes(flight.landing),
@@ -116,7 +123,10 @@ export function hasSchedulesOverlap(flights: any[]): boolean {
   return false;
 }
 
-export function hasSchedulesInconsistencies(flightsDurationsByDestination: Record<string, string[]>): boolean {
-  return Object.values(flightsDurationsByDestination)
-  .some((flightDurations) => flightDurations.length > 1);
+export function hasSchedulesInconsistencies(
+  flightsDurationsByDestination: Record<string, string[]>,
+): boolean {
+  return Object.values(flightsDurationsByDestination).some(
+    (flightDurations) => flightDurations.length > 1,
+  );
 }

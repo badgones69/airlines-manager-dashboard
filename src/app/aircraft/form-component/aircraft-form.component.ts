@@ -56,7 +56,16 @@ import {
 import { Aircraft } from '../../shared/dto/Aircraft';
 import { Manufacturer } from '../../shared/dto/Manufacturer';
 import { MANUFACTURERS } from '../../shared/data/manufacturers';
-import { getAircraftFormTitle, getFlightsInputLabel, getHomeHubLabel, getManufacturerLabel, getModelLabel, getNumberFlightsLabel, getUnknownManufacturerErrorMessage, getUnknownModelErrorMessage } from '../../shared/labels/forms/aircraft-form';
+import {
+  getAircraftFormTitle,
+  getFlightsInputLabel,
+  getHomeHubLabel,
+  getManufacturerLabel,
+  getModelLabel,
+  getNumberFlightsLabel,
+  getUnknownManufacturerErrorMessage,
+  getUnknownModelErrorMessage,
+} from '../../shared/labels/forms/aircraft-form';
 import { Model } from '../../shared/dto/Model';
 import { getUnknownAirportErrorMessage } from '../../shared/labels/forms/route-form';
 import { Airport } from '../../shared/dto/Airport';
@@ -65,7 +74,12 @@ import { AirportMapper } from '../../shared/mappers/AirportMapper';
 import { AircraftMapper } from '../../shared/mappers/AircraftMapper';
 import { AircraftService } from '../../shared/services/aircraft.service';
 import { Country } from '../../shared/dto/Country';
-import { generateAircraftRegistration, getManufacturerByName, getModelByName, validateAndFormatFlights } from '../../shared/utils/aviation-utils';
+import {
+  generateAircraftRegistration,
+  getManufacturerByName,
+  getModelByName,
+  validateAndFormatFlights,
+} from '../../shared/utils/aviation-utils';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { AircraftFlightsComponent } from '../pages/aircraft-flights/aircraft-flights.component';
@@ -118,7 +132,8 @@ export class AircraftFormComponent implements OnInit {
   public manufacturerFlag: string = '';
   public homeHubFlag: string = '';
   public numberFlights: number = -1;
-  public numberFlightsLabel$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public numberFlightsLabel$: BehaviorSubject<string> =
+    new BehaviorSubject<string>('');
 
   /* Form fields identifiers */
   public manufacturerFieldIdentifier: string = 'manufacturer';
@@ -143,7 +158,9 @@ export class AircraftFormComponent implements OnInit {
   // Manufacturer field available values
   public manufacturers: Manufacturer[] = MANUFACTURERS;
   // List of manufacturers matching to manufacturer field value
-  public filteredManufacturers: Observable<Manufacturer[]> = new Observable<Manufacturer[]>();
+  public filteredManufacturers: Observable<Manufacturer[]> = new Observable<
+    Manufacturer[]
+  >();
   // Model field available values
   public models: Model[] = [];
   // List of models matching to manufacturer field value
@@ -166,17 +183,13 @@ export class AircraftFormComponent implements OnInit {
   public routeMapper: RouteMapper = new RouteMapper();
   public aircraftMapper: AircraftMapper = new AircraftMapper();
 
-  constructor(
-    readonly notificationService: NotificationService,
-  ) {
+  constructor(readonly notificationService: NotificationService) {
     /* Form fields creation & constraints definition */
-    this.aircraftForm = new FormGroup(
-      {
-        manufacturer: new FormControl('', Validators.required),
-        model: new FormControl(''),
-        homeHub: new FormControl('', Validators.required),
-      },
-    );
+    this.aircraftForm = new FormGroup({
+      manufacturer: new FormControl('', Validators.required),
+      model: new FormControl(''),
+      homeHub: new FormControl('', Validators.required),
+    });
   }
 
   ngOnInit(): void {
@@ -205,7 +218,9 @@ export class AircraftFormComponent implements OnInit {
         distinctUntilChanged(),
         startWith(''),
         map((manufacturer) =>
-          manufacturer ? this.filterManufacturers(manufacturer) : this.manufacturers.slice(),
+          manufacturer
+            ? this.filterManufacturers(manufacturer)
+            : this.manufacturers.slice(),
         ),
       );
 
@@ -221,9 +236,7 @@ export class AircraftFormComponent implements OnInit {
     this.aircraftForm
       .get(this.modelFieldIdentifier)
       ?.valueChanges.pipe(takeUntil(new Subject<void>()))
-      .subscribe((modelValueChanged) =>
-        this.changeModel(modelValueChanged),
-      );
+      .subscribe((modelValueChanged) => this.changeModel(modelValueChanged));
 
     this.aircraftForm
       .get(this.homeHubFieldIdentifier)
@@ -252,20 +265,21 @@ export class AircraftFormComponent implements OnInit {
         homeHub: this.aircraft?.homeHub,
       });
 
-      this.manufacturerFlag = this.aircraft?.manufacturer?.headquarterCountryFlagCode;
+      this.manufacturerFlag =
+        this.aircraft?.manufacturer?.headquarterCountryFlagCode;
       this.homeHubFlag = this.aircraft?.homeHub?.country.flagCode;
     });
 
     if (this.isEditMode) {
-      this.aircraftService.refreshAircraftFlights(
-        {
-          numberFlights: this.aircraft.flights.length / 2,
-          flights: this.flightMapper.flightsListToFields(this.aircraft.flights),
-        }
-      );
+      this.aircraftService.refreshAircraftFlights({
+        numberFlights: this.aircraft.flights.length / 2,
+        flights: this.flightMapper.flightsListToFields(this.aircraft.flights),
+      });
       this.aircraftService.aircraftFlights.subscribe((aircraftFlights: any) => {
         this.numberFlights = aircraftFlights.numberFlights;
-        this.numberFlightsLabel$.next(getNumberFlightsLabel(this.numberFlights));
+        this.numberFlightsLabel$.next(
+          getNumberFlightsLabel(this.numberFlights),
+        );
       });
     }
   }
@@ -278,9 +292,7 @@ export class AircraftFormComponent implements OnInit {
       ?.valueChanges.pipe(
         distinctUntilChanged(),
         startWith(''),
-        map((model) =>
-          model ? this.filterModels(model) : listModels.slice(),
-        ),
+        map((model) => (model ? this.filterModels(model) : listModels.slice())),
       );
   }
 
@@ -292,17 +304,22 @@ export class AircraftFormComponent implements OnInit {
           ? capitalize(manufacturerValueChanged)
           : capitalize(manufacturerValueChanged.name);
 
-      const manufacturerFound: Manufacturer | undefined = this.manufacturers.find(
-        (manufacturer) =>
-          capitalize(manufacturer.name) === capitalize(manufacturerValue),
-      );
+      const manufacturerFound: Manufacturer | undefined =
+        this.manufacturers.find(
+          (manufacturer) =>
+            capitalize(manufacturer.name) === capitalize(manufacturerValue),
+        );
 
       if (manufacturerFound) {
         this.manufacturerFlag = manufacturerFound.headquarterCountryFlagCode;
         this.models = manufacturerFound.models;
         this.setAvailableModels(this.models);
-        this.aircraftForm.get(this.modelFieldIdentifier)?.setValidators([Validators.required]);
-        this.changeModel(this.aircraftForm.get(this.modelFieldIdentifier)?.value);
+        this.aircraftForm
+          .get(this.modelFieldIdentifier)
+          ?.setValidators([Validators.required]);
+        this.changeModel(
+          this.aircraftForm.get(this.modelFieldIdentifier)?.value,
+        );
       } else {
         if (manufacturerValueChanged === '') {
           this.manufacturerFlag = '';
@@ -326,7 +343,7 @@ export class AircraftFormComponent implements OnInit {
           : capitalize(modelValueChanged.name);
 
       const modelFound = this.models.some(
-        (model) => capitalize(model.name) === capitalize(filterValue)
+        (model) => capitalize(model.name) === capitalize(filterValue),
       );
 
       if (!modelFound && filterValue !== '') {
@@ -353,36 +370,50 @@ export class AircraftFormComponent implements OnInit {
 
       if (homeHubFound) {
         this.homeHubFlag = homeHubFound.country.flagCode;
-        this.routeService.findRoutesByDepartureHub(homeHubFound.id ?? 0).then((routes) => {
-          const oldHubRoutes: number[] = this.hubRoutes.map((route: any) => route.id);
-          const newHubRoutes: number[] = routes.map((route: any) => route.routeID);
+        this.routeService
+          .findRoutesByDepartureHub(homeHubFound.id ?? 0)
+          .then((routes) => {
+            const oldHubRoutes: number[] = this.hubRoutes.map(
+              (route: any) => route.id,
+            );
+            const newHubRoutes: number[] = routes.map(
+              (route: any) => route.routeID,
+            );
 
-          const isDifferentHub: boolean = oldHubRoutes.length > 0 &&
-            oldHubRoutes.length !== newHubRoutes.length &&
-            newHubRoutes.some((newRoute: any) => !oldHubRoutes.includes(newRoute));
+            const isDifferentHub: boolean =
+              oldHubRoutes.length > 0 &&
+              oldHubRoutes.length !== newHubRoutes.length &&
+              newHubRoutes.some(
+                (newRoute: any) => !oldHubRoutes.includes(newRoute),
+              );
 
-          this.hubRoutes = this.routeMapper.routesListFromDB(routes);
-          let mustResetFlights: boolean = false;
+            this.hubRoutes = this.routeMapper.routesListFromDB(routes);
+            let mustResetFlights: boolean = false;
 
-          this.aircraftService.aircraftFlights.subscribe((aircraftFlights) => {
-            if (aircraftFlights.numberFlights) {
-              mustResetFlights = aircraftFlights.numberFlights > 0 && isDifferentHub;
+            this.aircraftService.aircraftFlights.subscribe(
+              (aircraftFlights) => {
+                if (aircraftFlights.numberFlights) {
+                  mustResetFlights =
+                    aircraftFlights.numberFlights > 0 && isDifferentHub;
+                }
+              },
+            );
+
+            if (mustResetFlights) {
+              this.aircraftService.refreshAircraftFlights(null);
+              this.numberFlightsLabel$.next('');
+            }
+
+            if (this.formMode === EDIT_FORM_MODE) {
+              let mustChangeRegistration: boolean =
+                homeHubFound.id != this.aircraft?.homeHub.id;
+
+              if (mustChangeRegistration) {
+                this.aircraftForm.value.registration =
+                  generateAircraftRegistration(homeHubFound.country);
+              }
             }
           });
-
-          if (mustResetFlights) {
-            this.aircraftService.refreshAircraftFlights(null);
-            this.numberFlightsLabel$.next('');
-          }
-
-          if (this.formMode === EDIT_FORM_MODE) {
-            let mustChangeRegistration: boolean = homeHubFound.id != this.aircraft?.homeHub.id;
-
-            if (mustChangeRegistration) {
-              this.aircraftForm.value.registration = generateAircraftRegistration(homeHubFound.country);
-            }
-          }
-        });
       } else if (homeHubValueChanged === '') {
         this.homeHubFlag = '';
       } else {
@@ -402,8 +433,11 @@ export class AircraftFormComponent implements OnInit {
       },
     );
 
-    dialogRef.componentInstance.isEdit = this.numberFlightsLabel$.getValue() !== '';
-    dialogRef.componentInstance.routes = this.hubRoutes.map((route) => route.arrivalAirport);
+    dialogRef.componentInstance.isEdit =
+      this.numberFlightsLabel$.getValue() !== '';
+    dialogRef.componentInstance.routes = this.hubRoutes.map(
+      (route) => route.arrivalAirport,
+    );
 
     dialogRef.componentInstance.submitted.subscribe((aircraftFlights: any) => {
       this.aircraftService.refreshAircraftFlights(aircraftFlights);
@@ -423,9 +457,8 @@ export class AircraftFormComponent implements OnInit {
       typeof manufacturerValue === 'string'
         ? capitalize(manufacturerValue)
         : capitalize(manufacturerValue.name);
-    return this.manufacturers.filter(
-      (manufacturer) =>
-        capitalize(manufacturer.name).startsWith(capitalize(filterValue)),
+    return this.manufacturers.filter((manufacturer) =>
+      capitalize(manufacturer.name).startsWith(capitalize(filterValue)),
     );
   }
 
@@ -439,9 +472,8 @@ export class AircraftFormComponent implements OnInit {
       typeof modelValue === 'string'
         ? capitalize(modelValue)
         : capitalize(modelValue.name);
-    return this.models.filter(
-      (model) =>
-        capitalize(model.name).startsWith(capitalize(filterValue)),
+    return this.models.filter((model) =>
+      capitalize(model.name).startsWith(capitalize(filterValue)),
     );
   }
 
@@ -498,9 +530,7 @@ export class AircraftFormComponent implements OnInit {
   /* Model field error message(s) display */
   displayModelErrorMessage(): string {
     if (
-      this.aircraftForm
-        .get(this.modelFieldIdentifier)
-        ?.hasError(REQUIRED_ERROR)
+      this.aircraftForm.get(this.modelFieldIdentifier)?.hasError(REQUIRED_ERROR)
     ) {
       return getRequiredFieldErrorMessage();
     } else if (
@@ -538,17 +568,19 @@ export class AircraftFormComponent implements OnInit {
     )?.value;
 
     if (typeof manufacturerValue === 'string') {
-      this.aircraftForm.value.manufacturer = getManufacturerByName(manufacturerValue)?.id;
+      this.aircraftForm.value.manufacturer =
+        getManufacturerByName(manufacturerValue)?.id;
     } else {
       this.aircraftForm.value.manufacturer = manufacturerValue.id;
     }
 
-    const modelValue = this.aircraftForm.get(
-      this.modelFieldIdentifier,
-    )?.value;
+    const modelValue = this.aircraftForm.get(this.modelFieldIdentifier)?.value;
 
     if (typeof modelValue === 'string') {
-      this.aircraftForm.value.model = getModelByName(modelValue, this.aircraftForm.value.manufacturer)?.id;
+      this.aircraftForm.value.model = getModelByName(
+        modelValue,
+        this.aircraftForm.value.manufacturer,
+      )?.id;
     } else {
       this.aircraftForm.value.model = modelValue.id;
     }
@@ -565,29 +597,36 @@ export class AircraftFormComponent implements OnInit {
           capitalize(hub.name) === capitalize(homeHubValue) ||
           capitalize(hub.iata) === capitalize(homeHubValue),
       );
-      homeHubCountry = homeHubFound?.country
-      this.aircraftForm.value.homeHub = homeHubFound?.id
+      homeHubCountry = homeHubFound?.country;
+      this.aircraftForm.value.homeHub = homeHubFound?.id;
     } else {
       homeHubCountry = homeHubValue.country;
       this.aircraftForm.value.homeHub = homeHubValue.id;
     }
 
     if (!this.isEditMode) {
-      this.aircraftForm.value.registration = generateAircraftRegistration(homeHubCountry);
+      this.aircraftForm.value.registration =
+        generateAircraftRegistration(homeHubCountry);
     }
 
     this.aircraftService.aircraftFlights.subscribe((aircraftFlights) => {
-      this.numberFlights = aircraftFlights.numberFlights
-      this.aircraftForm.value.flights = validateAndFormatFlights(aircraftFlights.flights, this.aircraftForm.value.homeHub, this.hubRoutes);
+      this.numberFlights = aircraftFlights.numberFlights;
+      this.aircraftForm.value.flights = validateAndFormatFlights(
+        aircraftFlights.flights,
+        this.aircraftForm.value.homeHub,
+        this.hubRoutes,
+      );
     });
 
-    if (this.numberFlights > 0 && this.aircraftForm.value.flights.length == 0) {
+    if (this.numberFlights > 0 && this.aircraftForm.value.flights.length === 0) {
       this.notificationService.showErrorNotification(
         `${getFlightsDetailsDialogTitle()}`.toUpperCase(),
         `${getAircraftFlightsErrorNotificationMessage()}`,
       );
     } else {
-      this.submitted.emit(this.aircraftMapper.aircraftToDB(this.aircraftForm.value));
+      this.submitted.emit(
+        this.aircraftMapper.aircraftToDB(this.aircraftForm.value),
+      );
     }
   }
 }

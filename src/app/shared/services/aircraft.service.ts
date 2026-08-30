@@ -16,7 +16,9 @@ export class AircraftService {
   public flightService: FlightService = inject(FlightService);
 
   readonly aircrafts$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
-  readonly aircraftFlights$: BehaviorSubject<any> = new BehaviorSubject<any>({});
+  readonly aircraftFlights$: BehaviorSubject<any> = new BehaviorSubject<any>(
+    {},
+  );
 
   constructor(readonly notificationService: NotificationService) {
     this.refreshAircraftsList();
@@ -68,7 +70,13 @@ export class AircraftService {
 
   /* Aircraft creation */
   public async createAircraft(aircraftToCreate: any): Promise<any> {
-    const { aircraftRegistration, aircraftManufacturer, aircraftModel, aircraftHomeHub, aircraftFlights } = aircraftToCreate;
+    const {
+      aircraftRegistration,
+      aircraftManufacturer,
+      aircraftModel,
+      aircraftHomeHub,
+      aircraftFlights,
+    } = aircraftToCreate;
 
     const aircraftResponse = await supabase
       .from('AIRCRAFT')
@@ -85,21 +93,30 @@ export class AircraftService {
       const aircraftId: number = aircraftResponse.data![0]!.aircraftID;
       const flightsResponsesStatus: string[] = [];
 
-      await Promise.all(aircraftFlights.map(async (flight: any) => {
-        const flightResponse: any = await this.flightService.createFlight(flight, aircraftId);
+      await Promise.all(
+        aircraftFlights.map(async (flight: any) => {
+          const flightResponse: any = await this.flightService.createFlight(
+            flight,
+            aircraftId,
+          );
 
-        if (flightResponse.status.toString().startsWith('20')) {
-          flightsResponsesStatus.push(flightResponse.status.toString());
-        }
-      }));
+          if (flightResponse.status.toString().startsWith('20')) {
+            flightsResponsesStatus.push(flightResponse.status.toString());
+          }
+        }),
+      );
 
       this.refreshAircraftsList();
 
-      if (flightsResponsesStatus.length == aircraftFlights.length) {
+      if (flightsResponsesStatus.length === aircraftFlights.length) {
         /* Flight numbers caching */
-        this.flightService.findAllExistingFlightNumbers().then((existingFlightNumbers) => {
-          this.flightService.cacheExistingFlightNumbers(existingFlightNumbers.map((flight) => flight.flightNumber));
-        });
+        this.flightService
+          .findAllExistingFlightNumbers()
+          .then((existingFlightNumbers) => {
+            this.flightService.cacheExistingFlightNumbers(
+              existingFlightNumbers.map((flight) => flight.flightNumber),
+            );
+          });
         return aircraftResponse.data;
       } else {
         /* Technical error notification showing */
@@ -119,7 +136,14 @@ export class AircraftService {
 
   /* Aircraft updating */
   public async updateAircraft(aircraftUpdated: any): Promise<any> {
-    const { aircraftUUID, aircraftRegistration, aircraftManufacturer, aircraftModel, aircraftHomeHub, aircraftFlights } = aircraftUpdated;
+    const {
+      aircraftUUID,
+      aircraftRegistration,
+      aircraftManufacturer,
+      aircraftModel,
+      aircraftHomeHub,
+      aircraftFlights,
+    } = aircraftUpdated;
 
     const aircraftResponse = await supabase
       .from('AIRCRAFT')
@@ -134,31 +158,47 @@ export class AircraftService {
 
     if (aircraftResponse.status.toString().startsWith('20')) {
       const aircraftId: number = aircraftResponse.data![0]!.aircraftID;
-      const oldAircraftFlights: any[] = await this.flightService.findFlightsByAircraft(aircraftId);
+      const oldAircraftFlights: any[] =
+        await this.flightService.findFlightsByAircraft(aircraftId);
       let flightsToCreate: any[] = [];
       let flightsToDelete: any[] = [];
       const flightsResponsesStatus: string[] = [];
 
       if (aircraftFlights.length > oldAircraftFlights.length) {
-        flightsToCreate = aircraftFlights.splice(oldAircraftFlights.length, aircraftFlights.length - oldAircraftFlights.length);
+        flightsToCreate = aircraftFlights.splice(
+          oldAircraftFlights.length,
+          aircraftFlights.length - oldAircraftFlights.length,
+        );
 
-        await Promise.all(flightsToCreate.map(async (flight: any) => {
-          const flightResponse: any = await this.flightService.createFlight(flight, aircraftId);
+        await Promise.all(
+          flightsToCreate.map(async (flight: any) => {
+            const flightResponse: any = await this.flightService.createFlight(
+              flight,
+              aircraftId,
+            );
 
-          if (flightResponse.status.toString().startsWith('20')) {
-            flightsResponsesStatus.push(flightResponse.status.toString());
-          }
-        }));
+            if (flightResponse.status.toString().startsWith('20')) {
+              flightsResponsesStatus.push(flightResponse.status.toString());
+            }
+          }),
+        );
       } else if (aircraftFlights.length < oldAircraftFlights.length) {
-        flightsToDelete = oldAircraftFlights.splice(aircraftFlights.length, oldAircraftFlights.length - aircraftFlights.length);
-        
-        await Promise.all(flightsToDelete.map(async (flight: any) => {
-          const flightResponse: any = await this.flightService.deleteFlight(flight.flightUUID);
+        flightsToDelete = oldAircraftFlights.splice(
+          aircraftFlights.length,
+          oldAircraftFlights.length - aircraftFlights.length,
+        );
 
-          if (flightResponse.status.toString().startsWith('20')) {
-            flightsResponsesStatus.push(flightResponse.status.toString());
-          }
-        }));
+        await Promise.all(
+          flightsToDelete.map(async (flight: any) => {
+            const flightResponse: any = await this.flightService.deleteFlight(
+              flight.flightUUID,
+            );
+
+            if (flightResponse.status.toString().startsWith('20')) {
+              flightsResponsesStatus.push(flightResponse.status.toString());
+            }
+          }),
+        );
       }
 
       oldAircraftFlights.forEach((oldFlight, index) => {
@@ -166,21 +206,31 @@ export class AircraftService {
         aircraftFlights[index].flightNumber = oldFlight.flightNumber;
       });
 
-      await Promise.all(aircraftFlights.map(async (flight: any) => {
-        const flightResponse: any = await this.flightService.updateFlight(flight);
+      await Promise.all(
+        aircraftFlights.map(async (flight: any) => {
+          const flightResponse: any =
+            await this.flightService.updateFlight(flight);
 
-        if (flightResponse.status.toString().startsWith('20')) {
-          flightsResponsesStatus.push(flightResponse.status.toString());
-        }
-      }));
+          if (flightResponse.status.toString().startsWith('20')) {
+            flightsResponsesStatus.push(flightResponse.status.toString());
+          }
+        }),
+      );
 
       this.refreshAircraftsList();
 
-      if (flightsResponsesStatus.length == aircraftFlights.length + flightsToCreate.length + flightsToDelete.length) {
+      if (
+        flightsResponsesStatus.length ==
+        aircraftFlights.length + flightsToCreate.length + flightsToDelete.length
+      ) {
         /* Flight numbers caching */
-        this.flightService.findAllExistingFlightNumbers().then((existingFlightNumbers) => {
-          this.flightService.cacheExistingFlightNumbers(existingFlightNumbers.map((flight) => flight.flightNumber));
-        });
+        this.flightService
+          .findAllExistingFlightNumbers()
+          .then((existingFlightNumbers) => {
+            this.flightService.cacheExistingFlightNumbers(
+              existingFlightNumbers.map((flight) => flight.flightNumber),
+            );
+          });
         return aircraftResponse.data;
       } else {
         /* Technical error notification showing */

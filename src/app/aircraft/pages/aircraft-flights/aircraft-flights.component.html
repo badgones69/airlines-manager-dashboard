@@ -3,7 +3,6 @@
 <mat-dialog-content>
   <!-- FORM -->
   <form id="form" [formGroup]="aircraftFlightsForm">
-
     <!-- NUMBER FLIGHTS FIELD -->
     <mat-form-field class="form-field">
       <mat-label id="numberFlightsInputLabel">
@@ -19,12 +18,11 @@
       />
       <mat-error>{{ displayNumberFlightsErrorMessage() }}</mat-error>
     </mat-form-field>
-    
+
     <!-- FLIGHTS FIELDS -->
     <div formArrayName="flights" id="flights-fields-array">
       @for (flight of flights.controls; track flight) {
         <div [formGroupName]="$index" class="flight-fields-container">
-
           <!-- ROUTE FIELD -->
           <mat-form-field class="form-field">
             <mat-label id="flightRouteInputLabel">
@@ -43,9 +41,14 @@
                 [displayWith]="displayFlightRoute"
                 (optionSelected)="changeFlightRoute($event.option.value, $index)"
               >
-                @for (route of getFilteredRoutes($index) | async; track route.id) {
+                @for (
+                  route of getFilteredRoutes($index) | async;
+                  track route.id
+                ) {
                   <mat-option [value]="route">
-                    <span class="flag fi fi-{{ route.country.flagCode }}"></span>
+                    <span
+                      class="flag fi fi-{{ route.country.flagCode }}"
+                    ></span>
                     <span>{{ route.iata }}</span>
                   </mat-option>
                 }
@@ -65,7 +68,9 @@
               [formControlName]="getDepartureTimeFieldIdentifier($index)"
               type="time"
             />
-            <mat-error>{{ displayFlightDepartureTimeErrorMessage($index) }}</mat-error>
+            <mat-error>
+              {{ displayFlightDepartureTimeErrorMessage($index) }}
+            </mat-error>
           </mat-form-field>
 
           <!-- LENGTH FIELD -->
