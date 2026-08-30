@@ -75,7 +75,7 @@ export const routes: Routes = [
       { path: 'network', component: RoutesNetworkComponent },
     ],
   },
-  
+
   /* Aircraft pages */
   {
     path: 'aircrafts',

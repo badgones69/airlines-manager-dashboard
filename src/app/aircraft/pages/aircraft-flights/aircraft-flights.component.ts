@@ -1,6 +1,22 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { AircraftMapper } from '../../../shared/mappers/AircraftMapper';
 import {
   MatDialogActions,
@@ -9,23 +25,51 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { getAircraftFlightRouteInputLabel, getAircraftFlightsDialogTitle, getAircraftFlightDepartureTimeInputLabel, getAircraftNumberFlightsInputLabel, getValidateButtonLabel, getAircraftFlightLengthInputLabel, getNumberFlightsFieldValueErrorMessage } from '../../../shared/labels/dialogs/aircraft-flights-dialog';
+import {
+  getAircraftFlightRouteInputLabel,
+  getAircraftFlightsDialogTitle,
+  getAircraftFlightDepartureTimeInputLabel,
+  getAircraftNumberFlightsInputLabel,
+  getValidateButtonLabel,
+  getAircraftFlightLengthInputLabel,
+  getNumberFlightsFieldValueErrorMessage,
+} from '../../../shared/labels/dialogs/aircraft-flights-dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { distinctUntilChanged, map, Observable, startWith, Subject, takeUntil } from 'rxjs';
-import { MatAutocomplete, MatOption, MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import {
+  distinctUntilChanged,
+  map,
+  Observable,
+  startWith,
+  Subject,
+  takeUntil,
+} from 'rxjs';
+import {
+  MatAutocomplete,
+  MatOption,
+  MatAutocompleteTrigger,
+} from '@angular/material/autocomplete';
 import { Airport } from '../../../shared/dto/Airport';
 import { capitalize } from '../../../shared/utils/labels-utils';
 import { AirportMapper } from '../../../shared/mappers/AirportMapper';
 import { RouteMapper } from '../../../shared/mappers/RouteMapper';
 import { AirportService } from '../../../shared/services/airport.service';
-import { MAX_ERROR, MIN_ERROR, REQUIRED_ERROR, UNKNOWN_AIRPORT_ERROR } from '../../../shared/constants/forms-constants';
+import {
+  MAX_ERROR,
+  MIN_ERROR,
+  REQUIRED_ERROR,
+  UNKNOWN_AIRPORT_ERROR,
+} from '../../../shared/constants/forms-constants';
 import { getRequiredFieldErrorMessage } from '../../../shared/labels/commons/form-common';
 import { getUnknownAirportErrorMessage } from '../../../shared/labels/forms/route-form';
 import { RouteService } from '../../../shared/services/route.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { AircraftService } from '../../../shared/services/aircraft.service';
-import { getDepartureTimeFieldIdentifier, getLengthFieldIdentifier, getRouteFieldIdentifier } from '../../../shared/labels/forms/aircraft-form';
+import {
+  getDepartureTimeFieldIdentifier,
+  getLengthFieldIdentifier,
+  getRouteFieldIdentifier,
+} from '../../../shared/labels/forms/aircraft-form';
 
 @Component({
   selector: 'aircraft-flights',
@@ -128,12 +172,10 @@ export class AircraftFlightsComponent implements OnInit {
 
   constructor(readonly notificationService: NotificationService) {
     /* Form fields creation & constraints definition */
-    this.aircraftFlightsForm = new FormGroup(
-      {
-        numberFlights: new FormControl('', Validators.required),
-        flights: new FormBuilder().array([]),
-      },
-    );
+    this.aircraftFlightsForm = new FormGroup({
+      numberFlights: new FormControl('', Validators.required),
+      flights: new FormBuilder().array([]),
+    });
   }
 
   ngOnInit(): void {
@@ -141,19 +183,19 @@ export class AircraftFlightsComponent implements OnInit {
     this.aircraftFlightsDialogTitle = getAircraftFlightsDialogTitle();
     this.aircraftNumberFlightsInputLabel = getAircraftNumberFlightsInputLabel();
     this.aircraftFlightRouteInputLabel = getAircraftFlightRouteInputLabel();
-    this.aircraftFlightDepartureTimeInputLabel = getAircraftFlightDepartureTimeInputLabel();
+    this.aircraftFlightDepartureTimeInputLabel =
+      getAircraftFlightDepartureTimeInputLabel();
     this.aircraftFlightLengthInputLabel = getAircraftFlightLengthInputLabel();
     this.validateButtonLabel = getValidateButtonLabel();
 
     this.aircraftFlightsForm
       .get(this.numberFlightsFieldIdentifier)
-      ?.valueChanges.pipe(
-        takeUntil(new Subject<void>()))
+      ?.valueChanges.pipe(takeUntil(new Subject<void>()))
       .subscribe((numberFlightsValueChanged) =>
         this.setFlightsFields(numberFlightsValueChanged),
       );
 
-    if(this.isEdit) {
+    if (this.isEdit) {
       this.aircraftService.aircraftFlights.subscribe((aircraftFlights) => {
         if (aircraftFlights) {
           this.setFlightsFields(aircraftFlights.numberFlights);
@@ -164,7 +206,10 @@ export class AircraftFlightsComponent implements OnInit {
           });
 
           aircraftFlights.flights.forEach((flight: any, index: number) => {
-            this.setRouteFlag(index, flight[getRouteFieldIdentifier(index)].country.flagCode);
+            this.setRouteFlag(
+              index,
+              flight[getRouteFieldIdentifier(index)].country.flagCode,
+            );
           });
         }
       });
@@ -181,9 +226,8 @@ export class AircraftFlightsComponent implements OnInit {
       typeof flightRouteValue === 'string'
         ? capitalize(flightRouteValue)
         : capitalize(flightRouteValue.iata);
-    return this.routes.filter(
-      (route) =>
-        capitalize(route.iata).startsWith(filterValue),
+    return this.routes.filter((route) =>
+      capitalize(route.iata).startsWith(filterValue),
     );
   }
 
@@ -366,13 +410,22 @@ export class AircraftFlightsComponent implements OnInit {
     if (numberFlights > 0 && numberFlights < 13) {
       if (numberFields < numberFlights) {
         while (numberFields < numberFlights) {
-          this.flights.push(new FormGroup(
-            {
-              [getRouteFieldIdentifier(numberFields)]: new FormControl('', Validators.required),
-              [getDepartureTimeFieldIdentifier(numberFields)]: new FormControl('', Validators.required),
-              [getLengthFieldIdentifier(numberFields)]: new FormControl('', Validators.required),
-            }
-          ));
+          this.flights.push(
+            new FormGroup({
+              [getRouteFieldIdentifier(numberFields)]: new FormControl(
+                '',
+                Validators.required,
+              ),
+              [getDepartureTimeFieldIdentifier(numberFields)]: new FormControl(
+                '',
+                Validators.required,
+              ),
+              [getLengthFieldIdentifier(numberFields)]: new FormControl(
+                '',
+                Validators.required,
+              ),
+            }),
+          );
           numberFields++;
         }
       } else {
@@ -391,22 +444,21 @@ export class AircraftFlightsComponent implements OnInit {
 
     for (let i: number = 0; i < this.flights.length; i++) {
       // @ts-ignore
-      const filteredRoute = (this.flights
-        ?.controls[i] as FormGroup)
-        ?.controls[getRouteFieldIdentifier(i)]
-        ?.valueChanges.pipe(
-          distinctUntilChanged(),
-          startWith(''),
-          map((route) =>
-            route ? this.filterRoutes(route) : this.routes.slice(),
-          ),
+      const filteredRoute = (this.flights?.controls[i] as FormGroup)?.controls[
+        getRouteFieldIdentifier(i)
+      ]?.valueChanges.pipe(
+        distinctUntilChanged(),
+        startWith(''),
+        map((route) =>
+          route ? this.filterRoutes(route) : this.routes.slice(),
+        ),
       );
       this.setFilteredRoute(i, filteredRoute);
 
-      (this.flights
-        ?.controls[i] as FormGroup)
-        ?.controls[getRouteFieldIdentifier(i)]
-        ?.valueChanges.pipe(takeUntil(new Subject<void>()))
+      (this.flights?.controls[i] as FormGroup)?.controls[
+        getRouteFieldIdentifier(i)
+      ]?.valueChanges
+        .pipe(takeUntil(new Subject<void>()))
         .subscribe((flightRouteValueChanged) =>
           this.changeFlightRoute(flightRouteValueChanged, i),
         );
@@ -427,7 +479,9 @@ export class AircraftFlightsComponent implements OnInit {
       );
 
       if (flightDestinationFound) {
-        (this.flights.controls[index] as FormGroup).controls[getRouteFieldIdentifier(index)].patchValue(flightDestinationFound, { emitEvent: false });
+        (this.flights.controls[index] as FormGroup).controls[
+          getRouteFieldIdentifier(index)
+        ].patchValue(flightDestinationFound, { emitEvent: false });
         this.setRouteFlag(index, flightDestinationFound.country.flagCode);
       } else if (flightRouteValueChanged === '') {
         this.setRouteFlag(index, '');
@@ -445,15 +499,18 @@ export class AircraftFlightsComponent implements OnInit {
   /* Number flights field error message(s) display */
   displayNumberFlightsErrorMessage(): string {
     if (
-        this.aircraftFlightsForm.get(this.numberFlightsFieldIdentifier)
+      this.aircraftFlightsForm
+        .get(this.numberFlightsFieldIdentifier)
         ?.hasError(REQUIRED_ERROR)
     ) {
       return getRequiredFieldErrorMessage();
     } else if (
-      this.aircraftFlightsForm.get(this.numberFlightsFieldIdentifier)
+      this.aircraftFlightsForm
+        .get(this.numberFlightsFieldIdentifier)
         ?.hasError(MIN_ERROR) ||
-      this.aircraftFlightsForm.get(this.numberFlightsFieldIdentifier)
-      ?.hasError(MAX_ERROR)
+      this.aircraftFlightsForm
+        .get(this.numberFlightsFieldIdentifier)
+        ?.hasError(MAX_ERROR)
     ) {
       return getNumberFlightsFieldValueErrorMessage();
     }
@@ -462,14 +519,11 @@ export class AircraftFlightsComponent implements OnInit {
 
   /* Flight route fields error message(s) display */
   displayFlightRouteErrorMessage(index: number): string {
-    const flightRouteField: AbstractControl = (this.flights
-      ?.controls[index] as FormGroup)
-      ?.controls[getRouteFieldIdentifier(index)]
+    const flightRouteField: AbstractControl = (
+      this.flights?.controls[index] as FormGroup
+    )?.controls[getRouteFieldIdentifier(index)];
 
-    if (
-        flightRouteField
-        ?.hasError(REQUIRED_ERROR)
-    ) {
+    if (flightRouteField?.hasError(REQUIRED_ERROR)) {
       return getRequiredFieldErrorMessage();
     } else if ('xx' === this.getRouteFlag(index)) {
       flightRouteField?.setErrors({ [UNKNOWN_AIRPORT_ERROR]: true });
@@ -480,14 +534,11 @@ export class AircraftFlightsComponent implements OnInit {
 
   /* Flight departure time fields error message(s) display */
   displayFlightDepartureTimeErrorMessage(index: number): string {
-    const flightDepartureTimeField: AbstractControl = (this.flights
-      ?.controls[index] as FormGroup)
-      ?.controls[getDepartureTimeFieldIdentifier(index)]
+    const flightDepartureTimeField: AbstractControl = (
+      this.flights?.controls[index] as FormGroup
+    )?.controls[getDepartureTimeFieldIdentifier(index)];
 
-    if (
-        flightDepartureTimeField
-        ?.hasError(REQUIRED_ERROR)
-    ) {
+    if (flightDepartureTimeField?.hasError(REQUIRED_ERROR)) {
       return getRequiredFieldErrorMessage();
     }
     return '';
@@ -495,14 +546,11 @@ export class AircraftFlightsComponent implements OnInit {
 
   /* Flight length fields error message(s) display */
   displayFlightLengthErrorMessage(index: number): string {
-    const flightLengthField: AbstractControl = (this.flights
-      ?.controls[index] as FormGroup)
-      ?.controls[getLengthFieldIdentifier(index)];
+    const flightLengthField: AbstractControl = (
+      this.flights?.controls[index] as FormGroup
+    )?.controls[getLengthFieldIdentifier(index)];
 
-    if (
-        flightLengthField
-        ?.hasError(REQUIRED_ERROR)
-    ) {
+    if (flightLengthField?.hasError(REQUIRED_ERROR)) {
       return getRequiredFieldErrorMessage();
     }
     return '';

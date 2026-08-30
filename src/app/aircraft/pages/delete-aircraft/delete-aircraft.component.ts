@@ -45,22 +45,24 @@ export class DeleteAircraftComponent implements OnInit {
     // If deletion is confirmed by user
     if (isDeletionDialogConfirmed) {
       // Aircraft deletion
-      this.aircraftService.deleteAircraft(this.aircraftUUID).then((response) => {
-        // If Aircraft is deleted
-        if (response.status === 204) {
-          /* Success notification showing */
-          this.notificationService.showSuccessNotification(
-            this.deleteAircraftDialogTitle.toUpperCase(),
-            getAircraftFormSuccessNotificationMessage(DELETE_FORM_MODE),
-          );
-        } else {
-          /* Technical error notification showing */
-          this.notificationService.showErrorNotification(
-            `${getTechnicalErrorTitle()}`,
-            `${getTechnicalErrorMessage()}`,
-          );
-        }
-      });
+      this.aircraftService
+        .deleteAircraft(this.aircraftUUID)
+        .then((response) => {
+          // If Aircraft is deleted
+          if (response.status === 204) {
+            /* Success notification showing */
+            this.notificationService.showSuccessNotification(
+              this.deleteAircraftDialogTitle.toUpperCase(),
+              getAircraftFormSuccessNotificationMessage(DELETE_FORM_MODE),
+            );
+          } else {
+            /* Technical error notification showing */
+            this.notificationService.showErrorNotification(
+              `${getTechnicalErrorTitle()}`,
+              `${getTechnicalErrorMessage()}`,
+            );
+          }
+        });
     }
   }
 }

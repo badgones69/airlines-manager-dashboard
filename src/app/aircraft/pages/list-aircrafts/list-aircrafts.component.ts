@@ -72,7 +72,7 @@ export class ListAircraftsComponent implements OnInit, AfterViewInit {
     'manufacturer',
     'model',
     'home-hub',
-    'flights'
+    'flights',
   ];
 
   /* List columns headers labels */
@@ -110,7 +110,8 @@ export class ListAircraftsComponent implements OnInit, AfterViewInit {
     });
 
     this.aircraftService.aircrafts.subscribe((aircrafts) => {
-      this.aircraftsList.data = this.aircraftMapper.aircraftsListFromDB(aircrafts);
+      this.aircraftsList.data =
+        this.aircraftMapper.aircraftsListFromDB(aircrafts);
     });
   }
 

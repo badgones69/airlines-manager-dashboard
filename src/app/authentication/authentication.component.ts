@@ -174,9 +174,15 @@ export class AuthenticationComponent implements OnInit {
                 // Session opening
                 this.userService.connectUser(user);
                 /* Flight numbers caching */
-                this.flightService.findAllExistingFlightNumbers().then((existingFlightNumbers) => {
-                  this.flightService.cacheExistingFlightNumbers(existingFlightNumbers.map((flight) => flight.flightNumber));
-                });
+                this.flightService
+                  .findAllExistingFlightNumbers()
+                  .then((existingFlightNumbers) => {
+                    this.flightService.cacheExistingFlightNumbers(
+                      existingFlightNumbers.map(
+                        (flight) => flight.flightNumber,
+                      ),
+                    );
+                  });
                 // Redirection to home page
                 this.router.navigate(['home']);
               } else {

@@ -18,7 +18,9 @@
       <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[1] }}</th>
       <td mat-cell *matCellDef="let aircraft">
         <span
-          class="flag fi fi-{{ aircraft.manufacturer.headquarterCountryFlagCode }}"
+          class="flag fi fi-{{
+            aircraft.manufacturer.headquarterCountryFlagCode
+          }}"
         ></span>
         {{ aircraft.manufacturer.name }}
       </td>
@@ -28,14 +30,14 @@
     <ng-container [matColumnDef]="columnsIdentifiers[2]">
       <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[2] }}</th>
       <td mat-cell *matCellDef="let aircraft">
-          @if (aircraft.model.cargo) {
-            <span id="cargo-container">
-              <i id="cargo-icon" class="material-icons">package_2</i>
-              {{ aircraft.model.name }}
-            </span>
-          } @else {
+        @if (aircraft.model.cargo) {
+          <span id="cargo-container">
+            <i id="cargo-icon" class="material-icons">package_2</i>
             {{ aircraft.model.name }}
-          }
+          </span>
+        } @else {
+          {{ aircraft.model.name }}
+        }
       </td>
     </ng-container>
 
@@ -43,14 +45,10 @@
     <ng-container [matColumnDef]="columnsIdentifiers[3]">
       <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[3] }}</th>
       <td mat-cell *matCellDef="let aircraft">
-        <span
-          class="flag fi fi-{{ aircraft.homeHub.country.flagCode }}"
-        ></span>
+        <span class="flag fi fi-{{ aircraft.homeHub.country.flagCode }}"></span>
         <span class="iata">{{ aircraft.homeHub.iata }}</span>
         {{ aircraft.homeHub.name }}
-        {{
-          aircraft.homeHub.region ? `(${aircraft.homeHub.region.code})` : ""
-        }}
+        {{ aircraft.homeHub.region ? `(${aircraft.homeHub.region.code})` : "" }}
       </td>
     </ng-container>
 
@@ -70,13 +68,12 @@
         [class.mat-column-flights]="authenticatedUser.profile < 3"
         *matCellDef="let aircraft"
       >
-        <button 
-          mat-icon-button (click)="openFlightsDetails(aircraft)"
-          [disabled]="aircraft.flights.length < 1">
-          <mat-icon
-            [matBadge]="aircraft.flights.length"
-            aria-hidden="false"
-          >
+        <button
+          mat-icon-button
+          (click)="openFlightsDetails(aircraft)"
+          [disabled]="aircraft.flights.length < 1"
+        >
+          <mat-icon [matBadge]="aircraft.flights.length" aria-hidden="false">
             flight_takeoff
           </mat-icon>
         </button>

@@ -10,7 +10,9 @@ import { NotificationService } from './notification.service';
   providedIn: 'root',
 })
 export class FlightService {
-  readonly existingFlightNumbers$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  readonly existingFlightNumbers$: BehaviorSubject<any[]> = new BehaviorSubject<
+    any[]
+  >([]);
 
   constructor(readonly notificationService: NotificationService) {
     this.refreshExistingFlightNumbers();
@@ -18,7 +20,9 @@ export class FlightService {
 
   /* Existing flight numbers loading */
   public refreshExistingFlightNumbers(): void {
-    this.existingFlightNumbers$.next(getStoredItem(EXISTING_FLIGHT_NUMBERS_STORAGE_NAME));
+    this.existingFlightNumbers$.next(
+      getStoredItem(EXISTING_FLIGHT_NUMBERS_STORAGE_NAME),
+    );
   }
 
   /* Existing flight numbers reading */
@@ -62,12 +66,21 @@ export class FlightService {
   }
 
   /* Flight creation */
-  public async createFlight(flightToCreate: any, aircraftId: number): Promise<any> {
-    const { flightNumber, flightRoute, flightTakeOff, flightLanding, flightReturn } = flightToCreate;
+  public async createFlight(
+    flightToCreate: any,
+    aircraftId: number,
+  ): Promise<any> {
+    const {
+      flightNumber,
+      flightRoute,
+      flightTakeOff,
+      flightLanding,
+      flightReturn,
+    } = flightToCreate;
 
     const response = await supabase
-    .from('FLIGHT')
-    .insert({
+      .from('FLIGHT')
+      .insert({
         flightUUID: uuidv7(),
         flightNumber,
         flightRoute,
@@ -75,26 +88,32 @@ export class FlightService {
         flightLanding,
         flightAircraft: aircraftId,
         flightReturn,
-    })
-    .select();
+      })
+      .select();
 
     return response;
   }
 
   /* Flight updating */
   public async updateFlight(flightToUpdate: any): Promise<any> {
-    const { flightUUID, flightRoute, flightTakeOff, flightLanding, flightReturn } = flightToUpdate;
+    const {
+      flightUUID,
+      flightRoute,
+      flightTakeOff,
+      flightLanding,
+      flightReturn,
+    } = flightToUpdate;
 
     const response = await supabase
-    .from('FLIGHT')
-    .update({
+      .from('FLIGHT')
+      .update({
         flightRoute,
         flightTakeOff,
         flightLanding,
         flightReturn,
-    })
-    .eq('flightUUID', flightUUID)
-    .select();
+      })
+      .eq('flightUUID', flightUUID)
+      .select();
 
     return response;
   }

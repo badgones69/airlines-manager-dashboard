@@ -1,10 +1,26 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { DialogComponent } from '../../../shared/components/dialog/dialog.component';
 import { INFO_DIALOG_MODE } from '../../../shared/constants/dialogs-constants';
 import { Aircraft } from '../../../shared/dto/Aircraft';
-import { getDepartureAirportLabel, getFlightNumberLabel, getFlightsDetailsDialogTitle, getLandingLabel, getTakeOffLabel } from '../../../shared/labels/dialogs/flights-details-dialog';
+import {
+  getDepartureAirportLabel,
+  getFlightNumberLabel,
+  getFlightsDetailsDialogTitle,
+  getLandingLabel,
+  getTakeOffLabel,
+} from '../../../shared/labels/dialogs/flights-details-dialog';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatPaginator, MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import {
+  MatPaginator,
+  MatPaginatorIntl,
+  MatPaginatorModule,
+} from '@angular/material/paginator';
 import { getArrivalAirportLabel } from '../../../shared/labels/forms/route-form';
 import { Flight } from '../../../shared/dto/Flight';
 import { InternationalPaginator } from '../../../shared/components/international-paginator';
@@ -12,12 +28,7 @@ import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'flights-details',
-  imports: [
-    DialogComponent,
-    MatTableModule,
-    MatPaginatorModule,
-    DatePipe,
-  ],
+  imports: [DialogComponent, MatTableModule, MatPaginatorModule, DatePipe],
   templateUrl: './flights-details.component.html',
   styleUrls: [
     '../../../shared/styles/commons.scss',
@@ -38,14 +49,14 @@ export class FlightsDetailsComponent implements OnInit, AfterViewInit {
   public flightsList: MatTableDataSource<Flight> = new MatTableDataSource();
 
   /* List columns identifiers */
-    public columnsIdentifiers: string[] = [
-      'number',
-      'departure-airport',
-      'takeoff-time',
-      'landing-time',
-      'arrival-airport',
-    ];
-  
+  public columnsIdentifiers: string[] = [
+    'number',
+    'departure-airport',
+    'takeoff-time',
+    'landing-time',
+    'arrival-airport',
+  ];
+
   /* List columns headers labels */
   public columnsHeaders: string[] = [
     getFlightNumberLabel(),
