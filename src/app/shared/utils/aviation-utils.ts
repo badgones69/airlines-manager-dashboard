@@ -61,7 +61,13 @@ export function generateAircraftRegistration(homeHubCountry: Country | undefined
     }
 
     if (registrationLength > 1) {
-      return `${countryICAO}-${generateRandomString(characters, registrationLength)}`;
+      if (homeHubCountry.aircraftRegistrationRule !== 'L') {
+        return `${countryICAO}-`
+          .concat(`${generateRandomString(characters.filter(c => c !== '0'), 1)}`)
+          .concat(`${generateRandomString(characters, registrationLength - 1)}`);
+      } else {
+        return `${countryICAO}-${generateRandomString(characters, registrationLength)}`;
+      }
     }
   }
   return '';
