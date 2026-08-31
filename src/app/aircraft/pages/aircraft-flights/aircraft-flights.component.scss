@@ -1,0 +1,18 @@
+/* Fields */
+.form-field {
+  margin-bottom: 0;
+}
+
+/* Flights fields array */
+#flights-fields-array {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 25px;
+  row-gap: 1em;
+}
+
+/* Flight fields container */
+#flight-fields-container {
+  display: flex;
+  gap: 10px;
+}

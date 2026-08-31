@@ -11,6 +11,7 @@ import { AboutComponent } from './about/about.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UserService } from './shared/services/user.service';
 import { User } from './shared/dto/User';
+import { FlightService } from './shared/services/flight.service';
 
 @Component({
   selector: 'app',
@@ -37,6 +38,7 @@ export class AppComponent implements OnInit {
 
   /* Injections */
   public userService: UserService = inject(UserService);
+  public flightService: FlightService = inject(FlightService);
   public router: Router = inject(Router);
 
   constructor(readonly dialog: MatDialog) {}
@@ -85,6 +87,8 @@ export class AppComponent implements OnInit {
   logout(): void {
     // Session closing
     this.userService.disconnectUser();
+    // Flight numbers uncaching
+    this.flightService.uncacheExistingFlightNumbers();
     // Redirection to authentication form
     this.router.navigate(['authentication']);
   }

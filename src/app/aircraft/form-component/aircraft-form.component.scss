@@ -1,0 +1,21 @@
+/* Model field (cargo) */
+#cargo-container {
+  display: flex;
+}
+#cargo-icon {
+  margin-right: 5px;
+}
+
+/* Aircraft flights form container */
+#flights-form-container {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin-bottom: 20px;
+}
+
+/* Number flights message */
+.number-flights-message {
+  font-weight: bold;
+  margin-left: 20px;
+}

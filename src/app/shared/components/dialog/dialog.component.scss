@@ -4,13 +4,16 @@ h2,
   text-align: center;
 }
 .mat-mdc-dialog-content {
-  max-height: 700px;
+  max-height: 750px;
 }
 
 /* Dialog buttons */
 #ok-button {
   background-color: var(--app-blue);
   font-weight: bold;
+}
+#ok-button:disabled {
+  background-color: var(--app-grey);
 }
 
 #cancel-button {

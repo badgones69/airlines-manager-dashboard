@@ -1,0 +1,20 @@
+/* Columns */
+.mat-column-number,
+.mat-column-departure-airport,
+.mat-column-takeoff-time,
+.mat-column-landing-time,
+.mat-column-arrival-airport {
+  text-align: center;
+  padding: 7px;
+}
+.mat-column-number,
+.mat-column-departure-airport,
+.mat-column-takeoff-time,
+.mat-column-landing-time {
+  border-right: 2px solid var(--app-red);
+}
+
+/* IATA code (in cell value) */
+.iata {
+  font-weight: bold;
+}
