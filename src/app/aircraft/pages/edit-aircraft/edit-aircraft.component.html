@@ -1,0 +1,17 @@
+@if (authenticatedUser) {
+  @if (authenticatedUser.profile < 3) {
+    <!-- AIRCRAFT FORM (EDIT MODE) -->
+    <aircraft-form
+      (submitted)="editAircraft($event)"
+      [formMode]="formMode"
+      [aircraft]="initAircraftToEdit"
+    >
+    </aircraft-form>
+  } @else {
+    <!-- FORBIDDEN ERROR PAGE -->
+    <forbidden></forbidden>
+  }
+} @else {
+  <!-- UNAUTHORIZED ERROR PAGE -->
+  <unauthorized></unauthorized>
+}

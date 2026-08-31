@@ -63,6 +63,21 @@ export class RouteService {
     return data?.[0];
   }
 
+  /* Routes retrieving by departure hub */
+  public async findRoutesByDepartureHub(departureHub: number): Promise<any> {
+    const { data } = await supabase
+      .from('ROUTE')
+      .select(
+        `*,
+          routeDepartureHub:AIRPORT!routeDepartureHub(*),
+          routeArrivalAirport:AIRPORT!routeArrivalAirport(*)
+        `,
+      )
+      .eq('routeDepartureHub', departureHub);
+
+    return data || [];
+  }
+
   /* Route creation */
   public async createRoute(routeToCreate: any): Promise<any> {
     const { routeDepartureHub, routeArrivalAirport } = routeToCreate;

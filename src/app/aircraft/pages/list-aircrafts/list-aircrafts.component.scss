@@ -1,0 +1,39 @@
+/* Columns */
+.mat-column-registration,
+.mat-column-manufacturer,
+.mat-column-model,
+.mat-column-home-hub,
+.column-flights,
+.mat-column-actions {
+  text-align: center;
+}
+.mat-column-registration,
+.mat-column-manufacturer,
+.column-flights,
+.mat-column-actions {
+  padding: 3px;
+}
+.mat-column-model,
+.mat-column-home-hub {
+  padding: 7px;
+}
+.mat-column-registration,
+.mat-column-manufacturer,
+.mat-column-model,
+.mat-column-home-hub,
+.mat-column-flights {
+  border-right: 2px solid var(--app-red);
+}
+
+/* Model cell value (cargo) */
+#cargo-container {
+  display: flex;
+}
+#cargo-icon {
+  margin-right: 5px;
+}
+
+/* IATA code (in cell value) */
+.iata {
+  font-weight: bold;
+}

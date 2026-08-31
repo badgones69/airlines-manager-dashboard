@@ -58,7 +58,7 @@ export class RoutesNetworkComponent implements OnInit {
     this.style = new Style({
       stroke: new Stroke({
         color: '#FF0000',
-        width: 2,
+        width: 1.5,
       }),
     });
 
