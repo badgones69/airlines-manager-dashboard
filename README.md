@@ -13,8 +13,8 @@
 </p>
 
 <p align="center">
-    <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/v1.5.0-FF0000.svg"></a>
-    <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/August 31st, 2026-7E7E7E.svg"></a>
+    <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/v1.5.1-F317F9.svg"></a>
+    <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/September 4th, 2026-7E7E7E.svg"></a>
     <br />
     <img src="https://img.shields.io/badge/SonarQube%20%3A%200%20issue(s)%20-0000AA?logo=sonar&logoColor=FFFFFF">
 </p>
@@ -29,11 +29,11 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
 **<ins>SERVER & DATABASE :<ins>**
 <p>
 <img
-    src="https://img.shields.io/badge/Vercel v58.4.4-000000?logo=vercel&logoColor=FFFFFF"
+    src="https://img.shields.io/badge/Vercel v59.11.7-000000?logo=vercel&logoColor=FFFFFF"
     alt="Vercel"
 />
 <img
-    src="https://img.shields.io/badge/Supabase--JS v2.111.0-008000?logo=supabase&logoColor=FFFFFF"
+    src="https://img.shields.io/badge/Supabase--JS v2.115.0-008000?logo=supabase&logoColor=FFFFFF"
     alt="Supabase-JS"
 />
 </p>
@@ -41,7 +41,7 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
 **<ins>FRAMEWORK & LANGUAGE :<ins>**
 <p>
 <img
-    src="https://img.shields.io/badge/Angular v22.1.0-purple?logo=angular&logoColor=FFFFFF"
+    src="https://img.shields.io/badge/Angular v22.1.5-purple?logo=angular&logoColor=FFFFFF"
     alt="Angular"
 />
 <img
@@ -77,11 +77,11 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
 **<ins>SECURITY :<ins>**
 <p>
 <img
-    src="https://img.shields.io/badge/UUID v14.0.1-grey.svg"
+    src="https://img.shields.io/badge/UUID v14.0.2-grey.svg"
     alt="UUID"
 />
 <img
-    src="https://img.shields.io/badge/Bcrypt--TS v9.0.1-9F5540.svg"
+    src="https://img.shields.io/badge/Bcrypt--TS v9.0.2-9F5540.svg"
     alt="Bcrypt-TS"
 />
 <img
