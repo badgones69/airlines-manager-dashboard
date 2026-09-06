@@ -557,11 +557,16 @@ export const BOMBARDIER_MODELS: Model[] = [
 export const COMAC_MODELS: Model[] = [
   {
     id: 1,
-    name: 'C909',
+    name: 'ARJ21-700',
     cargo: false,
   } as Model,
   {
     id: 2,
+    name: 'C909',
+    cargo: false,
+  } as Model,
+  {
+    id: 3,
     name: 'C919',
     cargo: false,
   } as Model,
