@@ -25,6 +25,8 @@ import { getArrivalAirportLabel } from '../../../shared/labels/forms/route-form'
 import { Flight } from '../../../shared/dto/Flight';
 import { InternationalPaginator } from '../../../shared/components/international-paginator';
 import { DatePipe } from '@angular/common';
+import { getStoredItem } from '../../../shared/utils/storage-utils';
+import { AUTHENTICATED_USER_STORAGE_NAME } from '../../../shared/constants/storage-constants';
 
 @Component({
   selector: 'flights-details',
@@ -66,12 +68,18 @@ export class FlightsDetailsComponent implements OnInit, AfterViewInit {
     getArrivalAirportLabel(),
   ];
 
+  public airlineICAO!: string;;
+
   constructor() {}
 
   ngOnInit(): void {
     this.flightsDetailsDialogTitle = `${getFlightsDetailsDialogTitle()} ${this.aircraft.registration}`;
     this.flightsDetailsDialogMode = INFO_DIALOG_MODE;
     this.flightsList.data = this.aircraft.flights;
+    
+    this.airlineICAO = JSON.parse(
+      getStoredItem(AUTHENTICATED_USER_STORAGE_NAME).toString(),
+    ).airline.icao;
   }
 
   ngAfterViewInit() {
