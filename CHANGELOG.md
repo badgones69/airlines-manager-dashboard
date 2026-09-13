@@ -1,5 +1,19 @@
 <h1 align="center">AM Dashboard</h1>
 <h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.5.3">1.5.3</a>
+    (2026-09-13)
+</h1>
+
+<h3>Bug fixes</h3>
+
+<ul>
+  <li><b>AIRLINE :</b></li>
+  <ul>
+    <li>edit form (ICAO code refresh in flight numbers)</li>
+  </ul>
+</ul>
+<br />
+<h1 align="center">
     <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.5.2">1.5.2</a>
     (2026-09-07)
 </h1>
