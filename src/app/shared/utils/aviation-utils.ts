@@ -1,5 +1,4 @@
 import {
-  AUTHENTICATED_USER_STORAGE_NAME,
   EXISTING_FLIGHT_NUMBERS_STORAGE_NAME,
 } from '../constants/storage-constants';
 import { Flight } from '../dto/Flight';
@@ -139,10 +138,6 @@ export function generateAircraftRegistration(
 }
 
 export function generateOutboundFlightNumber(): string {
-  const authenticatedUser: any = JSON.parse(
-    getStoredItem(AUTHENTICATED_USER_STORAGE_NAME).toString(),
-  );
-
   const evenDigits: string[] = ['0', '2', '4', '6', '8'];
   const oddDigits: string[] = ['1', '3', '5', '7', '9'];
   const allDigits: string[] = evenDigits.concat(oddDigits);
@@ -153,12 +148,9 @@ export function generateOutboundFlightNumber(): string {
   if (flightNumberLength < 1) {
     return flightNumber;
   } else if (flightNumberLength === 1) {
-    flightNumber = authenticatedUser.airline.icao.concat(
-      generateRandomString(evenDigits.slice(1), 1),
-    );
+    flightNumber = generateRandomString(evenDigits.slice(1), 1);
   } else {
-    flightNumber = authenticatedUser.airline.icao
-      .concat(generateRandomString(allDigits.slice(1), 1))
+    flightNumber = generateRandomString(allDigits.slice(1), 1)
       .concat(generateRandomString(allDigits, flightNumberLength - 2))
       .concat(generateRandomString(evenDigits, 1));
   }
