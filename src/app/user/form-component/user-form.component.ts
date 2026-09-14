@@ -323,7 +323,7 @@ export class UserFormComponent implements OnInit {
   submitUserForm() {
     this.userService.user.subscribe((user) => {
       if (user) {
-        let authenticatedUser = JSON.parse(user.toString());
+        let authenticatedUser: any = JSON.parse(user.toString());
         this.userForm.value.airline = authenticatedUser.airline.id;
         this.submitted.emit(this.userMapper.userToDB(this.userForm.value));
       }
