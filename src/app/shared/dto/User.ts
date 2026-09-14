@@ -7,6 +7,7 @@ export class User {
   surname!: string;
   login!: string;
   password?: string;
+  passwordExpired!: boolean;
   profile!: number;
   airline!: Airline;
 }

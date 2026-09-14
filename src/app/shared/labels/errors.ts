@@ -17,3 +17,7 @@ export function getTechnicalErrorTitle(): string {
 export function getTechnicalErrorMessage(): string {
   return 'Une erreur est survenue : veuillez réessayer...';
 }
+
+export function getImportFileDataErrorMessage(): string {
+  return "Les données de votre fichier d'import ne sont pas valides !";
+}
