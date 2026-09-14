@@ -39,3 +39,13 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+.early.coverage
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

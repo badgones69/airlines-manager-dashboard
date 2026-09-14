@@ -43,7 +43,8 @@
     "@angular/cli": "^22.1.7",
     "@angular/compiler-cli": "^22.1.5",
     "@types/node": "^26.4.1",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "@playwright/test": "^1.61.0"
   },
   "overrides": {
     "rimraf": "^6.1.3",
