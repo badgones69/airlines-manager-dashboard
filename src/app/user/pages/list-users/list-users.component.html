@@ -52,12 +52,24 @@
           <th mat-header-cell *matHeaderCellDef>{{ columnsHeaders[4] }}</th>
           <td mat-cell *matCellDef="let user">
             @if (authenticatedUser && authenticatedUser.uuid !== user.uuid) {
-              <a
-                href="users/reset-password"
-                (click)="openResetUserPasswordForm($event, user)"
-              >
-                {{ passwordResetColumnButtonName }}
-              </a>
+              @if (user.passwordExpired) {
+                <span id="password-expired-warning">
+                  <i class="material-icons">warning</i>
+                  <a
+                    href="users/reset-password"
+                    (click)="openResetUserPasswordForm($event, user)"
+                  >
+                    {{ passwordResetColumnButtonName }}
+                  </a>
+                </span>
+              } @else {
+                <a
+                  href="users/reset-password"
+                  (click)="openResetUserPasswordForm($event, user)"
+                >
+                  {{ passwordResetColumnButtonName }}
+                </a>
+              }
             }
           </td>
         </ng-container>
@@ -67,6 +79,9 @@
           <th id="actions" mat-header-cell *matHeaderCellDef>
             <button mat-icon-button routerLink="../add">
               <i class="material-icons">add</i>
+            </button>
+            <button mat-icon-button (click)="importUsers()">
+              <i class="material-icons">upload</i>
             </button>
           </th>
           <td mat-cell *matCellDef="let user">

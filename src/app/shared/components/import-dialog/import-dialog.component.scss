@@ -1,0 +1,26 @@
+/* Import form container */
+#import-form-container {
+  display: grid;
+  align-items: center;
+  margin-bottom: 10px;
+}
+#import-form-container > button {
+  margin-bottom: 20px;
+}
+
+/* File template */
+#file-template {
+  text-decoration: none;
+  color: var(--app-white);
+}
+
+/* File chooser */
+#fileChooser {
+  display: none;
+}
+
+/* Import file size */
+.import-file-size {
+  font-weight: bold;
+  font-size: 16px;
+}

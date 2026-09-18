@@ -43,7 +43,7 @@ export class AddUserComponent implements OnInit {
   /* User adding */
   addUser(user: any): void {
     // User creation
-    this.userService.createUser(user).then((result: any) => {
+    this.userService.createUser(user, false).then((result: any) => {
       // If user is created
       if (result) {
         /* Success notification showing */

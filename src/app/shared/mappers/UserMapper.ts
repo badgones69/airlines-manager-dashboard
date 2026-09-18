@@ -28,9 +28,20 @@ export class UserMapper {
       givenName: userFromDB.userGivenName,
       surname: userFromDB.userSurname,
       login: userFromDB.userLogin,
+      passwordExpired: userFromDB.userPasswordExpired,
       profile: userFromDB.userProfile,
       airline: this.airlineMapper.airlineFromDB(userFromDB.userAirline),
     } as User;
+  }
+
+  /* DTO => DB mapping (users list) */
+  public usersListToDB(usersListToDB: any[]): any[] {
+    let usersList: any[] = [];
+
+    for (const userToDB of usersListToDB) {
+      usersList.push(this.userToDB(userToDB));
+    }
+    return usersList;
   }
 
   /* DTO => DB mapping */
@@ -50,6 +61,7 @@ export class UserMapper {
       userSurname: capitalize(userToDB.surname),
       userLogin: userToDB.login,
       userPassword: userToDB.password,
+      userPasswordExpired: userToDB.passwordExpired,
       userProfile: userToDB.profile,
       userAirline: userToDB.airline,
     };

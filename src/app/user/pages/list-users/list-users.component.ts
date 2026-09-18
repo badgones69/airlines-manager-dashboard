@@ -35,6 +35,8 @@ import { DeleteUserComponent } from '../delete-user/delete-user.component';
 import { getPasswordInputLabel } from '../../../shared/labels/commons/form-common';
 import { getSubmitButtonLabel } from '../../../shared/labels/forms/reset-user-password-form';
 import { CommonModule } from '@angular/common';
+import { ImportUsersComponent } from '../import-users/import-users.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'list-users',
@@ -44,6 +46,7 @@ import { CommonModule } from '@angular/common';
     MatTableModule,
     MatPaginatorModule,
     MatButtonModule,
+    MatIconModule,
     MatLabel,
     RouterLink,
     ForbiddenComponent,
@@ -152,6 +155,19 @@ export class ListUsersComponent implements OnInit, AfterViewInit {
       },
     );
     dialogRef.componentInstance.userUUID = user.uuid!;
+    dialogRef.afterClosed().subscribe(() => this.ngOnInit());
+  }
+
+  /* Users import dialog opening */
+  importUsers() {
+    let dialogRef: MatDialogRef<ImportUsersComponent> = this.dialog.open(
+      ImportUsersComponent,
+      {
+        disableClose: false,
+        autoFocus: true,
+        scrollStrategy: new NoopScrollStrategy(),
+      },
+    );
     dialogRef.afterClosed().subscribe(() => this.ngOnInit());
   }
 }
