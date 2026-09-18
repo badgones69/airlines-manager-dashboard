@@ -2,6 +2,10 @@
 export const ADD_FORM_MODE = 'ADD';
 export const EDIT_FORM_MODE = 'EDIT';
 export const DELETE_FORM_MODE = 'DELETE';
+export const IMPORT_FORM_MODE = 'IMPORT';
+
+/* Import origins */
+export const IMPORT_USERS = 'IMPORT_USERS'
 
 /* Forms fields patterns */
 export const IDENTITY_PATTERN = String.raw`^[a-zA-Zßñçãáàâäéèêëíìîïõо́òôöúùûüẞÑÇÃÁÀÂÄÉÈÊËÍÌÎÏÕÒÓÔÖÚÙÛÜ\.]+(?:[ -][a-zA-Zßñçãáàâäéèêëíìîïõо́òôöúùûüẞÑÇÃÁÀÂÄÉÈÊËÍÌÎÏÕÒÓÔÖÚÙÛÜ\.]+)*$`;

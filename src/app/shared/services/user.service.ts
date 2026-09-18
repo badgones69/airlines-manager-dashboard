@@ -100,7 +100,7 @@ export class UserService {
   }
 
   /* User creation */
-  public async createUser(userToCreate: any): Promise<any> {
+  public async createUser(userToCreate: any, isImport: boolean): Promise<any> {
     const {
       userGivenName,
       userSurname,
@@ -110,7 +110,7 @@ export class UserService {
       userAirline,
     } = userToCreate;
 
-    const hashedPassword = await hash(userPassword, 13);
+    const hashedPassword: any = isImport ? '' : await hash(userPassword, 13);
 
     const response = await supabase
       .from('USER')
@@ -120,6 +120,7 @@ export class UserService {
         userSurname,
         userLogin,
         userPassword: hashedPassword,
+        userPasswordExpired: isImport,
         userProfile,
         userAirline,
       })
@@ -136,7 +137,32 @@ export class UserService {
         `${getLoginUniquenessErrorNotificationMessage()}`,
       );
     } else if (response.status.toString().startsWith('20')) {
-      return response.data;
+      return response;
+    } else {
+      /* Technical error notification showing */
+      this.notificationService.showErrorNotification(
+        `${getTechnicalErrorTitle()}`,
+        `${getTechnicalErrorMessage()}`,
+      );
+    }
+  }
+
+  /* Users import */
+  public async importUsers(usersToImport: any[]): Promise<any> {
+    const usersResponsesStatus: string[] = [];
+
+    await Promise.all(usersToImport.map(async (user: any) => {
+      const userResponse: any = await this.createUser(user, true);
+
+      if (userResponse.status.toString().startsWith('20')) {
+        usersResponsesStatus.push(userResponse.status.toString());
+      }
+    }));
+
+    this.refreshUsersList();
+
+    if (usersResponsesStatus.length === usersToImport.length) {
+      return true;
     } else {
       /* Technical error notification showing */
       this.notificationService.showErrorNotification(
@@ -156,6 +182,7 @@ export class UserService {
       .from('USER')
       .update({
         userPassword: hashedPassword,
+        userPasswordExpired: false,
       })
       .eq('userUUID', userUUID)
       .select();

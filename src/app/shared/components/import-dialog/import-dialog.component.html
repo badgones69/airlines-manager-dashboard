@@ -1,0 +1,46 @@
+<!-- TITLE -->
+<h2 mat-dialog-title>{{ importDialogTitle }}</h2>
+<mat-dialog-content>
+  <div id="import-form-container">
+    <!-- TEMPLATE FILE DOWNLOAD -->
+    <button
+      type="button"
+      class="submit-form-button"
+      mat-fab
+      extended
+      (click)="downloadTemplateFile()"
+    >
+      <i class="material-icons">download</i>
+      <a id="file-template" [download]="templateFileName" [href]="templateFileURL">{{ downloadTemplateFileInputLabel }}</a>
+    </button>
+
+    <!-- IMPORT FILE SELECTION -->
+    <button
+      type="button"
+      class="submit-form-button"
+      mat-fab
+      extended
+      onclick="document.getElementById('fileChooser').click()"
+    >
+      <i class="material-icons">draft</i>
+      {{ importFileInputLabel }}
+      <input id="fileChooser" accept=".txt" type="file" (change)="checkImportFile($event)" aria-label="''">
+    </button>
+
+    <!-- IMPORT FILE SIZE -->
+    <span class="import-file-size">{{ importFileSize$ | async }}</span>
+  </div>
+</mat-dialog-content>
+
+<!-- BUTTON -->
+<mat-dialog-actions>
+  <button
+    id="ok-button"
+    mat-button
+    mat-dialog-close
+    [disabled]="(importFileSize$ | async) === ''"
+    (click)="submitImportForm()"
+  >
+    {{ importButtonLabel }}
+  </button>
+</mat-dialog-actions>
