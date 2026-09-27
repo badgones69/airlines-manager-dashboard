@@ -1,3 +1,5 @@
+import { PARTICULES } from '../constants/language-constants';
+
 export function capitalize(word: string): string {
   word = word.replaceAll('ß', 'ẞ');
   return word.toUpperCase();
@@ -24,6 +26,31 @@ export function capitalizeDashedWordsFirstLetter(wordsBlock: string): string {
   }
 
   return words.join('-');
+}
+
+export function capitalizeWords(wordsBlock: string): string {
+  const words: string[] = wordsBlock.split(/([\s'-])/);
+
+  let isNewWord: boolean = true;
+
+  const result: string[] = words.map((word) => {
+    if (/^[\s'-]$/.test(word)) {
+      return word;
+    }
+
+    if (isNewWord) {
+      isNewWord = false;
+      return capitalizeFirstLetter(word);
+    }
+
+    if (PARTICULES.includes(word.toLowerCase())) {
+      return word.toLowerCase();
+    }
+
+    return capitalizeFirstLetter(word);
+  });
+
+  return result.join('');
 }
 
 export function capitalizeFirstLetter(word: string): string {
