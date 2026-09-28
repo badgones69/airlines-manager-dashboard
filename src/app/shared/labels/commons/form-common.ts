@@ -2,7 +2,7 @@ import {
   ADD_FORM_MODE,
   DELETE_FORM_MODE,
   EDIT_FORM_MODE,
-  IMPORT_FORM_MODE
+  IMPORT_FORM_MODE,
 } from '../../constants/forms-constants';
 
 export function getFormModeLabel(formMode: string): string {
@@ -13,7 +13,7 @@ export function getFormModeLabel(formMode: string): string {
       return 'Modification';
     case DELETE_FORM_MODE:
       return 'Suppression';
-    case IMPORT_FORM_MODE: 
+    case IMPORT_FORM_MODE:
       return 'Import';
     default:
       return '';

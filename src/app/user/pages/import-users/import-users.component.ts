@@ -1,9 +1,16 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { UserService } from '../../../shared/services/user.service';
-import { IMPORT_FORM_MODE, IMPORT_USERS } from '../../../shared/constants/forms-constants';
+import {
+  IMPORT_FORM_MODE,
+  IMPORT_USERS,
+} from '../../../shared/constants/forms-constants';
 import { ImportDialogComponent } from '../../../shared/components/import-dialog/import-dialog.component';
-import { getImportUsersFormSuccessNotificationMessage, getImportUsersFormTitle, getUsersImportTemplateFile } from '../../../shared/labels/dialogs/import-users-dialog';
+import {
+  getImportUsersFormSuccessNotificationMessage,
+  getImportUsersFormTitle,
+  getUsersImportTemplateFile,
+} from '../../../shared/labels/dialogs/import-users-dialog';
 import { getFormModeLabel } from '../../../shared/labels/commons/form-common';
 import { isValidUsersList } from '../../../shared/imports-validators/users-import-validators';
 import { UserMapper } from '../../../shared/mappers/UserMapper';
@@ -33,8 +40,11 @@ export class ImportUsersComponent implements OnInit {
     this.usersImportDialogTitle = `${getFormModeLabel(
       IMPORT_FORM_MODE,
     )} ${getImportUsersFormTitle()}`;
-    this.usersImportTemplateFileName = 'import_users_template.txt'
-    this.usersImportTemplateFile = new Blob([`${getUsersImportTemplateFile()}`], { type: 'text/plain;charset=utf-8,' });
+    this.usersImportTemplateFileName = 'import_users_template.txt';
+    this.usersImportTemplateFile = new Blob(
+      [`${getUsersImportTemplateFile()}`],
+      { type: 'text/plain;charset=utf-8,' },
+    );
   }
 
   /* Users importing */

@@ -151,13 +151,15 @@ export class UserService {
   public async importUsers(usersToImport: any[]): Promise<any> {
     const usersResponsesStatus: string[] = [];
 
-    await Promise.all(usersToImport.map(async (user: any) => {
-      const userResponse: any = await this.createUser(user, true);
+    await Promise.all(
+      usersToImport.map(async (user: any) => {
+        const userResponse: any = await this.createUser(user, true);
 
-      if (userResponse.status.toString().startsWith('20')) {
-        usersResponsesStatus.push(userResponse.status.toString());
-      }
-    }));
+        if (userResponse.status.toString().startsWith('20')) {
+          usersResponsesStatus.push(userResponse.status.toString());
+        }
+      }),
+    );
 
     this.refreshUsersList();
 
