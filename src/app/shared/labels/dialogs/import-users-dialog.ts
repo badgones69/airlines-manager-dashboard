@@ -3,7 +3,7 @@ export function getImportUsersFormTitle(): string {
 }
 
 export function getUsersImportTemplateFile(): string {
-  return "Prénom;Nom;Identifiant;Profil";
+  return 'Prénom;Nom;Identifiant;Profil';
 }
 
 export function getNumberUsersLabel(numberUsers: number): string {

@@ -5,7 +5,10 @@ export function isNotBlank(value: string): boolean {
   return !!value && value.trim() !== '';
 }
 
-export function isValidHeader(origin: string, header: string | undefined): boolean {
+export function isValidHeader(
+  origin: string,
+  header: string | undefined,
+): boolean {
   if (origin === IMPORT_USERS) {
     return !!header && header === getUsersImportTemplateFile();
   }

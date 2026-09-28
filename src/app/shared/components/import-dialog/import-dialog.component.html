@@ -11,7 +11,12 @@
       (click)="downloadTemplateFile()"
     >
       <i class="material-icons">download</i>
-      <a id="file-template" [download]="templateFileName" [href]="templateFileURL">{{ downloadTemplateFileInputLabel }}</a>
+      <a
+        id="file-template"
+        [download]="templateFileName"
+        [href]="templateFileURL"
+        >{{ downloadTemplateFileInputLabel }}</a
+      >
     </button>
 
     <!-- IMPORT FILE SELECTION -->
@@ -24,7 +29,13 @@
     >
       <i class="material-icons">draft</i>
       {{ importFileInputLabel }}
-      <input id="fileChooser" accept=".txt" type="file" (change)="checkImportFile($event)" aria-label="''">
+      <input
+        id="fileChooser"
+        accept=".txt"
+        type="file"
+        (change)="checkImportFile($event)"
+        aria-label="''"
+      />
     </button>
 
     <!-- IMPORT FILE SIZE -->

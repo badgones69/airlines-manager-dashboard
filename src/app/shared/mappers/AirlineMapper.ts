@@ -1,9 +1,6 @@
 import { Airline } from '../dto/Airline';
 import { getCountryById } from '../utils/geographical-utils';
-import {
-  capitalize,
-  capitalizeWords,
-} from '../utils/labels-utils';
+import { capitalize, capitalizeWords } from '../utils/labels-utils';
 
 export class AirlineMapper {
   /* DB => DTO mapping */
@@ -20,13 +17,11 @@ export class AirlineMapper {
 
   /* DTO => DB mapping */
   public airlineToDB(airlineToDB: any): any {
-    airlineToDB.name = capitalizeWords(airlineToDB.name);
-
     return {
       airlineID: airlineToDB.id,
       airlineUUID: airlineToDB.uuid,
       airlineICAO: capitalize(airlineToDB.icao),
-      airlineName: airlineToDB.name,
+      airlineName: capitalizeWords(airlineToDB.name),
       airlineLogo: airlineToDB.logo,
       airlineNationality: airlineToDB.nationality.id,
     };
