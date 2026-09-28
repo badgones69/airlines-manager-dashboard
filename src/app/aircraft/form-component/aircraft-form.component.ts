@@ -618,7 +618,10 @@ export class AircraftFormComponent implements OnInit {
       );
     });
 
-    if (this.numberFlights > 0 && this.aircraftForm.value.flights.length === 0) {
+    if (
+      this.numberFlights > 0 &&
+      this.aircraftForm.value.flights.length === 0
+    ) {
       this.notificationService.showErrorNotification(
         `${getFlightsDetailsDialogTitle()}`.toUpperCase(),
         `${getAircraftFlightsErrorNotificationMessage()}`,
