@@ -1,7 +1,5 @@
 import { User } from '../dto/User';
-import {
-  capitalizeWords,
-} from '../utils/labels-utils';
+import { capitalizeWords } from '../utils/labels-utils';
 import { AirlineMapper } from './AirlineMapper';
 
 export class UserMapper {

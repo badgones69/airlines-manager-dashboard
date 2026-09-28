@@ -39,7 +39,9 @@
               <mat-autocomplete
                 #autoFlightRoute="matAutocomplete"
                 [displayWith]="displayFlightRoute"
-                (optionSelected)="changeFlightRoute($event.option.value, $index)"
+                (optionSelected)="
+                  changeFlightRoute($event.option.value, $index)
+                "
               >
                 @for (
                   route of getFilteredRoutes($index) | async;

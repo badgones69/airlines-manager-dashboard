@@ -1,9 +1,6 @@
 import { Airport } from '../dto/Airport';
 import { getCountryById, getRegionById } from '../utils/geographical-utils';
-import {
-  capitalize,
-  capitalizeWords,
-} from '../utils/labels-utils';
+import { capitalize, capitalizeWords } from '../utils/labels-utils';
 
 export class AirportMapper {
   /* DB => DTO mapping (airports list) */
@@ -37,8 +34,6 @@ export class AirportMapper {
 
   /* DTO => DB mapping */
   public airportToDB(airportToDB: any): any {
-    airportToDB.name = capitalizeWords(airportToDB.name);
-
     if (airportToDB.city) {
       airportToDB.city = capitalizeWords(airportToDB.city);
     }
@@ -47,7 +42,7 @@ export class AirportMapper {
       airportID: airportToDB.id,
       airportUUID: airportToDB.uuid,
       airportIATA: capitalize(airportToDB.iata),
-      airportName: airportToDB.name,
+      airportName: capitalizeWords(airportToDB.name),
       airportCity: airportToDB.city,
       airportLatitude: airportToDB.latitude,
       airportLongitude: airportToDB.longitude,
