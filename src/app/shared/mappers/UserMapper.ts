@@ -1,9 +1,6 @@
 import { User } from '../dto/User';
 import {
-  capitalizeDashedWordsFirstLetter,
-  capitalizeFirstLetter,
-  capitalizeSpaceSeparatedWordsFirstLetter,
-  capitalize,
+  capitalizeWords,
 } from '../utils/labels-utils';
 import { AirlineMapper } from './AirlineMapper';
 
@@ -46,19 +43,11 @@ export class UserMapper {
 
   /* DTO => DB mapping */
   public userToDB(userToDB: any): any {
-    if (userToDB.givenName.includes('-') || userToDB.givenName.includes(' ')) {
-      userToDB.givenName = capitalizeDashedWordsFirstLetter(
-        capitalizeSpaceSeparatedWordsFirstLetter(userToDB.givenName),
-      );
-    } else {
-      userToDB.givenName = capitalizeFirstLetter(userToDB.givenName);
-    }
-
     return {
       userID: userToDB.id,
       userUUID: userToDB.uuid,
-      userGivenName: userToDB.givenName,
-      userSurname: capitalize(userToDB.surname),
+      userGivenName: capitalizeWords(userToDB.givenName),
+      userSurname: capitalizeWords(userToDB.surname),
       userLogin: userToDB.login,
       userPassword: userToDB.password,
       userPasswordExpired: userToDB.passwordExpired,
