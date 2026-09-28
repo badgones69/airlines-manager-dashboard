@@ -68,7 +68,7 @@ export class FlightsDetailsComponent implements OnInit, AfterViewInit {
     getArrivalAirportLabel(),
   ];
 
-  public airlineICAO!: string;;
+  public airlineICAO!: string;
 
   constructor() {}
 
@@ -76,7 +76,7 @@ export class FlightsDetailsComponent implements OnInit, AfterViewInit {
     this.flightsDetailsDialogTitle = `${getFlightsDetailsDialogTitle()} ${this.aircraft.registration}`;
     this.flightsDetailsDialogMode = INFO_DIALOG_MODE;
     this.flightsList.data = this.aircraft.flights;
-    
+
     this.airlineICAO = JSON.parse(
       getStoredItem(AUTHENTICATED_USER_STORAGE_NAME).toString(),
     ).airline.icao;

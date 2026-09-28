@@ -1,11 +1,6 @@
 import { Airport } from '../dto/Airport';
 import { getCountryById, getRegionById } from '../utils/geographical-utils';
-import {
-  capitalize,
-  capitalizeDashedWordsFirstLetter,
-  capitalizeFirstLetter,
-  capitalizeSpaceSeparatedWordsFirstLetter,
-} from '../utils/labels-utils';
+import { capitalize, capitalizeWords } from '../utils/labels-utils';
 
 export class AirportMapper {
   /* DB => DTO mapping (airports list) */
@@ -39,29 +34,15 @@ export class AirportMapper {
 
   /* DTO => DB mapping */
   public airportToDB(airportToDB: any): any {
-    if (airportToDB.name.includes('-') || airportToDB.name.includes(' ')) {
-      airportToDB.name = capitalizeDashedWordsFirstLetter(
-        capitalizeSpaceSeparatedWordsFirstLetter(airportToDB.name),
-      );
-    } else {
-      airportToDB.name = capitalizeFirstLetter(airportToDB.name);
-    }
-
     if (airportToDB.city) {
-      if (airportToDB.city.includes('-') || airportToDB.city.includes(' ')) {
-        airportToDB.city = capitalizeDashedWordsFirstLetter(
-          capitalizeSpaceSeparatedWordsFirstLetter(airportToDB.city),
-        );
-      } else {
-        airportToDB.city = capitalizeFirstLetter(airportToDB.city);
-      }
+      airportToDB.city = capitalizeWords(airportToDB.city);
     }
 
     return {
       airportID: airportToDB.id,
       airportUUID: airportToDB.uuid,
       airportIATA: capitalize(airportToDB.iata),
-      airportName: airportToDB.name,
+      airportName: capitalizeWords(airportToDB.name),
       airportCity: airportToDB.city,
       airportLatitude: airportToDB.latitude,
       airportLongitude: airportToDB.longitude,

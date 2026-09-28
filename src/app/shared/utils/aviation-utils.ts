@@ -1,6 +1,4 @@
-import {
-  EXISTING_FLIGHT_NUMBERS_STORAGE_NAME,
-} from '../constants/storage-constants';
+import { EXISTING_FLIGHT_NUMBERS_STORAGE_NAME } from '../constants/storage-constants';
 import { Flight } from '../dto/Flight';
 import { Route } from '../dto/Route';
 import { generateRandomNumber, generateRandomString } from './commons-utils';
@@ -142,7 +140,13 @@ export function generateOutboundFlightNumber(): string {
   const oddDigits: string[] = ['1', '3', '5', '7', '9'];
   const allDigits: string[] = evenDigits.concat(oddDigits);
 
-  const flightNumberLength: number = generateRandomNumber(['1', '2', '3', '4', '5']);
+  const flightNumberLength: number = generateRandomNumber([
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+  ]);
   let flightNumber: string = '';
 
   if (flightNumberLength < 1) {
