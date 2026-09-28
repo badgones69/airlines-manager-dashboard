@@ -1,5 +1,32 @@
 <h1 align="center">AM Dashboard</h1>
 <h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.5.4">1.5.4</a>
+    (2026-09-28)
+</h1>
+
+<h3>Bug fixes</h3>
+
+<ul>
+  <li><b>AIRLINE :</b></li>
+  <ul>
+    <li>edit form (name formatting)</li>
+  </ul>
+  <li><b>USER :</b></li>
+  <ul>
+    <li>add/edit form (identity with apostrophe allowed)</li>
+    <li>add/edit form (given name & surname formatting)</li>
+  </ul>
+  <li><b>HUB :</b></li>
+  <ul>
+    <li>add/edit form (name & city formatting)</li>
+  </ul>
+  <li><b>DESTINATION :</b></li>
+  <ul>
+    <li>add/edit form (name & city formatting)</li>
+  </ul>
+</ul>
+<br />
+<h1 align="center">
     <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.5.3">1.5.3</a>
     (2026-09-13)
 </h1>
