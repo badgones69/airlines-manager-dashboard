@@ -13,10 +13,12 @@
 </p>
 
 <p align="center">
-    <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/v1.5.4-F317F9.svg"></a>
-    <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/September 28th, 2026-7E7E7E.svg"></a>
+    <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/v1.5.5-F317F9.svg"></a>
+    <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/October 3rd, 2026-7E7E7E.svg"></a>
     <br />
-    <img src="https://img.shields.io/badge/SonarQube%20%3A%200%20issue(s)%20-0000AA?logo=sonar&logoColor=FFFFFF">
+    <a href="https://sonarcloud.io/project/overview?id=badgones69_airlines-manager-dashboard">
+        <img src="https://img.shields.io/badge/SonarQube%20%3A%2033%20issue(s)%20-0000AA?logo=sonar&logoColor=FFFFFF">
+    </a>
 </p>
 
 AM Dashboard is a free web app for people who plays to <a href="https://www.airlines-manager.com/">Airlines Manager : Plane Tycoon®</a>. Thanks to it, they may :
@@ -29,11 +31,11 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
 **<ins>SERVER & DATABASE :<ins>**
 <p>
 <img
-    src="https://img.shields.io/badge/Vercel v59.11.7-000000?logo=vercel&logoColor=FFFFFF"
+    src="https://img.shields.io/badge/Vercel v62.2.0-000000?logo=vercel&logoColor=FFFFFF"
     alt="Vercel"
 />
 <img
-    src="https://img.shields.io/badge/Supabase--JS v2.115.0-008000?logo=supabase&logoColor=FFFFFF"
+    src="https://img.shields.io/badge/Supabase--JS v2.117.2-008000?logo=supabase&logoColor=FFFFFF"
     alt="Supabase-JS"
 />
 </p>
@@ -41,7 +43,7 @@ AM Dashboard is a free web app for people who plays to <a href="https://www.airl
 **<ins>FRAMEWORK & LANGUAGE :<ins>**
 <p>
 <img
-    src="https://img.shields.io/badge/Angular v22.1.5-purple?logo=angular&logoColor=FFFFFF"
+    src="https://img.shields.io/badge/Angular v22.2.1-purple?logo=angular&logoColor=FFFFFF"
     alt="Angular"
 />
 <img
