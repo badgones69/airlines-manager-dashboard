@@ -1,5 +1,20 @@
 <h1 align="center">AM Dashboard</h1>
 <h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.5.5">1.5.5</a>
+    (2026-10-03)
+</h1>
+
+<h3>Security</h3>
+
+<ul>
+  <li><h4>Dependencies upgrade :</h4></li>
+  <ul>
+    <li>Angular</li>
+    <li>Supabase-JS</li>
+  </ul>
+</ul>
+<br />
+<h1 align="center">
     <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.5.4">1.5.4</a>
     (2026-09-28)
 </h1>
