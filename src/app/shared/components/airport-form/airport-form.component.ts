@@ -73,7 +73,7 @@ import {
   getCountryLabel,
   getRegionLabel,
   getUnknownRegionErrorMessage,
-  getIATAUniquenessErrorMessage,
+  getIATAUniquenessErrorNotificationMessage,
 } from '../../labels/commons/airport-common';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import {
@@ -494,6 +494,6 @@ export function showIATAUniquenessErrorNotification(
 ): void {
   notificationService.showErrorNotification(
     `${getFormModeLabel(formMode)} ${formTitle}`.toUpperCase(),
-    `${getIATAUniquenessErrorMessage()}`,
+    `${getIATAUniquenessErrorNotificationMessage()}`,
   );
 }

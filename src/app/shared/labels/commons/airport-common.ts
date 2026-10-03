@@ -1,3 +1,5 @@
+import { getNameLabel } from './form-common';
+
 export function getIATALabel(): string {
   return 'IATA';
 }
@@ -22,10 +24,14 @@ export function getRegionLabel(): string {
   return 'RÉGION';
 }
 
-export function getIATAUniquenessErrorMessage(): string {
+export function getUnknownRegionErrorMessage(): string {
+  return 'région inconnue';
+}
+
+export function getIATAUniquenessErrorNotificationMessage(): string {
   return 'Code IATA déjà lié à un autre aéroport existant !';
 }
 
-export function getUnknownRegionErrorMessage(): string {
-  return 'région inconnue';
+export function getAirportsImportTemplateFile(): string {
+  return `${getIATALabel()};${getNameLabel()};${getCityLabel()};${getLatitudeInputLabel()};${getLongitudeInputLabel()};${getCountryLabel()};${getRegionLabel()}`;
 }

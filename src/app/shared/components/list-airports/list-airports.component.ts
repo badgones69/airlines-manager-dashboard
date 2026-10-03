@@ -60,6 +60,7 @@ export class ListAirportsComponent implements OnInit, AfterViewInit {
   @Input() public isHub!: boolean;
   @Input() public openAirportForm!: (airport: Airport) => void;
   @Input() public deleteAirport!: (airport: Airport) => void;
+  @Input() public importAirports!: () => void;
 
   /* List properties */
   public airportsList: MatTableDataSource<Airport> = new MatTableDataSource();

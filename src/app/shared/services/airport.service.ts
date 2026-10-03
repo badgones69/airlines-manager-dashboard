@@ -119,7 +119,33 @@ export class AirportService {
         airportHub ? getHubFormTitle() : getDestinationFormTitle(),
       );
     } else if (response.status.toString().startsWith('20')) {
-      return response.data;
+      return response;
+    } else {
+      /* Technical error notification showing */
+      this.notificationService.showErrorNotification(
+        `${getTechnicalErrorTitle()}`,
+        `${getTechnicalErrorMessage()}`,
+      );
+    }
+  }
+
+  /* Airports import */
+  public async importAirports(airportsToImport: any[]): Promise<any> {
+    const airportsResponsesStatus: string[] = [];
+
+    await Promise.all(airportsToImport.map(async (airport: any) => {
+      const airportResponse: any = await this.createAirport(airport);
+
+      if (airportResponse.status.toString().startsWith('20')) {
+        airportsResponsesStatus.push(airportResponse.status.toString());
+      }
+    }));
+
+    this.refreshHubsList();
+    this.refreshDestinationsList();
+
+    if (airportsResponsesStatus.length === airportsToImport.length) {
+      return true;
     } else {
       /* Technical error notification showing */
       this.notificationService.showErrorNotification(
