@@ -1,5 +1,6 @@
-import { IMPORT_USERS } from '../constants/forms-constants';
+import { IMPORT_USERS, IMPORT_HUBS } from '../constants/forms-constants';
 import { getUsersImportTemplateFile } from '../labels/dialogs/import-users-dialog';
+import { getAirportsImportTemplateFile } from '../labels/commons/airport-common';
 
 export function isNotBlank(value: string): boolean {
   return !!value && value.trim() !== '';
@@ -9,8 +10,11 @@ export function isValidHeader(
   origin: string,
   header: string | undefined,
 ): boolean {
-  if (origin === IMPORT_USERS) {
-    return !!header && header === getUsersImportTemplateFile();
+  switch (origin) {
+    case IMPORT_USERS:
+      return !!header && header === getUsersImportTemplateFile();
+    case IMPORT_HUBS:
+      return !!header && header === getAirportsImportTemplateFile();
   }
   return false;
 }

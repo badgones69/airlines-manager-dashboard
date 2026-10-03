@@ -32,11 +32,19 @@ export class AirportMapper {
     } as Airport;
   }
 
+  /* DTO => DB mapping (airports list) */
+  public airportsListToDB(airportsListToDB: any[]): any[] {
+    let airportsList: any[] = [];
+
+    for (const airportToDB of airportsListToDB) {
+      airportsList.push(this.airportToDB(airportToDB));
+    }
+    return airportsList;
+  }
+
   /* DTO => DB mapping */
   public airportToDB(airportToDB: any): any {
-    if (airportToDB.city) {
-      airportToDB.city = capitalizeWords(airportToDB.city);
-    }
+    airportToDB.city = airportToDB.city ? capitalizeWords(airportToDB.city) : undefined;
 
     return {
       airportID: airportToDB.id,

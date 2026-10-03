@@ -9,6 +9,7 @@ import { DeleteHubComponent } from '../delete-hub/delete-hub.component';
 import { Airport } from '../../../shared/dto/Airport';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { ListAirportsComponent } from '../../../shared/components/list-airports/list-airports.component';
+import { ImportHubsComponent } from '../import-hubs/import-hubs.component';
 
 @Component({
   selector: 'list-hubs',
@@ -57,6 +58,19 @@ export class ListHubsComponent implements OnInit {
       },
     );
     dialogRef.componentInstance.hubUUID = hub.uuid!;
+    dialogRef.afterClosed().subscribe(() => this.ngOnInit());
+  }
+
+  /* Hubs import dialog opening */
+  importHubs() {
+    let dialogRef: MatDialogRef<ImportHubsComponent> = this.dialog.open(
+      ImportHubsComponent,
+      {
+        disableClose: false,
+        autoFocus: true,
+        scrollStrategy: new NoopScrollStrategy(),
+      },
+    );
     dialogRef.afterClosed().subscribe(() => this.ngOnInit());
   }
 }

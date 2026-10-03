@@ -1,9 +1,11 @@
+import { getGivenNameLabel, getLoginLabel, getProfileLabel, getSurnameLabel } from '../commons/user-common';
+
 export function getImportUsersFormTitle(): string {
   return "d'utilisateur(s)";
 }
 
 export function getUsersImportTemplateFile(): string {
-  return 'Prénom;Nom;Identifiant;Profil';
+  return `${getGivenNameLabel()};${getSurnameLabel()};${getLoginLabel()};${getProfileLabel()}`;
 }
 
 export function getNumberUsersLabel(numberUsers: number): string {
@@ -11,5 +13,5 @@ export function getNumberUsersLabel(numberUsers: number): string {
 }
 
 export function getImportUsersFormSuccessNotificationMessage(): string {
-  return `Vos utilisateurs ont bien été importés !`;
+  return 'Vos utilisateurs ont bien été importés !';
 }

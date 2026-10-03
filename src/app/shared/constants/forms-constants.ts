@@ -6,6 +6,7 @@ export const IMPORT_FORM_MODE = 'IMPORT';
 
 /* Import origins */
 export const IMPORT_USERS = 'IMPORT_USERS';
+export const IMPORT_HUBS = 'IMPORT_HUBS';
 
 /* Forms fields patterns */
 export const IDENTITY_PATTERN = String.raw`^[a-zA-Zßñçãáàâäéèêëíìîïõо́òôöúùûüẞÑÇÃÁÀÂÄÉÈÊËÍÌÎÏÕÒÓÔÖÚÙÛÜ'\.]+(?:[ -][a-zA-Zßñçãáàâäéèêëíìîïõо́òôöúùûüẞÑÇÃÁÀÂÄÉÈÊËÍÌÎÏÕÒÓÔÖÚÙÛÜ'\.]+)*$`;
