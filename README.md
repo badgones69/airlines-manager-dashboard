@@ -13,8 +13,8 @@
 </p>
 
 <p align="center">
-    <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/v1.5.5-F317F9.svg"></a>
-    <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/October 3rd, 2026-7E7E7E.svg"></a>
+    <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/v1.5.6-F317F9.svg"></a>
+    <a href="./CHANGELOG.md"><img src="https://img.shields.io/badge/October 4th, 2026-7E7E7E.svg"></a>
     <br />
     <a href="https://sonarcloud.io/project/overview?id=badgones69_airlines-manager-dashboard">
         <img src="https://img.shields.io/badge/SonarQube%20%3A%2033%20issue(s)%20-0000AA?logo=sonar&logoColor=FFFFFF">

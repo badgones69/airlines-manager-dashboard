@@ -1,5 +1,23 @@
 <h1 align="center">AM Dashboard</h1>
 <h1 align="center">
+    <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.5.6">1.5.6</a>
+    (2026-10-04)
+</h1>
+
+<h3>Bug fixes</h3>
+
+<ul>
+  <li><b>AIRLINE :</b></li>
+  <ul>
+    <li>edit form (name restrictions)</li>
+  </ul>
+  <li><b>AIRCRAFT & FLIGHTS :</b></li>
+  <ul>
+    <li>list (flights button icon)</li>
+  </ul>
+</ul>
+<br />
+<h1 align="center">
     <a href="https://github.com/badgones69/airlines-manager-dashboard/tree/1.5.5">1.5.5</a>
     (2026-10-03)
 </h1>
