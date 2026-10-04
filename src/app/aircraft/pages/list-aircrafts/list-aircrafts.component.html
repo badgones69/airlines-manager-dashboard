@@ -73,7 +73,7 @@
           (click)="openFlightsDetails(aircraft)"
           [disabled]="aircraft.flights.length < 1"
         >
-          <mat-icon [matBadge]="aircraft.flights.length" aria-hidden="false">
+          <mat-icon fontSet="material-icons" [matBadge]="aircraft.flights.length" aria-hidden="false">
             flight_takeoff
           </mat-icon>
         </button>
