@@ -9,6 +9,7 @@ import { Airport } from '../../../shared/dto/Airport';
 import { Router } from '@angular/router';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ImportDestinationsComponent } from '../import-destinations/import-destinations.component';
 
 @Component({
   selector: 'list-destinations',
@@ -57,6 +58,19 @@ export class ListDestinationsComponent implements OnInit {
       },
     );
     dialogRef.componentInstance.destinationUUID = destination.uuid!;
+    dialogRef.afterClosed().subscribe(() => this.ngOnInit());
+  }
+
+  /* Destinations import dialog opening */
+  importDestinations() {
+    let dialogRef: MatDialogRef<ImportDestinationsComponent> = this.dialog.open(
+      ImportDestinationsComponent,
+      {
+        disableClose: false,
+        autoFocus: true,
+        scrollStrategy: new NoopScrollStrategy(),
+      },
+    );
     dialogRef.afterClosed().subscribe(() => this.ngOnInit());
   }
 }

@@ -1,4 +1,5 @@
-import { IMPORT_HUBS, IMPORT_USERS } from '../../constants/forms-constants';
+import { IMPORT_DESTINATIONS, IMPORT_HUBS, IMPORT_USERS } from '../../constants/forms-constants';
+import { getNumberDestinationsLabel } from '../dialogs/import-destinations-dialog';
 import { getNumberHubsLabel } from '../dialogs/import-hubs-dialog';
 import { getNumberUsersLabel } from '../dialogs/import-users-dialog';
 
@@ -19,6 +20,9 @@ export function getNumberLabel(origin: string, number: number): string {
       break;
     case IMPORT_HUBS:
       numbersLabel = getNumberHubsLabel(number);
+      break;
+    case IMPORT_DESTINATIONS:
+      numbersLabel = getNumberDestinationsLabel(number);
       break;
   }
   return numbersLabel;
