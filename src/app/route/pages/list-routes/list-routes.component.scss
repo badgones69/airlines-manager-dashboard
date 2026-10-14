@@ -8,6 +8,8 @@
 .mat-column-departure-hub,
 .mat-column-arrival-airport {
   border-right: 2px solid var(--app-red);
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 /* IATA code (in cell value) */

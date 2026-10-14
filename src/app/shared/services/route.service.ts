@@ -102,7 +102,34 @@ export class RouteService {
         `${getExistingRouteErrorNotificationMessage()}`,
       );
     } else if (response.status.toString().startsWith('20')) {
-      return response.data;
+      return response;
+    } else {
+      /* Technical error notification showing */
+      this.notificationService.showErrorNotification(
+        `${getTechnicalErrorTitle()}`,
+        `${getTechnicalErrorMessage()}`,
+      );
+    }
+  }
+
+  /* Routes import */
+  public async importRoutes(routesToImport: any[]): Promise<any> {
+    const routesResponsesStatus: string[] = [];
+
+    await Promise.all(
+      routesToImport.map(async (route: any) => {
+        const routeResponse: any = await this.createRoute(route);
+
+        if (routeResponse.status.toString().startsWith('20')) {
+          routesResponsesStatus.push(routeResponse.status.toString());
+        }
+      }),
+    );
+
+    this.refreshRoutesList();
+
+    if (routesResponsesStatus.length === routesToImport.length) {
+      return true;
     } else {
       /* Technical error notification showing */
       this.notificationService.showErrorNotification(
