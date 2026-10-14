@@ -30,6 +30,7 @@ import {
 import { getRoutesListTitle } from '../../../shared/labels/lists';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
+import { ImportRoutesComponent } from '../import-routes/import-routes.component';
 
 @Component({
   selector: 'list-routes',
@@ -121,6 +122,19 @@ export class ListRoutesComponent implements OnInit, AfterViewInit {
       },
     );
     dialogRef.componentInstance.routeUUID = route.uuid!;
+    dialogRef.afterClosed().subscribe(() => this.ngOnInit());
+  }
+
+  /* Routes import dialog opening */
+  importRoutes() {
+    let dialogRef: MatDialogRef<ImportRoutesComponent> = this.dialog.open(
+      ImportRoutesComponent,
+      {
+        disableClose: false,
+        autoFocus: true,
+        scrollStrategy: new NoopScrollStrategy(),
+      },
+    );
     dialogRef.afterClosed().subscribe(() => this.ngOnInit());
   }
 }

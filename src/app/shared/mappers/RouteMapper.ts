@@ -28,6 +28,16 @@ export class RouteMapper {
     } as Route;
   }
 
+  /* DTO => DB mapping (routes list) */
+  public routesListToDB(routesListToDB: any[]): any[] {
+    let routesList: any[] = [];
+
+    for (const routeToDB of routesListToDB) {
+      routesList.push(this.routeToDB(routeToDB));
+    }
+    return routesList;
+  }
+
   /* DTO => DB mapping */
   public routeToDB(routeToDB: any): any {
     return {

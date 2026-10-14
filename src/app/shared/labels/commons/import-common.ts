@@ -1,6 +1,7 @@
-import { IMPORT_DESTINATIONS, IMPORT_HUBS, IMPORT_USERS } from '../../constants/forms-constants';
+import { IMPORT_DESTINATIONS, IMPORT_HUBS, IMPORT_ROUTES, IMPORT_USERS } from '../../constants/forms-constants';
 import { getNumberDestinationsLabel } from '../dialogs/import-destinations-dialog';
 import { getNumberHubsLabel } from '../dialogs/import-hubs-dialog';
+import { getNumberRoutesLabel } from '../dialogs/import-routes-dialog';
 import { getNumberUsersLabel } from '../dialogs/import-users-dialog';
 
 export function getDownloadTemplateFileInputLabel(): string {
@@ -23,6 +24,9 @@ export function getNumberLabel(origin: string, number: number): string {
       break;
     case IMPORT_DESTINATIONS:
       numbersLabel = getNumberDestinationsLabel(number);
+      break;
+    case IMPORT_ROUTES:
+      numbersLabel = getNumberRoutesLabel(number);
       break;
   }
   return numbersLabel;

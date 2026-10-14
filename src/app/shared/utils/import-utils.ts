@@ -1,4 +1,4 @@
-import { IMPORT_DESTINATIONS, IMPORT_HUBS, IMPORT_USERS } from '../constants/forms-constants';
+import { IMPORT_DESTINATIONS, IMPORT_HUBS, IMPORT_ROUTES, IMPORT_USERS } from '../constants/forms-constants';
 import { UserService } from '../services/user.service';
 
 export function mapImportFileData(
@@ -44,6 +44,17 @@ export function mapImportFileData(
         });
       });
       break;
+    case IMPORT_ROUTES:
+      importFileData.forEach(line => {
+        let values: any[] = line.split(';');
+
+        mappedData.push({
+          departureHub: values[0],
+          arrivalAirport: values[1],
+        });
+      });
+      break;
   }
+    
   return mappedData;
 }
